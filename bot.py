@@ -1,40 +1,38 @@
 import os
-import requests
-import logging
-import schedule
 import time
-import datetime
+import logging
+import requests
 import pandas as pd
+import schedule
+from datetime import datetime, timezone
 
-# === Configurazione ===
-ODDS_API_KEY = os.getenv("ODDS_API_KEY")
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+# === CONFIG ===
+ODDS_API_KEY = os.getenv("ODDS_API_KEY", "INSERISCI_LA_TUA_API_KEY")
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN", "INSERISCI_IL_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "INSERISCI_IL_CHAT_ID")
 
-MIN_ODDS = 1.70
-MIN_PROB = 0.70
-EDGE_MIN = 0.0
+# Imposta logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s: %(message)s"
+)
 
-# === Logger ===
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
+# === FUNZIONI ===
 
-# === Funzioni helper ===
-def send_telegram_message(text):
-    if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
-        logging.error("Telegram non configurato")
-        return
+def send_telegram_message(message: str):
+    """Invia un messaggio su Telegram"""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "Markdown"}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
     try:
-        requests.post(url, json=payload, timeout=15)
+        r = requests.post(url, json=payload)
+        r.raise_for_status()
     except Exception as e:
-        logging.error(f"Errore Telegram: {e}")
+        logging.error(f"Errore invio Telegram: {e}")
 
-def fetch_odds_for_sport(sport_key, markets="h2h,totals,spreads"):
-    if not ODDS_API_KEY:
-        logging.error("ODDS_API_KEY non impostata")
-        return []
-    url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
+
+def fetch_odds(sport, markets="h2h,totals,spreads"):
+    """Recupera quote dall'API Odds"""
+    url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
     params = {
         "apiKey": ODDS_API_KEY,
         "regions": "eu",
@@ -42,99 +40,90 @@ def fetch_odds_for_sport(sport_key, markets="h2h,totals,spreads"):
         "oddsFormat": "decimal"
     }
     try:
-        r = requests.get(url, params=params, timeout=30)
+        r = requests.get(url, params=params, timeout=10)
         r.raise_for_status()
         return r.json()
     except Exception as e:
-        logging.error(f"Odds fetch error {sport_key}/{markets}: {e}")
+        logging.error(f"Odds fetch error {sport}: {e}")
         return []
 
-def valid_future_match(start):
-    try:
-        dt = datetime.datetime.fromisoformat(start.replace("Z", "+00:00"))
-        return dt > datetime.datetime.now(datetime.timezone.utc)
-    except:
-        return False
 
-# === Stima probabilità (dummy, usa CSV se disponibile) ===
-def estimate_probability(event, market, outcome):
-    # Da migliorare con modelli sui CSV
-    return 0.75  # baseline 75%
-
-# === Genera pronostici ===
-def generate_picks():
-    sports = [
-        "soccer_italy_serie_a",
-        "soccer_epl",
-        "basketball_nba",
-        "americanfootball_nfl"
-    ]
-
+def analyze_csv_and_odds():
+    """Analizza i CSV locali e integra con Odds API"""
     picks = []
-    for sport in sports:
-        events = fetch_odds_for_sport(sport)
-        for ev in events:
-            start = ev.get("commence_time")
-            if not valid_future_match(start):
-                continue
 
-            for bm in ev.get("bookmakers", []):
-                for mk in bm.get("markets", []):
-                    for o in mk.get("outcomes", []):
-                        try:
-                            price = float(o.get("price", 0))
-                        except:
-                            continue
-                        if price < MIN_ODDS:
-                            continue
+    try:
+        # === Esempio calcio ===
+        for file in os.listdir():
+            if file.startswith("calcio") and file.endswith(".csv"):
+                df = pd.read_csv(file)
+                if "Date" in df.columns:
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    if not upcoming.empty:
+                        picks.append(f"Calcio: trovato {len(upcoming)} match futuri in {file}")
+    except Exception as e:
+        logging.error(f"Soccer error: {e}")
 
-                        implied = 1 / price
-                        model_prob = estimate_probability(ev, mk, o)
-                        if model_prob < MIN_PROB:
-                            continue
+    try:
+        # === Basket ===
+        for file in os.listdir():
+            if file.startswith("basket") and file.endswith(".csv"):
+                df = pd.read_csv(file)
+                if "Date" in df.columns:
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    if not upcoming.empty:
+                        picks.append(f"Basket: trovato {len(upcoming)} match futuri in {file}")
+    except Exception as e:
+        logging.error(f"Basket error: {e}")
 
-                        edge = model_prob - implied
-                        if edge > EDGE_MIN:
-                            picks.append({
-                                "sport": ev.get("sport_title", sport),
-                                "home": ev.get("home_team"),
-                                "away": ev.get("away_team"),
-                                "start": start,
-                                "market": mk.get("key"),
-                                "selection": o.get("name"),
-                                "odds": price,
-                                "model_prob": round(model_prob, 3),
-                                "implied": round(implied, 3),
-                                "edge": round(edge, 3),
-                                "bookmaker": bm.get("title", "")
-                            })
+    try:
+        # === Football ===
+        for file in os.listdir():
+            if file.endswith(".csv") and "football" in file.lower() or "nfl" in file.lower():
+                df = pd.read_csv(file)
+                if "Date" in df.columns:
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    if not upcoming.empty:
+                        picks.append(f"Football: trovato {len(upcoming)} match futuri in {file}")
+    except Exception as e:
+        logging.error(f"Football error: {e}")
+
     return picks
 
-def job():
-    picks = generate_picks()
-    if not picks:
-        logging.info("Nessun pronostico trovato")
-        return
-    best = sorted(picks, key=lambda x: x["edge"], reverse=True)[:3]
-    for p in best:
-        msg = (
-            f"🏆 {p['sport']}\n"
-            f"👥 {p['home']} vs {p['away']}\n"
-            f"⏰ {p['start']}\n"
-            f"🛒 Mercato: {p['market']}\n"
-            f"✅ Selezione: {p['selection']}\n"
-            f"💰 Quota: {p['odds']}\n"
-            f"📈 Prob modello: {p['model_prob']} | 📉 Implicita: {p['implied']}\n"
-            f"🔺 Edge: {p['edge']}\n"
-            f"🏷️ Book: {p['bookmaker']}"
-        )
-        send_telegram_message(msg)
 
-# Scheduler ogni 30 minuti
-schedule.every(30).minutes.do(job)
+def generate_picks():
+    """Genera pronostici dai CSV e Odds API"""
+    picks = analyze_csv_and_odds()
+
+    if picks:
+        for p in picks:
+            logging.info(f"Pronostico generato → {p}")
+            send_telegram_message(f"📊 Pronostico: {p}")
+    else:
+        logging.info("Nessun pronostico trovato")
+
+
+# === JOB SCHEDULER ===
+
+def job():
+    try:
+        generate_picks()
+    except Exception as e:
+        logging.error(f"Errore job: {e}")
+
+
+# 🔥 Forza subito un check all'avvio
+job()
+
+# Scheduler ogni 2 ore
+schedule.every(2).hours.do(job)
 
 logging.info("🤖 Bot avviato, in ascolto...")
 
 while True:
     schedule.run_pending()
     time.sleep(10)
+
