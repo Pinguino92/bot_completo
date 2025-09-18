@@ -218,6 +218,9 @@ schedule.every(2).hours.do(job)
 
 logging.info("🤖 Bot avviato, in ascolto...")
 
+# TEST TELEGRAM IMMEDIATO
+send_telegram_message("✅ Test: il bot è connesso a Telegram!")
+
 while True:
     schedule.run_pending()
     time.sleep(10)
