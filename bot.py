@@ -4,7 +4,6 @@ import logging
 import requests
 import pandas as pd
 import schedule
-from datetime import datetime, timezone
 
 # === CONFIG ===
 ODDS_API_KEY = os.getenv("ODDS_API_KEY", "INSERISCI_LA_TUA_API_KEY")
@@ -53,13 +52,14 @@ def analyze_csv_and_odds():
     picks = []
 
     try:
-        # === Esempio calcio ===
+        # === Calcio ===
         for file in os.listdir():
             if file.startswith("calcio") and file.endswith(".csv"):
                 df = pd.read_csv(file)
                 if "Date" in df.columns:
-                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce", utc=True)
+                    now = pd.Timestamp.now(tz="UTC")
+                    upcoming = df[df["Date"] > now]
                     if not upcoming.empty:
                         picks.append(f"Calcio: trovato {len(upcoming)} match futuri in {file}")
     except Exception as e:
@@ -71,8 +71,9 @@ def analyze_csv_and_odds():
             if file.startswith("basket") and file.endswith(".csv"):
                 df = pd.read_csv(file)
                 if "Date" in df.columns:
-                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce", utc=True)
+                    now = pd.Timestamp.now(tz="UTC")
+                    upcoming = df[df["Date"] > now]
                     if not upcoming.empty:
                         picks.append(f"Basket: trovato {len(upcoming)} match futuri in {file}")
     except Exception as e:
@@ -81,11 +82,12 @@ def analyze_csv_and_odds():
     try:
         # === Football ===
         for file in os.listdir():
-            if file.endswith(".csv") and "football" in file.lower() or "nfl" in file.lower():
+            if file.endswith(".csv") and ("football" in file.lower() or "nfl" in file.lower()):
                 df = pd.read_csv(file)
                 if "Date" in df.columns:
-                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
-                    upcoming = df[df["Date"] > datetime.now(timezone.utc)]
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce", utc=True)
+                    now = pd.Timestamp.now(tz="UTC")
+                    upcoming = df[df["Date"] > now]
                     if not upcoming.empty:
                         picks.append(f"Football: trovato {len(upcoming)} match futuri in {file}")
     except Exception as e:
@@ -126,4 +128,5 @@ logging.info("🤖 Bot avviato, in ascolto...")
 while True:
     schedule.run_pending()
     time.sleep(10)
+
 
