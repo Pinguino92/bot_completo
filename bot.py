@@ -1,31 +1,37 @@
+import os
 import requests
 import time
 import datetime
 import schedule
 import logging
+import pandas as pd
 
-# 🔑 Chiavi integrate
-ODDS_API_KEY = "INSERISCI_API_KEY"
-TELEGRAM_TOKEN = "INSERISCI_TELEGRAM_TOKEN"
-TELEGRAM_CHAT_ID = "INSERISCI_TELEGRAM_CHAT_ID"
+# 🔑 Lettura dalle Environment Variables (Render → Environment)
+TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+ODDS_API_KEY = os.getenv("ODDS_API_KEY")
 
 # Logging
 logging.basicConfig(level=logging.INFO)
 
-# Endpoint Odds API (principali campionati)
-SPORTS = {
-    "Calcio": "soccer_italy_serie_a",
-    "Basket": "basketball_nba",
-    "Football": "americanfootball_nfl"
-}
+# Endpoint Odds API
+ODDS_API_URL = "https://api.the-odds-api.com/v4/sports"
 
-# Anti-duplicati
-sent_matches = set()
+# Intervallo richieste (ogni 2 ore)
+CHECK_INTERVAL = 120  # minuti
+PROB_THRESHOLD = 0.75  # 75% minimo
 
-def send_to_telegram(message):
-    """Invia messaggio su Telegram"""
+# Set pronostici già inviati (per evitare duplicati)
+sent_predictions = set()
+
+def send_to_telegram(message: str):
+    """Invia messaggi a Telegram"""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
+    payload = {
+        "chat_id": TELEGRAM_CHAT_ID,
+        "text": message,
+        "parse_mode": "HTML"
+    }
     try:
         r = requests.post(url, json=payload, timeout=10)
         if r.status_code != 200:
@@ -33,99 +39,105 @@ def send_to_telegram(message):
     except Exception as e:
         logging.error(f"Errore Telegram: {e}")
 
-def get_matches(sport_key):
-    """Recupera partite dalle Odds API"""
+def check_csv_matches():
+    """Legge i CSV locali e filtra le partite future"""
+    all_matches = []
+    today = datetime.datetime.now()
+
+    folders = ["downloads/calcio", "downloads/basket", "downloads/football"]
+    for folder in folders:
+        if not os.path.exists(folder):
+            continue
+
+        for f in os.listdir(folder):
+            if not f.endswith(".csv"):
+                continue
+            try:
+                df = pd.read_csv(os.path.join(folder, f))
+                if "Date" in df.columns:
+                    df["Date"] = pd.to_datetime(df["Date"], errors="coerce")
+                    fut = df[df["Date"] >= today]
+                    if not fut.empty:
+                        all_matches.extend(fut.to_dict("records"))
+            except Exception as e:
+                logging.error(f"Errore lettura {f}: {e}")
+    return all_matches
+
+def get_odds(sport_key):
+    """Scarica quote dalle Odds API SOLO se serve"""
+    url = f"{ODDS_API_URL}/{sport_key}/odds"
+    params = {
+        "apiKey": ODDS_API_KEY,
+        "regions": "eu",
+        "markets": "h2h,totals,spreads",
+        "oddsFormat": "decimal",
+        "dateFormat": "iso"
+    }
     try:
-        url = f"https://api.the-odds-api.com/v4/sports/{sport_key}/odds"
-        params = {
-            "apiKey": ODDS_API_KEY,
-            "regions": "eu",
-            "markets": "h2h,totals",
-            "oddsFormat": "decimal",
-            "dateFormat": "iso"
-        }
-        response = requests.get(url, params=params, timeout=10)
-        response.raise_for_status()
-        return response.json()
+        r = requests.get(url, params=params, timeout=10)
+        r.raise_for_status()
+        return r.json()
     except Exception as e:
         logging.error(f"{sport_key} error: {e}")
         return []
 
-def analyze_match(match):
-    """Analizza match e calcola probabilità stimata"""
-    if "bookmakers" not in match or not match["bookmakers"]:
-        return None
-
-    bookmaker = match["bookmakers"][0]
-    markets = bookmaker.get("markets", [])
-    if not markets:
-        return None
-
-    outcomes = markets[0]["outcomes"]
-    if len(outcomes) != 2:
-        return None
-
-    team1 = outcomes[0]["name"]
-    odds1 = float(outcomes[0]["price"])
-    team2 = outcomes[1]["name"]
-    odds2 = float(outcomes[1]["price"])
-
-    winner = team1 if odds1 < odds2 else team2
-    probability = round(1 / min(odds1, odds2), 2)
-
-    return {
-        "id": match.get("id", f"{team1}-{team2}"),
-        "teams": f"{team1} vs {team2}",
-        "winner": winner,
-        "odds": min(odds1, odds2),
-        "probability": probability,
-        "start_time": match["commence_time"]
-    }
-
-def job():
-    """Job pianificato: recupero + analisi + invio"""
+def analyze_and_send():
+    """Analizza i match e invia pronostici"""
     logging.info("🔍 Controllo nuove partite...")
 
-    for sport_name, sport_key in SPORTS.items():
-        matches = get_matches(sport_key)
+    upcoming = check_csv_matches()
+    logging.info(f"📊 Partite future trovate nei CSV: {len(upcoming)}")
 
-        for match in matches:
-            analysis = analyze_match(match)
-            if not analysis:
+    sports = ["soccer_italy_serie_a", "basketball_nba", "americanfootball_nfl"]
+
+    for sport in sports:
+        odds_data = get_odds(sport)
+        for match in odds_data:
+            if "id" not in match or match["id"] in sent_predictions:
+                continue
+            if "bookmakers" not in match or not match["bookmakers"]:
                 continue
 
-            # DEBUG log per ogni candidato
-            logging.info(f"🎯 {sport_name} candidato: {analysis['teams']} | Prob: {analysis['probability']*100:.1f}%")
-
-            if analysis["id"] in sent_matches:
-                logging.info(f"⏭️ Scartato {sport_name}: {analysis['teams']} (già inviato)")
+            bookmaker = match["bookmakers"][0]
+            markets = bookmaker.get("markets", [])
+            if not markets:
                 continue
 
-            if analysis["probability"] >= 0.75:  # filtro 75%
-                message = (
-                    f"📊 Pronostico {sport_name}\n"
-                    f"⚡ {analysis['teams']}\n"
-                    f"📅 {analysis['start_time']}\n"
-                    f"🔮 Vincente probabile: <b>{analysis['winner']}</b>\n"
-                    f"💰 Quota stimata: {analysis['odds']}\n"
-                    f"📈 Probabilità stimata: {analysis['probability']*100:.1f}%"
-                )
-                send_to_telegram(message)
-                logging.info(f"✅ Inviato {sport_name}: {analysis['teams']}")
-                sent_matches.add(analysis["id"])
-            else:
-                logging.info(f"❌ Scartato {sport_name}: {analysis['teams']} (Prob {analysis['probability']*100:.1f}% < 75%)")
+            for market in markets[:4]:  # primi 4 mercati
+                outcomes = market.get("outcomes", [])
+                if len(outcomes) < 2:
+                    continue
 
-def schedule_jobs():
-    """Esegue il job ogni 2 ore"""
-    schedule.every(2).hours.do(job)
+                try:
+                    odds_values = [float(o["price"]) for o in outcomes]
+                    best_outcome = outcomes[odds_values.index(min(odds_values))]
+                    probability = 1 / min(odds_values)
+
+                    if probability >= PROB_THRESHOLD:
+                        start_time = match.get("commence_time", "N/D")
+                        message = (
+                            f"📊 <b>Pronostico {sport.upper()}</b>\n"
+                            f"🕒 Data: {start_time}\n"
+                            f"🎯 Mercato: {market['key']}\n"
+                            f"✅ Esito: {best_outcome['name']}\n"
+                            f"💰 Quota: {best_outcome['price']}\n"
+                            f"📈 Probabilità stimata: {probability*100:.1f}%"
+                        )
+                        send_to_telegram(message)
+                        sent_predictions.add(match["id"])
+                except Exception as e:
+                    logging.error(f"Errore analisi {sport}: {e}")
+
+def job():
+    analyze_and_send()
 
 if __name__ == "__main__":
-    # Test iniziale
+    # Messaggio test all’avvio
     send_to_telegram("✅ Bot avviato su Render e pronto a cercare pronostici!")
-    schedule_jobs()
-    logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
 
+    schedule.every(CHECK_INTERVAL).minutes.do(job)
+
+    logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
     while True:
         schedule.run_pending()
         time.sleep(30)
