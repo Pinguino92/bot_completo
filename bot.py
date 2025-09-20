@@ -3,130 +3,155 @@ import time
 import datetime
 import schedule
 import logging
-import os
-import pandas as pd
 
-# 🔑 Variabili ambiente (Render → Environment)
-ODDS_API_KEY = os.getenv("ODDS_API_KEY")
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+# 🔑 Configurazioni
+ODDS_API_KEY = "INSERISCI_API_KEY"
+TELEGRAM_TOKEN = "INSERISCI_TELEGRAM_TOKEN"
+TELEGRAM_CHAT_ID = "INSERISCI_CHAT_ID"
 
 # Logging
 logging.basicConfig(level=logging.INFO)
 
-# Sports da analizzare
+# Sports monitorati
 SPORTS = {
-    "soccer_italy_serie_a": "⚽ Calcio",
-    "basketball_nba": "🏀 Basket NBA",
-    "americanfootball_nfl": "🏈 American Football"
+    "soccer_italy_serie_a": "Serie A - Italia",
+    "soccer_italy_serie_b": "Serie B - Italia",
+    "soccer_spain_la_liga": "La Liga - Spagna",
+    "soccer_spain_segunda_division": "Segunda Division - Spagna",
+    "soccer_england_epl": "Premier League - Inghilterra",
+    "soccer_england_championship": "Championship - Inghilterra",
+    "soccer_germany_bundesliga": "Bundesliga - Germania",
+    "soccer_germany_bundesliga2": "Bundesliga 2 - Germania",
+    "soccer_france_ligue_one": "Ligue 1 - Francia",
+    "soccer_france_ligue_two": "Ligue 2 - Francia",
+    "americanfootball_nfl": "NFL - Football Americano",
+    "americanfootball_ncaaf": "NCAA - Football Americano",
+    "basketball_nba": "NBA - Basket",
 }
 
-# Funzione invio Telegram
+# Parametri
+MIN_PROB = 55.0
+MIN_QUOTA = 1.40
+sent_predictions = set()  # per evitare doppioni
+
+
+# --- Funzioni ---
 def send_to_telegram(message: str):
+    """Invia messaggi su Telegram"""
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
     try:
-        r = requests.post(url, json=payload, timeout=10)
-        if r.status_code != 200:
-            logging.error(f"Errore Telegram: {r.text}")
+        requests.post(url, json=payload, timeout=10)
     except Exception as e:
         logging.error(f"Errore Telegram: {e}")
 
-# Recupero odds API
+
 def get_odds(sport: str):
-    url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
-    params = {
-        "apiKey": ODDS_API_KEY,
-        "regions": "eu",
-        "markets": "h2h,totals",
-        "oddsFormat": "decimal",
-        "dateFormat": "iso"
-    }
+    """Recupera quote dalle Odds API"""
     try:
-        r = requests.get(url, params=params, timeout=10)
-        r.raise_for_status()
-        return r.json()
+        url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
+        params = {
+            "apiKey": ODDS_API_KEY,
+            "regions": "eu",
+            "markets": "h2h,totals",
+            "oddsFormat": "decimal",
+            "dateFormat": "iso",
+        }
+        response = requests.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        return response.json()
     except Exception as e:
         logging.error(f"{sport} error: {e}")
         return []
 
-# Analisi match
+
 def analyze_matches(sport: str, matches: list):
+    """Analizza i match e produce pronostici + scartati"""
     pronostici = []
-    scartati = 0
+    scartati = []
     now = datetime.datetime.utcnow()
 
     for match in matches:
         try:
-            start_time = datetime.datetime.fromisoformat(match["commence_time"].replace("Z", "+00:00"))
+            start_time = datetime.datetime.fromisoformat(
+                match["commence_time"].replace("Z", "+00:00")
+            )
             if not (now < start_time < now + datetime.timedelta(days=2)):
-                continue  # solo partite entro 48 ore
+                continue  # solo entro 48h
 
             for bookmaker in match.get("bookmakers", []):
                 for market in bookmaker.get("markets", []):
-                    outcomes = market.get("outcomes", [])
-                    if len(outcomes) < 2:
-                        continue
+                    for outcome in market.get("outcomes", []):
+                        try:
+                            quota = float(outcome["price"])
+                            probability = round((1 / quota) * 100, 1)
 
-                    # Trova quota più bassa → maggiore probabilità
-                    best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-                    quota = float(best_outcome["price"])
-                    probability = round((1 / quota) * 100, 1)
+                            match_id = f"{sport}{match['id']}{outcome['name']}"
+                            info_base = (
+                                f"🏟️ {SPORTS.get(sport, sport)}\n"
+                                f"{match['home_team']} vs {match['away_team']}\n"
+                                f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
+                                f"🔮 Pronostico: {outcome['name']}\n"
+                                f"💰 Quota: {quota}\n"
+                                f"📈 Probabilità stimata: {probability}%"
+                            )
 
-                    if probability >= 55 and quota >= 1.40:
-                        pronostici.append({
-                            "sport": sport,
-                            "teams": match["home_team"] + " vs " + match["away_team"],
-                            "start_time": start_time.strftime("%d/%m/%Y %H:%M"),
-                            "prediction": best_outcome["name"],
-                            "odds": quota,
-                            "probability": probability
-                        })
-                    else:
-                        scartati += 1
+                            # Accettato
+                            if (
+                                probability >= MIN_PROB
+                                and quota >= MIN_QUOTA
+                                and match_id not in sent_predictions
+                            ):
+                                pronostici.append(info_base)
+                                sent_predictions.add(match_id)
+                            # Scartato
+                            else:
+                                motivo = []
+                                if probability < MIN_PROB:
+                                    motivo.append(f"probabilità {probability}% < {MIN_PROB}%")
+                                if quota < MIN_QUOTA:
+                                    motivo.append(f"quota {quota} < {MIN_QUOTA}")
+                                scartati.append(info_base + f"\n❌ SCARTATO ({', '.join(motivo)})")
+
+                        except Exception:
+                            continue
         except Exception:
-            scartati += 1
+            continue
 
     return pronostici, scartati
 
-# Job principale
+
 def job():
+    """Job schedulato"""
     logging.info("🔍 Controllo nuove partite...")
+    all_pronostici, all_scartati = [], []
 
-    total_pronostici = 0
-    total_scartati = 0
-
-    for sport, label in SPORTS.items():
+    for sport in SPORTS:
         matches = get_odds(sport)
         pronostici, scartati = analyze_matches(sport, matches)
-        total_pronostici += len(pronostici)
-        total_scartati += scartati
+        all_pronostici.extend(pronostici)
+        all_scartati.extend(scartati)
 
-        for p in pronostici:
-            message = (
-                f"📊 Pronostico {label}\n"
-                f"📌 Match: {p['teams']}\n"
-                f"📅 Data: {p['start_time']}\n"
-                f"🔮 Pronostico: {p['prediction']}\n"
-                f"💰 Quota stimata: {p['odds']}\n"
-                f"📈 Probabilità: {p['probability']}%"
-            )
-            send_to_telegram(message)
+    if all_pronostici:
+        for p in all_pronostici:
+            send_to_telegram("✅ PRONOSTICO TROVATO\n\n" + p)
+    if all_scartati:
+        for s in all_scartati:
+            send_to_telegram(s)
 
-    # Log riepilogo su Render
-    logging.info(f"📊 Totale pronostici inviati: {total_pronostici}")
-    logging.info(f"❌ Eventi scartati: {total_scartati}")
+    if not all_pronostici and not all_scartati:
+        send_to_telegram("ℹ️ Nessun match disponibile entro 48h.")
 
-    if total_pronostici == 0:
-        logging.info("⚠️ Nessun pronostico trovato per i prossimi 2 giorni.")
 
-# Pianificazione → ogni 2 ore
-schedule.every(2).hours.do(job)
+# --- Schedule ---
+schedule_times = ["08:00", "13:00", "17:00", "22:00"]
+for t in schedule_times:
+    schedule.every().day.at(t).do(job)
 
-if __name__ == "__main__":
-    # Test iniziale Telegram
-    send_to_telegram("✅ Bot avviato su Render e pronto a cercare pronostici!")
-    logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
+
+if _name_ == "_main_":
+    send_to_telegram("🤖 Bot avviato su Render e pronto a cercare pronostici!")
+    job()  # lancio immediato al deploy
     while True:
         schedule.run_pending()
         time.sleep(30)
