@@ -3,6 +3,7 @@ import time
 import logging
 import requests
 import datetime
+import schedule
 
 # 🔑 Variabili ambiente (Render → Environment)
 ODDS_API_KEY   = os.getenv("ODDS_API_KEY")
@@ -12,17 +13,28 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 # Logging
 logging.basicConfig(level=logging.INFO)
 
-# Sports da analizzare (come tua ultima versione)
+# Sports da analizzare (puoi aggiungere altri se vuoi)
 SPORTS = {
-    "soccer_italy_serie_a": "⚽ Calcio",
-    "basketball_nba": "🏀 Basket NBA",
-    "americanfootball_nfl": "🏈 American Football"
+    "soccer_italy_serie_a": "⚽ Serie A - Italia",
+    "soccer_italy_serie_b": "⚽ Serie B - Italia",
+    "soccer_spain_la_liga": "⚽ La Liga - Spagna",
+    "soccer_spain_segunda_division": "⚽ La Liga 2 - Spagna",
+    "soccer_england_epl": "⚽ Premier League - Inghilterra",
+    "soccer_england_championship": "⚽ Championship - Inghilterra",
+    "soccer_germany_bundesliga": "⚽ Bundesliga - Germania",
+    "soccer_germany_bundesliga2": "⚽ Bundesliga 2 - Germania",
+    "soccer_france_ligue_one": "⚽ Ligue 1 - Francia",
+    "soccer_france_ligue_two": "⚽ Ligue 2 - Francia",
+    "basketball_nba": "🏀 NBA",
+    "americanfootball_nfl": "🏈 NFL",
+    "americanfootball_ncaaf": "🏈 NCAA Football"
 }
 
 # Parametri filtro
 MIN_PROB  = 55.0   # %
 MIN_QUOTA = 1.40   # decimale
 
+# Funzione invio Telegram
 def send_to_telegram(message: str):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         logging.error("⚠️ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID mancanti nelle Environment Variables.")
@@ -36,6 +48,7 @@ def send_to_telegram(message: str):
     except Exception as e:
         logging.error(f"Errore Telegram: {e}")
 
+# Recupero odds dalle API
 def get_odds(sport: str):
     if not ODDS_API_KEY:
         logging.error("⚠️ ODDS_API_KEY mancante nelle Environment Variables.")
@@ -56,6 +69,7 @@ def get_odds(sport: str):
         logging.error(f"{sport} error: {e}")
         return []
 
+# Analisi dei match
 def analyze_matches(sport: str, matches: list):
     pronostici = []
     scartati   = []
@@ -68,8 +82,7 @@ def analyze_matches(sport: str, matches: list):
                 continue
             start_time = datetime.datetime.fromisoformat(ct.replace("Z", "+00:00"))
             if not (now < start_time < now + datetime.timedelta(days=2)):
-                # fuori finestra 48h → scarto “silenzioso”
-                continue
+                continue  # solo partite entro 48h
 
             home = match.get("home_team", "Home")
             away = match.get("away_team", "Away")
@@ -83,7 +96,6 @@ def analyze_matches(sport: str, matches: list):
                         continue
 
                     any_market_found = True
-                    # quota più bassa => prob più alta (1/odds)
                     try:
                         best_outcome = min(outcomes, key=lambda x: float(x["price"]))
                         quota = float(best_outcome["price"])
@@ -112,7 +124,6 @@ def analyze_matches(sport: str, matches: list):
                             motivo.append(f"quota {quota} < {MIN_QUOTA}")
                         scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
 
-            # se non c'erano mercati/quote, segnalalo come scartato (utile per capire i “weekend vuoti”)
             if not any_market_found:
                 scartati.append(
                     "❌ SCARTATO\n\n"
@@ -123,12 +134,12 @@ def analyze_matches(sport: str, matches: list):
                 )
 
         except Exception:
-            # se un match esplode in parsing, lo segniamo scartato generico
             scartati.append(f"❌ SCARTATO\n\n{SPORTS.get(sport, sport)}\n⚠️ Errore parsing match.")
             continue
 
     return pronostici, scartati
 
+# Job principale
 def job():
     logging.info("🔍 Controllo nuove partite...")
     tot_ok, tot_ko = 0, 0
@@ -148,17 +159,17 @@ def job():
     logging.info(f"📊 Totale pronostici inviati: {tot_ok}")
     logging.info(f"❌ Eventi scartati (con motivo): {tot_ko}")
     if tot_ok == 0 and tot_ko == 0:
-        # nessun match nelle 48h o zero quote disponibili su tutti
         send_to_telegram("ℹ️ Nessun match disponibile entro 48h (nessuna quota).")
 
-# Schedulazione: ogni 2 ore (come tua versione)
-import schedule
-schedule.every(2).hours.do(job)
+# --- Schedule fisso ---
+schedule_times = ["08:00", "13:00", "17:00", "22:00"]
+for t in schedule_times:
+    schedule.every().day.at(t).do(job)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     send_to_telegram("✅ Bot avviato su Render e pronto a cercare pronostici!")
     logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
-    job()  # lancio immediato
+    job()  # lancio immediato al deploy
     while True:
         schedule.run_pending()
         time.sleep(30)
