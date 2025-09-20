@@ -5,9 +5,17 @@ import schedule
 import logging
 
 # 🔑 Configurazioni
-ODDS_API_KEY = "INSERISCI_API_KEY"
-TELEGRAM_TOKEN = "INSERISCI_TELEGRAM_TOKEN"
-TELEGRAM_CHAT_ID = "INSERISCI_CHAT_ID"
+import os
+
+def _env_strict(name: str) -> str:
+    v = os.getenv(name, "").strip()
+    if not v or v.startswith("INSERISCI"):
+        raise RuntimeError(f"Variabile d'ambiente {name} mancante o placeholder.")
+    return v
+
+ODDS_API_KEY   = _env_strict("ODDS_API_KEY")
+TELEGRAM_TOKEN = _env_strict("TELEGRAM_TOKEN")
+TELEGRAM_CHAT_ID = _env_strict("TELEGRAM_CHAT_ID")
 
 # Logging
 logging.basicConfig(level=logging.INFO)
