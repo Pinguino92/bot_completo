@@ -73,6 +73,6 @@ def download_csv():
             except Exception as e:
                 logging.error(f"❌ Errore download {url}: {e}")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     download_csv()
     logging.info("✅ Download CSV completato!")
