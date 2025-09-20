@@ -1,17 +1,17 @@
 import os
+import re
 import time
 import logging
-import re
-from typing import List, Dict, Tuple
-import gdown
+import pathlib
+import requests
+from urllib.parse import urlparse, parse_qs
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+logging.basicConfig(level=logging.INFO)
+SESSION = requests.Session()
+SESSION.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# === URL definitivi (copiati da Google Drive) ===
-DRIVE_LINKS: Dict[str, List[str]] = {
+# === INSERISCI QUI i link che mi hai passato (copiati 1:1) ===
+LINKS = {
     "calcio": [
         "https://drive.google.com/file/d/1wTlTM25ZdyB8W1AiqpGEPiCSDr8j5AfX/view?usp=sharing",
         "https://drive.google.com/file/d/11tSVFvOLlO15PKwfeD8EvuseSVZ3bLCx/view?usp=sharing",
@@ -52,61 +52,111 @@ DRIVE_LINKS: Dict[str, List[str]] = {
     ],
 }
 
-OUT_BASE = "downloads"
+OUT_DIR = pathlib.Path("downloads")
 
-def ensure_dirs():
-    for cat in DRIVE_LINKS.keys():
-        os.makedirs(os.path.join(OUT_BASE, cat), exist_ok=True)
 
-def extract_id(url: str) -> str:
-    """Estrae l'ID da link Google Drive"""
-    m = re.search(r"/d/([a-zA-Z0-9\-_]+)", url)
+def extract_file_id(url: str) -> str | None:
+    """
+    Supporta:
+      - https://drive.google.com/file/d/<ID>/view?...
+      - https://drive.google.com/uc?id=<ID>
+    """
+    try:
+        parsed = urlparse(url)
+        if "drive.google.com" not in parsed.netloc:
+            return None
+        # caso uc?id=...
+        qs = parse_qs(parsed.query).get("id")
+        if qs and len(qs) > 0:
+            return qs[0]
+
+        # caso file/d/<ID>/
+        m = re.search(r"/file/d/([^/]+)/", parsed.path)
+        if m:
+            return m.group(1)
+    except Exception:
+        return None
+    return None
+
+
+def build_direct_url(file_id: str) -> str:
+    return f"https://drive.google.com/uc?export=download&id={file_id}"
+
+
+def _resolve_confirm_token(content: str) -> str | None:
+    """
+    Quando Google mostra la pagina HTML di conferma (limite/antivirus),
+    troviamo il token di conferma.
+    """
+    # token in link tipo confirm=XXXX
+    m = re.search(r'href="(/uc\?export=download[^"]?confirm=([^"&]+)[^"])"', content)
     if m:
-        return m.group(1)
-    return ""
+        return m.group(2)
+    # a volte appare come input hidden name="confirm" value="..."
+    m2 = re.search(r'name="confirm"\s+value="([^"]+)"', content)
+    if m2:
+        return m2.group(1)
+    return None
 
-def download_with_retries(file_id: str, dest_path: str, attempts: int = 3) -> Tuple[bool, str]:
-    url = f"https://drive.google.com/uc?export=download&id={file_id}"
-    last_err = ""
-    for attempt in range(1, attempts + 1):
-        logging.info(f"⬇️ Download {url} → {dest_path} (tentativo {attempt}/{attempts})")
-        try:
-            out = gdown.download(url=url, output=dest_path, quiet=False, fuzzy=True, use_cookies=False)
-            if out and os.path.exists(dest_path) and os.path.getsize(dest_path) > 0:
-                return True, ""
-            last_err = "File vuoto o path non creato"
-        except Exception as e:
-            last_err = str(e)
-        time.sleep(2 * attempt)
-    return False, last_err
+
+def download_one(url: str, dest: pathlib.Path, attempt: int = 1, max_attempts: int = 2) -> bool:
+    file_id = extract_file_id(url)
+    if not file_id:
+        logging.error(f"❌ Link non valido (ID non trovato): {url}")
+        return False
+
+    direct = build_direct_url(file_id)
+    dest.parent.mkdir(parents=True, exist_ok=True)
+
+    try:
+        logging.info(f"⬇️ Download {url} → {dest} (tentativo {attempt}/{max_attempts})")
+        with SESSION.get(direct, stream=True, timeout=30) as r:
+            if "text/html" in r.headers.get("Content-Type", ""):
+                # potenziale pagina di conferma, leggi HTML
+                html = r.text
+                token = _resolve_confirm_token(html)
+                if token:
+                    # riprova con token
+                    confirm_url = f"{direct}&confirm={token}"
+                    r = SESSION.get(confirm_url, stream=True, timeout=30)
+                    r.raise_for_status()
+                    if "text/html" in r.headers.get("Content-Type", ""):
+                        raise RuntimeError("Google Drive conferma non risolta.")
+                else:
+                    # magari richiede ancora redirect, provo follow automaticamente
+                    pass
+            r.raise_for_status()
+
+            with open(dest, "wb") as f:
+                for chunk in r.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+        return True
+
+    except Exception as e:
+        logging.error(f"❌ Errore download {url}: {e}")
+        if attempt < max_attempts:
+            time.sleep(2 * attempt)
+            return download_one(url, dest, attempt + 1, max_attempts)
+        return False
+
 
 def main():
-    ensure_dirs()
-    total_ok, total_fail = 0, 0
-    failed_items = []
-
-    for category, links in DRIVE_LINKS.items():
-        out_dir = os.path.join(OUT_BASE, category)
-        for link in links:
-            file_id = extract_id(link)
-            if not file_id:
-                logging.error(f"❌ ID non riconosciuto: {link}")
-                total_fail += 1
-                failed_items.append((category, link, "ID non valido"))
-                continue
-            dest = os.path.join(out_dir, f"{file_id}.csv")
-            ok, err = download_with_retries(file_id, dest, attempts=3)
-            if ok:
-                total_ok += 1
+    ok, fail = 0, 0
+    for group, urls in LINKS.items():
+        base = OUT_DIR / group
+        for url in urls:
+            file_id = extract_file_id(url)
+            # Nome file = ID.csv (semplice e stabile)
+            name = (file_id or "sconosciuto") + ".csv"
+            dest = base / name
+            if download_one(url, dest):
+                ok += 1
             else:
-                total_fail += 1
-                logging.error(f"❌ Errore download {link}: {err}")
-                failed_items.append((category, link, err))
+                fail += 1
 
-    logging.info(f"✅ Scaricati: {total_ok} | ❌ Falliti: {total_fail}")
-    if failed_items:
-        for cat, link, err in failed_items:
-            logging.warning(f"[{cat}] {link} → {err}")
+    logging.info(f"✅ Scaricati: {ok} | ❌ Falliti: {fail}")
+
 
 if __name__ == "__main__":
     main()
