@@ -1,9 +1,8 @@
-# download_csv.py
 import os
 import time
 import logging
 import re
-from urllib.parse import urlparse, parse_qs
+from typing import List, Dict, Tuple
 import gdown
 
 logging.basicConfig(
@@ -11,125 +10,103 @@ logging.basicConfig(
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
-# ---------- LINK GOOGLE DRIVE (come da tua lista) ----------
-LINKS = {
+# === URL definitivi (copiati da Google Drive) ===
+DRIVE_LINKS: Dict[str, List[str]] = {
     "calcio": [
-        "https://drive.google.com/uc?id=1IwH4OWw8K7d6lA6L_yOHDv0sPWzAjB7R",
-        "https://drive.google.com/uc?id=1OvFQSfS818GvIrE668IceV2BxWpUwpPH",
-        "https://drive.google.com/uc?id=1nuA3X9RR8nmHCiIJgHtYBNXSBfh5JVpz",
-        "https://drive.google.com/uc?id=1Mu5mHX1iZ6DDty4yOsPBhYDBG4IV8tBo",
-        "https://drive.google.com/uc?id=101leVcEblRX6SIZQ9IPYt3gBftfdTfU6",
-        "https://drive.google.com/uc?id=1ZuKPIIPCH9aqwX80CpDb0-KGVcylYlRy",
-        "https://drive.google.com/uc?id=1DCElGIAfJmpKcCWU6i2vcuCPs1No5orq",
-        "https://drive.google.com/uc?id=1Wu9IG7QdmunqUw0duHVgCzzLlMXhSLE5",
-        "https://drive.google.com/uc?id=18-IzszXSMuTehzogMXzCpEtXY4MX-3y7",
-        "https://drive.google.com/uc?id=1rzjuCvl1FCY81BdUiFycC0doRUHtjjLR",
-        "https://drive.google.com/uc?id=1wEjlzWU9e_B9VVtQQTXzRP9hXu7C_4SH",
-        "https://drive.google.com/uc?id=1fjVYftn8Wzq5wVsgD1-9I3b1x8JsOhqK",
-        "https://drive.google.com/uc?id=1UjdjPAGJYZvqGchWlrb3DWbBNl_eHuxN",
-        "https://drive.google.com/uc?id=1c1WEcoUiGnvfs34Fs8EQQlwlHsNPnoTA",
-        "https://drive.google.com/uc?id=10LQ4_jPdt3NG42MGPUbrRygmMXXChRvo",
-        "https://drive.google.com/uc?id=1INKdlNQxnoyDuNhMIYwAe0LA1SxveDcC",
-        "https://drive.google.com/uc?id=109b1Cw9xPCND3gDGBHElegMp6ky5Uk_h",
-        "https://drive.google.com/uc?id=1Cv0zrXxbEV7pVT4tT2dMBaFwD4fKuiIT",
-        "https://drive.google.com/uc?id=1f9jKgs5DcvUES_9KdaYdqyCP-L-7hNdS",
-        "https://drive.google.com/uc?id=1MHk4DTUw2rzhCZMDFB7yCLwOc1HWHFmR",
-        "https://drive.google.com/uc?id=1FN39YP3RwZsrgxC7n-Jlp5C9Yv6i-Zh_",
-        "https://drive.google.com/uc?id=1x0nZkpMHAainZQsBgxsyjRghOgDfltIg",
-        "https://drive.google.com/uc?id=1JE4DO2DH1dmE_N9zxKKkTFTUuWUyVMBV",
-        "https://drive.google.com/uc?id=1UCba1YBdJknDRQQTmjrsy3nmZIRxT87_",
+        "https://drive.google.com/file/d/1wTlTM25ZdyB8W1AiqpGEPiCSDr8j5AfX/view?usp=sharing",
+        "https://drive.google.com/file/d/11tSVFvOLlO15PKwfeD8EvuseSVZ3bLCx/view?usp=sharing",
+        "https://drive.google.com/file/d/1b3GwAwcFrZo6Wl0k0qKQBM3HKZ1guxE4/view?usp=drive_link",
+        "https://drive.google.com/file/d/1BgTAXO7Pbf7krU4VSqpe9mRNcFN1fpAU/view?usp=drive_link",
+        "https://drive.google.com/file/d/1tZWqSSwql5EPd4ewkK4L-lr7vkdWDSyG/view?usp=drive_link",
+        "https://drive.google.com/file/d/16e9fVPJOjKVXINpJLFeiEz51BIOKPW22/view?usp=drive_link",
+        "https://drive.google.com/file/d/1dfXkJq7tW0_gEPtE_I1VQmrQmNptZr-B/view?usp=drive_link",
+        "https://drive.google.com/file/d/1oGdZVCRRRd1bsr5aYerYCtr5ozChVEsb/view?usp=drive_link",
+        "https://drive.google.com/file/d/1XnYsWx9z4cftPq7QsM9OjlWW_HAl_ATU/view?usp=drive_link",
+        "https://drive.google.com/file/d/1RxWz1vdOBucb2MCIaiwJ781ud8w4w43Z/view?usp=drive_link",
+        "https://drive.google.com/file/d/1o4BwSRoSWtRe75giJX5oPgOLE0p8aCQ_/view?usp=drive_link",
+        "https://drive.google.com/file/d/1FM2zJUMNdv6a802hSwu_O78JTcyAOUYg/view?usp=drive_link",
+        "https://drive.google.com/file/d/1J6klYEANGe4fKLra2C5KXApTBbGyGqlh/view?usp=drive_link",
+        "https://drive.google.com/file/d/1UEXCOk7ftQktsJyVuwYYy_zmNi8SNO9O/view?usp=drive_link",
+        "https://drive.google.com/file/d/1zxsOuE5XlyHCXaVPKk-QA0owntdBrrSn/view?usp=drive_link",
+        "https://drive.google.com/file/d/1nvA7rGIQ89mIt57_QrfcYYXUMdyV2P5c/view?usp=drive_link",
+        "https://drive.google.com/file/d/1mUBvukQzzHcMQejEIBt9hhVujHC1rTD5/view?usp=drive_link",
+        "https://drive.google.com/file/d/1yGh9VBLtXi6Xpd7jjpUm7pUyy08_xoMq/view?usp=drive_link",
+        "https://drive.google.com/file/d/1nfa_-cVX_W-IQ_h_7OXr6oSszgk4fr4h/view?usp=drive_link",
+        "https://drive.google.com/file/d/1KOy7IBJhefHPvxJnbnCVSnMrFsClJ-XG/view?usp=drive_link",
+        "https://drive.google.com/file/d/12700XBoabfEmP4Z5OM0eyPKw7rOPULD4/view?usp=drive_link",
+        "https://drive.google.com/file/d/1RIcsAkKtci-YfdwHnFnOMhfaeBadszup/view?usp=drive_link",
+        "https://drive.google.com/file/d/1NkVTEZ_s7IecTzQrS28OKrxWoJuDq0jK/view?usp=drive_link",
+        "https://drive.google.com/file/d/1wl73AzeYwNS5mapuAifltDA3x5FYQyWZ/view?usp=drive_link",
     ],
     "basket": [
-        "https://drive.google.com/uc?id=1jW1s1ZsMPG9nqRSv7eMncSeYxGl7zaJ1",
-        "https://drive.google.com/uc?id=17AbS759AvEYGqgHOZv1legV4cDi-eMfL",
-        "https://drive.google.com/uc?id=1pag9i3by7rLo-4uq9VV2BkuDXzQA-cf3",
-        "https://drive.google.com/uc?id=1ksnBEN0qVnJnkTsmw6c5aNM2Ijhp4TGh",
+        "https://drive.google.com/file/d/1zMdXKb_0Kgy734fl_J3cDZ7KOgCNM6Ng/view?usp=drive_link",
+        "https://drive.google.com/file/d/1eSXgRXH9U7QrO5Q4LO6oA6pweyaCqsgF/view?usp=drive_link",
+        "https://drive.google.com/file/d/1jRzPAg5Q-yHmJPqYliakxDmWnrpMCqu_/view?usp=drive_link",
+        "https://drive.google.com/file/d/1XZ_fzreWKgSrt4Fdh6Dzooax3Bc0ZugF/view?usp=drive_link",
     ],
     "football": [
-        "https://drive.google.com/uc?id=1M49rGXflx9jX5PnDP87JvI145f2lNEuU",
-        "https://drive.google.com/uc?id=1DFDw8u6jtr-y9bTD2vqcZdw7Itn_gBeU",
-        "https://drive.google.com/uc?id=1E0pqvpIx6PEX5MYNBcwVmQl1YwoSrFmb",
-        "https://drive.google.com/uc?id=1_YyLl3lE5AcfLHJ6YXRP23SZrE7ei5GO",
+        "https://drive.google.com/file/d/1c6mPo49iqxkl3Z2soKlJrY9wdF3874Jl/view?usp=drive_link",
+        "https://drive.google.com/file/d/10HdPiazGdgoHhmAGFZWrltlTdbhHW-jg/view?usp=drive_link",
+        "https://drive.google.com/file/d/1jdBb1FntwcUNEFsGcpsm_l4CfYvXmwxf/view?usp=drive_link",
+        "https://drive.google.com/file/d/1mx56GF1c9t5TLb2jt4XpvcBUGNzG1hQL/view?usp=drive_link",
     ],
 }
 
-# ---------- UTILS ----------
+OUT_BASE = "downloads"
+
 def ensure_dirs():
-    for folder in ["downloads/calcio", "downloads/basket", "downloads/football"]:
-        os.makedirs(folder, exist_ok=True)
+    for cat in DRIVE_LINKS.keys():
+        os.makedirs(os.path.join(OUT_BASE, cat), exist_ok=True)
 
-def extract_file_id(link_or_id: str) -> str | None:
-    """
-    Accetta:
-      - URL tipo .../uc?id=XXXX
-      - URL tipo .../file/d/XXXX/view
-      - Solo ID (alfanumerico con _ e -)
-    Ritorna l'ID o None.
-    """
-    s = link_or_id.strip()
-    if s.startswith("http"):
-        parsed = urlparse(s)
-        qs = parse_qs(parsed.query)
-        if "id" in qs and qs["id"]:
-            return qs["id"][0]
-        m = re.search(r"/file/d/([a-zA-Z0-9_-]+)", s)
-        if m:
-            return m.group(1)
-    # Se sembra già un ID
-    if re.fullmatch(r"[a-zA-Z0-9_-]{10,}", s):
-        return s
-    return None
+def extract_id(url: str) -> str:
+    """Estrae l'ID da link Google Drive"""
+    m = re.search(r"/d/([a-zA-Z0-9\-_]+)", url)
+    if m:
+        return m.group(1)
+    return ""
 
-def make_uc_url(file_id: str) -> str:
-    return f"https://drive.google.com/uc?id={file_id}"
-
-def download_one(url_or_id: str, out_dir: str) -> tuple[bool, str]:
-    """
-    Prova a scaricare un file. Ritorna (ok, path_o_messaggio_errore).
-    """
-    fid = extract_file_id(url_or_id)
-    if not fid:
-        return False, f"ID non riconosciuto: {url_or_id}"
-    url = make_uc_url(fid)
-    out_path = os.path.join(out_dir, f"{fid}.csv")
-
-    # due tentativi con gdown
-    for attempt in range(1, 3):
+def download_with_retries(file_id: str, dest_path: str, attempts: int = 3) -> Tuple[bool, str]:
+    url = f"https://drive.google.com/uc?export=download&id={file_id}"
+    last_err = ""
+    for attempt in range(1, attempts + 1):
+        logging.info(f"⬇️ Download {url} → {dest_path} (tentativo {attempt}/{attempts})")
         try:
-            logging.info(f"⬇️ Download {url} → {out_path} (tentativo {attempt}/2)")
-            gdown.download(url=url, output=out_path, quiet=False, use_cookies=False, fuzzy=True)
-            if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
-                return True, out_path
+            out = gdown.download(url=url, output=dest_path, quiet=False, fuzzy=True, use_cookies=False)
+            if out and os.path.exists(dest_path) and os.path.getsize(dest_path) > 0:
+                return True, ""
+            last_err = "File vuoto o path non creato"
         except Exception as e:
-            time.sleep(1.5)
-
-    return False, f"Failed to retrieve file url: {url}"
+            last_err = str(e)
+        time.sleep(2 * attempt)
+    return False, last_err
 
 def main():
     ensure_dirs()
-    total_ok = 0
-    failed = []
+    total_ok, total_fail = 0, 0
+    failed_items = []
 
-    for sport, urls in LINKS.items():
-        out_dir = os.path.join("downloads", sport)
-        os.makedirs(out_dir, exist_ok=True)
-        for u in urls:
-            ok, msg = download_one(u, out_dir)
+    for category, links in DRIVE_LINKS.items():
+        out_dir = os.path.join(OUT_BASE, category)
+        for link in links:
+            file_id = extract_id(link)
+            if not file_id:
+                logging.error(f"❌ ID non riconosciuto: {link}")
+                total_fail += 1
+                failed_items.append((category, link, "ID non valido"))
+                continue
+            dest = os.path.join(out_dir, f"{file_id}.csv")
+            ok, err = download_with_retries(file_id, dest, attempts=3)
             if ok:
                 total_ok += 1
             else:
-                logging.error(f"❌ Errore download {u}: {msg}")
-                failed.append((u, msg))
+                total_fail += 1
+                logging.error(f"❌ Errore download {link}: {err}")
+                failed_items.append((category, link, err))
 
-    logging.info("—" * 60)
-    logging.info(f"✅ Download CSV completato! File scaricati: {total_ok}")
-    if failed:
-        logging.warning(f"⚠️ File falliti: {len(failed)}")
-        for u, err in failed[:10]:
-            logging.warning(f"- {u} -> {err}")
-        if len(failed) > 10:
-            logging.warning(f"... altri {len(failed)-10} errori non mostrati")
+    logging.info(f"✅ Scaricati: {total_ok} | ❌ Falliti: {total_fail}")
+    if failed_items:
+        for cat, link, err in failed_items:
+            logging.warning(f"[{cat}] {link} → {err}")
 
 if __name__ == "__main__":
     main()
-
