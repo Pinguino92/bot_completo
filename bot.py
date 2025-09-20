@@ -166,7 +166,7 @@ schedule_times = ["08:00", "13:00", "17:00", "22:00"]
 for t in schedule_times:
     schedule.every().day.at(t).do(job)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     send_to_telegram("✅ Bot avviato su Render e pronto a cercare pronostici!")
     logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
     job()  # lancio immediato al deploy
