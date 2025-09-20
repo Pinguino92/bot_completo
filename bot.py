@@ -73,7 +73,7 @@ def analyze_matches(sport: str, matches: list):
                     quota = float(best_outcome["price"])
                     probability = round((1 / quota) * 100, 1)
 
-                    if probability >= 55:
+                    if probability >= 55 and quota >= 1.40:
                         pronostici.append({
                             "sport": sport,
                             "teams": match["home_team"] + " vs " + match["away_team"],
