@@ -1,19 +1,18 @@
+# download_csv.py
 import os
+import time
 import logging
+import re
+from urllib.parse import urlparse, parse_qs
 import gdown
 
-# Logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-# Cartelle di destinazione
-FOLDERS = {
-    "calcio": "downloads/calcio",
-    "basket": "downloads/basket",
-    "football": "downloads/football",
-}
-
-# Link Google Drive definitivi
-CSV_LINKS = {
+# ---------- LINK GOOGLE DRIVE (come da tua lista) ----------
+LINKS = {
     "calcio": [
         "https://drive.google.com/uc?id=1IwH4OWw8K7d6lA6L_yOHDv0sPWzAjB7R",
         "https://drive.google.com/uc?id=1OvFQSfS818GvIrE668IceV2BxWpUwpPH",
@@ -54,25 +53,82 @@ CSV_LINKS = {
     ],
 }
 
-def ensure_folders():
-    """Crea cartelle se non esistono"""
-    for folder in FOLDERS.values():
+# ---------- UTILS ----------
+def ensure_dirs():
+    for folder in ["downloads/calcio", "downloads/basket", "downloads/football"]:
         os.makedirs(folder, exist_ok=True)
 
-def download_csv():
-    """Scarica tutti i CSV nelle rispettive cartelle"""
-    ensure_folders()
-    for sport, links in CSV_LINKS.items():
-        folder = FOLDERS[sport]
-        for url in links:
-            try:
-                file_id = url.split("id=")[-1]
-                output = os.path.join(folder, f"{file_id}.csv")
-                logging.info(f"⬇️ Download {url} → {output}")
-                gdown.download(url, output, quiet=False)
-            except Exception as e:
-                logging.error(f"❌ Errore download {url}: {e}")
+def extract_file_id(link_or_id: str) -> str | None:
+    """
+    Accetta:
+      - URL tipo .../uc?id=XXXX
+      - URL tipo .../file/d/XXXX/view
+      - Solo ID (alfanumerico con _ e -)
+    Ritorna l'ID o None.
+    """
+    s = link_or_id.strip()
+    if s.startswith("http"):
+        parsed = urlparse(s)
+        qs = parse_qs(parsed.query)
+        if "id" in qs and qs["id"]:
+            return qs["id"][0]
+        m = re.search(r"/file/d/([a-zA-Z0-9_-]+)", s)
+        if m:
+            return m.group(1)
+    # Se sembra già un ID
+    if re.fullmatch(r"[a-zA-Z0-9_-]{10,}", s):
+        return s
+    return None
 
-if __name__ == "__main__":
-    download_csv()
-    logging.info("✅ Download CSV completato!")
+def make_uc_url(file_id: str) -> str:
+    return f"https://drive.google.com/uc?id={file_id}"
+
+def download_one(url_or_id: str, out_dir: str) -> tuple[bool, str]:
+    """
+    Prova a scaricare un file. Ritorna (ok, path_o_messaggio_errore).
+    """
+    fid = extract_file_id(url_or_id)
+    if not fid:
+        return False, f"ID non riconosciuto: {url_or_id}"
+    url = make_uc_url(fid)
+    out_path = os.path.join(out_dir, f"{fid}.csv")
+
+    # due tentativi con gdown
+    for attempt in range(1, 3):
+        try:
+            logging.info(f"⬇️ Download {url} → {out_path} (tentativo {attempt}/2)")
+            gdown.download(url=url, output=out_path, quiet=False, use_cookies=False, fuzzy=True)
+            if os.path.exists(out_path) and os.path.getsize(out_path) > 0:
+                return True, out_path
+        except Exception as e:
+            time.sleep(1.5)
+
+    return False, f"Failed to retrieve file url: {url}"
+
+def main():
+    ensure_dirs()
+    total_ok = 0
+    failed = []
+
+    for sport, urls in LINKS.items():
+        out_dir = os.path.join("downloads", sport)
+        os.makedirs(out_dir, exist_ok=True)
+        for u in urls:
+            ok, msg = download_one(u, out_dir)
+            if ok:
+                total_ok += 1
+            else:
+                logging.error(f"❌ Errore download {u}: {msg}")
+                failed.append((u, msg))
+
+    logging.info("—" * 60)
+    logging.info(f"✅ Download CSV completato! File scaricati: {total_ok}")
+    if failed:
+        logging.warning(f"⚠️ File falliti: {len(failed)}")
+        for u, err in failed[:10]:
+            logging.warning(f"- {u} -> {err}")
+        if len(failed) > 10:
+            logging.warning(f"... altri {len(failed)-10} errori non mostrati")
+
+if _name_ == "_main_":
+    main()
