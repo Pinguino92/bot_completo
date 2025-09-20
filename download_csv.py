@@ -130,5 +130,5 @@ def main():
         if len(failed) > 10:
             logging.warning(f"... altri {len(failed)-10} errori non mostrati")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
