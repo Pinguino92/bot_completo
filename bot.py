@@ -149,7 +149,7 @@ for t in schedule_times:
     schedule.every().day.at(t).do(job)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     send_to_telegram("🤖 Bot avviato su Render e pronto a cercare pronostici!")
     job()  # lancio immediato al deploy
     while True:
