@@ -21,7 +21,7 @@ TELEGRAM_CHAT_ID = _env_strict("TELEGRAM_CHAT_ID")
 logging.basicConfig(level=logging.INFO)
 
 # Sports monitorati
-SPORTS  {
+SPORTS = {
     "soccer_italy_serie_a": "Serie A - Italia",
     "soccer_italy_serie_b": "Serie B - Italia",
     "soccer_spain_la_liga": "La Liga - Spagna",
