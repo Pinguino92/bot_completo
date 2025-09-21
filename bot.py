@@ -190,6 +190,9 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             continue
                         # 🔹 Calcola probabilità combinata API + CSV
 prob_api = round((1.0 / quota) * 100.0, 1)
+except Exceotion:
+    continue
+
 prob_csv = None
 
 # esempio: usa CSV se il campionato è presente
