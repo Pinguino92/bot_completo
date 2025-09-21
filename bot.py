@@ -253,9 +253,9 @@ def job():
     tot_ok, tot_ko = 0, 0
 
     for sport in SPORTS.keys():
-    hist_df = load_historical_data(sport)           # 👈 AGGIUNTA: carica i CSV (downloads/ + data/)
-    matches = get_odds(sport)
-    accettati, rifiutati = analyze_matches(sport, matches, hist_df)  # 👈 PASSA hist_df
+        hist_df = load_historical_data(sport)           # 👈 AGGIUNTA: carica i CSV (downloads/ + data/)
+        matches = get_odds(sport)
+        accettati, rifiutati = analyze_matches(sport, matches, hist_df)  # 👈 PASSA hist_df
 
         for msg in accettati:
             send_to_telegram(msg)
