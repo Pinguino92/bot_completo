@@ -4,6 +4,9 @@ import logging
 import requests
 import datetime
 import schedule
+import pandas as pd
+import glob
+import os
 
 # 🔑 Variabili ambiente (Render → Environment)
 ODDS_API_KEY   = os.getenv("ODDS_API_KEY")
@@ -32,8 +35,19 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAA Football"
 }
 
-# --- Dati storici (CSV da downloads/ e data/) ---
-import glob
+# 📂 Caricamento CSV storici (data/ + downloads/)
+def load_csv_data():
+    csv_data = {}
+    paths = glob.glob("data/.csv") + glob.glob("downloads//.csv", recursive=True)
+    for path in paths:
+        try:
+            df = pd.read_csv(path)
+            csv_data[os.path.basename(path)] = df
+        except Exception:
+            continue
+    return csv_data
+
+CSV_DATA = load_csv_data()
 
 def _category_for_sport(sport_key: str) -> str:
     # Mappa lo sport alla cartella usata da download_csv.py e/o data/
@@ -174,7 +188,21 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         quota = float(best_outcome["price"])
                         if quota <= 1.0:
                             continue
-                        probability = round((1.0 / quota) * 100.0, 1)
+                        # 🔹 Calcola probabilità combinata API + CSV
+prob_api = round((1.0 / quota) * 100.0, 1)
+prob_csv = None
+
+# esempio: usa CSV se il campionato è presente
+for name, df in CSV_DATA.items():
+    if home in str(df.values) and away in str(df.values):
+        # puoi affinare con metriche reali dal CSV
+        prob_csv = 60.0  # valore placeholder
+        break
+
+if prob_csv:
+    probability = round((prob_api * 0.6) + (prob_csv * 0.4), 1)
+else:
+    probability = prob_api
                     except Exception:
                         continue
 
