@@ -32,6 +32,59 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAA Football"
 }
 
+# --- Dati storici (CSV da downloads/ e data/) ---
+import glob
+
+def _category_for_sport(sport_key: str) -> str:
+    # Mappa lo sport alla cartella usata da download_csv.py e/o data/
+    if sport_key.startswith("soccer_"):
+        return "calcio"
+    if sport_key.startswith("basketball_"):
+        return "basket"
+    if sport_key.startswith("americanfootball_"):
+        return "football"
+    return "misc"
+
+def load_historical_data(sport_key: str):
+    """
+    Carica i CSV storici per lo sport indicato, unendo:
+    - downloads/<categoria>/*.csv  (scaricati da Google Drive)
+    - data/<categoria>/*.csv       (presenti su GitHub)
+    Ritorna un DataFrame (o None se pandas non è disponibile/nessun file).
+    """
+    try:
+        import pandas as pd
+    except Exception:
+        logging.warning("ℹ️ pandas non disponibile: salto caricamento storici.")
+        return None
+
+    categoria = _category_for_sport(sport_key)
+
+    paths = []
+    paths.extend(glob.glob(os.path.join("downloads", categoria, "*.csv")))
+    paths.extend(glob.glob(os.path.join("data", categoria, "*.csv")))
+
+    if not paths:
+        logging.info(f"ℹ️ Nessun CSV storico trovato per {sport_key} (cartelle: downloads/{categoria}, data/{categoria})")
+        return None
+
+    dfs = []
+    for p in paths:
+        try:
+            df = pd.read_csv(p)
+            if not df.empty:
+                dfs.append(df)
+        except Exception as e:
+            logging.warning(f"⚠️ Impossibile leggere {p}: {e}")
+
+    if not dfs:
+        logging.info(f"ℹ️ Nessun CSV valido per {sport_key}.")
+        return None
+
+    full = pd.concat(dfs, ignore_index=True)
+    logging.info(f"📂 Storici caricati per {sport_key}: {len(paths)} file, {len(full)} righe totali.")
+    return full
+    
 # Parametri filtro
 MIN_PROB  = 60.0   # %
 MIN_QUOTA = 1.50   # decimale
@@ -81,7 +134,7 @@ def get_odds(sport: str):
 # Analisi dei match
 sent_predictions = set()  # 👈 aggiungi questa variabile globale sopra
 
-def analyze_matches(sport: str, matches: list):
+def analyze_matches(sport: str, matches: list, hist_df=None):
     pronostici = []
     scartati   = []
     now = datetime.datetime.now(datetime.timezone.utc)
@@ -172,8 +225,9 @@ def job():
     tot_ok, tot_ko = 0, 0
 
     for sport in SPORTS.keys():
-        matches = get_odds(sport)
-        accettati, rifiutati = analyze_matches(sport, matches)
+    hist_df = load_historical_data(sport)           # 👈 AGGIUNTA: carica i CSV (downloads/ + data/)
+    matches = get_odds(sport)
+    accettati, rifiutati = analyze_matches(sport, matches, hist_df)  # 👈 PASSA hist_df
 
         for msg in accettati:
             send_to_telegram(msg)
