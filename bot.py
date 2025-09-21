@@ -10,6 +10,8 @@ ODDS_API_KEY   = os.getenv("ODDS_API_KEY")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
+sent_predictions = set()  # evita duplicati
+
 # Logging
 logging.basicConfig(level=logging.INFO)
 
@@ -132,15 +134,17 @@ def analyze_matches(sport: str, matches: list):
                     prediction_id = f"{sport}{home}{away}{market_key}{best_outcome.get('name','N/D')}"
 if prediction_id not in sent_predictions:
     if probability >= MIN_PROB and quota >= MIN_QUOTA:
-        pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+    prediction_id = f"{sport}{home}{away}_{best_outcome.get('name','N/D')}"
+    if prediction_id not in sent_predictions:
         sent_predictions.add(prediction_id)
-                    else:
-                        motivo = []
-                        if probability < MIN_PROB:
-                            motivo.append(f"prob {probability}% < {MIN_PROB}%")
-                        if quota < MIN_QUOTA:
-                            motivo.append(f"quota {quota} < {MIN_QUOTA}")
-                        scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
+        pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+else:
+    motivo = []
+    if probability < MIN_PROB:
+        motivo.append(f"prob {probability}% < {MIN_PROB}%")
+    if quota < MIN_QUOTA:
+        motivo.append(f"quota {quota} < {MIN_QUOTA}")
+    scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
 
             if not any_market_found:
                 scartati.append(
