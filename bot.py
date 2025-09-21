@@ -33,7 +33,7 @@ SPORTS = {
 }
 
 # Parametri filtro
-MIN_PROB  = 65.0   # %
+MIN_PROB  = 60.0   # %
 MIN_QUOTA = 1.50   # decimale
 
 # Funzione invio Telegram
