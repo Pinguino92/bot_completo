@@ -129,8 +129,11 @@ def analyze_matches(sport: str, matches: list):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-                    if probability >= MIN_PROB and quota >= MIN_QUOTA:
-                        pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+                    prediction_id = f"{sport}{home}{away}{market_key}{best_outcome.get('name','N/D')}"
+if prediction_id not in sent_predictions:
+    if probability >= MIN_PROB and quota >= MIN_QUOTA:
+        pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+        sent_predictions.add(prediction_id)
                     else:
                         motivo = []
                         if probability < MIN_PROB:
