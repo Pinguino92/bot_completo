@@ -177,8 +177,6 @@ def job():
 
         for msg in accettati:
             send_to_telegram(msg)
-        for msg in rifiutati:
-            send_to_telegram(msg)
 
         tot_ok += len(accettati)
         tot_ko += len(rifiutati)
