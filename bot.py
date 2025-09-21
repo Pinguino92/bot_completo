@@ -168,30 +168,26 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             any_market_found = False
 
             for bookmaker in match.get("bookmakers", []):
-                bookmaker_name = bookmaker.get("title", "Sconosciuto")
+    bookmaker_name = bookmaker.get("title", "Sconosciuto")
 
-                for market in bookmaker.get("markets", []):
-                    outcomes = market.get("outcomes", [])
-                    if len(outcomes) < 2:
-                        continue
+    for market in bookmaker.get("markets", []):
+        outcomes = market.get("outcomes", [])
+        if len(outcomes) < 2:
+            continue
 
-                    # 🔹 Filtra solo i mercati richiesti per il calcio
-                    market_key = market.get("key", "")
-                    if sport.startswith("soccer_"):
-                        if market_key == "totals":
-                            # solo under/over 2.5
-                            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
+        # 🔹 Filtra solo i mercati richiesti per il calcio
+        market_key = market.get("key", "")
+        if sport.startswith("soccer_"):
+            if market_key == "totals":
+                outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
 
-                    any_market_found = True
-                    try:
-                        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-                        quota = float(best_outcome["price"])
-                        if quota <= 1.0:
-                            continue
-                        # 🔹 Calcola probabilità combinata API + CSV
-prob_api = round((1.0 / quota) * 100.0, 1)
-except Exceotion:
-    continue
+        any_market_found = True
+        try:
+            best_outcome = min(outcomes, key=lambda x: float(x["price"]))
+            quota = float(best_outcome["price"])
+            prob_api = round((1.0 / quota) * 100.0, 1)
+        except Exception:
+            continue
 
 prob_csv = None
 
