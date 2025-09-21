@@ -187,7 +187,7 @@ def job():
         send_to_telegram("ℹ️ Nessun match disponibile entro 48h (nessuna quota).")
 
 # --- Schedule fisso ---
-schedule_times = ["08:00", "13:00", "17:00", "22:00"]
+schedule_times = ["07:00", "11:00", "17:00"]
 for t in schedule_times:
     schedule.every().day.at(t).do(job)
 
