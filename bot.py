@@ -168,12 +168,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             any_market_found = False
 
             for bookmaker in match.get("bookmakers", []):
-    bookmaker_name = bookmaker.get("title", "Sconosciuto")
+                bookmaker_name = bookmaker.get("title", "Sconosciuto")
 
-    for market in bookmaker.get("markets", []):
-        outcomes = market.get("outcomes", [])
-        if len(outcomes) < 2:
-            continue
+                for market in bookmaker.get("markets", []):
+                outcomes = market.get("outcomes", [])
+                if len(outcomes) < 2:
+                continue
 
         # 🔹 Filtra solo i mercati richiesti per il calcio
         market_key = market.get("key", "")
@@ -188,6 +188,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             prob_api = round((1.0 / quota) * 100.0, 1)
         except Exception:
             continue
+
 
 prob_csv = None
 
