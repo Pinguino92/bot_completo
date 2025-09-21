@@ -79,6 +79,8 @@ def get_odds(sport: str):
         return []
 
 # Analisi dei match
+sent_predictions = set()  # 👈 aggiungi questa variabile globale sopra
+
 def analyze_matches(sport: str, matches: list):
     pronostici = []
     scartati   = []
@@ -99,6 +101,8 @@ def analyze_matches(sport: str, matches: list):
             any_market_found = False
 
             for bookmaker in match.get("bookmakers", []):
+                bookmaker_name = bookmaker.get("title", "Sconosciuto")
+
                 for market in bookmaker.get("markets", []):
                     outcomes = market.get("outcomes", [])
                     if len(outcomes) < 2:
@@ -110,7 +114,6 @@ def analyze_matches(sport: str, matches: list):
                         if market_key == "totals":
                             # solo under/over 2.5
                             outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
-                        # "btts" (gol/nogol) lo lasciamo così com'è
 
                     any_market_found = True
                     try:
@@ -122,29 +125,31 @@ def analyze_matches(sport: str, matches: list):
                     except Exception:
                         continue
 
+                    # 👇 id univoco: sport + squadre + mercato + outcome
+                    prediction_id = f"{sport}{home}{away}{market_key}{best_outcome.get('name','N/D')}"
+
                     base_msg = (
                         f"{SPORTS.get(sport, sport)}\n"
                         f"📌 {home} vs {away}\n"
                         f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
-                        f"🔮 Pronostico: {best_outcome.get('name','N/D')}\n"
+                        f"🏦 Bookmaker: {bookmaker_name}\n"
+                        f"🔮 Pronostico: {best_outcome.get('name','N/D')} ({market_key})\n"
                         f"💰 Quota: {quota}\n"
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-                    prediction_id = f"{sport}{home}{away}{market_key}{best_outcome.get('name','N/D')}"
-if prediction_id not in sent_predictions:
-    if probability >= MIN_PROB and quota >= MIN_QUOTA:
-    prediction_id = f"{sport}{home}{away}_{best_outcome.get('name','N/D')}"
-    if prediction_id not in sent_predictions:
-        sent_predictions.add(prediction_id)
-        pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
-else:
-    motivo = []
-    if probability < MIN_PROB:
-        motivo.append(f"prob {probability}% < {MIN_PROB}%")
-    if quota < MIN_QUOTA:
-        motivo.append(f"quota {quota} < {MIN_QUOTA}")
-    scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
+                    if prediction_id not in sent_predictions:
+                        sent_predictions.add(prediction_id)  # 👈 evita duplicati
+
+                        if probability >= MIN_PROB and quota >= MIN_QUOTA:
+                            pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+                        else:
+                            motivo = []
+                            if probability < MIN_PROB:
+                                motivo.append(f"prob {probability}% < {MIN_PROB}%")
+                            if quota < MIN_QUOTA:
+                                motivo.append(f"quota {quota} < {MIN_QUOTA}")
+                            scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
 
             if not any_market_found:
                 scartati.append(
