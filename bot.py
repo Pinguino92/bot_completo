@@ -31,8 +31,8 @@ SPORTS = {
 }
 
 # Parametri filtro
-MIN_PROB  = 55.0   # %
-MIN_QUOTA = 1.40   # decimale
+MIN_PROB  = 65.0   # %
+MIN_QUOTA = 1.50   # decimale
 
 # Funzione invio Telegram
 def send_to_telegram(message: str):
@@ -53,11 +53,18 @@ def get_odds(sport: str):
     if not ODDS_API_KEY:
         logging.error("⚠️ ODDS_API_KEY mancante nelle Environment Variables.")
         return []
+
+    # 🔹 Mercati specifici per il calcio
+    if sport.startswith("soccer_"):
+        markets = "h2h,btts,totals"
+    else:
+        markets = "h2h,totals"
+
     url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
     params = {
         "apiKey": ODDS_API_KEY,
         "regions": "eu",
-        "markets": "h2h,totals",
+        "markets": markets,
         "oddsFormat": "decimal",
         "dateFormat": "iso"
     }
@@ -94,6 +101,14 @@ def analyze_matches(sport: str, matches: list):
                     outcomes = market.get("outcomes", [])
                     if len(outcomes) < 2:
                         continue
+
+                    # 🔹 Filtra solo i mercati richiesti per il calcio
+                    market_key = market.get("key", "")
+                    if sport.startswith("soccer_"):
+                        if market_key == "totals":
+                            # solo under/over 2.5
+                            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
+                        # "btts" (gol/nogol) lo lasciamo così com'è
 
                     any_market_found = True
                     try:
