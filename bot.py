@@ -42,7 +42,7 @@ def send_to_telegram(message: str):
         logging.error("⚠️ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID mancanti nelle Environment Variables.")
         return
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message,}
     try:
         r = requests.post(url, json=payload, timeout=10)
         if r.status_code != 200:
