@@ -165,8 +165,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
 
                     # quota API
-quota = float(best_outcome["price"])
-prob_api = round((1.0 / quota) * 100.0, 1)
+try:
+    best_outcome = min(outcomes, key=lambda x: float(x["price"]))
+    quota = float(best_outcome["price"])
+    prob_api = round((1.0 / quota) * 100.0, 1)
+except Exception:
+    continue
 
 # CSV (se disponibili)
 prob_csv = None
