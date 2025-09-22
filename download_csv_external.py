@@ -107,7 +107,7 @@ def job():
 # schedulazione: ogni giorno alle 02:00
 schedule.every().day.at("09:00").do(job)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     job()  # primo download immediato al deploy
     while True:
         schedule.run_pending()
