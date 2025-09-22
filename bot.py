@@ -30,6 +30,8 @@ SPORTS = {
     "soccer_germany_bundesliga2": "⚽ Bundesliga 2 - Germania",
     "soccer_france_ligue_one": "⚽ Ligue 1 - Francia",
     "soccer_france_ligue_two": "⚽ Ligue 2 - Francia",
+    "soccer_uefa_champs_league":"⚽ Champions League",
+    "soccer_uefa_europa_league": "⚽ Europa League",
     "basketball_nba": "🏀 NBA",
     "americanfootball_nfl": "🏈 NFL",
     "americanfootball_ncaaf": "🏈 NCAA Football"
