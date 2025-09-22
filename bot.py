@@ -154,63 +154,63 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             for bookmaker in match.get("bookmakers", []):
                 bookmaker_name = bookmaker.get("title", "Sconosciuto")
 
-  for market in bookmaker.get("markets", []):
-    outcomes = market.get("outcomes", [])
-    if len(outcomes) < 2:
-        continue
+             for market in bookmaker.get("markets", []):
+                outcomes = market.get("outcomes", [])
+                if len(outcomes) < 2:
+                    continue
 
-    # 🔹 Filtra solo i mercati richiesti per il calcio
-    market_key = market.get("key", "")
-    if sport.startswith("soccer_"):
-        if market_key == "totals":
-            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
+                # 🔹 Filtra solo i mercati richiesti per il calcio
+                market_key = market.get("key", "")
+                if sport.startswith("soccer_"):
+                    if market_key == "totals":
+                        outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
 
-    any_market_found = True
+                any_market_found = True
 
-    # quota API
-    try:
-        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-        quota = float(best_outcome["price"])
-        prob_api = round((1.0 / quota) * 100.0, 1)
-    except Exception:
-        continue
+                # quota API
+                try:
+                    best_outcome = min(outcomes, key=lambda x: float(x["price"]))
+                    quota = float(best_outcome["price"])
+                    prob_api = round((1.0 / quota) * 100.0, 1)
+                except Exception:
+                    continue
 
-    # CSV (se disponibili)
-    prob_csv = None
+                # CSV (se disponibili)
+                prob_csv = None
+                if hist_df is not None:
+                    try:
+                        team_matches = hist_df[
+                            (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
+                        ]
+                        if not team_matches.empty:
+                            total_matches = len(team_matches)
+                            home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
+                            away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
 
-    if hist_df is not None:
-    try:
-        team_matches = hist_df[
-            (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
-        ]
-        if not team_matches.empty:
-            total_matches = len(team_matches)
-            home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
-            away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
+                            home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
+                            away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
 
-            home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
-            away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
+                            home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
+                            home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
+                            away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
+                            away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
 
-            home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
-            home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
-            away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
-            away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
+                            prob_csv = (
+                                (home_win_rate * 0.4) +
+                                ((100 - away_win_rate) * 0.2) +
+                                ((home_goals_scored - home_goals_conceded) * 5) +
+                                ((away_goals_conceded - away_goals_scored) * 5)
+                            )
+                            prob_csv = max(0, min(100, prob_csv))
+                    except Exception as e:
+                        logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
 
-            prob_csv = (
-                (home_win_rate * 0.4) +
-                ((100 - away_win_rate) * 0.2) +
-                ((home_goals_scored - home_goals_conceded) * 5) +
-                ((away_goals_conceded - away_goals_scored) * 5)
-            )
-            prob_csv = max(0, min(100, prob_csv))
-    except Exception as e:
-        logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
+                # Combina API + CSV
+                if prob_csv is not None:
+                    probability = round((prob_api * 0.6) + (prob_csv * 0.4), 1)
+                else:
+                    probability = prob_api
 
-# Combina API + CSV
-if prob_csv is not None:
-    probability = round((prob_api * 0.6) + (prob_csv * 0.4), 1)
-else:
-    probability = prob_api
 
 
                     # 🔹 Calcolo prob_csv dai dati storici
