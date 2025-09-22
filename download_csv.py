@@ -22,18 +22,25 @@ LINKS = {
         "https://drive.google.com/file/d/1BgTAXO7Pbf7krU4VSqpe9mRNcFN1fpAU/view?usp=drive_link",
         "https://drive.google.com/file/d/1tZWqSSwql5EPd4ewkK4L-lr7vkdWDSyG/view?usp=drive_link",
     ],
-    "basket": [
-        "https://drive.google.com/file/d/1zMdXKb_0Kgy734fl_J3cDZ7KOgCNM6Ng/view?usp=drive_link",
-        "https://drive.google.com/file/d/1eSXgRXH9U7QrO5Q4LO6oA6pweyaCqsgF/view?usp=drive_link",
-        "https://drive.google.com/file/d/1jRzPAg5Q-yHmJPqYliakxDmWnrpMCqu_/view?usp=drive_link",
-        "https://drive.google.com/file/d/1XZ_fzreWKgSrt4Fdh6Dzooax3Bc0ZugF/view?usp=drive_link",
+    "basketball_nba": [
+         "https://drive.google.com/file/d/1zMdXKb_0Kgy734fl_J3cDZ7KOgCNM6Ng/view?usp=drive_link",
+         "https://drive.google.com/file/d/1eSXgRXH9U7QrO5Q4LO6oA6pweyaCqsgF/view?usp=drive_link",
+         "https://drive.google.com/file/d/1jRzPAg5Q-yHmJPqYliakxDmWnrpMCqu_/view?usp=drive_link",
+         "https://drive.google.com/file/d/1XZ_fzreWKgSrt4Fdh6Dzooax3Bc0ZugF/view?usp=drive_link",
     ],
-    "football": [
-        "https://drive.google.com/file/d/1c6mPo49iqxkl3Z2soKlJrY9wdF3874Jl/view?usp=drive_link",
-        "https://drive.google.com/file/d/10HdPiazGdgoHhmAGFZWrltlTdbhHW-jg/view?usp=drive_link",
-        "https://drive.google.com/file/d/1jdBb1FntwcUNEFsGcpsm_l4CfYvXmwxf/view?usp=drive_link",
-        "https://drive.google.com/file/d/1mx56GF1c9t5TLb2jt4XpvcBUGNzG1hQL/view?usp=drive_link",
+
     ],
+    "americanfootball_nfl": [
+         "https://drive.google.com/file/d/1c6mPo49iqxkl3Z2soKlJrY9wdF3874Jl/view?usp=drive_link",
+         "https://drive.google.com/file/d/10HdPiazGdgoHhmAGFZWrltlTdbhHW-jg/view?usp=drive_link",
+         "https://drive.google.com/file/d/1jdBb1FntwcUNEFsGcpsm_l4CfYvXmwxf/view?usp=drive_link",
+         "https://drive.google.com/file/d/1mx56GF1c9t5TLb2jt4XpvcBUGNzG1hQL/view?usp=drive_link",
+    ],
+    "americanfootball_ncaaf": [
+         "https://drive.google.com/file/d/10HdPiazGdgoHhmAGFZWrltlTdbhHW-jg/view?usp=drive_link",
+         "https://drive.google.com/file/d/1jdBb1FntwcUNEFsGcpsm_l4CfYvXmwxf/view?usp=drive_link",
+    ],
+
 }
 
 # --- FUNZIONI UTILI ---
@@ -102,9 +109,10 @@ def download_http(url: str, dest_path: str) -> bool:
 # --- MAIN ---
 def main():
     ok, fail = 0, 0
-    for group, urls in LINKS.items():
-        base = OUT_DIR / group
+    for sport_key, urls in LINKS.items():
+        base = OUT_DIR / sport_key   # 👈 usa la chiave API come cartella
         base.mkdir(parents=True, exist_ok=True)
+
 
         for url in urls:
             filename = url.split("/")[-1] or "file.csv"
