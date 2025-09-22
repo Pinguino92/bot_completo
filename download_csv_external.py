@@ -103,3 +103,20 @@ for comp, links in CSV_LINKS.items():
             logging.info(f"✅ Scaricato {comp}: {filename}")
         except Exception as e:
             logging.error(f"❌ Errore download {url}: {e}")
+
+import schedule
+import time
+
+def job():
+    print("⏳ Download CSV esterni in corso...")
+    download_all_csv()   # 👈 la tua funzione principale che scarica i CSV
+    print("✅ Download CSV esterni completato!")
+
+# schedulazione: ogni giorno alle 02:00
+schedule.every().day.at("09:00").do(job)
+
+if _name_ == "_main_":
+    job()  # primo download immediato al deploy
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
