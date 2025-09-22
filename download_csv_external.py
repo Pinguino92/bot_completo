@@ -59,18 +59,6 @@ CSV_LINKS = {
         "https://www.football-data.co.uk/mmz4281/2425/EU.csv",
     ],
 
-    "basketball_nba": [
-    "https://raw.githubusercontent.com/seemethere/nba_py/master/docs/data/games.csv"
-],
-
-"americanfootball_nfl": [
-    "https://github.com/nflverse/nflverse-data/releases/download/games/games.csv"
-],
-
-"americanfootball_ncaaf": [
-    "https://github.com/sportsdataverse/cfbfastR-data/releases/download/games/games.csv"
-]
-
 }
 
 def download_all_csv():
