@@ -54,29 +54,21 @@ CSV_LINKS = {
     ],
     "soccer_uefa_champs_league": [
         "https://www.football-data.co.uk/mmz4281/2425/EC.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/EC.csv",
     ],
     "soccer_uefa_europa_league": [
         "https://www.football-data.co.uk/mmz4281/2425/EU.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/EU.csv",
     ],
 
-    # 🏀 NBA (repo NocturneBear)
-    # Uso regolare stagione fino al 2024
-    "basketball_nba": [
-        "https://github.com/NocturneBear/NBA-Data-2010-2024/raw/main/regular_season_box_scores_2010_2024_part_1.csv",
-        "https://github.com/NocturneBear/NBA-Data-2010-2024/raw/main/regular_season_box_scores_2010_2024_part_2.csv",
-        "https://github.com/NocturneBear/NBA-Data-2010-2024/raw/main/regular_season_totals_2010_2024.csv",
+    # 🏀 "nba": [
+        "https://raw.githubusercontent.com/bttmly/nba/master/data/games.csv"
     ],
 
-    # 🏈 NFL (nflverse data)
-    "americanfootball_nfl": [
-        "https://github.com/nflverse/nflverse-data/raw/master/games.csv.gz"
+    # 🏈 "nfl": [
+        "https://github.com/nflverse/nflfastR-data/raw/master/games.csv.gz"
     ],
 
-    # NCAA Football (potresti trovare dataset simile/analogo, non sempre aggiornati)
-    "americanfootball_ncaaf": [
-        "https://github.com/nflverse/nflverse-data/raw/master/college_games.csv.gz"
+    # "ncaaf": [
+        "https://github.com/sportsdataverse/cfbfastR-data/raw/master/games.csv.gz"
     ]
 }
 
