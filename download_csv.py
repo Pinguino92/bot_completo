@@ -236,29 +236,29 @@ def main():
     ok, fail = 0, 0
     for group, urls in LINKS.items():
         base = OUT_DIR / group
-        for url in links:
-    filename = url.split("/")[-1] or "file.csv"
-    dest = os.path.join(folder, filename)
+        base.mkdir(parents=True, exist_ok=True)
 
-    if "drive.google.com" in url:
-        ok = _download_google_drive(url, dest)
-    else:
-        ok = _download_http(url, dest)
+        for url in urls:   # 👈 qui era "links", va corretto in "urls"
+            filename = url.split("/")[-1] or "file.csv"
+            dest = base / filename
 
-    if not ok:
-        # ultimo tentativo: se è un link "view", prova a convertirlo in uc?export=download
-        if "drive.google.com/file/d/" in url:
-            file_id = _gdrive_extract_id(url)
-            if file_id:
-                direct = f"https://drive.google.com/uc?export=download&id={file_id}"
-                dest2 = os.path.join(folder, f"{file_id}.csv")
-                ok2 = _download_google_drive(direct, dest2)
-                if not ok2:
-                    logging.error(f"❌ Fallito anche con link diretto: {direct}")
-        else:
-            logging.error(f"❌ Download fallito per: {url}")
+            if "drive.google.com" in url:
+                success = _download_google_drive(url, str(dest))
+            else:
+                success = _download_http(url, str(dest))
 
-
+            if not success:
+                # ultimo tentativo: se è un link "view", prova a convertirlo in uc?export=download
+                if "drive.google.com/file/d/" in url:
+                    file_id = _gdrive_extract_id(url)
+                    if file_id:
+                        direct = f"https://drive.google.com/uc?export=download&id={file_id}"
+                        dest2 = base / f"{file_id}.csv"
+                        success2 = _download_google_drive(direct, str(dest2))
+                        if not success2:
+                            logging.error(f"❌ Fallito anche con link diretto: {direct}")
+                else:
+                    logging.error(f"❌ Download fallito per: {url}")
 
 if __name__ == "__main__":
     main()
