@@ -154,27 +154,31 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             for bookmaker in match.get("bookmakers", []):
                 bookmaker_name = bookmaker.get("title", "Sconosciuto")
 
-                for market in bookmaker.get("markets", []):
-                    outcomes = market.get("outcomes", [])
-                    if len(outcomes) < 2:
-                        continue
+  for market in bookmaker.get("markets", []):
+    outcomes = market.get("outcomes", [])
+    if len(outcomes) < 2:
+        continue
 
-                    market_key = market.get("key", "")
-                    if sport.startswith("soccer_"):
-                        if market_key == "totals":
-                            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
+    # 🔹 Filtra solo i mercati richiesti per il calcio
+    market_key = market.get("key", "")
+    if sport.startswith("soccer_"):
+        if market_key == "totals":
+            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
 
-                    # quota API
-try:
-    best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-    quota = float(best_outcome["price"])
-    prob_api = round((1.0 / quota) * 100.0, 1)
-except Exception:
-    continue
+    any_market_found = True
 
-# CSV (se disponibili)
-prob_csv = None
-if hist_df is not None:
+    # quota API
+    try:
+        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
+        quota = float(best_outcome["price"])
+        prob_api = round((1.0 / quota) * 100.0, 1)
+    except Exception:
+        continue
+
+    # CSV (se disponibili)
+    prob_csv = None
+
+    if hist_df is not None:
     try:
         team_matches = hist_df[
             (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
