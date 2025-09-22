@@ -60,41 +60,43 @@ CSV_LINKS = {
     ],
 
     "basketball_nba": [
-        "https://raw.githubusercontent.com/bttmly/nba/master/data/games.csv"
-    ],
+    "https://raw.githubusercontent.com/seemethere/nba_py/master/docs/data/games.csv"
+],
 
-    "americanfootball_nfl": [
-        "https://github.com/nflverse/nflfastR-data/raw/master/games.csv.gz"
-    ],
+"americanfootball_nfl": [
+    "https://github.com/nflverse/nflverse-data/releases/download/games/games.csv"
+],
 
-    "americanfootball_ncaaf": [
-        "https://github.com/sportsdataverse/cfbfastR-data/raw/master/games.csv.gz"
-    ]
+"americanfootball_ncaaf": [
+    "https://github.com/sportsdataverse/cfbfastR-data/releases/download/games/games.csv"
+]
+
 }
 
-for comp, links in CSV_LINKS.items():
-    if comp.startswith("soccer_"):
-        folder = "data/calcio"
-    elif comp.startswith("basketball_"):
-        folder = "data/basket"
-    elif comp.startswith("americanfootball_"):
-        folder = "data/football"
-    else:
-        folder = "data/misc"
+def download_all_csv():
+    for comp, links in CSV_LINKS.items():
+        if comp.startswith("soccer_"):
+            folder = "data/calcio"
+        elif comp.startswith("basketball_"):
+            folder = "data/basket"
+        elif comp.startswith("americanfootball_"):
+            folder = "data/football"
+        else:
+            folder = "data/misc"
 
-    os.makedirs(folder, exist_ok=True)
+        os.makedirs(folder, exist_ok=True)
 
-    for url in links:
-        try:
-            filename = url.split("/")[-1]
-            dest = f"{folder}/{comp}_{filename}"
-            r = requests.get(url, timeout=30)
-            r.raise_for_status()
-            with open(dest, "wb") as f:
-                f.write(r.content)
-            logging.info(f"✅ Scaricato {comp}: {filename}")
-        except Exception as e:
-            logging.error(f"❌ Errore download {url}: {e}")
+        for url in links:
+            try:
+                filename = url.split("/")[-1]
+                dest = f"{folder}/{comp}_{filename}"
+                r = requests.get(url, timeout=30)
+                r.raise_for_status()
+                with open(dest, "wb") as f:
+                    f.write(r.content)
+                logging.info(f"✅ Scaricato {comp}: {filename}")
+            except Exception as e:
+                logging.error(f"❌ Errore download {url}: {e}")
 
 import schedule
 import time
