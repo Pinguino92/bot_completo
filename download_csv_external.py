@@ -59,15 +59,15 @@ CSV_LINKS = {
         "https://www.football-data.co.uk/mmz4281/2425/EU.csv",
     ],
 
-    # 🏀 "nba": [
+    "basketball_nba": [
         "https://raw.githubusercontent.com/bttmly/nba/master/data/games.csv"
     ],
 
-    # 🏈 "nfl": [
+    "americanfootball_nfl": [
         "https://github.com/nflverse/nflfastR-data/raw/master/games.csv.gz"
     ],
 
-    # "ncaaf": [
+    "americanfootball_ncaaf": [
         "https://github.com/sportsdataverse/cfbfastR-data/raw/master/games.csv.gz"
     ]
 }
