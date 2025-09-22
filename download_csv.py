@@ -4,6 +4,97 @@ import time
 import logging
 import pathlib
 import requests
+import re
+from urllib.parse import urlparse, parse_qs
+
+def _gdrive_extract_id(url: str):
+    """
+    Estrae l'ID sia da:
+      - https://drive.google.com/file/d/<ID>/view?...
+      - https://drive.google.com/uc?id=<ID>&export=download
+    """
+    m = re.search(r'/d/([-\w]{10,})', url)
+    if m:
+        return m.group(1)
+    qs = parse_qs(urlparse(url).query)
+    if 'id' in qs:
+        return qs['id'][0]
+    return None
+
+def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bool:
+    """
+    Scarica file da Google Drive gestendo pagina di conferma e token.
+    Ritorna True/False.
+    """
+    file_id = _gdrive_extract_id(url)
+    if not file_id:
+        logging.error(f"⚠️ Impossibile estrarre l'ID da: {url}")
+        return False
+
+    session = requests.Session()
+    session.headers.update({"User-Agent": "Mozilla/5.0"})
+
+    base = f"https://drive.google.com/uc?export=download&id={file_id}"
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            r = session.get(base, stream=True, timeout=60)
+
+            # 1) token nei cookie (download_warning)
+            token = None
+            for k, v in r.cookies.items():
+                if k.startswith('download_warning'):
+                    token = v
+                    break
+            if token:
+                confirm_url = f"https://drive.google.com/uc?export=download&confirm={token}&id={file_id}"
+                r = session.get(confirm_url, stream=True, timeout=60)
+
+            # 2) se è ancora HTML, prova a pescare il token dalla pagina
+            ctype = r.headers.get("Content-Type", "")
+            if "text/html" in ctype:
+                html = r.text
+                # quota superata / troppi accessi
+                if "Quota exceeded" in html or "too many users" in html or "download quota" in html:
+                    logging.error(f"❌ Quota Google Drive superata per: {url}. Sposta/duplica il file o attendi.")
+                    return False
+
+                m = re.search(r'href="([^"]*confirm=([^&"]+)[^"]*)"', html)
+                if m:
+                    confirm_url = "https://drive.google.com" + m.group(1).replace("&amp;", "&")
+                    r = session.get(confirm_url, stream=True, timeout=60)
+                    ctype = r.headers.get("Content-Type", "")
+
+            if "text/html" in ctype:
+                logging.error(f"❌ Google Drive conferma non risolta: {url} (tentativo {attempt}/{max_retries})")
+                continue
+
+            # 3) salva su disco
+            with open(dest_path, "wb") as f:
+                for chunk in r.iter_content(32768):
+                    if chunk:
+                        f.write(chunk)
+
+            logging.info(f"✅ Scaricato da Google Drive: {dest_path}")
+            return True
+
+        except Exception as e:
+            logging.error(f"❌ Errore GDrive ({attempt}/{max_retries}) {url}: {e}")
+
+    return False
+
+def _download_http(url: str, dest_path: str) -> bool:
+    try:
+        r = requests.get(url, timeout=60)
+        r.raise_for_status()
+        with open(dest_path, "wb") as f:
+            f.write(r.content)
+        logging.info(f"✅ Scaricato: {dest_path}")
+        return True
+    except Exception as e:
+        logging.error(f"❌ Errore download {url}: {e}")
+        return False
+
 from urllib.parse import urlparse, parse_qs
 
 logging.basicConfig(level=logging.INFO)
@@ -145,17 +236,28 @@ def main():
     ok, fail = 0, 0
     for group, urls in LINKS.items():
         base = OUT_DIR / group
-        for url in urls:
-            file_id = extract_file_id(url)
-            # Nome file = ID.csv (semplice e stabile)
-            name = (file_id or "sconosciuto") + ".csv"
-            dest = base / name
-            if download_one(url, dest):
-                ok += 1
-            else:
-                fail += 1
+        for url in links:
+    filename = url.split("/")[-1] or "file.csv"
+    dest = os.path.join(folder, filename)
 
-    logging.info(f"✅ Scaricati: {ok} | ❌ Falliti: {fail}")
+    if "drive.google.com" in url:
+        ok = _download_google_drive(url, dest)
+    else:
+        ok = _download_http(url, dest)
+
+    if not ok:
+        # ultimo tentativo: se è un link "view", prova a convertirlo in uc?export=download
+        if "drive.google.com/file/d/" in url:
+            file_id = _gdrive_extract_id(url)
+            if file_id:
+                direct = f"https://drive.google.com/uc?export=download&id={file_id}"
+                dest2 = os.path.join(folder, f"{file_id}.csv")
+                ok2 = _download_google_drive(direct, dest2)
+                if not ok2:
+                    logging.error(f"❌ Fallito anche con link diretto: {direct}")
+        else:
+            logging.error(f"❌ Download fallito per: {url}")
+
 
 
 if __name__ == "__main__":
