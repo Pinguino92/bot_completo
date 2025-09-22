@@ -4,15 +4,9 @@ import time
 import logging
 import pathlib
 import requests
-import re
 from urllib.parse import urlparse, parse_qs
 
 def _gdrive_extract_id(url: str):
-    """
-    Estrae l'ID sia da:
-      - https://drive.google.com/file/d/<ID>/view?...
-      - https://drive.google.com/uc?id=<ID>&export=download
-    """
     m = re.search(r'/d/([-\w]{10,})', url)
     if m:
         return m.group(1)
@@ -22,10 +16,6 @@ def _gdrive_extract_id(url: str):
     return None
 
 def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bool:
-    """
-    Scarica file da Google Drive gestendo pagina di conferma e token.
-    Ritorna True/False.
-    """
     file_id = _gdrive_extract_id(url)
     if not file_id:
         logging.error(f"⚠️ Impossibile estrarre l'ID da: {url}")
@@ -33,14 +23,12 @@ def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bo
 
     session = requests.Session()
     session.headers.update({"User-Agent": "Mozilla/5.0"})
-
     base = f"https://drive.google.com/uc?export=download&id={file_id}"
 
     for attempt in range(1, max_retries + 1):
         try:
             r = session.get(base, stream=True, timeout=60)
 
-            # 1) token nei cookie (download_warning)
             token = None
             for k, v in r.cookies.items():
                 if k.startswith('download_warning'):
@@ -50,13 +38,11 @@ def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bo
                 confirm_url = f"https://drive.google.com/uc?export=download&confirm={token}&id={file_id}"
                 r = session.get(confirm_url, stream=True, timeout=60)
 
-            # 2) se è ancora HTML, prova a pescare il token dalla pagina
             ctype = r.headers.get("Content-Type", "")
             if "text/html" in ctype:
                 html = r.text
-                # quota superata / troppi accessi
                 if "Quota exceeded" in html or "too many users" in html or "download quota" in html:
-                    logging.error(f"❌ Quota Google Drive superata per: {url}. Sposta/duplica il file o attendi.")
+                    logging.error(f"❌ Quota Google Drive superata per: {url}")
                     return False
 
                 m = re.search(r'href="([^"]*confirm=([^&"]+)[^"]*)"', html)
@@ -69,7 +55,6 @@ def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bo
                 logging.error(f"❌ Google Drive conferma non risolta: {url} (tentativo {attempt}/{max_retries})")
                 continue
 
-            # 3) salva su disco
             with open(dest_path, "wb") as f:
                 for chunk in r.iter_content(32768):
                     if chunk:
@@ -77,10 +62,8 @@ def _download_google_drive(url: str, dest_path: str, max_retries: int = 2) -> bo
 
             logging.info(f"✅ Scaricato da Google Drive: {dest_path}")
             return True
-
         except Exception as e:
             logging.error(f"❌ Errore GDrive ({attempt}/{max_retries}) {url}: {e}")
-
     return False
 
 def _download_http(url: str, dest_path: str) -> bool:
@@ -95,15 +78,14 @@ def _download_http(url: str, dest_path: str) -> bool:
         logging.error(f"❌ Errore download {url}: {e}")
         return False
 
-from urllib.parse import urlparse, parse_qs
-
 logging.basicConfig(level=logging.INFO)
 SESSION = requests.Session()
 SESSION.headers.update({"User-Agent": "Mozilla/5.0"})
 
-# === INSERISCI QUI i link che mi hai passato (copiati 1:1) ===
+# === LINK CORRETTI PER TUTTI GLI SPORT ===
 LINKS = {
-    "calcio": [
+    # ⚽ Calcio
+    "soccer": [
         "https://drive.google.com/file/d/1wTlTM25ZdyB8W1AiqpGEPiCSDr8j5AfX/view?usp=sharing",
         "https://drive.google.com/file/d/11tSVFvOLlO15PKwfeD8EvuseSVZ3bLCx/view?usp=sharing",
         "https://drive.google.com/file/d/1b3GwAwcFrZo6Wl0k0qKQBM3HKZ1guxE4/view?usp=drive_link",
@@ -129,15 +111,23 @@ LINKS = {
         "https://drive.google.com/file/d/1NkVTEZ_s7IecTzQrS28OKrxWoJuDq0jK/view?usp=drive_link",
         "https://drive.google.com/file/d/1wl73AzeYwNS5mapuAifltDA3x5FYQyWZ/view?usp=drive_link",
     ],
-    "basket": [
+
+    # 🏀 NBA
+    "basketball_nba": [
         "https://drive.google.com/file/d/1zMdXKb_0Kgy734fl_J3cDZ7KOgCNM6Ng/view?usp=drive_link",
         "https://drive.google.com/file/d/1eSXgRXH9U7QrO5Q4LO6oA6pweyaCqsgF/view?usp=drive_link",
         "https://drive.google.com/file/d/1jRzPAg5Q-yHmJPqYliakxDmWnrpMCqu_/view?usp=drive_link",
         "https://drive.google.com/file/d/1XZ_fzreWKgSrt4Fdh6Dzooax3Bc0ZugF/view?usp=drive_link",
     ],
-    "football": [
+
+    # 🏈 NFL
+    "americanfootball_nfl": [
         "https://drive.google.com/file/d/1c6mPo49iqxkl3Z2soKlJrY9wdF3874Jl/view?usp=drive_link",
         "https://drive.google.com/file/d/10HdPiazGdgoHhmAGFZWrltlTdbhHW-jg/view?usp=drive_link",
+    ],
+
+    # 🏈 NCAA
+    "americanfootball_ncaaf": [
         "https://drive.google.com/file/d/1jdBb1FntwcUNEFsGcpsm_l4CfYvXmwxf/view?usp=drive_link",
         "https://drive.google.com/file/d/1mx56GF1c9t5TLb2jt4XpvcBUGNzG1hQL/view?usp=drive_link",
     ],
@@ -145,120 +135,30 @@ LINKS = {
 
 OUT_DIR = pathlib.Path("downloads")
 
-
-def extract_file_id(url: str) -> str | None:
-    """
-    Supporta:
-      - https://drive.google.com/file/d/<ID>/view?...
-      - https://drive.google.com/uc?id=<ID>
-    """
-    try:
-        parsed = urlparse(url)
-        if "drive.google.com" not in parsed.netloc:
-            return None
-        # caso uc?id=...
-        qs = parse_qs(parsed.query).get("id")
-        if qs and len(qs) > 0:
-            return qs[0]
-
-        # caso file/d/<ID>/
-        m = re.search(r"/file/d/([^/]+)/", parsed.path)
-        if m:
-            return m.group(1)
-    except Exception:
-        return None
-    return None
-
-
-def build_direct_url(file_id: str) -> str:
-    return f"https://drive.google.com/uc?export=download&id={file_id}"
-
-
-def _resolve_confirm_token(content: str) -> str | None:
-    """
-    Quando Google mostra la pagina HTML di conferma (limite/antivirus),
-    troviamo il token di conferma.
-    """
-    # token in link tipo confirm=XXXX
-    m = re.search(r'href="(/uc\?export=download[^"]?confirm=([^"&]+)[^"])"', content)
-    if m:
-        return m.group(2)
-    # a volte appare come input hidden name="confirm" value="..."
-    m2 = re.search(r'name="confirm"\s+value="([^"]+)"', content)
-    if m2:
-        return m2.group(1)
-    return None
-
-
-def download_one(url: str, dest: pathlib.Path, attempt: int = 1, max_attempts: int = 2) -> bool:
-    file_id = extract_file_id(url)
-    if not file_id:
-        logging.error(f"❌ Link non valido (ID non trovato): {url}")
-        return False
-
-    direct = build_direct_url(file_id)
-    dest.parent.mkdir(parents=True, exist_ok=True)
-
-    try:
-        logging.info(f"⬇️ Download {url} → {dest} (tentativo {attempt}/{max_attempts})")
-        with SESSION.get(direct, stream=True, timeout=30) as r:
-            if "text/html" in r.headers.get("Content-Type", ""):
-                # potenziale pagina di conferma, leggi HTML
-                html = r.text
-                token = _resolve_confirm_token(html)
-                if token:
-                    # riprova con token
-                    confirm_url = f"{direct}&confirm={token}"
-                    r = SESSION.get(confirm_url, stream=True, timeout=30)
-                    r.raise_for_status()
-                    if "text/html" in r.headers.get("Content-Type", ""):
-                        raise RuntimeError("Google Drive conferma non risolta.")
-                else:
-                    # magari richiede ancora redirect, provo follow automaticamente
-                    pass
-            r.raise_for_status()
-
-            with open(dest, "wb") as f:
-                for chunk in r.iter_content(chunk_size=8192):
-                    if chunk:
-                        f.write(chunk)
-        return True
-
-    except Exception as e:
-        logging.error(f"❌ Errore download {url}: {e}")
-        if attempt < max_attempts:
-            time.sleep(2 * attempt)
-            return download_one(url, dest, attempt + 1, max_attempts)
-        return False
-
-
 def main():
-    ok, fail = 0, 0
     for group, urls in LINKS.items():
         base = OUT_DIR / group
         base.mkdir(parents=True, exist_ok=True)
-
-        for url in urls:   # 👈 qui era "links", va corretto in "urls"
+        for url in urls:
             filename = url.split("/")[-1] or "file.csv"
             dest = base / filename
 
+            success = False
             if "drive.google.com" in url:
                 success = _download_google_drive(url, str(dest))
             else:
                 success = _download_http(url, str(dest))
 
-            if not success:
-                # ultimo tentativo: se è un link "view", prova a convertirlo in uc?export=download
-                if "drive.google.com/file/d/" in url:
-                    file_id = _gdrive_extract_id(url)
-                    if file_id:
-                        direct = f"https://drive.google.com/uc?export=download&id={file_id}"
-                        dest2 = base / f"{file_id}.csv"
-                        success2 = _download_google_drive(direct, str(dest2))
-                        if not success2:
-                            logging.error(f"❌ Fallito anche con link diretto: {direct}")
-                else:
-                    logging.error(f"❌ Download fallito per: {url}")
+            if not success and "drive.google.com/file/d/" in url:
+                file_id = _gdrive_extract_id(url)
+                if file_id:
+                    direct = f"https://drive.google.com/uc?export=download&id={file_id}"
+                    dest2 = base / f"{file_id}.csv"
+                    success2 = _download_google_drive(direct, str(dest2))
+                    if not success2:
+                        logging.error(f"❌ Fallito anche con link diretto: {direct}")
+            elif not success:
+                logging.error(f"❌ Download fallito per: {url}")
 
 if __name__ == "__main__":
     main()
