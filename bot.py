@@ -35,19 +35,9 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAA Football"
 }
 
-# 📂 Caricamento CSV storici (data/ + downloads/)
-def load_csv_data():
-    csv_data = {}
-    paths = glob.glob("data/*.csv") + glob.glob("downloads/**/*.csv", recursive=True)
-    for path in paths:
-        try:
-            df = pd.read_csv(path)
-            csv_data[os.path.basename(path)] = df
-        except Exception:
-            continue
-    return csv_data
-
-CSV_DATA = load_csv_data()
+# --- CSV STORICI (Google Drive + GitHub + esterni) ---
+import glob
+import pandas as pd
 
 def _category_for_sport(sport_key: str) -> str:
     if sport_key.startswith("soccer_"):
@@ -59,20 +49,21 @@ def _category_for_sport(sport_key: str) -> str:
     return "misc"
 
 def load_historical_data(sport_key: str):
-    try:
-        import pandas as pd
-    except Exception:
-        logging.warning("ℹ️ pandas non disponibile: salto caricamento storici.")
-        return None
-
+    """
+    Carica i CSV da:
+      - data/<categoria>/ (GitHub)
+      - downloads/<categoria>/ (Google Drive)
+      - external_data/<categoria>/ (siti esterni)
+    """
     categoria = _category_for_sport(sport_key)
 
     paths = []
-    paths.extend(glob.glob(os.path.join("downloads", categoria, "*.csv")))
     paths.extend(glob.glob(os.path.join("data", categoria, "*.csv")))
+    paths.extend(glob.glob(os.path.join("downloads", categoria, "*.csv")))
+    paths.extend(glob.glob(os.path.join("external_data", categoria, "*.csv")))
 
     if not paths:
-        logging.info(f"ℹ️ Nessun CSV storico trovato per {sport_key}.")
+        logging.info(f"ℹ️ Nessun CSV trovato per {sport_key}.")
         return None
 
     dfs = []
@@ -82,15 +73,16 @@ def load_historical_data(sport_key: str):
             if not df.empty:
                 dfs.append(df)
         except Exception as e:
-            logging.warning(f"⚠️ Impossibile leggere {p}: {e}")
+            logging.warning(f"⚠️ Errore lettura {p}: {e}")
 
     if not dfs:
-        logging.info(f"ℹ️ Nessun CSV valido per {sport_key}.")
         return None
 
     full = pd.concat(dfs, ignore_index=True)
-    logging.info(f"📂 Storici caricati per {sport_key}: {len(paths)} file, {len(full)} righe totali.")
+    logging.info(f"📂 Storici caricati per {sport_key}: {len(paths)} file, {len(full)} righe.")
     return full
+# -----------------------------------------------------
+
     
 # Parametri filtro
 MIN_PROB  = 60.0   # %
@@ -170,13 +162,46 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         if market_key == "totals":
                             outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
 
-                    any_market_found = True
-                    try:
-                        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-                        quota = float(best_outcome["price"])
-                        prob_api = round((1.0 / quota) * 100.0, 1)
-                    except Exception:
-                        continue
+                    # quota API
+quota = float(best_outcome["price"])
+prob_api = round((1.0 / quota) * 100.0, 1)
+
+# CSV (se disponibili)
+prob_csv = None
+if hist_df is not None:
+    try:
+        team_matches = hist_df[
+            (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
+        ]
+        if not team_matches.empty:
+            total_matches = len(team_matches)
+            home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
+            away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
+
+            home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
+            away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
+
+            home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
+            home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
+            away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
+            away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
+
+            prob_csv = (
+                (home_win_rate * 0.4) +
+                ((100 - away_win_rate) * 0.2) +
+                ((home_goals_scored - home_goals_conceded) * 5) +
+                ((away_goals_conceded - away_goals_scored) * 5)
+            )
+            prob_csv = max(0, min(100, prob_csv))
+    except Exception as e:
+        logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
+
+# Combina API + CSV
+if prob_csv is not None:
+    probability = round((prob_api * 0.6) + (prob_csv * 0.4), 1)
+else:
+    probability = prob_api
+
 
                     # 🔹 Calcolo prob_csv dai dati storici
                     prob_csv = None
@@ -259,8 +284,10 @@ def job():
 
     for sport in SPORTS.keys():
         hist_df = load_historical_data(sport)
+        hist_df = load_historical_data(sport)   # 🔹 carica CSV da tutte le fonti
         matches = get_odds(sport)
         accettati, rifiutati = analyze_matches(sport, matches, hist_df)
+
 
         for msg in accettati:
             send_to_telegram(msg)
