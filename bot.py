@@ -253,6 +253,7 @@ def job():
     for sport in SPORTS.keys():
         hist_df = load_historical_data(sport)   # 🔹 carica CSV da tutte le fonti
         matches = get_odds(sport)
+        logging.info(f"{sport}: ricevuti {len(matches)} eventi dalle API")
         accettati, rifiutati = analyze_matches(sport, matches, hist_df)
 
         for msg in accettati:
