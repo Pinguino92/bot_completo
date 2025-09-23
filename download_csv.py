@@ -15,13 +15,56 @@ OUT_DIR = pathlib.Path("downloads")
 
 # === INSERISCI QUI i link Google Drive e HTTP ===
 LINKS = {
-    "calcio": [
-        "https://drive.google.com/file/d/1wTlTM25ZdyB8W1AiqpGEPiCSDr8j5AfX/view?usp=sharing",
-        "https://drive.google.com/file/d/11tSVFvOLlO15PKwfeD8EvuseSVZ3bLCx/view?usp=sharing",
-        "https://drive.google.com/file/d/1b3GwAwcFrZo6Wl0k0qKQBM3HKZ1guxE4/view?usp=drive_link",
-        "https://drive.google.com/file/d/1BgTAXO7Pbf7krU4VSqpe9mRNcFN1fpAU/view?usp=drive_link",
-        "https://drive.google.com/file/d/1tZWqSSwql5EPd4ewkK4L-lr7vkdWDSyG/view?usp=drive_link",
+    "LINKS = {
+    "soccer_italy_serie_a": [
+        "https://drive.google.com/file/d/1IwH4OWw8K7d6lA6L_yOHDv0sPWzAjB7R/view?usp=sharing",
+        "https://drive.google.com/file/d/1OvFQSfS818GvIrE668IceV2BxWpUwpPH/view?usp=sharing",
+        "https://drive.google.com/file/d/1nuA3X9RR8nmHCiIJgHtYBNXSBfh5JVpz/view?usp=sharing",
+        "https://drive.google.com/file/d/1Mu5mHX1iZ6DDty4yOsPBhYDBG4IV8tBo/view?usp=sharing",
     ],
+    "soccer_spain_la_liga": [
+        "https://drive.google.com/file/d/101leVcEblRX6SIZQ9IPYt3gBftfdTfU6/view?usp=sharing",
+        "https://drive.google.com/file/d/1ZuKPIIPCH9aqwX80CpDb0-KGVcylYlRy/view?usp=sharing",
+    ],
+    "soccer_france_ligue_one": [
+        "https://drive.google.com/file/d/1DCElGIAfJmpKcCWU6i2vcuCPs1No5orq/view?usp=sharing",
+        "https://drive.google.com/file/d/1Wu9IG7QdmunqUw0duHVgCzzLlMXhSLE5/view?usp=sharing",
+    ],
+    "soccer_germany_bundesliga": [
+        "https://drive.google.com/file/d/18-IzszXSMuTehzogMXzCpEtXY4MX-3y7/view?usp=sharing",
+        "https://drive.google.com/file/d/1rzjuCvl1FCY81BdUiFycC0doRUHtjjLR/view?usp=sharing",
+    ],
+    "soccer_england_efl_champ": [
+        "https://drive.google.com/file/d/1wEjlzWU9e_B9VVtQQTXzRP9hXu7C_4SH/view?usp=sharing",
+        "https://drive.google.com/file/d/1fjVYftn8Wzq5wVsgD1-9I3b1x8JsOhqK/view?usp=sharing",
+    ],
+    "soccer_uefa_champs_league": [
+        "https://drive.google.com/file/d/1UjdjPAGJYZvqGchWlrb3DWbBNl_eHuxN/view?usp=sharing",
+        "https://drive.google.com/file/d/1c1WEcoUiGnvfs34Fs8EQQlwlHsNPnoTA/view?usp=sharing",
+    ],
+    "soccer_uefa_europa_league": [
+        "https://drive.google.com/file/d/10LQ4_jPdt3NG42MGPUbrRygmMXXChRvo/view?usp=sharing",
+        "https://drive.google.com/file/d/1INKdlNQxnoyDuNhMIYwAe0LA1SxveDcC/view?usp=sharing",
+    ],
+    "soccer_argentina_primera_division": [
+        "https://drive.google.com/file/d/109b1Cw9xPCND3gDGBHElegMp6ky5Uk_h/view?usp=sharing",
+    ],
+    "soccer_brazil_campeonato": [
+        "https://drive.google.com/file/d/1Cv0zrXxbEV7pVT4tT2dMBaFwD4fKuiIT/view?usp=sharing",
+    ],
+    "soccer_mexico_ligamx": [
+        "https://drive.google.com/file/d/1f9jKgs5DcvUES_9KdaYdqyCP-L-7hNdS/view?usp=sharing",
+    ],
+    "soccer_portugal_primeira_liga": [
+        "https://drive.google.com/file/d/1MHk4DTUw2rzhCZMDFB7yCLwOc1HWHFmR/view?usp=sharing",
+    ],
+    "soccer_netherlands_eredivisie": [
+        "https://drive.google.com/file/d/1FN39YP3RwZsrgxC7n-Jlp5C9Yv6i-Zh_/view?usp=sharing",
+    ],
+    "soccer_turkey_super_league": [
+        "https://drive.google.com/file/d/1x0nZkpMHAainZQsBgxsyjRghOgDfltIg/view?usp=sharing",
+    ],
+
     "basketball_nba": [
          "https://drive.google.com/file/d/1zMdXKb_0Kgy734fl_J3cDZ7KOgCNM6Ng/view?usp=drive_link",
          "https://drive.google.com/file/d/1eSXgRXH9U7QrO5Q4LO6oA6pweyaCqsgF/view?usp=drive_link",
