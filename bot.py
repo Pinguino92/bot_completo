@@ -34,7 +34,8 @@ SPORTS = {
     "soccer_uefa_europa_league": "⚽ Europa League",
     "basketball_nba": "🏀 NBA",
     "americanfootball_nfl": "🏈 NFL",
-    "americanfootball_ncaaf": "🏈 NCAA Football"
+    "americanfootball_ncaaf": "🏈 NCAA Football",
+    "baseball_mlb": "⚾ MLB - Baseball",
 }
 
 # --- CSV STORICI (Google Drive + GitHub + esterni) ---
@@ -45,6 +46,8 @@ def _category_for_sport(sport_key: str) -> str:
         return "basket"
     if sport_key.startswith("americanfootball_"):
         return "football"
+    if sport_key.startswith("baseball_"):
+        return "baseball" 
     return "misc"
 
 def load_historical_data(sport_key: str):
