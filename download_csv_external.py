@@ -60,7 +60,7 @@ CSV_LINKS = {
 
     # 🏈 NFL (nflverse)
     "americanfootball_nfl": [
-        "https://github.com/nflverse/nflverse-data/releases/download/games/games.csv",
+        "https://raw.githubusercontent.com/nflverse/nflverse-data/main/games/games.csv",
     ],
 
     # 🏈 NCAA Football (cfbfastR)
