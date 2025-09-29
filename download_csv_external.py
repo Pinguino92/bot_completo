@@ -56,11 +56,13 @@ CSV_LINKS = {
    # 🏀 NBA
 "basketball_nba": [
     "https://raw.githubusercontent.com/sportsdataverse/nba-data/master/games/games.csv",
+    "https://raw.githubusercontent.com/NocturneBear/NBA-Data-2010-2024/main/nba_games.csv",
 ],
 
 # 🏈 NFL
 "americanfootball_nfl": [
-    "https://raw.githubusercontent.com/nflverse/nflverse-data/master/games.csv",
+    "https://raw.githubusercontent.com/nflverse/nflverse-data/master/games.csv"
+    "https://raw.githubusercontent.com/nflverse/nflfastR-data/master/data/games.csv",
 ],
 
 # 🏈 NCAA Football
