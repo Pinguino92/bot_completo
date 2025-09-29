@@ -1,6 +1,9 @@
 import os
 import requests
 import logging
+import schedule
+import time
+import pandas as pd  # ← (1) aggiunta
 
 logging.basicConfig(level=logging.INFO)
 
@@ -8,49 +11,40 @@ logging.basicConfig(level=logging.INFO)
 os.makedirs("data/calcio", exist_ok=True)
 os.makedirs("data/basket", exist_ok=True)
 os.makedirs("data/football", exist_ok=True)
+os.makedirs("data/hockey", exist_ok=True)
 
 # Mappa competizioni → link CSV verificati o utili
 CSV_LINKS = {
     # ⚽ Calcio (football-data.co.uk)
     "soccer_italy_serie_a": [
         "https://www.football-data.co.uk/mmz4281/2425/I1.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/I1.csv",
     ],
     "soccer_italy_serie_b": [
         "https://www.football-data.co.uk/mmz4281/2425/I2.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/I2.csv",
     ],
     "soccer_spain_la_liga": [
         "https://www.football-data.co.uk/mmz4281/2425/SP1.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/SP1.csv",
     ],
     "soccer_spain_segunda_division": [
         "https://www.football-data.co.uk/mmz4281/2425/SP2.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/SP2.csv",
     ],
     "soccer_epl": [
         "https://www.football-data.co.uk/mmz4281/2425/E0.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/E0.csv",
     ],
-    "soccer_championship": [
+    "soccer_efl_champ": [  # 👈 corretto da soccer_championship
         "https://www.football-data.co.uk/mmz4281/2425/E1.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/E1.csv",
     ],
     "soccer_germany_bundesliga": [
         "https://www.football-data.co.uk/mmz4281/2425/D1.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/D1.csv",
     ],
     "soccer_germany_bundesliga2": [
         "https://www.football-data.co.uk/mmz4281/2425/D2.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/D2.csv",
     ],
     "soccer_france_ligue_one": [
         "https://www.football-data.co.uk/mmz4281/2425/F1.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/F1.csv",
     ],
     "soccer_france_ligue_two": [
         "https://www.football-data.co.uk/mmz4281/2425/F2.csv",
-        "https://www.football-data.co.uk/mmz4281/2526/F2.csv",
     ],
     "soccer_uefa_champs_league": [
         "https://www.football-data.co.uk/mmz4281/2425/EC.csv",
@@ -59,7 +53,63 @@ CSV_LINKS = {
         "https://www.football-data.co.uk/mmz4281/2425/EU.csv",
     ],
 
+    # 🏀 NBA (sportsdataverse)
+    "basketball_nba": [
+        "https://raw.githubusercontent.com/sportsdataverse/nba-data/main/games/games.csv",
+    ],
+
+    # 🏈 NFL (nflverse)
+    "americanfootball_nfl": [
+        "https://github.com/nflverse/nflverse-data/releases/download/games/games.csv",
+    ],
+
+    # 🏈 NCAA Football (cfbfastR)
+    "americanfootball_ncaaf": [
+        "https://github.com/sportsdataverse/cfbfastR-data/releases/download/games/games.csv",
+    ],
+
+    # 🏒 NHL (hockeyR)
+    "icehockey_nhl": [
+        "https://raw.githubusercontent.com/kevinzdavidson/hockeyR-data/main/games.csv",
+    ],
 }
+
+# (2) funzione di pulizia leggera post-download
+def sanitize_csv(path: str, sport_key: str):
+    """
+    Pulizia base:
+    - autodetect delimiter (virgola/semicolon/tab)
+    - UTF-8, rimozione BOM se presente
+    - salta righe corrotte e righe completamente vuote
+    Non rinomina colonne: i football-data per il calcio sono già conformi.
+    """
+    try:
+        df = pd.read_csv(
+            path,
+            sep=None,              # autodetect delimitatore
+            engine="python",
+            encoding="utf-8",
+            on_bad_lines="skip"
+        )
+        df = df.dropna(how="all")
+        df.to_csv(path, index=False, encoding="utf-8")
+    except UnicodeDecodeError:
+        # rimuovi BOM e riprova
+        with open(path, "rb") as f:
+            raw = f.read()
+        bom = b"\xef\xbb\xbf"
+        if raw.startswith(bom):
+            raw = raw[len(bom):]
+        with open(path, "wb") as f:
+            f.write(raw)
+        try:
+            df = pd.read_csv(path, sep=None, engine="python", on_bad_lines="skip")
+            df = df.dropna(how="all")
+            df.to_csv(path, index=False, encoding="utf-8")
+        except Exception as e2:
+            logging.warning(f"Pulizia fallback fallita per {path}: {e2}")
+    except Exception as e:
+        logging.warning(f"Pulizia CSV non riuscita per {path}: {e}")
 
 def download_all_csv():
     for comp, links in CSV_LINKS.items():
@@ -69,6 +119,8 @@ def download_all_csv():
             folder = "data/basket"
         elif comp.startswith("americanfootball_"):
             folder = "data/football"
+        elif comp.startswith("icehockey_"):
+            folder = "data/hockey"
         else:
             folder = "data/misc"
 
@@ -78,23 +130,21 @@ def download_all_csv():
             try:
                 filename = url.split("/")[-1]
                 dest = f"{folder}/{comp}_{filename}"
-                r = requests.get(url, timeout=30)
+                r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
                 r.raise_for_status()
                 with open(dest, "wb") as f:
                     f.write(r.content)
                 logging.info(f"✅ Scaricato {comp}: {filename}")
+                sanitize_csv(dest, comp)  # ← (2) chiamata alla pulizia
             except Exception as e:
                 logging.error(f"❌ Errore download {url}: {e}")
 
-import schedule
-import time
-
 def job():
     print("⏳ Download CSV esterni in corso...")
-    download_all_csv()   # 👈 la tua funzione principale che scarica i CSV
+    download_all_csv()
     print("✅ Download CSV esterni completato!")
 
-# schedulazione: ogni giorno alle 02:00
+# schedulazione: ogni giorno alle 09:00
 schedule.every().day.at("09:00").do(job)
 
 if __name__ == "__main__":
