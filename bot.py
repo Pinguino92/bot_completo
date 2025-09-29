@@ -49,7 +49,7 @@ def _category_for_sport(sport_key: str) -> str:
         return "football"
     if sport_key.startswith("baseball_"):
         return "baseball" 
-    if sport_key.startswith("hockey_"):
+    if sport_key.startswith("icehockey_"):
         return "hockey"
     return "misc"
 
