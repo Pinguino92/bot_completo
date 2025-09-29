@@ -53,25 +53,26 @@ CSV_LINKS = {
         "https://www.football-data.co.uk/mmz4281/2425/EU.csv",
     ],
 
-    # 🏀 NBA (sportsdataverse)
-    "basketball_nba": [
-        "https://raw.githubusercontent.com/sportsdataverse/nba-data/main/games/games.csv",
-    ],
+   # 🏀 NBA
+"basketball_nba": [
+    "https://raw.githubusercontent.com/sportsdataverse/nba-data/master/games/games.csv",
+],
 
-    # 🏈 NFL (nflverse)
-    "americanfootball_nfl": [
-        "https://raw.githubusercontent.com/nflverse/nflverse-data/main/games/games.csv",
-    ],
+# 🏈 NFL
+"americanfootball_nfl": [
+    "https://raw.githubusercontent.com/nflverse/nflverse-data/master/games.csv",
+],
 
-    # 🏈 NCAA Football (cfbfastR)
-    "americanfootball_ncaaf": [
-        "https://github.com/sportsdataverse/cfbfastR-data/releases/download/games/games.csv",
-    ],
+# 🏈 NCAA Football
+"americanfootball_ncaaf": [
+    "https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/master/games.csv",
+],
 
-    # 🏒 NHL (hockeyR)
-    "icehockey_nhl": [
-        "https://raw.githubusercontent.com/kevinzdavidson/hockeyR-data/main/games.csv",
-    ],
+# 🏒 NHL
+"icehockey_nhl": [
+    "https://raw.githubusercontent.com/kevinzdavidson/hockeyR-data/main/games.csv",
+],
+
 }
 
 # (2) funzione di pulizia leggera post-download
