@@ -259,7 +259,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-                   if prediction_id not in sent_predictions:
+                     if prediction_id not in sent_predictions:
                        sent_predictions.add(prediction_id)
 
                        # soglie specifiche per sport
