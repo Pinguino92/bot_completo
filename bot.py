@@ -34,9 +34,7 @@ SPORTS = {
     "soccer_uefa_europa_league": "⚽ Europa League",
     "basketball_nba": "🏀 NBA",
     "americanfootball_nfl": "🏈 NFL",
-    "americanfootball_ncaaf": "🏈 NCAA Football",
-    "baseball_mlb": "⚾ MLB - Baseball",
-    "icehockey_nhl": "🏒 NHL - Hockey USA",
+    "americanfootball_ncaaf": "🏈 NCAA Football"
 }
 
 # --- CSV STORICI (Google Drive + GitHub + esterni) ---
@@ -47,10 +45,6 @@ def _category_for_sport(sport_key: str) -> str:
         return "basket"
     if sport_key.startswith("americanfootball_"):
         return "football"
-    if sport_key.startswith("baseball_"):
-        return "baseball" 
-    if sport_key.startswith("icehockey_"):
-        return "hockey"
     return "misc"
 
 def load_historical_data(sport_key: str):
@@ -259,7 +253,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-if prediction_id not in sent_predictions:
+                    if prediction_id not in sent_predictions:
                         sent_predictions.add(prediction_id)
                         if probability >= MIN_PROB and quota >= MIN_QUOTA:
                             pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
@@ -294,7 +288,6 @@ def job():
     for sport in SPORTS.keys():
         hist_df = load_historical_data(sport)   # 🔹 carica CSV da tutte le fonti
         matches = get_odds(sport)
-        logging.info(f"{sport}: ricevuti {len(matches)} eventi dalle API")
         accettati, rifiutati = analyze_matches(sport, matches, hist_df)
 
         for msg in accettati:
