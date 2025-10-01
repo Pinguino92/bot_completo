@@ -92,6 +92,41 @@ def load_historical_data(sport_key: str):
 MIN_PROB  = 60.0   # %
 MIN_QUOTA = 1.50   # decimale
 
+# --- Soglie per sport (min probabilità %, min quota) ---
+# Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
+SPORT_THRESHOLDS = {
+    "soccer_": {"prob": 70.0, "quota": 1.30},            # tutti i campionati di calcio
+    "basketball_": {"prob": 60.0, "quota": 1.50},         # NBA (ed eventuali altri basketball_)
+    "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},# NFL
+    "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.50},# NCAA Football
+    "baseball_mlb": {"prob": 60.0, "quota": 1.50},        # MLB
+    "icehockey_nhl": {"prob": 70.0, "quota": 1.30},       # NHL
+}
+
+def get_thresholds(sport_key: str):
+    """
+    Ritorna (min_prob_percent, min_quota) per lo sport indicato.
+    - Controlla prima gli sport scritti esatti (NFL, NCAAF, MLB, NHL)
+    - Poi i prefissi (soccer_, basketball_)
+    - Fallback: MIN_PROB / MIN_QUOTA
+    """
+    # match esatti
+    for exact in ("americanfootball_nfl", "americanfootball_ncaaf", "baseball_mlb", "icehockey_nhl"):
+        if sport_key == exact:
+            t = SPORT_THRESHOLDS[exact]
+            return t["prob"], t["quota"]
+
+    # prefissi
+    if sport_key.startswith("soccer_"):
+        t = SPORT_THRESHOLDS["soccer_"]
+        return t["prob"], t["quota"]
+    if sport_key.startswith("basketball_"):
+        t = SPORT_THRESHOLDS["basketball_"]
+        return t["prob"], t["quota"]
+
+    # fallback
+    return MIN_PROB, MIN_QUOTA
+
 # Funzione invio Telegram
 def send_to_telegram(message: str):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
@@ -224,17 +259,21 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-                    if prediction_id not in sent_predictions:
-                        sent_predictions.add(prediction_id)
-                        if probability >= MIN_PROB and quota >= MIN_QUOTA:
-                            pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
-                        else:
-                            motivo = []
-                            if probability < MIN_PROB:
-                                motivo.append(f"prob {probability}% < {MIN_PROB}%")
-                            if quota < MIN_QUOTA:
-                                motivo.append(f"quota {quota} < {MIN_QUOTA}")
-                            scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
+                   if prediction_id not in sent_predictions:
+                       sent_predictions.add(prediction_id)
+
+                       # soglie specifiche per sport
+                       min_prob, min_quota = get_thresholds(sport)
+
+                       if probability >= min_prob and quota >= min_quota:
+                          pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg + f"\n🎯 Soglie usate: prob≥{min_prob}%, quota≥{min_quota}")
+                       else:
+                          motivo = []
+                          if probability < min_prob:
+                              motivo.append(f"prob {probability}% < {min_prob}%")
+                          if quota < min_quota:
+                              motivo.append(f"quota {quota} < {min_quota}")
+                       scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🎯 Soglie usate: prob≥{min_prob}%, quota≥{min_quota}\n🚫 Motivo: {', '.join(motivo)}")
 
             if not any_market_found:
                 scartati.append(
