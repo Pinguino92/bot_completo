@@ -36,7 +36,7 @@ SPORTS = {
     "americanfootball_nfl": "🏈 NFL",
     "americanfootball_ncaaf": "🏈 NCAA Football",
     "baseball_mlb": "⚾ MLB - Baseball",
-    "icehockey_nhl": "🏒 NHL - Hockey USA",
+    "icehockey_nhl": "NHL - Hockey USA",
 }
 
 # --- CSV STORICI (Google Drive + GitHub + esterni) ---
