@@ -34,7 +34,8 @@ SPORTS = {
     "soccer_uefa_europa_league": "⚽ Europa League",
     "basketball_nba": "🏀 NBA",
     "americanfootball_nfl": "🏈 NFL",
-    "americanfootball_ncaaf": "🏈 NCAA Football"
+    "americanfootball_ncaaf": "🏈 NCAA Football",
+    "baseball_mlb": "⚾ MLB - Baseball",
     "icehockey_nhl": "🏒 NHL - Hockey USA",
 }
 
@@ -85,10 +86,6 @@ def load_historical_data(sport_key: str):
     logging.info(f"📂 Storici caricati per {sport_key}: {len(paths)} file, {len(full)} righe.")
     return full
 # -----------------------------------------------------
-
-# Parametri filtro
-MIN_PROB  = 60.0   # %
-MIN_QUOTA = 1.50   # decimale
 
 # --- Soglie per sport (min probabilità %, min quota) ---
 # Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
