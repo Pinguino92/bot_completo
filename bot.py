@@ -300,7 +300,7 @@ def job():
 
     logging.info(f"📊 Totale pronostici inviati: {tot_ok}")
     logging.info(f"❌ Eventi scartati: {tot_ko}")
-    if tot_ok == 0 and tot_ko == 0:
+    if tot_ok == 0:
         send_to_telegram("ℹ️ Nessun match disponibile entro 48h (nessuna quota).")
 
 # --- Schedule fisso ---
