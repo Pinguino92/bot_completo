@@ -259,8 +259,13 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-                     if prediction_id not in sent_predictions:
-                       sent_predictions.add(prediction_id)
+    for prediction in predictions:
+    prediction_id = prediction.get("id")
+
+    if prediction_id not in sent_predictions:
+        message = f"📊 Pronostico: {prediction.get('match')} - {prediction.get('bet')} - Quota: {prediction.get('odds')}, Probabilità: {prediction.get('probability')}%"
+        send_telegram_message(message)
+        sent_predictions.add(prediction_id)
 
                        # soglie specifiche per sport
                        min_prob, min_quota = get_thresholds(sport)
