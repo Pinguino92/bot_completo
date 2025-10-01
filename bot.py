@@ -259,38 +259,17 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-try:
-    predictions = get_predictions()  # la tua funzione che genera i pronostici
-   except Exception as e:
-    logging.error(f"Errore nel calcolo delle predictions: {e}")
-    predictions = []
-
-# 🔽 Da qui in poi FUORI dal try/except
-    for prediction in predictions:
-    prediction_id = prediction.get("id")
-
-    if prediction_id not in sent_predictions:
-        message = (
-            f"📊 Pronostico: {prediction.get('match')} - "
-            f"{prediction.get('bet')} - "
-            f"Quota: {prediction.get('odds')}, "
-            f"Probabilità: {prediction.get('probability')}%"
-        )
-        send_telegram_message(message)
-        sent_predictions.add(prediction_id)
-
-                       # soglie specifiche per sport
-                       min_prob, min_quota = get_thresholds(sport)
-
-                       if probability >= min_prob and quota >= min_quota:
-                          pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg + f"\n🎯 Soglie usate: prob≥{min_prob}%, quota≥{min_quota}")
-                       else:
-                          motivo = []
-                          if probability < min_prob:
-                              motivo.append(f"prob {probability}% < {min_prob}%")
-                          if quota < min_quota:
-                              motivo.append(f"quota {quota} < {min_quota}")
-                       scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🎯 Soglie usate: prob≥{min_prob}%, quota≥{min_quota}\n🚫 Motivo: {', '.join(motivo)}")
+if prediction_id not in sent_predictions:
+                        sent_predictions.add(prediction_id)
+                        if probability >= MIN_PROB and quota >= MIN_QUOTA:
+                            pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
+                        else:
+                            motivo = []
+                            if probability < MIN_PROB:
+                                motivo.append(f"prob {probability}% < {MIN_PROB}%")
+                            if quota < MIN_QUOTA:
+                                motivo.append(f"quota {quota} < {MIN_QUOTA}")
+                            scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
 
             if not any_market_found:
                 scartati.append(
