@@ -263,7 +263,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
     prediction_id = prediction.get("id")
 
     if prediction_id not in sent_predictions:
-        message = f"📊 Pronostico: {prediction.get('match')} - {prediction.get('bet')} - Quota: {prediction.get('odds')}, Probabilità: {prediction.get('probability')}%"
+        message = (
+            f"📊 Pronostico: {prediction.get('match')} - "
+            f"{prediction.get('bet')} - "
+            f"Quota: {prediction.get('odds')}, "
+            f"Probabilità: {prediction.get('probability')}%"
+        )
         send_telegram_message(message)
         sent_predictions.add(prediction_id)
 
