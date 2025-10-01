@@ -259,7 +259,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         f"📈 Probabilità stimata: {probability}%"
                     )
 
-   try:
+try:
     predictions = get_predictions()  # la tua funzione che genera i pronostici
    except Exception as e:
     logging.error(f"Errore nel calcolo delle predictions: {e}")
