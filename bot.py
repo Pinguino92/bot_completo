@@ -47,9 +47,10 @@ def _category_for_sport(sport_key: str) -> str:
         return "basket"
     if sport_key.startswith("americanfootball_"):
         return "football"
-    return "misc"
     if sport_key.startswith("icehockey_"):
         return "hockey"
+    if sport_key.startswith("baseball_"):
+        return "baseball"
     return "misc"
 
 def load_historical_data(sport_key: str):
