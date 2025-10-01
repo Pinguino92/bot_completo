@@ -261,12 +261,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
 
    try:
     predictions = get_predictions()  # la tua funzione che genera i pronostici
-except Exception as e:
+   except Exception as e:
     logging.error(f"Errore nel calcolo delle predictions: {e}")
     predictions = []
 
 # 🔽 Da qui in poi FUORI dal try/except
-for prediction in predictions:
+    for prediction in predictions:
     prediction_id = prediction.get("id")
 
     if prediction_id not in sent_predictions:
