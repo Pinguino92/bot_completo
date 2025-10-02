@@ -144,7 +144,7 @@ def get_odds(sport: str):
         return []
 
     if sport.startswith("soccer_"):
-        markets = "h2h,btts,totals"
+        markets = "h2h,btts,totals,spreads"
     else:
         markets = "h2h,totals"
 
@@ -267,14 +267,39 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                                 motivo.append(f"quota {quota} < {MIN_QUOTA}")
                             scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
 
-            if not any_market_found:
-                scartati.append(
-                    "❌ SCARTATO\n\n"
-                    f"{SPORTS.get(sport, sport)}\n"
-                    f"📌 {home} vs {away}\n"
-                    f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
-                    "🚫 Motivo: nessuna quota disponibile"
-                )
+            if sport.startswith("soccer_") and hist_df is not None:
+                try:
+                    team_matches = hist_df[
+                        (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
+                    ]
+                    if not team_matches.empty:
+                        btts_matches = team_matches[(team_matches['FTHG'] > 0) & (team_matches['FTAG'] > 0)]
+                        prob_btts = round((len(btts_matches) / len(team_matches)) * 100, 1)
+
+                        prediction_id_btts = f"{sport}{home}{away}btts_yes"
+                        if prediction_id_btts not in sent_predictions:
+                            sent_predictions.add(prediction_id_btts)
+                            if prob_btts >= MIN_PROB:
+                                pronostici.append(
+                                    "✅ PRONOSTICO TROVATO\n\n"
+                                    f"{SPORTS.get(sport, sport)}\n"
+                                    f"📌 {home} vs {away}\n"
+                                    f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
+                                    f"🔮 Pronostico: Entrambe Segnano (BTTS)\n"
+                                    f"📈 Probabilità stimata: {prob_btts}%"
+                                )
+                            else:
+                                scartati.append(
+                                    "❌ SCARTATO\n\n"
+                                    f"{SPORTS.get(sport, sport)}\n"
+                                    f"📌 {home} vs {away}\n"
+                                    f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
+                                    f"🔮 Pronostico: Entrambe Segnano (BTTS)\n"
+                                    f"📈 Probabilità stimata: {prob_btts}%\n"
+                                    f"🚫 Motivo: prob < {MIN_PROB}%"
+                                )
+                except Exception as e:
+                    logging.warning(f"⚠️ Errore calcolo BTTS per {home} vs {away}: {e}")
 
         except Exception:
             scartati.append(f"❌ SCARTATO\n\n{SPORTS.get(sport, sport)}\n⚠️ Errore parsing match.")
