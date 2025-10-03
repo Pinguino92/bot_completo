@@ -6,7 +6,6 @@ import datetime
 import schedule
 import pandas as pd
 import glob
-import os
 
 # 🔑 Variabili ambiente (Render → Environment)
 ODDS_API_KEY   = os.getenv("ODDS_API_KEY")
