@@ -88,6 +88,10 @@ def load_historical_data(sport_key: str):
     return full
 # -----------------------------------------------------
 
+# Parametri filtro
+MIN_PROB = 60.0 #%
+MIN_QUOTA = 1.50 #decimale
+
 # --- Soglie per sport (min probabilità %, min quota) ---
 # Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
 SPORT_THRESHOLDS = {
