@@ -36,7 +36,7 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAA Football",
     "baseball_mlb": "⚾ MLB - Baseball",
     "icehockey_nhl": "NHL - Hockey USA",
-    "tennis_atp_shangai_masters": "ATP - China",
+    "tennis_atp_shanghai_masters": "ATP Shanghai Masters",
 }
 
 # --- CSV STORICI (Google Drive + GitHub + esterni) ---
@@ -97,13 +97,13 @@ MIN_QUOTA = 1.50 #decimale
 # --- Soglie per sport (min probabilità %, min quota) ---
 # Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 60.0, "quota": 1.30},            # tutti i campionati di calcio
-    "basketball_": {"prob": 60.0, "quota": 1.50},         # NBA (ed eventuali altri basketball_)
+    "soccer_": {"prob": 50.0, "quota": 1.30},            # tutti i campionati di calcio
+    "basketball_": {"prob": 60.0, "quota": 1.40},         # NBA (ed eventuali altri basketball_)
     "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},# NFL
     "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.50},# NCAA Football
     "baseball_mlb": {"prob": 60.0, "quota": 1.50},        # MLB
     "icehockey_nhl": {"prob": 70.0, "quota": 1.30},       # NHL
-    "tennis_atp_shangai_masters": {"prob": 70.0, "quota": 1.30}, #ATP 
+    "tennis_atp_shanghai_masters": {"prob": 70.0, "quota": 1.30}, #ATP 
 }
 
 def get_thresholds(sport_key: str):
