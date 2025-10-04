@@ -36,6 +36,7 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAA Football",
     "baseball_mlb": "⚾ MLB - Baseball",
     "icehockey_nhl": "NHL - Hockey USA",
+    "tennis_atp_shangai_masters": "ATP - China",
 }
 
 # --- CSV STORICI (Google Drive + GitHub + esterni) ---
@@ -50,6 +51,8 @@ def _category_for_sport(sport_key: str) -> str:
         return "hockey"
     if sport_key.startswith("baseball_"):
         return "baseball"
+    if sport_key.startswith("tennis_"):
+        return "tennis"
     return "misc"
 
 def load_historical_data(sport_key: str):
@@ -94,12 +97,13 @@ MIN_QUOTA = 1.50 #decimale
 # --- Soglie per sport (min probabilità %, min quota) ---
 # Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 70.0, "quota": 1.30},            # tutti i campionati di calcio
+    "soccer_": {"prob": 60.0, "quota": 1.30},            # tutti i campionati di calcio
     "basketball_": {"prob": 60.0, "quota": 1.50},         # NBA (ed eventuali altri basketball_)
     "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},# NFL
     "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.50},# NCAA Football
     "baseball_mlb": {"prob": 60.0, "quota": 1.50},        # MLB
     "icehockey_nhl": {"prob": 70.0, "quota": 1.30},       # NHL
+    "tennis_atp_shangai_masters": {"prob": 70.0, "quota": 1.30}, #ATP 
 }
 
 def get_thresholds(sport_key: str):
@@ -110,7 +114,7 @@ def get_thresholds(sport_key: str):
     - Fallback: MIN_PROB / MIN_QUOTA
     """
     # match esatti
-    for exact in ("americanfootball_nfl", "americanfootball_ncaaf", "baseball_mlb", "icehockey_nhl"):
+    for exact in ("americanfootball_nfl", "americanfootball_ncaaf", "baseball_mlb", "icehockey_nhl", "tennis_atp_shangai_masters"):
         if sport_key == exact:
             t = SPORT_THRESHOLDS[exact]
             return t["prob"], t["quota"]
