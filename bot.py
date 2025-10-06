@@ -38,7 +38,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.10"))  # 10%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.12"))  # 12%
 
 # blending e divergenze
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
@@ -118,13 +118,13 @@ SPORT_RELIABILITY = {
 
 # Soglie per sport
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 60.0, "quota": 1.35},              # calcio
-    "basketball_": {"prob": 62.0, "quota": 1.40},           # NBA
-    "americanfootball_nfl": {"prob": 60.0, "quota": 1.40},  # NFL
-    "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.40},# NCAAF
-    "baseball_mlb": {"prob": 60.0, "quota": 1.40},          # MLB
-    "icehockey_nhl": {"prob": 60.0, "quota": 1.35},         # NHL
-    "tennis_atp_shanghai_masters": {"prob": 60.0, "quota": 1.35},
+    "soccer_": {"prob": 68.0, "quota": 1.40},              # calcio
+    "basketball_": {"prob": 63.0, "quota": 1.55},           # NBA
+    "americanfootball_nfl": {"prob": 66.0, "quota": 1.55},  # NFL
+    "americanfootball_ncaaf": {"prob": 64.0, "quota": 1.55},# NCAAF
+    "baseball_mlb": {"prob": 62.0, "quota": 1.60},          # MLB
+    "icehockey_nhl": {"prob": 67.0, "quota": 1.45},         # NHL
+    "tennis_atp_shanghai_masters": {"prob": 69.0, "quota": 1.35},
 }
 
 # ──────────────────────────────────────────────────────────────
