@@ -208,14 +208,14 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                     any_market_found = True
 
                     # quota API
-    try:
-        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-        quota = float(best_outcome["price"])
-        prob_api = round((1.0 / quota) * 100.0, 1)
-    except Exception:
-        continue
+                    try:
+                        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
+                        quota = float(best_outcome["price"])
+                        prob_api = round((1.0 / quota) * 100.0, 1)
+                    except Exception:
+                        continue
 
-# CSV (se disponibili)
+                    # CSV (se disponibili)
 prob_csv = None
 if hist_df is not None:
     try:
