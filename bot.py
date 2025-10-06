@@ -97,11 +97,11 @@ MIN_QUOTA = 1.50 #decimale
 # --- Soglie per sport (min probabilità %, min quota) ---
 # Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 50.0, "quota": 1.30},            # tutti i campionati di calcio
+    "soccer_": {"prob": 60.0, "quota": 1.30},            # tutti i campionati di calcio
     "basketball_": {"prob": 60.0, "quota": 1.40},         # NBA (ed eventuali altri basketball_)
-    "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},# NFL
-    "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.50},# NCAA Football
-    "baseball_mlb": {"prob": 60.0, "quota": 1.50},        # MLB
+    "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},# NFL
+    "americanfootball_ncaaf": {"prob": 65.0, "quota": 1.50},# NCAA Football
+    "baseball_mlb": {"prob": 65.0, "quota": 1.50},        # MLB
     "icehockey_nhl": {"prob": 70.0, "quota": 1.30},       # NHL
     "tennis_atp_shanghai_masters": {"prob": 70.0, "quota": 1.30}, #ATP 
 }
@@ -220,18 +220,18 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                     if hist_df is not None:
                         try:
                             if sport.startswith("tennis_"):
-                                # 🔹 Calcolo probabilità tennis dai CSV (colonne: player1, player2, winner)
+                                # 🔹 Calcolo probabilità tennis dai CSV (colonne: winner_name, loser_name)
                                 player_matches = hist_df[
-                                    (hist_df['player1'] == home) | (hist_df['player2'] == home) |
-                                    (hist_df['player1'] == away) | (hist_df['player2'] == away)
+                                    (hist_df['winner_name'] == home) | (hist_df['loser_name'] == home) |
+                                    (hist_df['winner_name'] == away) | (hist_df['loser_name'] == away)
                                 ]
 
                                 if not player_matches.empty:
-                                    total_home = len(player_matches[(player_matches['player1'] == home) | (player_matches['player2'] == home)])
-                                    total_away = len(player_matches[(player_matches['player1'] == away) | (player_matches['player2'] == away)])
+                                    total_home = len(player_matches[(player_matches['winner_name'] == home) | (player_matches['loser_name'] == home)])
+                                    total_away = len(player_matches[(player_matches['winner_name'] == away) | (player_matches['loser_name'] == away)])
 
-                                    home_wins = len(player_matches[player_matches['winner'] == home])
-                                    away_wins = len(player_matches[player_matches['winner'] == away])
+                                    home_wins = len(player_matches[player_matches['winner_name'] == home])
+                                    away_wins = len(player_matches[player_matches['winner_name'] == away])
 
                                     home_win_rate = (home_wins / total_home) * 100 if total_home > 0 else 0
                                     away_win_rate = (away_wins / total_away) * 100 if total_away > 0 else 0
