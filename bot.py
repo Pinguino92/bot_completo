@@ -634,12 +634,17 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
     state_acc = load_feedback_state()
     recent_acc = float(state_acc.get(f"acc__{sport}", 0.55))
 
+    logging.debug(f"[DEBUG] Inizio analisi per {sport}: {len(matches)} eventi ricevuti")
+
     for match in matches:
         try:
             ct = match.get("commence_time")
-            if not ct: continue
+            if not ct:
+                logging.debug(f"[DEBUG] {sport}: match senza commence_time")
+                continue
             start_time = datetime.datetime.fromisoformat(ct.replace("Z","+00:00"))
             if not (now < start_time < now + datetime.timedelta(days=2)):
+                logging.debug(f"[DEBUG] {sport}: {match.get('home_team')} vs {match.get('away_team')} fuori intervallo 48h")
                 continue
 
             home = match.get("home_team","Home")
@@ -657,6 +662,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                 for market in bookmaker.get("markets", []):
                     outcomes = market.get("outcomes", [])
                     if len(outcomes) < 2:
+                        logging.debug(f"[DEBUG] {sport} | {home} vs {away} | mercato vuoto ({market.get('key')})")
                         continue
 
                     mkey = market.get("key","")
@@ -665,6 +671,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                     if sport.startswith("soccer_") and mkey == "totals":
                         outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
                         if not outcomes:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | nessuna linea 2.5 trovata per totals")
                             continue
 
                     # Per altri sport: seleziona linea principale (point)
@@ -675,10 +682,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             outcomes = [o for o in outcomes if o.get("point")==main_point]
                             line_point_to_show = main_point
                         if not outcomes:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | nessuna linea principale trovata ({mkey})")
                             continue
 
                     fair = fair_probs_from_outcomes(outcomes)
                     if not fair:
+                        logging.debug(f"[DEBUG] {sport} | {home} vs {away} | fair odds vuote ({mkey})")
                         continue
 
                     for item in fair:
@@ -687,17 +696,17 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         fair_p = float(item["fair_prob"])
                         point  = item.get("point", None)
 
-                        # volatilità per outcome
                         vol_pct = vol_map.get(mkey, {}).get(name, 0.0)
                         if vol_pct > VOLATILITY_LIMIT:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | volatilità alta {vol_pct:.2f} > {VOLATILITY_LIMIT}")
                             continue
 
-                        # CSV probability (se disponibile)
                         prob_csv = csv_prob_for_event(sport, hist_df, home, away) if hist_df is not None else None
+                        if prob_csv is None:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | prob_csv assente")
 
-                        # Confidenza dinamica
                         confidence_api = max(1e-6, 1.0 - min(1.0, vol_pct))
-                        confidence_csv = 0.50 + 0.50*(recent_acc)  # 0.55 -> 0.775
+                        confidence_csv = 0.50 + 0.50*(recent_acc)
 
                         if prob_csv is not None:
                             diff = abs(fair_p - prob_csv)
@@ -707,21 +716,24 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         else:
                             prob_final = fair_p
 
-                        # affidabilità sport
                         prob_final *= sport_reliability_weight(sport)
                         prob_final = max(0.0, min(100.0, round(prob_final, 1)))
 
-                        # soglie
                         min_prob, min_quota = get_thresholds(sport)
-                        if not (prob_final >= min_prob and price >= min_quota):
-                            continue
-
-                        # EV & filtro anomali
                         ev = expected_value(prob_final, price)
+
+                        if not (prob_final >= min_prob):
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | prob {prob_final:.1f}% < soglia {min_prob}")
+                            continue
+                        if not (price >= min_quota):
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | quota {price:.2f} < soglia {min_quota}")
+                            continue
                         if ev > 0.6:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | EV {ev:.2f} > 0.6 (anomalo)")
                             continue
 
-                        # candidato migliore per EV
+                        logging.debug(f"[DEBUG] ✅ VALIDO {sport} | {home} vs {away} | {name} | prob={prob_final:.1f}% quota={price} ev={ev:.2f}")
+
                         cand = {
                             "name": name,
                             "market": mkey,
@@ -737,6 +749,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             best_point = cand["point"]
 
             if not best_pick:
+                logging.debug(f"[DEBUG] {sport} | {home} vs {away} | nessun candidato valido dopo filtri")
                 continue
 
             # Messaggio Telegram – con linea per sport ≠ calcio
@@ -758,20 +771,17 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                 f"📈 Probabilità: *{best_pick['prob_final']}%*\n"
             )
 
-            # badge confidenza
             badge = confidence_bucket(best_pick['prob_final'], best_vol or 0.0, best_ev or 0.0)
             msg += f"🛡️ Confidenza: {badge}"
 
-            # de-dup globale persistente
             prediction_id = f"{sport}|{home}|{away}|{best_pick['market']}|{best_pick['name']}|{best_point}"
             if prediction_id in sent_predictions:
+                logging.debug(f"[DEBUG] {sport} | {home} vs {away} | duplicato già inviato")
                 continue
             sent_predictions.add(prediction_id); pred_save(sent_predictions)
 
-            # invia
             send_to_telegram("✅ *PRONOSTICO*\n\n" + msg)
 
-            # log
             try:
                 match_id = match.get("id", prediction_id)
                 date_str = start_time.strftime("%Y-%m-%d")
@@ -781,7 +791,9 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
 
         except Exception as e:
             scartati.append(f"❌ Errore parsing {sport}: {e}")
+            logging.warning(f"[DEBUG] Errore match {sport}: {e}")
 
+    logging.debug(f"[DEBUG] Fine analisi {sport} | trovati {len(pronostici)} validi, {len(scartati)} errori")
     return pronostici, scartati
 
 # ──────────────────────────────────────────────────────────────
@@ -896,6 +908,8 @@ def start_scheduler():
 # ──────────────────────────────────────────────────────────────
 # 🚀 MAIN
 # ──────────────────────────────────────────────────────────────
+logging.getLogger().setLevel(logging.DEBUG)
+
 if __name__ == "__main__":
     send_to_telegram("✅ Bot PRO v2 avviato (volatilità, blending dinamico, linea totals, report Domenica 21:00, backup 24h).")
     logging.info("🤖 Bot PRO v2 attivo. In attesa di invio pronostici...")
