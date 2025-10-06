@@ -902,6 +902,7 @@ def start_scheduler():
     sched.add_job(weekly_report, "cron", **WEEKLY_REPORT_TIME)
     # backup giornaliero
     sched.add_job(backup_results_log, "cron", **DAILY_BACKUP_TIME)
+    sched.add_job(update_results_with_scores, "cron", **DAILY_BACKUP_TIME)
     sched.start()
     return sched
 
