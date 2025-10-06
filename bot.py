@@ -215,58 +215,59 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                     except Exception:
                         continue
 
-                    # CSV (se disponibili)
-prob_csv = None
-if hist_df is not None:
-    try:
-        if sport.startswith("tennis_"):
-            # 🔹 Calcolo probabilità tennis dai CSV (colonne: player1, player2, winner)
-            player_matches = hist_df[
-                (hist_df['player1'] == home) | (hist_df['player2'] == home) |
-                (hist_df['player1'] == away) | (hist_df['player2'] == away)
-            ]
+                                       # CSV (se disponibili)
+                    prob_csv = None
+                    if hist_df is not None:
+                        try:
+                            if sport.startswith("tennis_"):
+                                # 🔹 Calcolo probabilità tennis dai CSV (colonne: player1, player2, winner)
+                                player_matches = hist_df[
+                                    (hist_df['player1'] == home) | (hist_df['player2'] == home) |
+                                    (hist_df['player1'] == away) | (hist_df['player2'] == away)
+                                ]
 
-            if not player_matches.empty:
-                total_home = len(player_matches[(player_matches['player1'] == home) | (player_matches['player2'] == home)])
-                total_away = len(player_matches[(player_matches['player1'] == away) | (player_matches['player2'] == away)])
+                                if not player_matches.empty:
+                                    total_home = len(player_matches[(player_matches['player1'] == home) | (player_matches['player2'] == home)])
+                                    total_away = len(player_matches[(player_matches['player1'] == away) | (player_matches['player2'] == away)])
 
-                home_wins = len(player_matches[player_matches['winner'] == home])
-                away_wins = len(player_matches[player_matches['winner'] == away])
+                                    home_wins = len(player_matches[player_matches['winner'] == home])
+                                    away_wins = len(player_matches[player_matches['winner'] == away])
 
-                home_win_rate = (home_wins / total_home) * 100 if total_home > 0 else 0
-                away_win_rate = (away_wins / total_away) * 100 if total_away > 0 else 0
+                                    home_win_rate = (home_wins / total_home) * 100 if total_home > 0 else 0
+                                    away_win_rate = (away_wins / total_away) * 100 if total_away > 0 else 0
 
-                # media pesata dei due tennisti
-                prob_csv = round((home_win_rate * 0.6) + ((100 - away_win_rate) * 0.4), 1)
+                                    # media pesata dei due tennisti
+                                    prob_csv = round((home_win_rate * 0.6) + ((100 - away_win_rate) * 0.4), 1)
 
-        else:
-            # 🔹 Calcolo classico per sport di squadra
-            team_matches = hist_df[
-                (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
-            ]
-            if not team_matches.empty:
-                total_matches = len(team_matches)
-                home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
-                away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
+                            else:
+                                # 🔹 Calcolo classico per sport di squadra
+                                team_matches = hist_df[
+                                    (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
+                                ]
+                                if not team_matches.empty:
+                                    total_matches = len(team_matches)
+                                    home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
+                                    away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
 
-                home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
-                away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
+                                    home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
+                                    away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
 
-                home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
-                home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
-                away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
-                away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
+                                    home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
+                                    home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
+                                    away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
+                                    away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
 
-                prob_csv = (
-                    (home_win_rate * 0.4) +
-                    ((100 - away_win_rate) * 0.2) +
-                    ((home_goals_scored - home_goals_conceded) * 5) +
-                    ((away_goals_conceded - away_goals_scored) * 5)
-                )
-                prob_csv = max(0, min(100, prob_csv))
-                
-    except Exception as e:
-        logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
+                                    prob_csv = (
+                                        (home_win_rate * 0.4) +
+                                        ((100 - away_win_rate) * 0.2) +
+                                        ((home_goals_scored - home_goals_conceded) * 5) +
+                                        ((away_goals_conceded - away_goals_scored) * 5)
+                                    )
+                                    prob_csv = max(0, min(100, prob_csv))
+
+                        except Exception as e:
+                            logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
+
 
                     # Combina API + CSV
                     if prob_csv is not None:
