@@ -264,6 +264,7 @@ if hist_df is not None:
                     ((away_goals_conceded - away_goals_scored) * 5)
                 )
                 prob_csv = max(0, min(100, prob_csv))
+                
     except Exception as e:
         logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
 
