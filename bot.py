@@ -120,11 +120,11 @@ SPORT_RELIABILITY = {
 SPORT_THRESHOLDS = {
     "soccer_": {"prob": 60.0, "quota": 1.35},              # calcio
     "basketball_": {"prob": 62.0, "quota": 1.40},           # NBA
-    "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},  # NFL
-    "americanfootball_ncaaf": {"prob": 65.0, "quota": 1.50},# NCAAF
-    "baseball_mlb": {"prob": 66.0, "quota": 1.55},          # MLB
-    "icehockey_nhl": {"prob": 70.0, "quota": 1.35},         # NHL
-    "tennis_atp_shanghai_masters": {"prob": 72.0, "quota": 1.35},
+    "americanfootball_nfl": {"prob": 60.0, "quota": 1.40},  # NFL
+    "americanfootball_ncaaf": {"prob": 60.0, "quota": 1.40},# NCAAF
+    "baseball_mlb": {"prob": 60.0, "quota": 1.40},          # MLB
+    "icehockey_nhl": {"prob": 60.0, "quota": 1.35},         # NHL
+    "tennis_atp_shanghai_masters": {"prob": 60.0, "quota": 1.35},
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -150,10 +150,10 @@ def send_to_telegram(message: str):
 # ──────────────────────────────────────────────────────────────
 def _category_for_sport(sport_key: str) -> str:
     if sport_key.startswith("soccer_"): return "calcio"
-    if sport_key.startswith("basketball_"): return "nba"
+    if sport_key.startswith("basketball_"): return "basket"
     if sport_key.startswith("americanfootball_"): return "football"
     if sport_key.startswith("icehockey_"): return "hockey"
-    if sport_key.startswith("baseball_"): return "mlb"
+    if sport_key.startswith("baseball_"): return "baseball"
     if sport_key.startswith("tennis_"): return "tennis"
     return "misc"
 
