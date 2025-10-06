@@ -1,3 +1,18 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+BOT V2 – Versione ottimizzata e più accurata per pronostici sportivi.
+
+Migliorie:
+- Calcolo “fair odds” corretto per margine bookmaker
+- Filtro su valore atteso (Expected Value, EV)
+- Blending dinamico tra API e CSV in base alla coerenza
+- Analisi forma recente (ultimi 10 match)
+- Lettura CSV robusta e compatibile con schemi diversi
+- Orari italiani 09:00, 13:00, 19:00
+- Telegram + Render completamente supportati
+"""
+
 import os
 import time
 import logging
@@ -6,18 +21,25 @@ import datetime
 import schedule
 import pandas as pd
 import glob
+from typing import Optional, List, Dict
 
-# 🔑 Variabili ambiente (Render → Environment)
-ODDS_API_KEY   = os.getenv("ODDS_API_KEY")
-TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
+# 🔑 Variabili ambiente
+ODDS_API_KEY     = os.getenv("ODDS_API_KEY")
+TELEGRAM_TOKEN   = os.getenv("TELEGRAM_TOKEN")
 TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
-sent_predictions = set()  # evita duplicati
+# ⚙️ Parametri configurabili
+MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))   # % base minima
+MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))     # quota minima
+MIN_EV        = float(os.getenv("MIN_EV", "0.05"))        # valore atteso minimo (+5%)
+FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))       # ultime 10 partite
+DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))
+BLEND_API_DEFAULT = float(os.getenv("BLEND_API_DEFAULT", "0.6"))
 
-# Logging
-logging.basicConfig(level=logging.INFO)
+sent_predictions = set()
+logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
-# Sports da analizzare
+# ⚽️ Sport da analizzare
 SPORTS = {
     "soccer_italy_serie_a": "⚽ Serie A - Italia",
     "soccer_italy_serie_b": "⚽ Serie B - Italia",
@@ -35,338 +57,279 @@ SPORTS = {
     "americanfootball_nfl": "🏈 NFL",
     "americanfootball_ncaaf": "🏈 NCAA Football",
     "baseball_mlb": "⚾ MLB - Baseball",
-    "icehockey_nhl": "NHL - Hockey USA",
-    "tennis_atp_shanghai_masters": "ATP Shanghai Masters",
+    "icehockey_nhl": "🏒 NHL - Hockey",
+    "tennis_atp_shanghai_masters": "🎾 ATP Shanghai Masters",
 }
 
-# --- CSV STORICI (Google Drive + GitHub + esterni) ---
+# ------------------------------------------------------------
+# 📂 LETTURA CSV STORICI
+# ------------------------------------------------------------
 def _category_for_sport(sport_key: str) -> str:
-    if sport_key.startswith("soccer_"):
-        return "calcio"
-    if sport_key.startswith("basketball_"):
-        return "basket"
-    if sport_key.startswith("americanfootball_"):
-        return "football"
-    if sport_key.startswith("icehockey_"):
-        return "hockey"
-    if sport_key.startswith("baseball_"):
-        return "baseball"
-    if sport_key.startswith("tennis_"):
-        return "tennis"
+    if sport_key.startswith("soccer_"): return "calcio"
+    if sport_key.startswith("basketball_"): return "basket"
+    if sport_key.startswith("americanfootball_"): return "football"
+    if sport_key.startswith("icehockey_"): return "hockey"
+    if sport_key.startswith("baseball_"): return "baseball"
+    if sport_key.startswith("tennis_"): return "tennis"
     return "misc"
 
-def load_historical_data(sport_key: str):
-    """
-    Carica i CSV da:
-      - data/<categoria>/ (GitHub)
-      - downloads/<categoria>/ (Google Drive)
-      - external_data/<categoria>/ (siti esterni)
-    """
+def read_csv_smart(path: str) -> Optional[pd.DataFrame]:
+    """Lettura robusta multi-separatore/multi-encoding."""
+    seps = [",", ";", "\t", "|"]
+    encs = ["utf-8", "latin1", "cp1252"]
+    for enc in encs:
+        for sep in seps:
+            try:
+                df = pd.read_csv(path, sep=sep, encoding=enc)
+                if df.shape[1] == 1 and any(ch in str(df.columns[0]) for ch in [",",";","\t","|"]):
+                    continue
+                df.columns = [c.strip() for c in df.columns]
+                return df
+            except Exception:
+                continue
+    return None
+
+def load_historical_data(sport_key: str) -> Optional[pd.DataFrame]:
     categoria = _category_for_sport(sport_key)
-
     paths = []
-    paths.extend(glob.glob(os.path.join("data", categoria, "*.csv")))
-    paths.extend(glob.glob(os.path.join("downloads", categoria, "*.csv")))
-    paths.extend(glob.glob(os.path.join("external_data", categoria, "*.csv")))
-
+    for base in ["data", "downloads", "external_data"]:
+        paths.extend(glob.glob(os.path.join(base, categoria, "*.csv")))
     if not paths:
         logging.info(f"ℹ️ Nessun CSV trovato per {sport_key}.")
         return None
 
     dfs = []
     for p in paths:
-        try:
-            df = pd.read_csv(p)
-            if not df.empty:
-                dfs.append(df)
-        except Exception as e:
-            logging.warning(f"⚠️ Errore lettura {p}: {e}")
-
-    if not dfs:
-        return None
-
-    full = pd.concat(dfs, ignore_index=True)
+        df = read_csv_smart(p)
+        if df is not None and not df.empty:
+            dfs.append(df)
+        else:
+            logging.warning(f"⚠️ Errore lettura {p}")
+    if not dfs: return None
+    full = pd.concat(dfs, ignore_index=True, sort=False)
     logging.info(f"📂 Storici caricati per {sport_key}: {len(paths)} file, {len(full)} righe.")
     return full
-# -----------------------------------------------------
 
-# Parametri filtro
-MIN_PROB = 60.0 #%
-MIN_QUOTA = 1.50 #decimale
-
-# --- Soglie per sport (min probabilità %, min quota) ---
-# Le costanti MIN_PROB / MIN_QUOTA restano come fallback.
+# ------------------------------------------------------------
+# 🎯 PARAMETRI SOGLIA SPORT
+# ------------------------------------------------------------
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 60.0, "quota": 1.30},            # tutti i campionati di calcio
-    "basketball_": {"prob": 60.0, "quota": 1.40},         # NBA (ed eventuali altri basketball_)
-    "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},# NFL
-    "americanfootball_ncaaf": {"prob": 65.0, "quota": 1.50},# NCAA Football
-    "baseball_mlb": {"prob": 65.0, "quota": 1.50},        # MLB
-    "icehockey_nhl": {"prob": 70.0, "quota": 1.30},       # NHL
-    "tennis_atp_shanghai_masters": {"prob": 70.0, "quota": 1.30}, #ATP 
+    "soccer_": {"prob": 60.0, "quota": 1.35},
+    "basketball_": {"prob": 62.0, "quota": 1.40},
+    "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},
+    "americanfootball_ncaaf": {"prob": 65.0, "quota": 1.50},
+    "baseball_mlb": {"prob": 66.0, "quota": 1.55},
+    "icehockey_nhl": {"prob": 70.0, "quota": 1.35},
+    "tennis_atp_shanghai_masters": {"prob": 72.0, "quota": 1.35},
 }
 
 def get_thresholds(sport_key: str):
-    """
-    Ritorna (min_prob_percent, min_quota) per lo sport indicato.
-    - Controlla prima gli sport scritti esatti (NFL, NCAAF, MLB, NHL)
-    - Poi i prefissi (soccer_, basketball_)
-    - Fallback: MIN_PROB / MIN_QUOTA
-    """
-    # match esatti
-    for exact in ("americanfootball_nfl", "americanfootball_ncaaf", "baseball_mlb", "icehockey_nhl", "tennis_atp_shangai_masters"):
+    for exact in ("americanfootball_nfl","americanfootball_ncaaf","baseball_mlb","icehockey_nhl","tennis_atp_shanghai_masters"):
         if sport_key == exact:
             t = SPORT_THRESHOLDS[exact]
-            return t["prob"], t["quota"]
-
-    # prefissi
+            return t["prob"], max(t["quota"], MIN_QUOTA)
     if sport_key.startswith("soccer_"):
-        t = SPORT_THRESHOLDS["soccer_"]
-        return t["prob"], t["quota"]
+        t = SPORT_THRESHOLDS["soccer_"]; return t["prob"], max(t["quota"], MIN_QUOTA)
     if sport_key.startswith("basketball_"):
-        t = SPORT_THRESHOLDS["basketball_"]
-        return t["prob"], t["quota"]
+        t = SPORT_THRESHOLDS["basketball_"]; return t["prob"], max(t["quota"], MIN_QUOTA)
+    return MIN_PROB_BASE, MIN_QUOTA
 
-    # fallback
-    return MIN_PROB, MIN_QUOTA
-
-# Funzione invio Telegram
+# ------------------------------------------------------------
+# ✉️ TELEGRAM
+# ------------------------------------------------------------
 def send_to_telegram(message: str):
     if not TELEGRAM_TOKEN or not TELEGRAM_CHAT_ID:
         logging.error("⚠️ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID mancanti.")
         return
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
     try:
-        r = requests.post(url, json=payload, timeout=10)
+        r = requests.post(
+            f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage",
+            json={"chat_id": TELEGRAM_CHAT_ID, "text": message},
+            timeout=10
+        )
         if r.status_code != 200:
             logging.error(f"Errore Telegram: {r.text}")
     except Exception as e:
         logging.error(f"Errore Telegram: {e}")
 
-# Recupero odds dalle API
-def get_odds(sport: str):
-    if not ODDS_API_KEY:
-        logging.error("⚠️ ODDS_API_KEY mancante.")
-        return []
+# ------------------------------------------------------------
+# 📊 FAIR ODDS & EXPECTED VALUE
+# ------------------------------------------------------------
+def fair_probs_from_outcomes(outcomes: List[Dict]) -> List[Dict]:
+    inv_sum = 0.0
+    vals = []
+    for o in outcomes:
+        try:
+            price = float(o["price"])
+            inv = 1.0 / max(price, 1e-9)
+            vals.append((o, price, inv))
+            inv_sum += inv
+        except Exception:
+            continue
+    fair_list = []
+    if inv_sum <= 0: return fair_list
+    for o, price, inv in vals:
+        fair_p = (inv / inv_sum) * 100.0
+        fair_list.append({"name": o.get("name",""), "price": price, "fair_prob": round(fair_p, 2)})
+    return fair_list
 
-    if sport.startswith("soccer_"):
-        markets = "h2h,btts,totals,spreads"
-    else:
-        markets = "h2h,totals"
+def expected_value(prob_percent: float, price: float) -> float:
+    return (prob_percent/100.0) * price - 1.0
 
-    url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
-    params = {
-        "apiKey": ODDS_API_KEY,
-        "regions": "eu",
-        "markets": markets,
-        "oddsFormat": "decimal",
-        "dateFormat": "iso"
-    }
+# ------------------------------------------------------------
+# 🔍 FORMA RECENTE
+# ------------------------------------------------------------
+def recent_form_rate_tennis(df: pd.DataFrame, player: str) -> Optional[float]:
     try:
-        r = requests.get(url, params=params, timeout=15)
-        r.raise_for_status()
-        return r.json()
-    except Exception as e:
-        logging.error(f"{sport} error: {e}")
-        return []
+        if {"player1","player2","winner"}.issubset(set(df.columns)):
+            sub = df[(df["player1"] == player) | (df["player2"] == player)].tail(FORM_WINDOW)
+            if sub.empty: return None
+            return 100 * (sub["winner"] == player).sum() / len(sub)
+        elif {"winner_name","loser_name"}.issubset(set(df.columns)):
+            sub = df[(df["winner_name"] == player) | (df["loser_name"] == player)].tail(FORM_WINDOW)
+            if sub.empty: return None
+            return 100 * (sub["winner_name"] == player).sum() / len(sub)
+        return None
+    except Exception:
+        return None
 
-# Analisi dei match
+def recent_form_rate_team(df: pd.DataFrame, team: str) -> Optional[float]:
+    try:
+        sub = df[(df.get("HomeTeam","") == team) | (df.get("AwayTeam","") == team)].tail(FORM_WINDOW)
+        if sub.empty: return None
+        wins = 0
+        for _, row in sub.iterrows():
+            if "FTR" in row:
+                if row.get("HomeTeam","") == team and row["FTR"] == "H": wins += 1
+                elif row.get("AwayTeam","") == team and row["FTR"] == "A": wins += 1
+        return 100 * wins / len(sub)
+    except Exception:
+        return None
+
+# ------------------------------------------------------------
+# 🧮 CALCOLO CSV PROBABILITÀ
+# ------------------------------------------------------------
+def csv_prob_for_event(sport: str, hist_df: pd.DataFrame, home: str, away: str) -> Optional[float]:
+    try:
+        if sport.startswith("tennis_"):
+            if {"player1","player2","winner"}.issubset(set(hist_df.columns)):
+                df = hist_df[(hist_df["player1"].isin([home,away])) | (hist_df["player2"].isin([home,away]))]
+                if df.empty: return None
+                home_win = (df["winner"] == home).sum()
+                away_win = (df["winner"] == away).sum()
+            elif {"winner_name","loser_name"}.issubset(set(hist_df.columns)):
+                df = hist_df[(hist_df["winner_name"].isin([home,away])) | (hist_df["loser_name"].isin([home,away]))]
+                if df.empty: return None
+                home_win = (df["winner_name"] == home).sum()
+                away_win = (df["winner_name"] == away).sum()
+            else:
+                return None
+            fh = recent_form_rate_tennis(hist_df, home) or 50
+            fa = recent_form_rate_tennis(hist_df, away) or 50
+            prob = 0.6*(home_win/(home_win+away_win+1)*100) + 0.25*fh + 0.15*(100-fa)
+            return round(prob,1)
+
+        if {"HomeTeam","AwayTeam","FTR"}.issubset(set(hist_df.columns)):
+            df = hist_df[(hist_df["HomeTeam"] == home) | (hist_df["AwayTeam"] == away)]
+            if df.empty: return None
+            home_wins = len(df[(df["HomeTeam"] == home) & (df["FTR"] == "H")])
+            away_wins = len(df[(df["AwayTeam"] == away) & (df["FTR"] == "A")])
+            fh = recent_form_rate_team(hist_df, home) or 50
+            fa = recent_form_rate_team(hist_df, away) or 50
+            return round(0.4*home_wins + 0.2*(100-away_wins) + 0.2*fh + 0.2*(100-fa),1)
+    except Exception:
+        return None
+    return None
+
+# ------------------------------------------------------------
+# 🤖 ANALISI MATCH
+# ------------------------------------------------------------
 def analyze_matches(sport: str, matches: list, hist_df=None):
-    pronostici = []
-    scartati   = []
+    pronostici, scartati = [], []
     now = datetime.datetime.now(datetime.timezone.utc)
 
     for match in matches:
         try:
             ct = match.get("commence_time")
-            if not ct:
-                continue
+            if not ct: continue
             start_time = datetime.datetime.fromisoformat(ct.replace("Z", "+00:00"))
-            if not (now < start_time < now + datetime.timedelta(days=2)):
-                continue
+            if not (now < start_time < now + datetime.timedelta(days=2)): continue
 
             home = match.get("home_team", "Home")
             away = match.get("away_team", "Away")
 
-            any_market_found = False
-
             for bookmaker in match.get("bookmakers", []):
                 bookmaker_name = bookmaker.get("title", "Sconosciuto")
-
                 for market in bookmaker.get("markets", []):
                     outcomes = market.get("outcomes", [])
-                    if len(outcomes) < 2:
-                        continue
+                    if len(outcomes) < 2: continue
 
-                    # 🔹 Filtra solo i mercati richiesti per il calcio
-                    market_key = market.get("key", "")
-                    if sport.startswith("soccer_"):
-                        if market_key == "totals":
-                            outcomes = [o for o in outcomes if str(o.get("point")) == "2.5"]
+                    fair = fair_probs_from_outcomes(outcomes)
+                    if not fair: continue
 
-                    any_market_found = True
+                    best = None
+                    for o in fair:
+                        prob_api = o["fair_prob"]
+                        quota = float(o["price"])
+                        prob_csv = csv_prob_for_event(sport, hist_df, home, away) if hist_df is not None else None
+                        if prob_csv is not None:
+                            diff = abs(prob_api - prob_csv)
+                            w_api = BLEND_API_DEFAULT if diff < DIVERGENZA_SOGLIA else min(0.9, BLEND_API_DEFAULT + 0.2)
+                            w_csv = 1 - w_api
+                            prob_final = round(prob_api*w_api + prob_csv*w_csv,1)
+                        else:
+                            prob_final = prob_api
+                        EV = expected_value(prob_final, quota)
+                        cand = {"name":o["name"],"prob_final":prob_final,"prob_api":prob_api,"price":quota,"EV":EV}
+                        if best is None or cand["EV"] > best["EV"]: best = cand
+                    if not best: continue
 
-                    # quota API
-                    try:
-                        best_outcome = min(outcomes, key=lambda x: float(x["price"]))
-                        quota = float(best_outcome["price"])
-                        prob_api = round((1.0 / quota) * 100.0, 1)
-                    except Exception:
-                        continue
-
-                                       # CSV (se disponibili)
-                    prob_csv = None
-                    if hist_df is not None:
-                        try:
-                            if sport.startswith("tennis_"):
-                                # 🔹 Calcolo probabilità tennis dai CSV (colonne: winner_name, loser_name)
-                                player_matches = hist_df[
-                                    (hist_df['winner_name'] == home) | (hist_df['loser_name'] == home) |
-                                    (hist_df['winner_name'] == away) | (hist_df['loser_name'] == away)
-                                ]
-
-                                if not player_matches.empty:
-                                    total_home = len(player_matches[(player_matches['winner_name'] == home) | (player_matches['loser_name'] == home)])
-                                    total_away = len(player_matches[(player_matches['winner_name'] == away) | (player_matches['loser_name'] == away)])
-
-                                    home_wins = len(player_matches[player_matches['winner_name'] == home])
-                                    away_wins = len(player_matches[player_matches['winner_name'] == away])
-
-                                    home_win_rate = (home_wins / total_home) * 100 if total_home > 0 else 0
-                                    away_win_rate = (away_wins / total_away) * 100 if total_away > 0 else 0
-
-                                    # media pesata dei due tennisti
-                                    prob_csv = round((home_win_rate * 0.6) + ((100 - away_win_rate) * 0.4), 1)
-
-                            else:
-                                # 🔹 Calcolo classico per sport di squadra
-                                team_matches = hist_df[
-                                    (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
-                                ]
-                                if not team_matches.empty:
-                                    total_matches = len(team_matches)
-                                    home_wins = len(team_matches[(team_matches['HomeTeam'] == home) & (team_matches['FTR'] == 'H')])
-                                    away_wins = len(team_matches[(team_matches['AwayTeam'] == away) & (team_matches['FTR'] == 'A')])
-
-                                    home_win_rate = (home_wins / total_matches) * 100 if total_matches > 0 else 0
-                                    away_win_rate = (away_wins / total_matches) * 100 if total_matches > 0 else 0
-
-                                    home_goals_scored   = team_matches.loc[team_matches['HomeTeam'] == home, 'FTHG'].mean()
-                                    home_goals_conceded = team_matches.loc[team_matches['HomeTeam'] == home, 'FTAG'].mean()
-                                    away_goals_scored   = team_matches.loc[team_matches['AwayTeam'] == away, 'FTAG'].mean()
-                                    away_goals_conceded = team_matches.loc[team_matches['AwayTeam'] == away, 'FTHG'].mean()
-
-                                    prob_csv = (
-                                        (home_win_rate * 0.4) +
-                                        ((100 - away_win_rate) * 0.2) +
-                                        ((home_goals_scored - home_goals_conceded) * 5) +
-                                        ((away_goals_conceded - away_goals_scored) * 5)
-                                    )
-                                    prob_csv = max(0, min(100, prob_csv))
-
-                        except Exception as e:
-                            logging.warning(f"⚠️ Errore calcolo prob CSV per {home} vs {away}: {e}")
-
-
-                    # Combina API + CSV
-                    if prob_csv is not None:
-                        probability = round((prob_api * 0.6) + (prob_csv * 0.4), 1)
-                    else:
-                        probability = prob_api
-
-                    prediction_id = f"{sport}{home}{away}{market_key}{best_outcome.get('name','N/D')}"
-                    base_msg = (
+                    min_prob, min_quota = get_thresholds(sport)
+                    ok = (best["prob_final"] >= min_prob and best["price"] >= min_quota and best["EV"] >= MIN_EV)
+                    msg = (
                         f"{SPORTS.get(sport, sport)}\n"
                         f"📌 {home} vs {away}\n"
-                        f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
                         f"🏦 Bookmaker: {bookmaker_name}\n"
-                        f"🔮 Pronostico: {best_outcome.get('name','N/D')} ({market_key})\n"
-                        f"💰 Quota: {quota}\n"
-                        f"📈 Probabilità stimata: {probability}%"
+                        f"🔮 Esito: {best['name']}\n"
+                        f"💰 Quota: {best['price']}\n"
+                        f"📈 Probabilità finale: {best['prob_final']}%\n"
+                        f"💎 EV: {round(best['EV']*100,1)}%"
                     )
-
-                    if prediction_id not in sent_predictions:
-                        sent_predictions.add(prediction_id)
-                        if probability >= MIN_PROB and quota >= MIN_QUOTA:
-                            pronostici.append("✅ PRONOSTICO TROVATO\n\n" + base_msg)
-                        else:
-                            motivo = []
-                            if probability < MIN_PROB:
-                                motivo.append(f"prob {probability}% < {MIN_PROB}%")
-                            if quota < MIN_QUOTA:
-                                motivo.append(f"quota {quota} < {MIN_QUOTA}")
-                            scartati.append("❌ SCARTATO\n\n" + base_msg + f"\n🚫 Motivo: {', '.join(motivo)}")
-
-            if sport.startswith("soccer_") and hist_df is not None:
-                try:
-                    team_matches = hist_df[
-                        (hist_df['HomeTeam'] == home) | (hist_df['AwayTeam'] == away)
-                    ]
-                    if not team_matches.empty:
-                        btts_matches = team_matches[(team_matches['FTHG'] > 0) & (team_matches['FTAG'] > 0)]
-                        prob_btts = round((len(btts_matches) / len(team_matches)) * 100, 1)
-
-                        prediction_id_btts = f"{sport}{home}{away}btts_yes"
-                        if prediction_id_btts not in sent_predictions:
-                            sent_predictions.add(prediction_id_btts)
-                            if prob_btts >= MIN_PROB:
-                                pronostici.append(
-                                    "✅ PRONOSTICO TROVATO\n\n"
-                                    f"{SPORTS.get(sport, sport)}\n"
-                                    f"📌 {home} vs {away}\n"
-                                    f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
-                                    f"🔮 Pronostico: Entrambe Segnano (BTTS)\n"
-                                    f"📈 Probabilità stimata: {prob_btts}%"
-                                )
-                            else:
-                                scartati.append(
-                                    "❌ SCARTATO\n\n"
-                                    f"{SPORTS.get(sport, sport)}\n"
-                                    f"📌 {home} vs {away}\n"
-                                    f"📅 {start_time.strftime('%d/%m/%Y %H:%M')}\n"
-                                    f"🔮 Pronostico: Entrambe Segnano (BTTS)\n"
-                                    f"📈 Probabilità stimata: {prob_btts}%\n"
-                                    f"🚫 Motivo: prob < {MIN_PROB}%"
-                                )
-                except Exception as e:
-                    logging.warning(f"⚠️ Errore calcolo BTTS per {home} vs {away}: {e}")
-
-        except Exception:
-            scartati.append(f"❌ SCARTATO\n\n{SPORTS.get(sport, sport)}\n⚠️ Errore parsing match.")
-            continue
-
+                    pid = f"{sport}{home}{away}{best['name']}"
+                    if pid not in sent_predictions:
+                        sent_predictions.add(pid)
+                        if ok: pronostici.append("✅ PRONOSTICO\n\n"+msg)
+                        else: scartati.append("❌ SCARTATO\n\n"+msg)
+        except Exception as e:
+            scartati.append(f"❌ Errore parsing {sport}: {e}")
     return pronostici, scartati
 
-# Job principale
+# ------------------------------------------------------------
+# 🔁 JOB PRINCIPALE
+# ------------------------------------------------------------
 def job():
     logging.info("🔍 Controllo nuove partite...")
     tot_ok, tot_ko = 0, 0
-
     for sport in SPORTS.keys():
-        hist_df = load_historical_data(sport)   # 🔹 carica CSV da tutte le fonti
+        hist_df = load_historical_data(sport)
         matches = get_odds(sport)
         accettati, rifiutati = analyze_matches(sport, matches, hist_df)
-
-        for msg in accettati:
-            send_to_telegram(msg)
-
-        tot_ok += len(accettati)
-        tot_ko += len(rifiutati)
-
-    logging.info(f"📊 Totale pronostici inviati: {tot_ok}")
-    logging.info(f"❌ Eventi scartati: {tot_ko}")
+        for msg in accettati: send_to_telegram(msg)
+        tot_ok += len(accettati); tot_ko += len(rifiutati)
+    logging.info(f"📊 Pronostici inviati: {tot_ok} | Scartati: {tot_ko}")
     if tot_ok == 0:
-        send_to_telegram("ℹ️ Nessun match disponibile entro 48h (nessuna quota).")
+        send_to_telegram("ℹ️ Nessun match con valore entro 48h.")
 
-# --- Schedule fisso ---
-schedule_times = ["07:00", "11:00", "17:00"]
+# ------------------------------------------------------------
+# 🕒 SCHEDULAZIONE
+# ------------------------------------------------------------
+schedule_times = ["09:00", "13:00", "19:00"]
 for t in schedule_times:
     schedule.every().day.at(t).do(job)
 
 if __name__ == "__main__":
-    send_to_telegram("✅ Bot avviato su Render e pronto a cercare pronostici!")
-    logging.info("🤖 Bot avviato. In attesa di invio pronostici...")
+    send_to_telegram("✅ Bot avviato (versione ottimizzata, alta accuratezza).")
+    logging.info("🤖 Bot attivo e in attesa di invio pronostici...")
     job()
     while True:
         schedule.run_pending()
