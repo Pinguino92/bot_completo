@@ -153,6 +153,43 @@ def send_to_telegram(message: str):
         logging.error(f"Errore Telegram: {e}")
 
 # ------------------------------------------------------------
+# 🧾 GET ODDS (API the-odds-api)
+# ------------------------------------------------------------
+def get_odds(sport: str):
+    """Recupera le quote correnti per lo sport specificato."""
+    if not ODDS_API_KEY:
+        logging.error("⚠️ ODDS_API_KEY mancante.")
+        return []
+
+    # imposta i mercati da interrogare
+    if sport.startswith("soccer_"):
+        markets = "h2h,btts,totals,spreads"
+    else:
+        markets = "h2h,totals"
+
+    url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
+    params = {
+        "apiKey": ODDS_API_KEY,
+        "regions": "eu",          # mercati europei
+        "markets": markets,
+        "oddsFormat": "decimal",
+        "dateFormat": "iso"
+    }
+
+    try:
+        r = requests.get(url, params=params, timeout=20)
+        r.raise_for_status()
+        data = r.json()
+        if isinstance(data, list):
+            logging.info(f"📡 Quote ricevute per {sport}: {len(data)} eventi")
+        else:
+            logging.warning(f"⚠️ Risposta inattesa per {sport}: {data}")
+        return data
+    except Exception as e:
+        logging.error(f"❌ Errore API per {sport}: {e}")
+        return []
+        
+# ------------------------------------------------------------
 # 📊 FAIR ODDS & EXPECTED VALUE
 # ------------------------------------------------------------
 def fair_probs_from_outcomes(outcomes: List[Dict]) -> List[Dict]:
