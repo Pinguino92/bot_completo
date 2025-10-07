@@ -38,7 +38,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.12"))  # 12%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.15"))  # 15%
 
 # blending e divergenze
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
