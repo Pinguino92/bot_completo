@@ -6,3 +6,4 @@ gdown
 rapidfuzz
 apscheduler
 pytz
+numpy
