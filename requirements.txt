@@ -8,3 +8,4 @@ apscheduler
 pytz
 numpy
 joblib
+scikit-learn
