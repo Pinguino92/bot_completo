@@ -941,15 +941,14 @@ def job():
     logging.info(f"📊 Pronostici (slot): {tot_ok} inviati | {tot_ko} scartati")
 
 # 🔁 Messaggio finale intelligente
-if tot_ok == 0:
-    msg = "ℹ️ Nessun pronostico valido trovato in nessuno sport nelle prossime 48h."
-    send_to_telegram(msg)
-    logging.info(msg)
-else:
-    msg = f"✅ Pronostici totali inviati: {tot_ok}"
-    send_to_telegram(msg)
-    logging.info(msg)
-
+    if tot_ok == 0:
+        msg = "ℹ️ Nessun pronostico valido trovato in nessuno sport nelle prossime 48h."
+        send_to_telegram(msg)
+        logging.info(msg)
+    else:
+        msg = f"✅ Pronostici totali inviati: {tot_ok}"
+        send_to_telegram(msg)
+        logging.info(msg)
 
 # ──────────────────────────────────────────────────────────────
 # 📈 REPORT SETTIMANALE (domenica 21:00 IT)
