@@ -18,6 +18,11 @@ import requests
 import datetime
 import pandas as pd
 from typing import Optional, List, Dict
+from context_engine.context_manager import context_adjustment, update_context_data
+from learning_engine.train_model import ai_correction, train_model
+from context_updater.update_injuries import update_all as update_injuries
+from context_updater.update_weather import update_weather
+
 
 # Scheduler TZ
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -38,7 +43,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.15"))  # 15%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.18"))  # 18%
 
 # blending e divergenze
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
@@ -54,7 +59,7 @@ ELO_STATE_PATH    = os.getenv("ELO_STATE_PATH",   f"{DATA_DIR}/elo_state.json")
 BACKUP_DIR        = os.getenv("BACKUP_DIR", f"{DATA_DIR}/backups")
 
 # dedup persistente (✅ ora su /data/)
-PRED_SENT_PATH = f"{DATA_DIR}/pred_sent.json"
+PRED_SENT_PATH = f"{DATA_DIR}"
 
 # timezone & orari
 TZ = pytz.timezone("Europe/Rome")
@@ -66,7 +71,6 @@ DAILY_BACKUP_TIME  = {"hour": 3, "minute": 30}  # tutti i giorni 03:30
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 # dedup persistente
-PRED_SENT_PATH = "pred_sent.json"
 
 def pred_load() -> set:
     try:
@@ -118,13 +122,13 @@ SPORT_RELIABILITY = {
 
 # Soglie per sport
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 68.0, "quota": 1.40},              # calcio
-    "basketball_": {"prob": 63.0, "quota": 1.55},           # NBA
-    "americanfootball_nfl": {"prob": 66.0, "quota": 1.55},  # NFL
-    "americanfootball_ncaaf": {"prob": 64.0, "quota": 1.55},# NCAAF
-    "baseball_mlb": {"prob": 62.0, "quota": 1.60},          # MLB
-    "icehockey_nhl": {"prob": 67.0, "quota": 1.45},         # NHL
-    "tennis_atp_shanghai_masters": {"prob": 69.0, "quota": 1.35},
+    "soccer_": {"prob": 65.0, "quota": 1.35},              # calcio
+    "basketball_": {"prob": 60.0, "quota": 1.50},           # NBA
+    "americanfootball_nfl": {"prob": 62.0, "quota": 1.52},  # NFL
+    "americanfootball_ncaaf": {"prob": 64.0, "quota": 1.52},# NCAAF
+    "baseball_mlb": {"prob": 60.0, "quota": 1.58},          # MLB
+    "icehockey_nhl": {"prob": 65.0, "quota": 1.48},         # NHL
+    "tennis_atp_shanghai_masters": {"prob": 65.0, "quota": 1.32},
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -602,6 +606,33 @@ def get_sport_blend_api(sport: str) -> float:
     return float(state.get(sport, BLEND_API_DEFAULT))
 
 # ──────────────────────────────────────────────────────────────
+# 🌦️ METEO & 🩹 INFORTUNI INFLUENCE
+# ──────────────────────────────────────────────
+
+def load_context_data():
+    base = "/data"
+    ctx = {"weather": {}, "injuries": {}}
+    try:
+        # Meteo
+        wdir = os.path.join(base, "weather_cache")
+        for f in glob.glob(os.path.join(wdir, "*_weather.json")):
+            sport = os.path.basename(f).replace("_weather.json", "")
+            with open(f, "r", encoding="utf-8") as fp:
+                ctx["weather"][sport] = json.load(fp)
+        # Infortuni
+        idir = os.path.join(base, "injuries_cache")
+        for f in glob.glob(os.path.join(idir, "*_injuries.json")):
+            sport = os.path.basename(f).replace("_injuries.json", "")
+            with open(f, "r", encoding="utf-8") as fp:
+                ctx["injuries"][sport] = json.load(fp)
+        logging.info(f"📊 Contexto caricato: {len(ctx['weather'])} sport meteo, {len(ctx['injuries'])} infortuni")
+    except Exception as e:
+        logging.warning(f"⚠️ Context load fallito: {e}")
+    return ctx
+
+CONTEXT_DATA = load_context_data()
+
+# ──────────────────────────────────────────────
 # 🧮 ANALISI MATCH
 # ──────────────────────────────────────────────────────────────
 def most_common_point(outcomes: List[Dict]) -> Optional[float]:
@@ -718,6 +749,45 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
 
                         prob_final *= sport_reliability_weight(sport)
                         prob_final = max(0.0, min(100.0, round(prob_final, 1)))
+
+                        # 🔧 Correzione infortuni per singola squadra
+                        # ──────────────────────────────────────────────
+                        try:
+                            idata = CONTEXT_DATA["injuries"].get(sport, [])
+                            if idata:
+                                # costruisce mappa squadra -> numero infortunati
+                                team_injuries = {}
+                                for dataset in idata:
+                                    for record in dataset.get("response", []):
+                                        team = record.get("team", {}).get("name")
+                                        if not team:
+                                            continue
+                                        team_injuries[team] = team_injuries.get(team, 0) + 1
+
+                                inj_home = team_injuries.get(home, 0)
+                                inj_away = team_injuries.get(away, 0)
+                                total_inj = inj_home + inj_away
+
+                                # penalità proporzionale: ogni infortunio riduce fino al 10% max
+                                if total_inj > 0:
+                                    if inj_home > inj_away:
+                                        # squadra di casa più penalizzata
+                                        penalty = min(10, inj_home - inj_away) * 0.5
+                                        prob_final -= penalty
+                                    elif inj_away > inj_home:
+                                        bonus = min(10, inj_away - inj_home) * 0.5
+                                        prob_final += bonus
+
+                                logging.debug(f"[DEBUG] Injuries {sport} | {home}:{inj_home} vs {away}:{inj_away} -> Δ={prob_final:.2f}")
+
+                        except Exception as e:
+                            logging.debug(f"[DEBUG] injury correction skipped {sport}: {e}")
+
+                        # 🔹 Context Engine
+                        context_bonus = context_adjustment(sport, home, away)
+                        prob_final = max(0, min(100, prob_final + context_bonus))
+                        # 🔹 Auto-Learning correction
+                        prob_final = ai_correction(prob_final, price)
 
                         min_prob, min_quota = get_thresholds(sport)
                         ev = expected_value(prob_final, price)
@@ -898,6 +968,14 @@ def start_scheduler():
     for hhmm in SCHEDULE_TIMES:
         h, m = map(int, hhmm.split(":"))
         sched.add_job(job, "cron", hour=h, minute=m)
+    # Aggiornamento giornaliero context
+    sched.add_job(update_context_data, "cron", hour=4, minute=0)
+    # Addestramento ML settimanale
+    sched.add_job(train_model, "cron", day_of_week="sun", hour=3, minute=0)
+
+    # Scheduler giornaliero
+    sched.add_job(update_injuries, "cron", hour=8, minute=30)
+    sched.add_job(update_weather, "cron", hour=8, minute=40)   
     # report domenica 21:00
     sched.add_job(weekly_report, "cron", **WEEKLY_REPORT_TIME)
     # backup giornaliero
@@ -905,6 +983,7 @@ def start_scheduler():
     sched.add_job(update_results_with_scores, "cron", **DAILY_BACKUP_TIME)
     sched.start()
     return sched
+
 
 # ──────────────────────────────────────────────────────────────
 # 🚀 MAIN
