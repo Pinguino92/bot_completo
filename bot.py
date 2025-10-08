@@ -880,6 +880,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             sent_predictions.add(prediction_id); pred_save(sent_predictions)
 
             send_to_telegram("✅ *PRONOSTICO*\n\n" + msg)
+            pronostici.append(best_pick)
 
             try:
                 match_id = match.get("id", prediction_id)
