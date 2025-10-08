@@ -6,6 +6,13 @@ BOT PRO v2 – pronto per Render/GitHub con persistente /data
 
 ✅ Aggiunto supporto a Render Disk:
    - Tutti i file di log, feedback, elo, dedup e backup ora vengono salvati in /data/
+
+✅ Patch integrate (richieste):
+   (2) Blending adattivo API/CSV/MODEL per sport (+ stato su /data/feedback_state.json)
+   (3) Filtri qualità addizionali: bookmaker minimi
+   (4) Modelli sport-specifici (calcio/tennis/basket) per prob_model
+   (7) Stake consigliato con Kelly cappato
+   +  log_prediction estesa con prob_api/prob_csv/prob_model/prob_final/ev
 """
 
 import os
@@ -18,11 +25,12 @@ import requests
 import datetime
 import pandas as pd
 from typing import Optional, List, Dict
+
+# ── i tuoi import invariati ───────────────────────────────────
 from context_engine.context_manager import context_adjustment, update_context_data
 from learning_engine.train_model import ai_correction, train_model
 from context_updater.update_injuries import update_all as update_injuries
 from context_updater.update_weather import update_weather
-
 
 # Scheduler TZ
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -45,7 +53,7 @@ MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))           # ultime N partite
 VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.18"))  # 18%
 
-# blending e divergenze
+# blending e divergenze (legacy tuoi)
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
 BLEND_API_DEFAULT = float(os.getenv("BLEND_API_DEFAULT", "0.6"))   # peso API
 
@@ -59,7 +67,7 @@ ELO_STATE_PATH    = os.getenv("ELO_STATE_PATH",   f"{DATA_DIR}/elo_state.json")
 BACKUP_DIR        = os.getenv("BACKUP_DIR", f"{DATA_DIR}/backups")
 
 # dedup persistente (✅ ora su /data/)
-PRED_SENT_PATH = f"{DATA_DIR}"
+PRED_SENT_PATH = f"{DATA_DIR}/sent_predictions.json"
 
 # timezone & orari
 TZ = pytz.timezone("Europe/Rome")
@@ -67,11 +75,14 @@ SCHEDULE_TIMES = ["09:00", "12:00", "16:00", "19:00"]  # invio pronostici
 WEEKLY_REPORT_TIME = {"day_of_week": "sun", "hour": 21, "minute": 0}  # domenica 21:00
 DAILY_BACKUP_TIME  = {"hour": 3, "minute": 30}  # tutti i giorni 03:30
 
+# 💰 Stake management (punto 7)
+BANKROLL = float(os.getenv("BANKROLL", "1000.0"))  # capitale per calcolo stake
+KELLY_CAP = float(os.getenv("KELLY_CAP", "0.05"))  # cap frazione Kelly (5% default)
+
 # log
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 # dedup persistente
-
 def pred_load() -> set:
     try:
         return set(json.load(open(PRED_SENT_PATH, "r", encoding="utf-8")))
@@ -177,9 +188,6 @@ def send_to_telegram(message: str):
 
 # ──────────────────────────────────────────────────────────────
 # 🗂️ CSV LOADER (data/, downloads/, download_external_csv/)
-# Supporta:
-#  - CSV locali
-#  - file .txt o .csv che contengono link http(s) a CSV (una riga per URL)
 # ──────────────────────────────────────────────────────────────
 def _category_for_sport(sport_key: str) -> str:
     if sport_key.startswith("soccer_"): return "calcio"
@@ -319,8 +327,6 @@ def get_scores(sport: str, days_from: int = 5):
     r = _http_get(url, params)
     if not r:
         return []
-    # Il tuo piano base (con risultati attivi) dovrebbe consentire l'endpoint
-    # se non consentito, verrà già gestito dal retry/return []
     try:
         return r.json() if r.text else []
     except Exception as e:
@@ -482,7 +488,7 @@ def compute_market_volatility(bookmakers: List[Dict]) -> Dict[str, Dict[str, flo
     return out
 
 # ──────────────────────────────────────────────────────────────
-# 🧠 FEEDBACK / ELO
+# 🧠 FEEDBACK / ELO STATE
 # ──────────────────────────────────────────────────────────────
 def load_feedback_state() -> Dict[str, float]:
     try:
@@ -500,18 +506,98 @@ def save_feedback_state(state: Dict[str, float]):
     except Exception as e:
         logging.warning(f"⚠️ save_feedback_state: {e}")
 
-def log_prediction(date_str: str, sport: str, match_id: str, home: str, away: str,
-                   market_key: str, outcome_name: str, price: float, prob_final: float, point: Optional[float]):
-    cols = ["date","sport","match_id","home","away","market","outcome","price","prob_final","point","outcome_result"]
-    row = [date_str, sport, match_id, home, away, market_key, outcome_name, price, prob_final, point if point is not None else "", ""]
-    try:
-        if not os.path.exists(RESULTS_LOG_PATH):
-            pd.DataFrame([row], columns=cols).to_csv(RESULTS_LOG_PATH, index=False)
-        else:
-            pd.DataFrame([row]).to_csv(RESULTS_LOG_PATH, mode="a", header=False, index=False)
-    except Exception as e:
-        logging.warning(f"⚠️ log_prediction error: {e}")
+# ──────────────────────────────────────────────────────────────
+# (2) BLENDING ADATTIVO API/CSV/MODEL – pesi per sport
+# ──────────────────────────────────────────────────────────────
+def _get_blend_weights_for_sport(sport: str):
+    """
+    Restituisce (w_api, w_csv, w_model) in [0..1] che sommano ~1.
+    Se assenti, default conservativo: API 0.6, CSV 0.3, MODEL 0.1
+    """
+    state = load_feedback_state()
+    wk = state.get(f"blend_weights__{sport}")
+    if isinstance(wk, list) and len(wk) == 3:
+        return tuple(wk)
+    return (0.6, 0.3, 0.1)
 
+def _save_blend_weights_for_sport(sport: str, w_api: float, w_csv: float, w_model: float):
+    state = load_feedback_state()
+    state[f"blend_weights__{sport}"] = [round(w_api,3), round(w_csv,3), round(w_model,3)]
+    save_feedback_state(state)
+
+def blend_predict(prob_api: Optional[float], prob_csv: Optional[float], prob_model: Optional[float], sport: str) -> float:
+    """
+    Combina le probabilità (in %) pesate. Se una manca, ripesa le altre.
+    """
+    if prob_api is None and prob_csv is None and prob_model is None:
+        return 0.0
+    w_api, w_csv, w_model = _get_blend_weights_for_sport(sport)
+    parts = []
+    weights = []
+    if prob_api is not None:   parts.append(prob_api); weights.append(w_api)
+    if prob_csv is not None:   parts.append(prob_csv); weights.append(w_csv)
+    if prob_model is not None: parts.append(prob_model); weights.append(w_model)
+    sw = sum(weights) or 1.0
+    val = sum(p * (w/sw) for p, w in zip(parts, weights))
+    return float(max(0.0, min(100.0, val)))
+
+# ──────────────────────────────────────────────────────────────
+# (4) MODELLI SPORT-SPECIFICI → prob_model (semplici)
+# ──────────────────────────────────────────────────────────────
+def soccer_model_prob(home: str, away: str, hist_df: Optional[pd.DataFrame]) -> Optional[float]:
+    try:
+        fh = recent_form_rate_team(hist_df, home) if hist_df is not None else None
+        fa = recent_form_rate_team(hist_df, away) if hist_df is not None else None
+        fh = 50 if fh is None else fh
+        fa = 50 if fa is None else fa
+        diff = fh - fa
+        prob_home = 50 + 0.25 * diff + 5.0  # bonus casa
+        return max(0.0, min(100.0, prob_home))
+    except Exception:
+        return None
+
+def tennis_model_prob(home: str, away: str, hist_df: Optional[pd.DataFrame]) -> Optional[float]:
+    try:
+        fh = recent_form_rate_tennis(hist_df, home) if hist_df is not None else None
+        fa = recent_form_rate_tennis(hist_df, away) if hist_df is not None else None
+        fh = 50 if fh is None else fh
+        fa = 50 if fa is None else fa
+        prob_home = 50 + 0.4 * (fh - fa)
+        return max(0.0, min(100.0, prob_home))
+    except Exception:
+        return None
+
+def basketball_model_prob(home: str, away: str, hist_df: Optional[pd.DataFrame]) -> Optional[float]:
+    try:
+        fh = recent_form_rate_team(hist_df, home) if hist_df is not None else None
+        fa = recent_form_rate_team(hist_df, away) if hist_df is not None else None
+        fh = 50 if fh is None else fh
+        fa = 50 if fa is None else fa
+        prob_home = 50 + 0.3 * (fh - fa) + 3.0
+        return max(0.0, min(100.0, prob_home))
+    except Exception:
+        return None
+
+def sport_model_predict(sport: str, home: str, away: str, hist_df: Optional[pd.DataFrame]) -> Optional[float]:
+    if sport.startswith("soccer_"):      return soccer_model_prob(home, away, hist_df)
+    if sport.startswith("tennis_"):      return tennis_model_prob(home, away, hist_df)
+    if sport.startswith("basketball_"):  return basketball_model_prob(home, away, hist_df)
+    return None
+
+# ──────────────────────────────────────────────────────────────
+# 🧮 KELLY (punto 7)
+# ──────────────────────────────────────────────────────────────
+def kelly_fraction(prob_percent: float, price: float) -> float:
+    p = prob_percent / 100.0
+    b = price - 1.0
+    if b <= 0: return 0.0
+    q = 1.0 - p
+    f = (b * p - q) / b
+    return max(0.0, min(KELLY_CAP, f))
+
+# ──────────────────────────────────────────────────────────────
+# 🧠 ELO + RISULTATI
+# ──────────────────────────────────────────────────────────────
 def elo_load():
     try:
         if os.path.exists(ELO_STATE_PATH):
@@ -604,6 +690,9 @@ def update_results_with_scores():
         except Exception as e:
             logging.warning(f"⚠️ Salvataggio risultati fallito: {e}")
 
+# ──────────────────────────────────────────────────────────────
+# (2) ADAPT BLEND WEIGHTS – ora usa grid-search se disponibili prob_api/csv/model
+# ──────────────────────────────────────────────────────────────
 def adapt_blend_weights():
     if not os.path.exists(RESULTS_LOG_PATH): return
     try:
@@ -612,22 +701,60 @@ def adapt_blend_weights():
         return
     if df.empty or "outcome_result" not in df.columns:
         return
+
     state = load_feedback_state()
     for sport in df["sport"].dropna().unique():
-        sub = df[df["sport"]==sport].tail(50)
-        if sub.empty: continue
-        wins = (sub["outcome_result"]=="W").sum()
-        total = (sub["outcome_result"].isin(["W","L"])).sum()
-        if total < 10:  # minimo campione
+        sub = df[df["sport"]==sport].tail(200).copy()
+        if sub.empty: 
             continue
-        acc = wins/total
-        state[f"acc__{sport}"] = round(acc, 3)
-        current = float(state.get(sport, BLEND_API_DEFAULT))
-        if acc >= 0.60:
-            current = max(0.40, current - 0.05)
-        else:
-            current = min(0.85, current + 0.05)
-        state[sport] = round(current, 2)
+
+        # accuracy rolling
+        acc = 0.0
+        sub_eval = sub[sub["outcome_result"].isin(["W","L"])]
+        if not sub_eval.empty:
+            wins = (sub_eval["outcome_result"]=="W").sum()
+            total = len(sub_eval)
+            acc = wins/total if total else 0.0
+            state[f"acc__{sport}"] = round(acc, 3)
+
+        # se non abbiamo le 3 colonne, fallback al tuo schema legacy (varia peso API globale)
+        if not {"prob_api","prob_csv","prob_model","price","outcome_result"}.issubset(sub.columns):
+            current = float(state.get(sport, BLEND_API_DEFAULT))
+            if acc >= 0.60:
+                current = max(0.40, current - 0.05)
+            else:
+                current = min(0.85, current + 0.05)
+            state[sport] = round(current, 2)
+            continue
+
+        # grid search su pesi che sommano a 1 (step 0.1)
+        rows = sub_eval.to_dict("records")
+        best_profit = -1e9
+        best = _get_blend_weights_for_sport(sport)
+        steps = [i/10.0 for i in range(0, 11)]
+        for wa in steps:
+            for wc in steps:
+                wm = 1.0 - wa - wc
+                if wm < 0: 
+                    continue
+                profit = 0.0
+                for r in rows:
+                    try:
+                        p_api   = float(r["prob_api"])
+                        p_csv   = float(r["prob_csv"])
+                        p_model = float(r["prob_model"])
+                        price   = float(r["price"])
+                        outcome = r["outcome_result"]
+                    except Exception:
+                        continue
+                    prob_final = wa*p_api + wc*p_csv + wm*p_model
+                    # simulazione flat stake 1
+                    profit += (price - 1.0) if outcome=="W" else -1.0
+                if profit > best_profit:
+                    best_profit = profit
+                    best = (wa, wc, wm)
+        _save_blend_weights_for_sport(sport, *best)
+
     save_feedback_state(state)
 
 def get_sport_blend_api(sport: str) -> float:
@@ -635,9 +762,8 @@ def get_sport_blend_api(sport: str) -> float:
     return float(state.get(sport, BLEND_API_DEFAULT))
 
 # ──────────────────────────────────────────────────────────────
-# 🌦️ METEO & 🩹 INFORTUNI INFLUENCE
-# ──────────────────────────────────────────────
-
+# 🌦️ METEO & 🩹 INFORTUNI CONTEXT
+# ──────────────────────────────────────────────────────────────
 def load_context_data():
     base = "/data"
     ctx = {"weather": {}, "injuries": {}}
@@ -654,7 +780,7 @@ def load_context_data():
             sport = os.path.basename(f).replace("_injuries.json", "")
             with open(f, "r", encoding="utf-8") as fp:
                 ctx["injuries"][sport] = json.load(fp)
-        logging.info(f"📊 Contexto caricato: {len(ctx['weather'])} sport meteo, {len(ctx['injuries'])} infortuni")
+        logging.info(f"📊 Contesto caricato: {len(ctx['weather'])} sport meteo, {len(ctx['injuries'])} infortuni")
     except Exception as e:
         logging.warning(f"⚠️ Context load fallito: {e}")
     return ctx
@@ -662,13 +788,12 @@ def load_context_data():
 CONTEXT_DATA = load_context_data()
 
 # ──────────────────────────────────────────────
-# 🧮 ANALISI MATCH
+# 🧮 ANALISI MATCH (+ filtri bookmaker minimi + blend + modelli + stake)
 # ──────────────────────────────────────────────────────────────
 def most_common_point(outcomes: List[Dict]) -> Optional[float]:
     pts = [o.get("point") for o in outcomes if o.get("point") is not None]
     if not pts:
         return None
-    # usa la moda (valore più frequente). Se pari, prendi mediana.
     try:
         from statistics import multimode, median
         modes = multimode(pts)
@@ -676,7 +801,6 @@ def most_common_point(outcomes: List[Dict]) -> Optional[float]:
             return modes[0]
         return float(median(pts))
     except Exception:
-        # fallback: arrotonda alla .5 più vicina
         avg = sum([float(p) for p in pts]) / len(pts)
         return round(avg*2)/2.0
 
@@ -710,14 +834,23 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             home = match.get("home_team","Home")
             away = match.get("away_team","Away")
 
-            vol_map = compute_market_volatility(match.get("bookmakers", []))
+            # (3) FILTRO: numero minimo bookmaker aggregati
+            bookmakers = match.get("bookmakers", []) or []
+            bk_count = len(bookmakers)
+            min_bk = 2 if sport.startswith("tennis_") else 3
+            if bk_count < min_bk:
+                logging.debug(f"[DEBUG] {sport} | {home} vs {away} | insufficient bookmakers: {bk_count} < {min_bk}")
+                scartati.append("insufficient_bookmakers")
+                continue
+
+            vol_map = compute_market_volatility(bookmakers)
             best_pick = None
             best_point  = None
             best_vol    = None
             best_ev     = None
             best_book   = None
 
-            for bookmaker in match.get("bookmakers", []):
+            for bookmaker in bookmakers:
                 bookmaker_name = bookmaker.get("title","Sconosciuto")
                 for market in bookmaker.get("markets", []):
                     outcomes = market.get("outcomes", [])
@@ -761,30 +894,35 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             logging.debug(f"[DEBUG] {sport} | {home} vs {away} | volatilità alta {vol_pct:.2f} > {VOLATILITY_LIMIT}")
                             continue
 
-                        prob_csv = csv_prob_for_event(sport, hist_df, home, away) if hist_df is not None else None
-                        if prob_csv is None:
-                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | prob_csv assente")
+                        # p_api / p_csv / p_model
+                        prob_api   = fair_p
+                        prob_csv   = csv_prob_for_event(sport, hist_df, home, away) if hist_df is not None else None
+                        prob_model = sport_model_predict(sport, home, away, hist_df)
 
+                        # conf legacy per divergenze (mantengo la tua idea)
                         confidence_api = max(1e-6, 1.0 - min(1.0, vol_pct))
                         confidence_csv = 0.50 + 0.50*(recent_acc)
 
-                        if prob_csv is not None:
+                        # blend moderno a 3 componenti
+                        prob_blend = blend_predict(prob_api, prob_csv, prob_model, sport)
+
+                        # se niente csv/model, manteniamo correzione legacy API/CSV
+                        if prob_csv is not None and prob_model is None:
                             diff = abs(fair_p - prob_csv)
                             if diff >= DIVERGENZA_SOGLIA:
                                 confidence_api *= 1.25
-                            prob_final = (confidence_api*fair_p + confidence_csv*prob_csv) / (confidence_api+confidence_csv)
+                            legacy = (confidence_api*fair_p + confidence_csv*prob_csv) / (confidence_api+confidence_csv)
+                            prob_final = (prob_blend + legacy) / 2.0
                         else:
-                            prob_final = fair_p
+                            prob_final = prob_blend
 
                         prob_final *= sport_reliability_weight(sport)
                         prob_final = max(0.0, min(100.0, round(prob_final, 1)))
 
-                        # 🔧 Correzione infortuni per singola squadra
-                        # ──────────────────────────────────────────────
+                        # 🔧 Infortuni (come nel tuo codice, con piccole cautele)
                         try:
                             idata = CONTEXT_DATA["injuries"].get(sport, [])
                             if idata:
-                                # costruisce mappa squadra -> numero infortunati
                                 team_injuries = {}
                                 for dataset in idata:
                                     for record in dataset.get("response", []):
@@ -795,27 +933,18 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
 
                                 inj_home = team_injuries.get(home, 0)
                                 inj_away = team_injuries.get(away, 0)
-                                total_inj = inj_home + inj_away
-
-                                # penalità proporzionale: ogni infortunio riduce fino al 10% max
-                                if total_inj > 0:
-                                    if inj_home > inj_away:
-                                        # squadra di casa più penalizzata
-                                        penalty = min(10, inj_home - inj_away) * 0.5
-                                        prob_final -= penalty
-                                    elif inj_away > inj_home:
-                                        bonus = min(10, inj_away - inj_home) * 0.5
-                                        prob_final += bonus
-
-                                logging.debug(f"[DEBUG] Injuries {sport} | {home}:{inj_home} vs {away}:{inj_away} -> Δ={prob_final:.2f}")
-
+                                if inj_home > inj_away:
+                                    penalty = min(10, inj_home - inj_away) * 0.5
+                                    prob_final -= penalty
+                                elif inj_away > inj_home:
+                                    bonus = min(10, inj_away - inj_home) * 0.5
+                                    prob_final += bonus
                         except Exception as e:
                             logging.debug(f"[DEBUG] injury correction skipped {sport}: {e}")
 
-                        # 🔹 Context Engine
+                        # Context Engine + AI correction (tuoi)
                         context_bonus = context_adjustment(sport, home, away)
                         prob_final = max(0, min(100, prob_final + context_bonus))
-                        # 🔹 Auto-Learning correction
                         prob_final = ai_correction(prob_final, price)
 
                         min_prob, min_quota = get_thresholds(sport)
@@ -831,13 +960,22 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                             logging.debug(f"[DEBUG] {sport} | {home} vs {away} | EV {ev:.2f} > 0.6 (anomalo)")
                             continue
 
-                        logging.debug(f"[DEBUG] ✅ VALIDO {sport} | {home} vs {away} | {name} | prob={prob_final:.1f}% quota={price} ev={ev:.2f}")
+                        # (7) Stake consigliato (Kelly cappato)
+                        f = kelly_fraction(prob_final, price)
+                        suggested_stake = round(BANKROLL * f, 2)
+
+                        logging.debug(f"[DEBUG] ✅ VALIDO {sport} | {home} vs {away} | {name} | prob={prob_final:.1f}% quota={price} ev={ev:.2f} stake={suggested_stake}")
 
                         cand = {
                             "name": name,
                             "market": mkey,
                             "price": price,
                             "prob_final": prob_final,
+                            "prob_api": prob_api,
+                            "prob_csv": prob_csv,
+                            "prob_model": prob_model,
+                            "ev": ev,
+                            "stake": suggested_stake,
                             "point": line_point_to_show if line_point_to_show is not None else point,
                         }
                         if (best_pick is None) or (ev > (best_ev if best_ev is not None else -999)):
@@ -851,7 +989,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                 logging.debug(f"[DEBUG] {sport} | {home} vs {away} | nessun candidato valido dopo filtri")
                 continue
 
-            # Messaggio Telegram – con linea per sport ≠ calcio
+            # Messaggio Telegram – con linea per sport ≠ calcio + stake
             point_line = ""
             if best_pick["market"] == "totals":
                 if sport.startswith("soccer_"):
@@ -860,6 +998,8 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                     if best_point is not None:
                         point_line = f"\n📏 Linea: {best_point}"
 
+            stake_line = f"\n💵 Stake suggerito: *{best_pick['stake']}€* (cap Kelly {int(KELLY_CAP*100)}%)" if best_pick["stake"] > 0 else ""
+
             msg = (
                 f"*{SPORTS.get(sport, sport)}*\n"
                 f"📌 *{home}* vs *{away}*\n"
@@ -867,7 +1007,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                 f"🏦 Bookmaker: {best_book}\n"
                 f"🔮 Esito: *{best_pick['name']}* ({best_pick['market']}){point_line}\n"
                 f"💰 Quota: *{best_pick['price']}*\n"
-                f"📈 Probabilità: *{best_pick['prob_final']}%*\n"
+                f"📈 Probabilità: *{best_pick['prob_final']}%*{stake_line}\n"
             )
 
             badge = confidence_bucket(best_pick['prob_final'], best_vol or 0.0, best_ev or 0.0)
@@ -885,7 +1025,16 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             try:
                 match_id = match.get("id", prediction_id)
                 date_str = start_time.strftime("%Y-%m-%d")
-                log_prediction(date_str, sport, match_id, home, away, best_pick["market"], best_pick["name"], best_pick["price"], best_pick["prob_final"], best_point)
+                # 🧾 LOG ESTESO con prob_api/csv/model/final + ev
+                log_prediction(
+                    date_str, sport, match_id, home, away,
+                    best_pick["market"], best_pick["name"], best_pick["price"],
+                    best_pick["prob_final"], best_point,
+                    prob_api=best_pick["prob_api"],
+                    prob_csv=best_pick["prob_csv"],
+                    prob_model=best_pick["prob_model"],
+                    ev=best_pick["ev"]
+                )
             except Exception as e:
                 logging.warning(f"⚠️ log_prediction failed: {e}")
 
@@ -911,6 +1060,48 @@ def backup_results_log():
         logging.info(f"🗄️ Backup creato: {dst}")
     except Exception as e:
         logging.warning(f"⚠️ Backup fallito: {e}")
+
+# ──────────────────────────────────────────────────────────────
+# 🧾 LOG PREDICTION (ESTESA)
+# ──────────────────────────────────────────────────────────────
+def log_prediction(date_str: str, sport: str, match_id: str, home: str, away: str,
+                   market_key: str, outcome_name: str, price: float, prob_final: float, point: Optional[float],
+                   prob_api: Optional[float]=None, prob_csv: Optional[float]=None,
+                   prob_model: Optional[float]=None, ev: Optional[float]=None):
+    """
+    Scrive una riga nel file results_log.csv con tutti i dati utili per feedback e training.
+    (VERSIONE ESTESA)
+    """
+    cols = [
+        "timestamp","date","sport","match_id","home","away","market","outcome","price",
+        "prob_api","prob_csv","prob_model","prob_final","ev","point","outcome_result"
+    ]
+    row = {
+        "timestamp": datetime.datetime.utcnow().isoformat(),
+        "date": date_str,
+        "sport": sport,
+        "match_id": match_id,
+        "home": home,
+        "away": away,
+        "market": market_key,
+        "outcome": outcome_name,
+        "price": price,
+        "prob_api": None if prob_api is None else round(float(prob_api),2),
+        "prob_csv": None if prob_csv is None else round(float(prob_csv),2),
+        "prob_model": None if prob_model is None else round(float(prob_model),2),
+        "prob_final": round(float(prob_final),2),
+        "ev": None if ev is None else round(float(ev),3),
+        "point": point if point is not None else "",
+        "outcome_result": ""
+    }
+    try:
+        if not os.path.exists(RESULTS_LOG_PATH):
+            pd.DataFrame([row], columns=cols).to_csv(RESULTS_LOG_PATH, index=False)
+        else:
+            pd.DataFrame([row])[cols].to_csv(RESULTS_LOG_PATH, mode="a", header=False, index=False)
+        logging.debug(f"📝 log_prediction salvato: {sport} {home}-{away}")
+    except Exception as e:
+        logging.warning(f"⚠️ log_prediction error: {e}")
 
 # ──────────────────────────────────────────────────────────────
 # 🔁 JOB PRINCIPALE
@@ -941,7 +1132,7 @@ def job():
 
     logging.info(f"📊 Pronostici (slot): {tot_ok} inviati | {tot_ko} scartati")
 
-# 🔁 Messaggio finale intelligente
+    # 🔁 Messaggio finale intelligente
     if tot_ok == 0:
         msg = "ℹ️ Nessun pronostico valido trovato in nessuno sport nelle prossime 48h."
         send_to_telegram(msg)
@@ -970,7 +1161,6 @@ def weekly_report():
     if last7.empty:
         return
 
-    # accuracy by sport
     def acc_of(s):
         s = s.dropna()
         if s.empty: return 0.0
@@ -980,7 +1170,6 @@ def weekly_report():
 
     by_sport = last7.groupby("sport")["outcome_result"].apply(acc_of).sort_values(ascending=False)
 
-    # global metrics
     global_acc = acc_of(last7["outcome_result"])
     state = load_feedback_state()
     blend_avg = sum(float(state.get(s, BLEND_API_DEFAULT)) for s in SPORTS.keys()) / max(1, len(SPORTS))
@@ -1013,7 +1202,7 @@ def start_scheduler():
 
     # Scheduler giornaliero
     sched.add_job(update_injuries, "cron", hour=8, minute=30)
-    sched.add_job(update_weather, "cron", hour=8, minute=40)   
+    sched.add_job(update_weather, "cron", hour=8, minute=40)
     # report domenica 21:00
     sched.add_job(weekly_report, "cron", **WEEKLY_REPORT_TIME)
     # backup giornaliero
@@ -1021,7 +1210,6 @@ def start_scheduler():
     sched.add_job(update_results_with_scores, "cron", **DAILY_BACKUP_TIME)
     sched.start()
     return sched
-
 
 # ──────────────────────────────────────────────────────────────
 # 🚀 MAIN
@@ -1040,4 +1228,3 @@ if __name__ == "__main__":
             time.sleep(30)
     except KeyboardInterrupt:
         scheduler.shutdown()
-
