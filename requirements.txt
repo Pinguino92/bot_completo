@@ -7,3 +7,4 @@ rapidfuzz
 apscheduler
 pytz
 numpy
+joblib
