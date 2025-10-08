@@ -1,0 +1,2431 @@
+Date,HomeTeam,AwayTeam,HomeScore,AwayScore,FTR
+18/03/2025 10:10,Chicago Cubs,Los Angeles Dodgers,1,4,A
+19/03/2025 10:10,Chicago Cubs,Los Angeles Dodgers,3,6,A
+27/03/2025 19:05,New York Yankees,Milwaukee Brewers,4,2,H
+27/03/2025 19:07,Toronto Blue Jays,Baltimore Orioles,2,12,A
+27/03/2025 20:05,Texas Rangers,Boston Red Sox,2,5,A
+27/03/2025 20:05,Washington Nationals,Philadelphia Phillies,3,7,A
+27/03/2025 20:10,Kansas City Royals,Cleveland Guardians,4,7,A
+27/03/2025 20:10,Houston Astros,New York Mets,3,1,H
+27/03/2025 20:10,Cincinnati Reds,San Francisco Giants,4,6,A
+27/03/2025 20:10,San Diego Padres,Atlanta Braves,7,4,H
+27/03/2025 20:10,Chicago White Sox,Los Angeles Angels,8,1,H
+27/03/2025 20:10,Miami Marlins,Pittsburgh Pirates,5,4,H
+27/03/2025 20:15,St. Louis Cardinals,Minnesota Twins,5,3,H
+27/03/2025 23:10,Los Angeles Dodgers,Detroit Tigers,5,4,H
+28/03/2025 02:10,Arizona Diamondbacks,Chicago Cubs,6,10,A
+28/03/2025 02:10,Seattle Mariners,Athletics,4,2,H
+28/03/2025 20:10,Tampa Bay Rays,Colorado Rockies,3,2,H
+28/03/2025 23:07,Toronto Blue Jays,Baltimore Orioles,8,2,H
+28/03/2025 23:10,Miami Marlins,Pittsburgh Pirates,3,4,A
+29/03/2025 00:05,Texas Rangers,Boston Red Sox,4,1,H
+29/03/2025 00:10,Houston Astros,New York Mets,1,3,A
+29/03/2025 01:40,Arizona Diamondbacks,Chicago Cubs,8,1,H
+29/03/2025 01:40,Seattle Mariners,Athletics,0,7,A
+29/03/2025 01:40,San Diego Padres,Atlanta Braves,4,3,H
+29/03/2025 02:10,Los Angeles Dodgers,Detroit Tigers,8,5,H
+29/03/2025 17:05,New York Yankees,Milwaukee Brewers,20,9,H
+29/03/2025 18:10,Chicago White Sox,Los Angeles Angels,0,1,A
+29/03/2025 18:15,St. Louis Cardinals,Minnesota Twins,5,1,H
+29/03/2025 19:07,Toronto Blue Jays,Baltimore Orioles,5,9,A
+29/03/2025 20:05,Washington Nationals,Philadelphia Phillies,6,11,A
+29/03/2025 20:10,Kansas City Royals,Cleveland Guardians,4,3,H
+29/03/2025 20:10,Cincinnati Reds,San Francisco Giants,3,2,H
+29/03/2025 20:10,Tampa Bay Rays,Colorado Rockies,1,2,A
+29/03/2025 20:10,Miami Marlins,Pittsburgh Pirates,5,4,H
+29/03/2025 23:05,Texas Rangers,Boston Red Sox,4,3,H
+29/03/2025 23:15,Houston Astros,New York Mets,2,1,H
+29/03/2025 23:15,San Diego Padres,Atlanta Braves,1,0,H
+30/03/2025 00:10,Arizona Diamondbacks,Chicago Cubs,3,4,A
+30/03/2025 01:10,Los Angeles Dodgers,Detroit Tigers,7,3,H
+30/03/2025 01:40,Seattle Mariners,Athletics,2,4,A
+30/03/2025 17:35,Washington Nationals,Philadelphia Phillies,5,1,H
+30/03/2025 17:35,New York Yankees,Milwaukee Brewers,12,3,H
+30/03/2025 17:37,Toronto Blue Jays,Baltimore Orioles,3,1,H
+30/03/2025 17:40,Cincinnati Reds,San Francisco Giants,3,6,A
+30/03/2025 17:40,Tampa Bay Rays,Colorado Rockies,6,4,H
+30/03/2025 17:40,Miami Marlins,Pittsburgh Pirates,3,2,H
+30/03/2025 18:10,Kansas City Royals,Cleveland Guardians,2,6,A
+30/03/2025 18:10,Chicago White Sox,Los Angeles Angels,2,3,A
+30/03/2025 18:15,St. Louis Cardinals,Minnesota Twins,9,2,H
+30/03/2025 18:35,Texas Rangers,Boston Red Sox,3,2,H
+30/03/2025 20:10,Arizona Diamondbacks,Chicago Cubs,10,6,H
+30/03/2025 20:10,Seattle Mariners,Athletics,2,1,H
+30/03/2025 23:10,San Diego Padres,Atlanta Braves,5,0,H
+31/03/2025 18:10,Chicago White Sox,Minnesota Twins,9,0,H
+31/03/2025 18:10,Milwaukee Brewers,Kansas City Royals,1,11,A
+31/03/2025 18:35,Baltimore Orioles,Boston Red Sox,8,5,H
+31/03/2025 19:05,Philadelphia Phillies,Colorado Rockies,6,1,H
+31/03/2025 22:40,Cincinnati Reds,Texas Rangers,14,3,H
+31/03/2025 22:40,Miami Marlins,New York Mets,4,10,A
+31/03/2025 23:05,Tampa Bay Rays,Pittsburgh Pirates,6,1,H
+31/03/2025 23:07,Toronto Blue Jays,Washington Nationals,5,2,H
+31/03/2025 23:45,St. Louis Cardinals,Los Angeles Angels,4,5,A
+01/04/2025 00:10,Houston Astros,San Francisco Giants,2,7,A
+01/04/2025 01:40,San Diego Padres,Cleveland Guardians,7,2,H
+01/04/2025 01:40,Seattle Mariners,Detroit Tigers,6,9,A
+01/04/2025 02:05,Athletics,Chicago Cubs,3,18,A
+01/04/2025 02:10,Los Angeles Dodgers,Atlanta Braves,6,1,H
+01/04/2025 22:40,Cincinnati Reds,Texas Rangers,0,1,A
+01/04/2025 22:40,Miami Marlins,New York Mets,4,2,H
+01/04/2025 23:05,Tampa Bay Rays,Pittsburgh Pirates,7,0,H
+01/04/2025 23:05,New York Yankees,Arizona Diamondbacks,5,7,A
+01/04/2025 23:07,Toronto Blue Jays,Washington Nationals,5,3,H
+01/04/2025 23:40,Chicago White Sox,Minnesota Twins,3,8,A
+01/04/2025 23:40,Milwaukee Brewers,Kansas City Royals,5,0,H
+01/04/2025 23:45,St. Louis Cardinals,Los Angeles Angels,7,9,A
+02/04/2025 00:10,Houston Astros,San Francisco Giants,1,3,A
+02/04/2025 01:40,San Diego Padres,Cleveland Guardians,7,0,H
+02/04/2025 01:40,Seattle Mariners,Detroit Tigers,1,4,A
+02/04/2025 02:05,Athletics,Chicago Cubs,4,7,A
+02/04/2025 02:10,Los Angeles Dodgers,Atlanta Braves,3,1,H
+02/04/2025 16:40,Cincinnati Reds,Texas Rangers,0,1,A
+02/04/2025 17:10,Tampa Bay Rays,Pittsburgh Pirates,2,4,A
+02/04/2025 17:10,Milwaukee Brewers,Kansas City Royals,3,2,H
+02/04/2025 17:15,St. Louis Cardinals,Los Angeles Angels,12,5,H
+02/04/2025 18:10,Chicago White Sox,Minnesota Twins,1,6,A
+02/04/2025 19:07,Toronto Blue Jays,Washington Nationals,4,2,H
+02/04/2025 19:35,Athletics,Chicago Cubs,2,10,A
+02/04/2025 20:10,San Diego Padres,Cleveland Guardians,5,2,H
+02/04/2025 20:10,Seattle Mariners,Detroit Tigers,3,2,H
+02/04/2025 20:10,Houston Astros,San Francisco Giants,3,6,A
+02/04/2025 20:40,Miami Marlins,New York Mets,5,6,A
+02/04/2025 22:35,Baltimore Orioles,Boston Red Sox,0,3,A
+02/04/2025 22:45,Philadelphia Phillies,Colorado Rockies,5,1,H
+02/04/2025 23:05,New York Yankees,Arizona Diamondbacks,3,4,A
+03/04/2025 00:38,Los Angeles Dodgers,Atlanta Braves,6,5,H
+03/04/2025 17:05,Baltimore Orioles,Boston Red Sox,4,8,A
+03/04/2025 17:05,Philadelphia Phillies,Colorado Rockies,3,1,H
+03/04/2025 20:10,Minnesota Twins,Houston Astros,2,5,A
+03/04/2025 23:05,New York Yankees,Arizona Diamondbacks,9,7,H
+03/04/2025 23:40,Milwaukee Brewers,Cincinnati Reds,1,0,H
+04/04/2025 17:10,Detroit Tigers,Chicago White Sox,7,4,H
+04/04/2025 18:10,Boston Red Sox,St. Louis Cardinals,13,9,H
+04/04/2025 18:20,Chicago Cubs,San Diego Padres,3,1,H
+04/04/2025 19:10,New York Mets,Toronto Blue Jays,5,0,H
+04/04/2025 20:10,Colorado Rockies,Athletics,3,6,A
+04/04/2025 20:12,Pittsburgh Pirates,New York Yankees,4,9,A
+04/04/2025 20:35,San Francisco Giants,Seattle Mariners,10,9,H
+04/04/2025 22:45,Washington Nationals,Arizona Diamondbacks,4,6,A
+04/04/2025 22:45,Philadelphia Phillies,Los Angeles Dodgers,3,2,H
+04/04/2025 23:15,Atlanta Braves,Miami Marlins,10,0,H
+04/04/2025 23:40,Kansas City Royals,Baltimore Orioles,8,2,H
+05/04/2025 00:05,Texas Rangers,Tampa Bay Rays,5,2,H
+05/04/2025 00:10,Milwaukee Brewers,Cincinnati Reds,3,2,H
+05/04/2025 01:38,Los Angeles Angels,Cleveland Guardians,6,8,A
+05/04/2025 17:10,Detroit Tigers,Chicago White Sox,7,2,H
+05/04/2025 18:10,Minnesota Twins,Houston Astros,6,1,H
+05/04/2025 18:20,Chicago Cubs,San Diego Padres,7,1,H
+05/04/2025 20:05,Washington Nationals,Arizona Diamondbacks,4,3,H
+05/04/2025 20:05,Philadelphia Phillies,Los Angeles Dodgers,1,3,A
+05/04/2025 20:05,Pittsburgh Pirates,New York Yankees,4,10,A
+05/04/2025 20:10,Kansas City Royals,Baltimore Orioles,1,8,A
+05/04/2025 23:05,Texas Rangers,Tampa Bay Rays,6,4,H
+05/04/2025 23:10,New York Mets,Toronto Blue Jays,3,2,H
+05/04/2025 23:10,Milwaukee Brewers,Cincinnati Reds,7,11,A
+05/04/2025 23:15,Atlanta Braves,Miami Marlins,0,4,A
+06/04/2025 00:10,Colorado Rockies,Athletics,4,7,A
+06/04/2025 01:05,San Francisco Giants,Seattle Mariners,4,1,H
+06/04/2025 01:38,Los Angeles Angels,Cleveland Guardians,10,4,H
+06/04/2025 17:35,Boston Red Sox,St. Louis Cardinals,5,4,H
+06/04/2025 17:35,Washington Nationals,Arizona Diamondbacks,5,4,H
+06/04/2025 17:35,Philadelphia Phillies,Los Angeles Dodgers,8,7,H
+06/04/2025 17:35,Pittsburgh Pirates,New York Yankees,5,4,H
+06/04/2025 17:40,New York Mets,Toronto Blue Jays,2,1,H
+06/04/2025 17:40,Detroit Tigers,Chicago White Sox,4,3,H
+06/04/2025 18:10,Kansas City Royals,Baltimore Orioles,4,1,H
+06/04/2025 18:10,Minnesota Twins,Houston Astros,7,9,A
+06/04/2025 18:10,Milwaukee Brewers,Cincinnati Reds,8,2,H
+06/04/2025 18:20,Chicago Cubs,San Diego Padres,7,8,A
+06/04/2025 18:35,Texas Rangers,Tampa Bay Rays,4,3,H
+06/04/2025 19:10,Colorado Rockies,Athletics,12,5,H
+06/04/2025 20:05,San Francisco Giants,Seattle Mariners,5,4,H
+06/04/2025 20:07,Los Angeles Angels,Cleveland Guardians,6,2,H
+06/04/2025 23:10,Boston Red Sox,St. Louis Cardinals,18,7,H
+07/04/2025 19:10,Detroit Tigers,New York Yankees,6,2,H
+07/04/2025 22:40,Pittsburgh Pirates,St. Louis Cardinals,8,4,H
+07/04/2025 22:45,Washington Nationals,Los Angeles Dodgers,6,4,H
+07/04/2025 22:45,Boston Red Sox,Toronto Blue Jays,2,6,A
+07/04/2025 23:10,New York Mets,Miami Marlins,2,0,H
+07/04/2025 23:40,Chicago Cubs,Texas Rangers,7,0,H
+07/04/2025 23:40,Kansas City Royals,Minnesota Twins,4,2,H
+08/04/2025 01:40,Arizona Diamondbacks,Baltimore Orioles,1,5,A
+08/04/2025 01:40,Seattle Mariners,Houston Astros,4,3,H
+08/04/2025 01:45,San Francisco Giants,Cincinnati Reds,0,2,A
+08/04/2025 02:05,Athletics,San Diego Padres,4,5,A
+08/04/2025 17:10,Detroit Tigers,New York Yankees,5,0,H
+08/04/2025 20:10,Cleveland Guardians,Chicago White Sox,1,0,H
+08/04/2025 20:10,New York Mets,Miami Marlins,10,5,H
+08/04/2025 22:40,Pittsburgh Pirates,St. Louis Cardinals,3,5,A
+08/04/2025 22:45,Washington Nationals,Los Angeles Dodgers,8,2,H
+08/04/2025 22:45,Boston Red Sox,Toronto Blue Jays,1,6,A
+08/04/2025 23:05,Tampa Bay Rays,Los Angeles Angels,3,4,A
+08/04/2025 23:15,Atlanta Braves,Philadelphia Phillies,7,5,H
+08/04/2025 23:40,Chicago Cubs,Texas Rangers,10,6,H
+08/04/2025 23:40,Kansas City Royals,Minnesota Twins,2,1,H
+09/04/2025 00:40,Colorado Rockies,Milwaukee Brewers,1,7,A
+09/04/2025 01:40,Arizona Diamondbacks,Baltimore Orioles,4,3,H
+09/04/2025 01:40,Seattle Mariners,Houston Astros,1,2,A
+09/04/2025 01:45,San Francisco Giants,Cincinnati Reds,0,1,A
+09/04/2025 02:05,Athletics,San Diego Padres,10,4,H
+09/04/2025 16:35,Pittsburgh Pirates,St. Louis Cardinals,2,1,H
+09/04/2025 17:10,New York Mets,Miami Marlins,0,5,A
+09/04/2025 17:10,Detroit Tigers,New York Yankees,3,4,A
+09/04/2025 18:20,Chicago Cubs,Texas Rangers,2,6,A
+09/04/2025 19:35,Athletics,San Diego Padres,1,2,A
+09/04/2025 19:40,Arizona Diamondbacks,Baltimore Orioles,9,0,H
+09/04/2025 19:45,San Francisco Giants,Cincinnati Reds,8,6,H
+09/04/2025 20:05,Washington Nationals,Los Angeles Dodgers,5,6,A
+09/04/2025 20:10,Seattle Mariners,Houston Astros,7,6,H
+09/04/2025 22:10,Cleveland Guardians,Chicago White Sox,3,2,H
+09/04/2025 22:45,Boston Red Sox,Toronto Blue Jays,1,2,A
+09/04/2025 23:05,Tampa Bay Rays,Los Angeles Angels,5,4,H
+09/04/2025 23:15,Atlanta Braves,Philadelphia Phillies,3,4,A
+09/04/2025 23:40,Kansas City Royals,Minnesota Twins,0,4,A
+10/04/2025 00:40,Colorado Rockies,Milwaukee Brewers,2,17,A
+10/04/2025 17:10,Tampa Bay Rays,Los Angeles Angels,1,11,A
+10/04/2025 17:10,Cleveland Guardians,Chicago White Sox,6,1,H
+10/04/2025 18:10,Kansas City Royals,Minnesota Twins,3,2,H
+10/04/2025 19:10,Colorado Rockies,Milwaukee Brewers,7,2,H
+10/04/2025 20:10,Boston Red Sox,Toronto Blue Jays,4,3,H
+10/04/2025 23:15,Atlanta Braves,Philadelphia Phillies,4,2,H
+11/04/2025 22:10,Cleveland Guardians,Kansas City Royals,7,0,H
+11/04/2025 22:40,Cincinnati Reds,Pittsburgh Pirates,5,3,H
+11/04/2025 23:05,Tampa Bay Rays,Atlanta Braves,6,3,H
+11/04/2025 23:05,New York Yankees,San Francisco Giants,1,9,A
+11/04/2025 23:10,Miami Marlins,Washington Nationals,4,7,A
+11/04/2025 23:40,Chicago White Sox,Boston Red Sox,11,1,H
+12/04/2025 00:10,Houston Astros,Los Angeles Angels,14,3,H
+12/04/2025 00:10,Minnesota Twins,Detroit Tigers,6,7,A
+12/04/2025 00:15,St. Louis Cardinals,Philadelphia Phillies,2,0,H
+12/04/2025 01:40,San Diego Padres,Colorado Rockies,8,0,H
+12/04/2025 01:40,Seattle Mariners,Texas Rangers,5,3,H
+12/04/2025 01:40,Arizona Diamondbacks,Milwaukee Brewers,0,7,A
+12/04/2025 02:05,Athletics,New York Mets,6,7,A
+12/04/2025 02:10,Los Angeles Dodgers,Chicago Cubs,3,0,H
+12/04/2025 18:10,Minnesota Twins,Detroit Tigers,0,4,A
+12/04/2025 18:15,St. Louis Cardinals,Philadelphia Phillies,1,4,A
+12/04/2025 19:05,New York Yankees,San Francisco Giants,8,4,H
+12/04/2025 20:05,Athletics,New York Mets,3,1,H
+12/04/2025 20:05,Baltimore Orioles,Toronto Blue Jays,5,4,H
+12/04/2025 20:10,Tampa Bay Rays,Atlanta Braves,4,5,A
+12/04/2025 20:10,Chicago White Sox,Boston Red Sox,3,2,H
+12/04/2025 20:10,Miami Marlins,Washington Nationals,7,6,H
+12/04/2025 22:10,Cleveland Guardians,Kansas City Royals,6,3,H
+12/04/2025 22:40,Cincinnati Reds,Pittsburgh Pirates,5,2,H
+12/04/2025 23:10,Houston Astros,Los Angeles Angels,1,4,A
+13/04/2025 00:10,Arizona Diamondbacks,Milwaukee Brewers,5,4,H
+13/04/2025 00:40,San Diego Padres,Colorado Rockies,2,0,H
+13/04/2025 01:10,Los Angeles Dodgers,Chicago Cubs,0,16,A
+13/04/2025 01:40,Seattle Mariners,Texas Rangers,9,2,H
+13/04/2025 17:35,Baltimore Orioles,Toronto Blue Jays,6,7,A
+13/04/2025 17:35,New York Yankees,San Francisco Giants,4,5,A
+13/04/2025 17:40,Cleveland Guardians,Kansas City Royals,2,4,A
+13/04/2025 17:40,Cincinnati Reds,Pittsburgh Pirates,4,0,H
+13/04/2025 17:40,Tampa Bay Rays,Atlanta Braves,8,3,H
+13/04/2025 17:40,Miami Marlins,Washington Nationals,11,4,H
+13/04/2025 18:10,Houston Astros,Los Angeles Angels,7,3,H
+13/04/2025 18:10,Minnesota Twins,Detroit Tigers,5,1,H
+13/04/2025 18:10,Chicago White Sox,Boston Red Sox,1,3,A
+13/04/2025 18:15,St. Louis Cardinals,Philadelphia Phillies,7,0,H
+13/04/2025 20:05,Athletics,New York Mets,0,8,A
+13/04/2025 20:10,San Diego Padres,Colorado Rockies,6,0,H
+13/04/2025 20:10,Seattle Mariners,Texas Rangers,3,1,H
+13/04/2025 20:10,Arizona Diamondbacks,Milwaukee Brewers,5,2,H
+13/04/2025 23:10,Los Angeles Dodgers,Chicago Cubs,2,4,A
+14/04/2025 22:40,Pittsburgh Pirates,Washington Nationals,10,3,H
+14/04/2025 22:45,Philadelphia Phillies,San Francisco Giants,4,10,A
+14/04/2025 23:05,Tampa Bay Rays,Boston Red Sox,16,1,H
+14/04/2025 23:05,New York Yankees,Kansas City Royals,4,1,H
+14/04/2025 23:07,Toronto Blue Jays,Atlanta Braves,4,8,A
+14/04/2025 23:40,Minnesota Twins,New York Mets,1,5,A
+14/04/2025 23:40,Milwaukee Brewers,Detroit Tigers,1,9,A
+14/04/2025 23:45,St. Louis Cardinals,Houston Astros,8,3,H
+15/04/2025 01:40,San Diego Padres,Chicago Cubs,10,4,H
+15/04/2025 02:10,Los Angeles Dodgers,Colorado Rockies,5,3,H
+15/04/2025 22:40,Pittsburgh Pirates,Washington Nationals,0,3,A
+15/04/2025 22:40,Cincinnati Reds,Seattle Mariners,8,4,H
+15/04/2025 22:40,Miami Marlins,Arizona Diamondbacks,4,10,A
+15/04/2025 22:45,Philadelphia Phillies,San Francisco Giants,6,4,H
+15/04/2025 23:05,Baltimore Orioles,Cleveland Guardians,3,6,A
+15/04/2025 23:05,Tampa Bay Rays,Boston Red Sox,4,7,A
+15/04/2025 23:05,New York Yankees,Kansas City Royals,4,2,H
+15/04/2025 23:07,Toronto Blue Jays,Atlanta Braves,6,3,H
+15/04/2025 23:40,Minnesota Twins,New York Mets,6,3,H
+15/04/2025 23:40,Chicago White Sox,Athletics,3,12,A
+15/04/2025 23:40,Milwaukee Brewers,Detroit Tigers,5,0,H
+15/04/2025 23:45,St. Louis Cardinals,Houston Astros,0,2,A
+16/04/2025 00:05,Texas Rangers,Los Angeles Angels,4,0,H
+16/04/2025 01:40,San Diego Padres,Chicago Cubs,1,2,A
+16/04/2025 02:10,Los Angeles Dodgers,Colorado Rockies,6,2,H
+16/04/2025 17:07,Toronto Blue Jays,Atlanta Braves,3,1,H
+16/04/2025 17:10,Minnesota Twins,New York Mets,4,3,H
+16/04/2025 17:10,Milwaukee Brewers,Detroit Tigers,5,1,H
+16/04/2025 17:15,St. Louis Cardinals,Houston Astros,4,1,H
+16/04/2025 20:10,San Diego Padres,Chicago Cubs,4,2,H
+16/04/2025 22:35,Baltimore Orioles,Cleveland Guardians,9,1,H
+16/04/2025 22:40,Pittsburgh Pirates,Washington Nationals,6,1,H
+16/04/2025 22:40,Cincinnati Reds,Seattle Mariners,3,5,A
+16/04/2025 22:40,Miami Marlins,Arizona Diamondbacks,2,6,A
+16/04/2025 22:45,Philadelphia Phillies,San Francisco Giants,4,11,A
+16/04/2025 23:05,Tampa Bay Rays,Boston Red Sox,0,1,A
+16/04/2025 23:05,New York Yankees,Kansas City Royals,4,3,H
+16/04/2025 23:40,Chicago White Sox,Athletics,1,3,A
+17/04/2025 00:05,Texas Rangers,Los Angeles Angels,3,1,H
+17/04/2025 02:10,Los Angeles Dodgers,Colorado Rockies,8,7,H
+17/04/2025 16:10,Miami Marlins,Arizona Diamondbacks,4,6,A
+17/04/2025 16:35,Pittsburgh Pirates,Washington Nationals,1,0,H
+17/04/2025 16:40,Cincinnati Reds,Seattle Mariners,7,11,A
+17/04/2025 18:10,Chicago White Sox,Athletics,0,8,A
+17/04/2025 20:05,Philadelphia Phillies,San Francisco Giants,6,4,H
+17/04/2025 22:35,Baltimore Orioles,Cleveland Guardians,6,2,H
+17/04/2025 22:40,Detroit Tigers,Kansas City Royals,6,1,H
+17/04/2025 23:05,Tampa Bay Rays,New York Yankees,3,6,A
+17/04/2025 23:10,New York Mets,St. Louis Cardinals,4,1,H
+18/04/2025 00:05,Texas Rangers,Los Angeles Angels,5,3,H
+18/04/2025 18:20,Chicago Cubs,Arizona Diamondbacks,13,11,H
+18/04/2025 22:40,Detroit Tigers,Kansas City Royals,7,3,H
+18/04/2025 22:40,Pittsburgh Pirates,Cleveland Guardians,7,10,A
+18/04/2025 22:45,Philadelphia Phillies,Miami Marlins,7,2,H
+18/04/2025 23:05,Baltimore Orioles,Cincinnati Reds,3,8,A
+18/04/2025 23:05,Tampa Bay Rays,New York Yankees,0,1,A
+18/04/2025 23:07,Toronto Blue Jays,Seattle Mariners,3,1,H
+18/04/2025 23:10,New York Mets,St. Louis Cardinals,5,4,H
+18/04/2025 23:10,Boston Red Sox,Chicago White Sox,10,3,H
+18/04/2025 23:15,Atlanta Braves,Minnesota Twins,6,4,H
+19/04/2025 00:05,Texas Rangers,Los Angeles Dodgers,0,3,A
+19/04/2025 00:10,Houston Astros,San Diego Padres,6,4,H
+19/04/2025 00:10,Milwaukee Brewers,Athletics,5,3,H
+19/04/2025 01:38,Los Angeles Angels,San Francisco Giants,2,0,H
+19/04/2025 17:05,Philadelphia Phillies,Miami Marlins,11,10,H
+19/04/2025 17:10,Detroit Tigers,Kansas City Royals,3,1,H
+19/04/2025 18:20,Chicago Cubs,Arizona Diamondbacks,6,2,H
+19/04/2025 19:07,Toronto Blue Jays,Seattle Mariners,4,8,A
+19/04/2025 20:05,Baltimore Orioles,Cincinnati Reds,9,5,H
+19/04/2025 20:05,Pittsburgh Pirates,Cleveland Guardians,0,3,A
+19/04/2025 20:05,New York Mets,St. Louis Cardinals,3,0,H
+19/04/2025 20:05,Texas Rangers,Los Angeles Dodgers,4,3,H
+19/04/2025 20:10,Colorado Rockies,Washington Nationals,11,12,A
+19/04/2025 20:10,Boston Red Sox,Chicago White Sox,4,3,H
+19/04/2025 20:10,Tampa Bay Rays,New York Yankees,10,8,H
+19/04/2025 23:10,Houston Astros,San Diego Padres,3,2,H
+19/04/2025 23:10,Milwaukee Brewers,Athletics,1,3,A
+19/04/2025 23:15,Atlanta Braves,Minnesota Twins,4,3,H
+20/04/2025 01:38,Los Angeles Angels,San Francisco Giants,2,3,A
+20/04/2025 17:35,Baltimore Orioles,Cincinnati Reds,2,24,A
+20/04/2025 17:35,Pittsburgh Pirates,Cleveland Guardians,4,5,A
+20/04/2025 17:35,Atlanta Braves,Minnesota Twins,6,2,H
+20/04/2025 17:35,Boston Red Sox,Chicago White Sox,4,8,A
+20/04/2025 17:35,Philadelphia Phillies,Miami Marlins,5,7,A
+20/04/2025 17:37,Toronto Blue Jays,Seattle Mariners,3,8,A
+20/04/2025 17:40,Detroit Tigers,Kansas City Royals,3,4,A
+20/04/2025 17:40,New York Mets,St. Louis Cardinals,7,4,H
+20/04/2025 17:40,Tampa Bay Rays,New York Yankees,0,4,A
+20/04/2025 18:10,Milwaukee Brewers,Athletics,14,1,H
+20/04/2025 18:20,Chicago Cubs,Arizona Diamondbacks,2,3,A
+20/04/2025 18:35,Texas Rangers,Los Angeles Dodgers,0,1,A
+20/04/2025 19:10,Colorado Rockies,Washington Nationals,2,3,A
+20/04/2025 20:07,Los Angeles Angels,San Francisco Giants,5,4,H
+20/04/2025 23:10,Houston Astros,San Diego Padres,2,3,A
+21/04/2025 00:10,Colorado Rockies,Washington Nationals,3,1,H
+21/04/2025 15:10,Boston Red Sox,Chicago White Sox,4,2,H
+21/04/2025 22:10,Cleveland Guardians,New York Yankees,6,4,H
+21/04/2025 22:40,Detroit Tigers,San Diego Padres,6,4,H
+21/04/2025 22:40,Miami Marlins,Cincinnati Reds,6,3,H
+21/04/2025 23:10,New York Mets,Philadelphia Phillies,5,4,H
+21/04/2025 23:15,Atlanta Braves,St. Louis Cardinals,7,6,H
+22/04/2025 00:10,Houston Astros,Toronto Blue Jays,7,0,H
+22/04/2025 01:45,San Francisco Giants,Milwaukee Brewers,5,2,H
+22/04/2025 22:10,Cleveland Guardians,New York Yankees,3,2,H
+22/04/2025 22:40,Detroit Tigers,San Diego Padres,0,2,A
+22/04/2025 22:40,Miami Marlins,Cincinnati Reds,4,3,H
+22/04/2025 22:45,Washington Nationals,Baltimore Orioles,7,0,H
+22/04/2025 22:45,Boston Red Sox,Seattle Mariners,8,3,H
+22/04/2025 23:10,New York Mets,Philadelphia Phillies,5,1,H
+22/04/2025 23:15,Atlanta Braves,St. Louis Cardinals,4,10,A
+22/04/2025 23:40,Kansas City Royals,Colorado Rockies,4,3,H
+22/04/2025 23:40,Chicago Cubs,Los Angeles Dodgers,11,10,H
+22/04/2025 23:40,Minnesota Twins,Chicago White Sox,4,2,H
+23/04/2025 00:10,Houston Astros,Toronto Blue Jays,5,1,H
+23/04/2025 01:38,Los Angeles Angels,Pittsburgh Pirates,3,9,A
+23/04/2025 01:40,Arizona Diamondbacks,Tampa Bay Rays,5,1,H
+23/04/2025 01:45,San Francisco Giants,Milwaukee Brewers,3,11,A
+23/04/2025 02:05,Athletics,Texas Rangers,5,8,A
+23/04/2025 16:15,Atlanta Braves,St. Louis Cardinals,4,1,H
+23/04/2025 17:10,Detroit Tigers,San Diego Padres,6,0,H
+23/04/2025 17:10,New York Mets,Philadelphia Phillies,4,3,H
+23/04/2025 17:10,Miami Marlins,Cincinnati Reds,2,5,A
+23/04/2025 17:10,Cleveland Guardians,New York Yankees,1,5,A
+23/04/2025 22:45,Washington Nationals,Baltimore Orioles,4,3,H
+23/04/2025 22:45,Boston Red Sox,Seattle Mariners,5,8,A
+23/04/2025 23:00,Chicago Cubs,Los Angeles Dodgers,7,6,H
+23/04/2025 23:40,Houston Astros,Toronto Blue Jays,3,1,H
+23/04/2025 23:40,Minnesota Twins,Chicago White Sox,6,3,H
+24/04/2025 01:38,Los Angeles Angels,Pittsburgh Pirates,0,3,A
+24/04/2025 01:40,Arizona Diamondbacks,Tampa Bay Rays,6,7,A
+24/04/2025 01:45,San Francisco Giants,Milwaukee Brewers,4,2,H
+24/04/2025 02:05,Athletics,Texas Rangers,5,2,H
+24/04/2025 17:10,Minnesota Twins,Chicago White Sox,0,3,A
+24/04/2025 17:35,Boston Red Sox,Seattle Mariners,3,4,A
+24/04/2025 18:10,Kansas City Royals,Colorado Rockies,7,4,H
+24/04/2025 18:15,Kansas City Royals,Colorado Rockies,6,2,H
+24/04/2025 19:45,San Francisco Giants,Milwaukee Brewers,6,5,H
+24/04/2025 22:45,Washington Nationals,Baltimore Orioles,1,2,A
+25/04/2025 01:29,Los Angeles Angels,Pittsburgh Pirates,4,3,H
+25/04/2025 01:40,Arizona Diamondbacks,Tampa Bay Rays,4,7,A
+25/04/2025 02:05,Athletics,Texas Rangers,5,3,H
+25/04/2025 18:20,Chicago Cubs,Philadelphia Phillies,4,0,H
+25/04/2025 22:45,Washington Nationals,New York Mets,5,4,H
+25/04/2025 23:05,New York Yankees,Toronto Blue Jays,2,4,A
+25/04/2025 23:40,Kansas City Royals,Houston Astros,2,0,H
+25/04/2025 23:40,Minnesota Twins,Los Angeles Angels,11,4,H
+26/04/2025 00:15,St. Louis Cardinals,Milwaukee Brewers,3,2,H
+26/04/2025 00:40,Colorado Rockies,Cincinnati Reds,7,8,A
+26/04/2025 01:40,San Diego Padres,Tampa Bay Rays,0,1,A
+26/04/2025 01:40,Arizona Diamondbacks,Atlanta Braves,2,8,A
+26/04/2025 01:40,Seattle Mariners,Miami Marlins,4,8,A
+26/04/2025 02:05,Athletics,Chicago White Sox,6,5,H
+26/04/2025 02:10,Los Angeles Dodgers,Pittsburgh Pirates,0,3,A
+26/04/2025 02:15,San Francisco Giants,Texas Rangers,0,2,A
+26/04/2025 17:10,Cleveland Guardians,Boston Red Sox,5,4,H
+26/04/2025 17:10,Detroit Tigers,Baltimore Orioles,4,3,H
+26/04/2025 18:10,Minnesota Twins,Los Angeles Angels,5,1,H
+26/04/2025 18:15,St. Louis Cardinals,Milwaukee Brewers,6,5,H
+26/04/2025 19:10,Colorado Rockies,Cincinnati Reds,4,6,A
+26/04/2025 20:05,Washington Nationals,New York Mets,0,2,A
+26/04/2025 20:05,San Francisco Giants,Texas Rangers,3,2,H
+26/04/2025 20:05,Chicago Cubs,Philadelphia Phillies,4,10,A
+26/04/2025 20:05,Athletics,Chicago White Sox,3,10,A
+26/04/2025 22:10,Detroit Tigers,Baltimore Orioles,6,2,H
+26/04/2025 22:10,Cleveland Guardians,Boston Red Sox,3,7,A
+26/04/2025 23:10,Kansas City Royals,Houston Astros,2,0,H
+27/04/2025 00:10,Arizona Diamondbacks,Atlanta Braves,7,8,A
+27/04/2025 00:40,San Diego Padres,Tampa Bay Rays,1,4,A
+27/04/2025 01:10,Los Angeles Dodgers,Pittsburgh Pirates,8,4,H
+27/04/2025 01:40,Seattle Mariners,Miami Marlins,14,0,H
+27/04/2025 17:35,Washington Nationals,New York Mets,8,7,H
+27/04/2025 17:35,New York Yankees,Toronto Blue Jays,11,2,H
+27/04/2025 17:40,New York Yankees,Toronto Blue Jays,5,1,H
+27/04/2025 17:40,Cleveland Guardians,Boston Red Sox,3,13,A
+27/04/2025 17:40,Detroit Tigers,Baltimore Orioles,7,0,H
+27/04/2025 17:40,Minnesota Twins,Los Angeles Angels,5,0,H
+27/04/2025 18:10,Kansas City Royals,Houston Astros,3,7,A
+27/04/2025 18:15,St. Louis Cardinals,Milwaukee Brewers,1,7,A
+27/04/2025 19:10,Colorado Rockies,Cincinnati Reds,1,8,A
+27/04/2025 20:05,San Francisco Giants,Texas Rangers,3,2,H
+27/04/2025 20:05,Athletics,Chicago White Sox,3,2,H
+27/04/2025 20:10,Los Angeles Dodgers,Pittsburgh Pirates,9,2,H
+27/04/2025 20:10,San Diego Padres,Tampa Bay Rays,2,4,A
+27/04/2025 20:10,Arizona Diamondbacks,Atlanta Braves,6,4,H
+27/04/2025 20:10,Seattle Mariners,Miami Marlins,7,6,H
+27/04/2025 23:10,Chicago Cubs,Philadelphia Phillies,1,3,A
+28/04/2025 20:05,Washington Nationals,New York Mets,5,19,A
+28/04/2025 22:10,Cleveland Guardians,Minnesota Twins,1,11,A
+28/04/2025 22:35,Baltimore Orioles,New York Yankees,4,3,H
+28/04/2025 22:40,Cincinnati Reds,St. Louis Cardinals,3,1,H
+29/04/2025 00:05,Texas Rangers,Athletics,1,2,A
+29/04/2025 00:10,Houston Astros,Detroit Tigers,8,5,H
+29/04/2025 00:40,Colorado Rockies,Atlanta Braves,3,6,A
+29/04/2025 02:10,Los Angeles Dodgers,Miami Marlins,7,6,H
+29/04/2025 22:10,Cleveland Guardians,Minnesota Twins,2,1,H
+29/04/2025 22:35,Baltimore Orioles,New York Yankees,3,15,A
+29/04/2025 22:40,Pittsburgh Pirates,Chicago Cubs,0,9,A
+29/04/2025 22:45,Philadelphia Phillies,Washington Nationals,7,6,H
+29/04/2025 23:05,Tampa Bay Rays,Kansas City Royals,1,3,A
+29/04/2025 23:07,Toronto Blue Jays,Boston Red Sox,2,10,A
+29/04/2025 23:10,New York Mets,Arizona Diamondbacks,8,3,H
+29/04/2025 23:40,Chicago White Sox,Milwaukee Brewers,2,7,A
+30/04/2025 00:05,Texas Rangers,Athletics,15,2,H
+30/04/2025 00:10,Houston Astros,Detroit Tigers,6,4,H
+30/04/2025 00:40,Colorado Rockies,Atlanta Braves,2,8,A
+30/04/2025 01:40,Seattle Mariners,Los Angeles Angels,5,3,H
+30/04/2025 01:40,San Diego Padres,San Francisco Giants,7,4,H
+30/04/2025 02:10,Los Angeles Dodgers,Miami Marlins,15,2,H
+30/04/2025 16:40,Cincinnati Reds,St. Louis Cardinals,0,6,A
+30/04/2025 18:10,Houston Astros,Detroit Tigers,4,7,A
+30/04/2025 19:10,Colorado Rockies,Atlanta Braves,2,1,H
+30/04/2025 19:10,Los Angeles Dodgers,Miami Marlins,12,7,H
+30/04/2025 20:10,Seattle Mariners,Los Angeles Angels,9,3,H
+30/04/2025 20:10,San Diego Padres,San Francisco Giants,5,3,H
+30/04/2025 22:10,Cleveland Guardians,Minnesota Twins,4,2,H
+30/04/2025 22:35,Baltimore Orioles,New York Yankees,5,4,H
+30/04/2025 22:40,Pittsburgh Pirates,Chicago Cubs,4,3,H
+30/04/2025 22:40,Cincinnati Reds,St. Louis Cardinals,1,9,A
+30/04/2025 22:45,Philadelphia Phillies,Washington Nationals,7,2,H
+30/04/2025 23:05,Tampa Bay Rays,Kansas City Royals,0,3,A
+30/04/2025 23:07,Toronto Blue Jays,Boston Red Sox,7,6,H
+30/04/2025 23:10,New York Mets,Arizona Diamondbacks,3,4,A
+30/04/2025 23:40,Chicago White Sox,Milwaukee Brewers,4,6,A
+01/05/2025 00:05,Texas Rangers,Athletics,1,7,A
+01/05/2025 16:35,Pittsburgh Pirates,Chicago Cubs,3,8,A
+01/05/2025 16:40,Cincinnati Reds,St. Louis Cardinals,9,1,H
+01/05/2025 17:10,New York Mets,Arizona Diamondbacks,2,4,A
+01/05/2025 17:10,Tampa Bay Rays,Kansas City Royals,2,8,A
+01/05/2025 17:10,Cleveland Guardians,Minnesota Twins,4,3,H
+01/05/2025 18:10,Chicago White Sox,Milwaukee Brewers,8,0,H
+01/05/2025 18:35,Texas Rangers,Athletics,0,3,A
+01/05/2025 22:45,Philadelphia Phillies,Washington Nationals,2,4,A
+01/05/2025 23:07,Toronto Blue Jays,Boston Red Sox,4,2,H
+02/05/2025 01:38,Los Angeles Angels,Detroit Tigers,4,10,A
+02/05/2025 01:45,San Francisco Giants,Colorado Rockies,3,4,A
+02/05/2025 22:10,Cincinnati Reds,Washington Nationals,6,1,H
+02/05/2025 22:40,Pittsburgh Pirates,San Diego Padres,4,9,A
+02/05/2025 22:45,Philadelphia Phillies,Arizona Diamondbacks,3,2,H
+02/05/2025 23:05,Baltimore Orioles,Kansas City Royals,3,0,H
+02/05/2025 23:05,New York Yankees,Tampa Bay Rays,3,0,H
+02/05/2025 23:07,Toronto Blue Jays,Cleveland Guardians,5,3,H
+02/05/2025 23:10,Boston Red Sox,Minnesota Twins,6,1,H
+02/05/2025 23:10,Miami Marlins,Athletics,1,6,A
+02/05/2025 23:15,Atlanta Braves,Los Angeles Dodgers,1,2,A
+02/05/2025 23:40,Chicago White Sox,Houston Astros,7,3,H
+03/05/2025 00:05,Texas Rangers,Seattle Mariners,1,13,A
+03/05/2025 00:10,Milwaukee Brewers,Chicago Cubs,0,10,A
+03/05/2025 00:15,St. Louis Cardinals,New York Mets,3,9,A
+03/05/2025 01:38,Los Angeles Angels,Detroit Tigers,1,9,A
+03/05/2025 02:15,San Francisco Giants,Colorado Rockies,4,0,H
+03/05/2025 17:05,New York Yankees,Tampa Bay Rays,2,3,A
+03/05/2025 18:10,Chicago White Sox,Houston Astros,3,8,A
+03/05/2025 19:07,Toronto Blue Jays,Cleveland Guardians,3,5,A
+03/05/2025 20:05,Pittsburgh Pirates,San Diego Padres,1,2,A
+03/05/2025 20:05,San Francisco Giants,Colorado Rockies,6,3,H
+03/05/2025 20:10,Boston Red Sox,Minnesota Twins,3,4,A
+03/05/2025 20:10,Miami Marlins,Athletics,9,6,H
+03/05/2025 22:05,Philadelphia Phillies,Arizona Diamondbacks,7,2,H
+03/05/2025 22:40,Cincinnati Reds,Washington Nationals,6,11,A
+03/05/2025 23:05,Texas Rangers,Seattle Mariners,1,2,A
+03/05/2025 23:10,Milwaukee Brewers,Chicago Cubs,2,6,A
+03/05/2025 23:15,Baltimore Orioles,Kansas City Royals,0,4,A
+03/05/2025 23:15,Atlanta Braves,Los Angeles Dodgers,3,10,A
+04/05/2025 01:38,Los Angeles Angels,Detroit Tigers,5,2,H
+04/05/2025 17:15,St. Louis Cardinals,New York Mets,6,5,H
+04/05/2025 17:35,Baltimore Orioles,Kansas City Royals,6,11,A
+04/05/2025 17:35,Pittsburgh Pirates,San Diego Padres,0,4,A
+04/05/2025 17:35,Boston Red Sox,Minnesota Twins,4,5,A
+04/05/2025 17:35,New York Yankees,Tampa Bay Rays,5,7,A
+04/05/2025 17:37,Toronto Blue Jays,Cleveland Guardians,4,5,A
+04/05/2025 17:40,Miami Marlins,Athletics,2,3,A
+04/05/2025 18:05,Philadelphia Phillies,Arizona Diamondbacks,9,11,A
+04/05/2025 18:10,Chicago White Sox,Houston Astros,5,4,H
+04/05/2025 18:10,Milwaukee Brewers,Chicago Cubs,4,0,H
+04/05/2025 18:35,Texas Rangers,Seattle Mariners,8,1,H
+04/05/2025 20:05,San Francisco Giants,Colorado Rockies,9,3,H
+04/05/2025 20:07,Los Angeles Angels,Detroit Tigers,1,13,A
+04/05/2025 20:10,Cincinnati Reds,Washington Nationals,1,4,A
+04/05/2025 22:15,St. Louis Cardinals,New York Mets,5,4,H
+04/05/2025 23:10,Atlanta Braves,Los Angeles Dodgers,4,3,H
+05/05/2025 22:40,Miami Marlins,Los Angeles Dodgers,4,7,A
+05/05/2025 23:05,New York Yankees,San Diego Padres,3,4,A
+05/05/2025 23:15,Atlanta Braves,Cincinnati Reds,4,0,H
+05/05/2025 23:40,Chicago Cubs,San Francisco Giants,9,2,H
+05/05/2025 23:40,Kansas City Royals,Chicago White Sox,3,0,H
+05/05/2025 23:40,Milwaukee Brewers,Houston Astros,5,1,H
+05/05/2025 23:45,St. Louis Cardinals,Pittsburgh Pirates,6,3,H
+06/05/2025 01:40,Arizona Diamondbacks,New York Mets,4,5,A
+06/05/2025 02:05,Athletics,Seattle Mariners,7,6,H
+06/05/2025 19:35,Washington Nationals,Cleveland Guardians,10,9,H
+06/05/2025 19:40,Washington Nationals,Cleveland Guardians,1,9,A
+06/05/2025 22:40,Miami Marlins,Los Angeles Dodgers,5,4,H
+06/05/2025 22:45,Boston Red Sox,Texas Rangers,1,6,A
+06/05/2025 23:05,Tampa Bay Rays,Philadelphia Phillies,4,8,A
+06/05/2025 23:05,New York Yankees,San Diego Padres,12,3,H
+06/05/2025 23:15,Atlanta Braves,Cincinnati Reds,2,1,H
+06/05/2025 23:40,Chicago Cubs,San Francisco Giants,5,14,A
+06/05/2025 23:40,Minnesota Twins,Baltimore Orioles,9,1,H
+06/05/2025 23:40,Kansas City Royals,Chicago White Sox,4,3,H
+06/05/2025 23:40,Milwaukee Brewers,Houston Astros,4,3,H
+06/05/2025 23:45,St. Louis Cardinals,Pittsburgh Pirates,2,1,H
+07/05/2025 01:38,Los Angeles Angels,Toronto Blue Jays,8,3,H
+07/05/2025 01:40,Arizona Diamondbacks,New York Mets,5,1,H
+07/05/2025 02:05,Athletics,Seattle Mariners,3,5,A
+07/05/2025 16:05,Washington Nationals,Cleveland Guardians,6,8,A
+07/05/2025 17:10,Milwaukee Brewers,Houston Astros,1,9,A
+07/05/2025 17:15,St. Louis Cardinals,Pittsburgh Pirates,5,0,H
+07/05/2025 18:20,Chicago Cubs,San Francisco Giants,1,3,A
+07/05/2025 19:35,Athletics,Seattle Mariners,5,6,A
+07/05/2025 19:40,Arizona Diamondbacks,New York Mets,1,7,A
+07/05/2025 20:40,Miami Marlins,Los Angeles Dodgers,1,10,A
+07/05/2025 22:45,Boston Red Sox,Texas Rangers,6,4,H
+07/05/2025 23:05,Tampa Bay Rays,Philadelphia Phillies,0,7,A
+07/05/2025 23:05,New York Yankees,San Diego Padres,4,3,H
+07/05/2025 23:15,Atlanta Braves,Cincinnati Reds,3,4,A
+07/05/2025 23:40,Minnesota Twins,Baltimore Orioles,5,2,H
+07/05/2025 23:40,Kansas City Royals,Chicago White Sox,2,1,H
+08/05/2025 00:40,Colorado Rockies,Detroit Tigers,6,8,A
+08/05/2025 01:38,Los Angeles Angels,Toronto Blue Jays,5,4,H
+08/05/2025 17:10,Minnesota Twins,Baltimore Orioles,5,2,H
+08/05/2025 17:35,Boston Red Sox,Texas Rangers,5,0,H
+08/05/2025 18:10,Kansas City Royals,Chicago White Sox,10,0,H
+08/05/2025 19:10,Colorado Rockies,Detroit Tigers,2,10,A
+08/05/2025 19:15,Colorado Rockies,Detroit Tigers,1,11,A
+08/05/2025 23:05,Tampa Bay Rays,Philadelphia Phillies,6,7,A
+08/05/2025 23:15,Atlanta Braves,Cincinnati Reds,5,4,H
+09/05/2025 01:38,Los Angeles Angels,Toronto Blue Jays,5,8,A
+09/05/2025 01:40,Arizona Diamondbacks,Los Angeles Dodgers,5,3,H
+09/05/2025 22:40,Detroit Tigers,Texas Rangers,2,1,H
+09/05/2025 22:40,Pittsburgh Pirates,Atlanta Braves,3,2,H
+09/05/2025 22:45,Washington Nationals,St. Louis Cardinals,0,10,A
+09/05/2025 23:05,Tampa Bay Rays,Milwaukee Brewers,4,3,H
+09/05/2025 23:10,New York Mets,Chicago Cubs,7,2,H
+09/05/2025 23:10,Cleveland Guardians,Philadelphia Phillies,6,0,H
+09/05/2025 23:40,Kansas City Royals,Boston Red Sox,2,1,H
+09/05/2025 23:40,Chicago White Sox,Miami Marlins,6,2,H
+10/05/2025 00:10,Houston Astros,Cincinnati Reds,3,0,H
+10/05/2025 00:10,Minnesota Twins,San Francisco Giants,3,1,H
+10/05/2025 00:40,Colorado Rockies,San Diego Padres,9,13,A
+10/05/2025 01:38,Los Angeles Angels,Baltimore Orioles,1,4,A
+10/05/2025 01:40,Arizona Diamondbacks,Los Angeles Dodgers,11,14,A
+10/05/2025 01:40,Seattle Mariners,Toronto Blue Jays,3,6,A
+10/05/2025 02:05,Athletics,New York Yankees,2,10,A
+10/05/2025 20:05,Washington Nationals,St. Louis Cardinals,2,4,A
+10/05/2025 20:05,Pittsburgh Pirates,Atlanta Braves,2,3,A
+10/05/2025 20:05,Athletics,New York Yankees,11,7,H
+10/05/2025 20:10,Tampa Bay Rays,Milwaukee Brewers,3,2,H
+10/05/2025 22:10,Detroit Tigers,Texas Rangers,3,10,A
+10/05/2025 22:10,Cleveland Guardians,Philadelphia Phillies,1,7,A
+10/05/2025 23:10,Houston Astros,Cincinnati Reds,9,13,A
+10/05/2025 23:10,Kansas City Royals,Boston Red Sox,1,10,A
+10/05/2025 23:10,Chicago White Sox,Miami Marlins,1,3,A
+10/05/2025 23:15,New York Mets,Chicago Cubs,5,6,A
+10/05/2025 23:15,Minnesota Twins,San Francisco Giants,2,1,H
+11/05/2025 00:10,Arizona Diamondbacks,Los Angeles Dodgers,3,0,H
+11/05/2025 00:10,Colorado Rockies,San Diego Padres,0,21,A
+11/05/2025 01:38,Los Angeles Angels,Baltimore Orioles,5,2,H
+11/05/2025 01:40,Seattle Mariners,Toronto Blue Jays,3,6,A
+11/05/2025 16:05,New York Mets,Chicago Cubs,6,2,H
+11/05/2025 17:35,Washington Nationals,St. Louis Cardinals,1,6,A
+11/05/2025 17:35,Pittsburgh Pirates,Atlanta Braves,4,3,H
+11/05/2025 17:40,Detroit Tigers,Texas Rangers,1,6,A
+11/05/2025 17:40,Tampa Bay Rays,Milwaukee Brewers,2,4,A
+11/05/2025 18:10,Houston Astros,Cincinnati Reds,6,0,H
+11/05/2025 18:10,Kansas City Royals,Boston Red Sox,1,3,A
+11/05/2025 18:10,Minnesota Twins,San Francisco Giants,7,6,H
+11/05/2025 18:10,Chicago White Sox,Miami Marlins,4,2,H
+11/05/2025 19:10,Colorado Rockies,San Diego Padres,9,3,H
+11/05/2025 20:05,Athletics,New York Yankees,2,12,A
+11/05/2025 20:07,Los Angeles Angels,Baltimore Orioles,3,7,A
+11/05/2025 20:10,Arizona Diamondbacks,Los Angeles Dodgers,1,8,A
+11/05/2025 20:10,Seattle Mariners,Toronto Blue Jays,1,9,A
+11/05/2025 23:10,Cleveland Guardians,Philadelphia Phillies,0,3,A
+12/05/2025 22:10,Cleveland Guardians,Milwaukee Brewers,5,0,H
+12/05/2025 22:40,Detroit Tigers,Boston Red Sox,14,2,H
+12/05/2025 22:45,Philadelphia Phillies,St. Louis Cardinals,2,3,A
+12/05/2025 23:10,New York Mets,Pittsburgh Pirates,4,3,H
+12/05/2025 23:15,Atlanta Braves,Washington Nationals,4,3,H
+12/05/2025 23:40,Chicago Cubs,Miami Marlins,5,2,H
+13/05/2025 00:05,Texas Rangers,Colorado Rockies,2,1,H
+13/05/2025 00:10,Houston Astros,Kansas City Royals,5,7,A
+13/05/2025 01:40,San Diego Padres,Los Angeles Angels,5,9,A
+13/05/2025 01:40,Seattle Mariners,New York Yankees,5,11,A
+13/05/2025 01:45,San Francisco Giants,Arizona Diamondbacks,1,2,A
+13/05/2025 22:10,Cleveland Guardians,Milwaukee Brewers,2,0,H
+13/05/2025 22:40,Detroit Tigers,Boston Red Sox,10,9,H
+13/05/2025 22:40,Cincinnati Reds,Chicago White Sox,1,5,A
+13/05/2025 23:07,Toronto Blue Jays,Tampa Bay Rays,9,11,A
+13/05/2025 23:10,New York Mets,Pittsburgh Pirates,2,1,H
+13/05/2025 23:15,Atlanta Braves,Washington Nationals,5,2,H
+13/05/2025 23:40,Chicago Cubs,Miami Marlins,5,4,H
+14/05/2025 00:05,Texas Rangers,Colorado Rockies,4,1,H
+14/05/2025 00:10,Houston Astros,Kansas City Royals,2,1,H
+14/05/2025 01:40,San Diego Padres,Los Angeles Angels,6,4,H
+14/05/2025 01:40,Seattle Mariners,New York Yankees,2,1,H
+14/05/2025 01:45,San Francisco Giants,Arizona Diamondbacks,10,6,H
+14/05/2025 02:10,Los Angeles Dodgers,Athletics,1,11,A
+14/05/2025 16:05,Baltimore Orioles,Minnesota Twins,3,6,A
+14/05/2025 16:10,Baltimore Orioles,Minnesota Twins,6,8,A
+14/05/2025 17:05,Philadelphia Phillies,St. Louis Cardinals,2,1,H
+14/05/2025 17:10,Cleveland Guardians,Milwaukee Brewers,5,9,A
+14/05/2025 19:45,San Francisco Giants,Arizona Diamondbacks,7,8,A
+14/05/2025 20:10,Seattle Mariners,New York Yankees,2,3,A
+14/05/2025 22:15,Philadelphia Phillies,St. Louis Cardinals,7,14,A
+14/05/2025 22:40,Detroit Tigers,Boston Red Sox,6,5,H
+14/05/2025 23:07,Toronto Blue Jays,Tampa Bay Rays,3,1,H
+14/05/2025 23:10,New York Mets,Pittsburgh Pirates,0,4,A
+14/05/2025 23:14,Cincinnati Reds,Chicago White Sox,2,4,A
+14/05/2025 23:15,Atlanta Braves,Washington Nationals,4,5,A
+14/05/2025 23:40,Chicago Cubs,Miami Marlins,1,3,A
+15/05/2025 00:05,Texas Rangers,Colorado Rockies,8,3,H
+15/05/2025 00:10,Houston Astros,Kansas City Royals,4,3,H
+15/05/2025 01:40,San Diego Padres,Los Angeles Angels,5,1,H
+15/05/2025 02:10,Los Angeles Dodgers,Athletics,9,3,H
+15/05/2025 16:15,Atlanta Braves,Washington Nationals,5,2,H
+15/05/2025 16:35,Baltimore Orioles,Minnesota Twins,0,4,A
+15/05/2025 16:40,Cincinnati Reds,Chicago White Sox,7,1,H
+15/05/2025 19:07,Toronto Blue Jays,Tampa Bay Rays,3,8,A
+16/05/2025 00:05,Texas Rangers,Houston Astros,1,0,H
+16/05/2025 02:10,Los Angeles Dodgers,Athletics,19,2,H
+16/05/2025 18:20,Chicago Cubs,Chicago White Sox,13,3,H
+16/05/2025 21:10,Cincinnati Reds,Cleveland Guardians,5,4,H
+16/05/2025 22:45,Philadelphia Phillies,Pittsburgh Pirates,8,4,H
+16/05/2025 23:05,Baltimore Orioles,Washington Nationals,3,4,A
+16/05/2025 23:05,New York Yankees,New York Mets,6,2,H
+16/05/2025 23:07,Toronto Blue Jays,Detroit Tigers,4,5,A
+16/05/2025 23:10,Boston Red Sox,Atlanta Braves,2,4,A
+16/05/2025 23:10,Miami Marlins,Tampa Bay Rays,9,4,H
+16/05/2025 23:40,Kansas City Royals,St. Louis Cardinals,3,10,A
+17/05/2025 00:05,Texas Rangers,Houston Astros,3,6,A
+17/05/2025 00:10,Milwaukee Brewers,Minnesota Twins,0,3,A
+17/05/2025 01:40,Arizona Diamondbacks,Colorado Rockies,8,0,H
+17/05/2025 01:40,San Diego Padres,Seattle Mariners,1,5,A
+17/05/2025 02:10,Los Angeles Dodgers,Los Angeles Angels,2,6,A
+17/05/2025 02:15,San Francisco Giants,Athletics,9,1,H
+17/05/2025 17:05,New York Yankees,New York Mets,2,3,A
+17/05/2025 18:20,Chicago Cubs,Chicago White Sox,7,3,H
+17/05/2025 19:07,Toronto Blue Jays,Detroit Tigers,2,1,H
+17/05/2025 20:05,Baltimore Orioles,Washington Nationals,6,10,A
+17/05/2025 20:10,Miami Marlins,Tampa Bay Rays,0,4,A
+17/05/2025 22:05,Philadelphia Phillies,Pittsburgh Pirates,5,2,H
+17/05/2025 22:40,Cincinnati Reds,Cleveland Guardians,4,1,H
+17/05/2025 23:05,Texas Rangers,Houston Astros,5,1,H
+17/05/2025 23:10,Kansas City Royals,St. Louis Cardinals,0,1,A
+17/05/2025 23:15,Boston Red Sox,Atlanta Braves,7,6,H
+17/05/2025 23:15,Milwaukee Brewers,Minnesota Twins,0,7,A
+18/05/2025 00:10,Arizona Diamondbacks,Colorado Rockies,12,14,A
+18/05/2025 00:40,San Diego Padres,Seattle Mariners,1,4,A
+18/05/2025 01:05,San Francisco Giants,Athletics,1,0,H
+18/05/2025 01:10,Los Angeles Dodgers,Los Angeles Angels,9,11,A
+18/05/2025 17:05,Texas Rangers,Houston Astros,3,4,A
+18/05/2025 17:35,Baltimore Orioles,Washington Nationals,4,10,A
+18/05/2025 17:35,Philadelphia Phillies,Pittsburgh Pirates,1,0,H
+18/05/2025 17:35,Boston Red Sox,Atlanta Braves,4,10,A
+18/05/2025 17:37,Toronto Blue Jays,Detroit Tigers,2,3,A
+18/05/2025 17:40,Cincinnati Reds,Cleveland Guardians,3,1,H
+18/05/2025 17:40,Miami Marlins,Tampa Bay Rays,5,1,H
+18/05/2025 18:10,Kansas City Royals,St. Louis Cardinals,2,1,H
+18/05/2025 18:10,Milwaukee Brewers,Minnesota Twins,5,2,H
+18/05/2025 18:20,Chicago Cubs,Chicago White Sox,6,2,H
+18/05/2025 20:05,San Francisco Giants,Athletics,3,2,H
+18/05/2025 20:10,Arizona Diamondbacks,Colorado Rockies,1,0,H
+18/05/2025 20:10,Los Angeles Dodgers,Los Angeles Angels,4,6,A
+18/05/2025 20:10,San Diego Padres,Seattle Mariners,1,6,A
+18/05/2025 23:10,New York Yankees,New York Mets,8,2,H
+19/05/2025 22:40,Pittsburgh Pirates,Cincinnati Reds,1,7,A
+19/05/2025 22:40,Miami Marlins,Chicago Cubs,8,7,H
+19/05/2025 22:45,Boston Red Sox,New York Mets,3,1,H
+19/05/2025 23:05,Tampa Bay Rays,Houston Astros,3,4,A
+19/05/2025 23:40,Chicago White Sox,Seattle Mariners,1,5,A
+19/05/2025 23:40,Milwaukee Brewers,Baltimore Orioles,5,4,H
+19/05/2025 23:45,St. Louis Cardinals,Detroit Tigers,11,4,H
+20/05/2025 00:40,Colorado Rockies,Philadelphia Phillies,3,9,A
+20/05/2025 01:45,San Francisco Giants,Kansas City Royals,1,3,A
+20/05/2025 02:05,Athletics,Los Angeles Angels,3,4,A
+20/05/2025 02:10,Los Angeles Dodgers,Arizona Diamondbacks,5,9,A
+20/05/2025 22:40,Pittsburgh Pirates,Cincinnati Reds,1,0,H
+20/05/2025 22:40,Miami Marlins,Chicago Cubs,1,14,A
+20/05/2025 22:45,Boston Red Sox,New York Mets,2,0,H
+20/05/2025 22:45,Washington Nationals,Atlanta Braves,5,3,H
+20/05/2025 23:05,Tampa Bay Rays,Houston Astros,3,2,H
+20/05/2025 23:05,New York Yankees,Texas Rangers,5,2,H
+20/05/2025 23:07,Toronto Blue Jays,San Diego Padres,3,0,H
+20/05/2025 23:40,Chicago White Sox,Seattle Mariners,1,0,H
+20/05/2025 23:40,Milwaukee Brewers,Baltimore Orioles,5,2,H
+20/05/2025 23:45,St. Louis Cardinals,Detroit Tigers,4,5,A
+21/05/2025 00:40,Colorado Rockies,Philadelphia Phillies,4,7,A
+21/05/2025 01:45,San Francisco Giants,Kansas City Royals,3,2,H
+21/05/2025 02:05,Athletics,Los Angeles Angels,5,7,A
+21/05/2025 02:10,Los Angeles Dodgers,Arizona Diamondbacks,4,3,H
+21/05/2025 16:35,Pittsburgh Pirates,Cincinnati Reds,3,1,H
+21/05/2025 17:10,Minnesota Twins,Cleveland Guardians,6,5,H
+21/05/2025 17:10,Tampa Bay Rays,Houston Astros,8,4,H
+21/05/2025 17:10,Miami Marlins,Chicago Cubs,1,2,A
+21/05/2025 17:10,Milwaukee Brewers,Baltimore Orioles,4,8,A
+21/05/2025 17:15,St. Louis Cardinals,Detroit Tigers,1,5,A
+21/05/2025 18:10,Chicago White Sox,Seattle Mariners,5,6,A
+21/05/2025 19:45,San Francisco Giants,Kansas City Royals,4,8,A
+21/05/2025 19:55,Minnesota Twins,Cleveland Guardians,1,5,A
+21/05/2025 22:45,Boston Red Sox,New York Mets,1,5,A
+21/05/2025 23:05,New York Yankees,Texas Rangers,4,3,H
+21/05/2025 23:07,Toronto Blue Jays,San Diego Padres,14,0,H
+22/05/2025 00:40,Colorado Rockies,Philadelphia Phillies,5,9,A
+22/05/2025 02:05,Athletics,Los Angeles Angels,5,10,A
+22/05/2025 02:10,Los Angeles Dodgers,Arizona Diamondbacks,3,1,H
+22/05/2025 16:35,New York Yankees,Texas Rangers,1,0,H
+22/05/2025 17:07,Toronto Blue Jays,San Diego Padres,7,6,H
+22/05/2025 19:10,Colorado Rockies,Philadelphia Phillies,0,2,A
+22/05/2025 19:35,Athletics,Los Angeles Angels,5,10,A
+22/05/2025 22:40,Detroit Tigers,Cleveland Guardians,0,7,A
+22/05/2025 22:40,Pittsburgh Pirates,Milwaukee Brewers,5,8,A
+22/05/2025 22:45,Washington Nationals,Atlanta Braves,8,7,H
+23/05/2025 00:10,Houston Astros,Seattle Mariners,9,2,H
+23/05/2025 17:35,Boston Red Sox,Baltimore Orioles,19,5,H
+23/05/2025 22:40,Cincinnati Reds,Chicago Cubs,6,13,A
+23/05/2025 22:40,Pittsburgh Pirates,Milwaukee Brewers,6,5,H
+23/05/2025 22:45,Washington Nationals,San Francisco Giants,0,4,A
+23/05/2025 23:05,Tampa Bay Rays,Toronto Blue Jays,3,1,H
+23/05/2025 23:10,Detroit Tigers,Cleveland Guardians,1,3,A
+23/05/2025 23:10,New York Mets,Los Angeles Dodgers,5,7,A
+23/05/2025 23:15,Atlanta Braves,San Diego Padres,1,2,A
+23/05/2025 23:40,Chicago White Sox,Texas Rangers,4,1,H
+24/05/2025 00:10,Houston Astros,Seattle Mariners,3,5,A
+24/05/2025 00:10,Minnesota Twins,Kansas City Royals,3,1,H
+24/05/2025 00:15,St. Louis Cardinals,Arizona Diamondbacks,4,3,H
+24/05/2025 00:40,Colorado Rockies,New York Yankees,3,2,H
+24/05/2025 01:38,Los Angeles Angels,Miami Marlins,7,4,H
+24/05/2025 02:05,Athletics,Philadelphia Phillies,3,4,A
+24/05/2025 17:05,Boston Red Sox,Baltimore Orioles,6,5,H
+24/05/2025 18:10,Minnesota Twins,Kansas City Royals,5,4,H
+24/05/2025 18:15,St. Louis Cardinals,Arizona Diamondbacks,6,5,H
+24/05/2025 20:05,Washington Nationals,San Francisco Giants,3,0,H
+24/05/2025 20:05,Pittsburgh Pirates,Milwaukee Brewers,2,1,H
+24/05/2025 20:10,Cincinnati Reds,Chicago Cubs,6,4,H
+24/05/2025 20:10,Houston Astros,Seattle Mariners,2,1,H
+24/05/2025 20:10,Atlanta Braves,San Diego Padres,7,1,H
+24/05/2025 20:10,Chicago White Sox,Texas Rangers,10,5,H
+24/05/2025 20:10,Colorado Rockies,New York Yankees,1,13,A
+24/05/2025 22:35,Boston Red Sox,Baltimore Orioles,1,2,A
+24/05/2025 23:05,Tampa Bay Rays,Toronto Blue Jays,3,1,H
+24/05/2025 23:15,Detroit Tigers,Cleveland Guardians,5,7,A
+24/05/2025 23:15,New York Mets,Los Angeles Dodgers,5,2,H
+25/05/2025 02:05,Athletics,Philadelphia Phillies,6,9,A
+25/05/2025 02:07,Los Angeles Angels,Miami Marlins,2,6,A
+25/05/2025 15:35,Detroit Tigers,Cleveland Guardians,5,0,H
+25/05/2025 17:35,Boston Red Sox,Baltimore Orioles,1,5,A
+25/05/2025 17:35,Washington Nationals,San Francisco Giants,2,3,A
+25/05/2025 17:35,Pittsburgh Pirates,Milwaukee Brewers,5,6,A
+25/05/2025 17:40,Cincinnati Reds,Chicago Cubs,8,11,A
+25/05/2025 17:40,Tampa Bay Rays,Toronto Blue Jays,13,0,H
+25/05/2025 18:10,Houston Astros,Seattle Mariners,5,3,H
+25/05/2025 18:10,Minnesota Twins,Kansas City Royals,1,2,A
+25/05/2025 18:10,Chicago White Sox,Texas Rangers,4,5,A
+25/05/2025 18:15,St. Louis Cardinals,Arizona Diamondbacks,4,3,H
+25/05/2025 19:10,Colorado Rockies,New York Yankees,4,5,A
+25/05/2025 20:05,Athletics,Philadelphia Phillies,5,4,H
+25/05/2025 20:07,Los Angeles Angels,Miami Marlins,0,3,A
+25/05/2025 20:10,Atlanta Braves,San Diego Padres,3,5,A
+25/05/2025 23:10,New York Mets,Los Angeles Dodgers,3,1,H
+26/05/2025 17:10,Detroit Tigers,San Francisco Giants,3,1,H
+26/05/2025 18:10,Milwaukee Brewers,Boston Red Sox,3,2,H
+26/05/2025 18:20,Chicago Cubs,Colorado Rockies,3,1,H
+26/05/2025 19:05,Baltimore Orioles,St. Louis Cardinals,5,2,H
+26/05/2025 20:05,Texas Rangers,Toronto Blue Jays,1,2,A
+26/05/2025 20:10,Kansas City Royals,Cincinnati Reds,4,7,A
+26/05/2025 20:10,New York Mets,Chicago White Sox,2,1,H
+26/05/2025 22:10,Cleveland Guardians,Los Angeles Dodgers,2,7,A
+26/05/2025 23:05,Tampa Bay Rays,Minnesota Twins,7,2,H
+27/05/2025 00:10,Arizona Diamondbacks,Pittsburgh Pirates,5,0,H
+27/05/2025 00:40,San Diego Padres,Miami Marlins,4,3,H
+27/05/2025 01:38,Los Angeles Angels,New York Yankees,1,5,A
+27/05/2025 22:10,Cleveland Guardians,Los Angeles Dodgers,5,9,A
+27/05/2025 22:35,Baltimore Orioles,St. Louis Cardinals,4,7,A
+27/05/2025 22:40,Detroit Tigers,San Francisco Giants,3,1,H
+27/05/2025 22:45,Philadelphia Phillies,Atlanta Braves,2,0,H
+27/05/2025 23:05,Tampa Bay Rays,Minnesota Twins,2,4,A
+27/05/2025 23:10,New York Mets,Chicago White Sox,6,4,H
+27/05/2025 23:40,Kansas City Royals,Cincinnati Reds,2,7,A
+27/05/2025 23:40,Milwaukee Brewers,Boston Red Sox,5,1,H
+28/05/2025 00:05,Chicago Cubs,Colorado Rockies,4,3,H
+28/05/2025 00:05,Texas Rangers,Toronto Blue Jays,2,0,H
+28/05/2025 00:10,Houston Astros,Athletics,11,1,H
+28/05/2025 01:38,Los Angeles Angels,New York Yankees,2,3,A
+28/05/2025 01:40,Arizona Diamondbacks,Pittsburgh Pirates,6,9,A
+28/05/2025 01:40,Seattle Mariners,Washington Nationals,9,1,H
+28/05/2025 01:40,San Diego Padres,Miami Marlins,8,6,H
+28/05/2025 17:10,Cleveland Guardians,Los Angeles Dodgers,7,4,H
+28/05/2025 17:10,Detroit Tigers,San Francisco Giants,4,3,H
+28/05/2025 17:10,Tampa Bay Rays,Minnesota Twins,5,0,H
+28/05/2025 17:10,Milwaukee Brewers,Boston Red Sox,6,5,H
+28/05/2025 17:10,New York Mets,Chicago White Sox,4,9,A
+28/05/2025 18:10,Houston Astros,Athletics,5,3,H
+28/05/2025 19:40,Arizona Diamondbacks,Pittsburgh Pirates,1,10,A
+28/05/2025 20:10,San Diego Padres,Miami Marlins,8,10,A
+28/05/2025 22:35,Baltimore Orioles,St. Louis Cardinals,4,6,A
+28/05/2025 23:40,Kansas City Royals,Cincinnati Reds,3,2,H
+29/05/2025 00:05,Chicago Cubs,Colorado Rockies,2,1,H
+29/05/2025 00:05,Texas Rangers,Toronto Blue Jays,0,2,A
+29/05/2025 01:38,Los Angeles Angels,New York Yankees,0,1,A
+29/05/2025 01:40,Seattle Mariners,Washington Nationals,0,9,A
+29/05/2025 17:05,Philadelphia Phillies,Atlanta Braves,5,4,H
+29/05/2025 22:45,Philadelphia Phillies,Atlanta Braves,3,9,A
+29/05/2025 23:07,Toronto Blue Jays,Athletics,12,0,H
+30/05/2025 00:10,Houston Astros,Tampa Bay Rays,3,13,A
+30/05/2025 01:40,Seattle Mariners,Washington Nationals,3,9,A
+30/05/2025 18:20,Chicago Cubs,Cincinnati Reds,2,6,A
+30/05/2025 20:30,Baltimore Orioles,Chicago White Sox,2,1,H
+30/05/2025 22:45,Philadelphia Phillies,Milwaukee Brewers,2,6,A
+30/05/2025 23:07,Toronto Blue Jays,Athletics,11,7,H
+30/05/2025 23:10,Cleveland Guardians,Los Angeles Angels,1,4,A
+30/05/2025 23:10,New York Mets,Colorado Rockies,4,2,H
+30/05/2025 23:10,Miami Marlins,San Francisco Giants,0,2,A
+30/05/2025 23:15,Atlanta Braves,Boston Red Sox,1,5,A
+31/05/2025 00:05,Texas Rangers,St. Louis Cardinals,11,1,H
+31/05/2025 00:10,Kansas City Royals,Detroit Tigers,5,7,A
+31/05/2025 00:10,Houston Astros,Tampa Bay Rays,2,1,H
+31/05/2025 01:40,Arizona Diamondbacks,Washington Nationals,7,9,A
+31/05/2025 01:40,San Diego Padres,Pittsburgh Pirates,3,2,H
+31/05/2025 02:10,Seattle Mariners,Minnesota Twins,6,12,A
+31/05/2025 02:10,Los Angeles Dodgers,New York Yankees,8,5,H
+31/05/2025 18:20,Chicago Cubs,Cincinnati Reds,2,0,H
+31/05/2025 19:07,Toronto Blue Jays,Athletics,8,7,H
+31/05/2025 20:05,Texas Rangers,St. Louis Cardinals,0,2,A
+31/05/2025 20:05,Baltimore Orioles,Chicago White Sox,4,2,H
+31/05/2025 20:05,Philadelphia Phillies,Milwaukee Brewers,7,17,A
+31/05/2025 20:10,Cleveland Guardians,Los Angeles Angels,7,5,H
+31/05/2025 20:10,Kansas City Royals,Detroit Tigers,1,0,H
+31/05/2025 20:10,New York Mets,Colorado Rockies,8,2,H
+31/05/2025 20:10,Houston Astros,Tampa Bay Rays,3,16,A
+31/05/2025 20:10,Atlanta Braves,Boston Red Sox,5,0,H
+31/05/2025 20:10,Miami Marlins,San Francisco Giants,1,0,H
+31/05/2025 23:15,Seattle Mariners,Minnesota Twins,5,4,H
+31/05/2025 23:15,Los Angeles Dodgers,New York Yankees,18,2,H
+01/06/2025 01:40,San Diego Padres,Pittsburgh Pirates,0,5,A
+01/06/2025 02:10,Arizona Diamondbacks,Washington Nationals,7,11,A
+01/06/2025 17:05,Texas Rangers,St. Louis Cardinals,8,1,H
+01/06/2025 17:35,Atlanta Braves,Boston Red Sox,1,3,A
+01/06/2025 17:35,Baltimore Orioles,Chicago White Sox,3,2,H
+01/06/2025 17:35,Philadelphia Phillies,Milwaukee Brewers,2,5,A
+01/06/2025 17:37,Toronto Blue Jays,Athletics,8,4,H
+01/06/2025 17:40,Cleveland Guardians,Los Angeles Angels,4,2,H
+01/06/2025 17:40,New York Mets,Colorado Rockies,5,3,H
+01/06/2025 17:40,Miami Marlins,San Francisco Giants,2,4,A
+01/06/2025 18:10,Kansas City Royals,Detroit Tigers,0,1,A
+01/06/2025 18:10,Houston Astros,Tampa Bay Rays,1,0,H
+01/06/2025 18:20,Chicago Cubs,Cincinnati Reds,7,3,H
+01/06/2025 20:10,Arizona Diamondbacks,Washington Nationals,3,1,H
+01/06/2025 20:10,Seattle Mariners,Minnesota Twins,2,1,H
+01/06/2025 21:10,San Diego Padres,Pittsburgh Pirates,6,4,H
+01/06/2025 23:10,Los Angeles Dodgers,New York Yankees,3,7,A
+02/06/2025 22:40,Miami Marlins,Colorado Rockies,4,6,A
+02/06/2025 23:10,Boston Red Sox,Los Angeles Angels,6,7,A
+02/06/2025 23:10,Cincinnati Reds,Milwaukee Brewers,2,3,A
+02/06/2025 23:40,Chicago White Sox,Detroit Tigers,1,13,A
+03/06/2025 01:45,San Francisco Giants,San Diego Padres,0,1,A
+03/06/2025 02:05,Athletics,Minnesota Twins,4,10,A
+03/06/2025 02:10,Los Angeles Dodgers,New York Mets,3,4,A
+03/06/2025 22:40,Pittsburgh Pirates,Houston Astros,0,3,A
+03/06/2025 22:40,Miami Marlins,Colorado Rockies,2,3,A
+03/06/2025 22:45,Washington Nationals,Chicago Cubs,3,8,A
+03/06/2025 23:05,New York Yankees,Cleveland Guardians,3,2,H
+03/06/2025 23:07,Toronto Blue Jays,Philadelphia Phillies,3,8,A
+03/06/2025 23:10,Boston Red Sox,Los Angeles Angels,3,4,A
+03/06/2025 23:10,Cincinnati Reds,Milwaukee Brewers,4,2,H
+03/06/2025 23:15,Atlanta Braves,Arizona Diamondbacks,3,8,A
+03/06/2025 23:35,Tampa Bay Rays,Texas Rangers,5,1,H
+03/06/2025 23:40,Chicago White Sox,Detroit Tigers,8,1,H
+03/06/2025 23:45,St. Louis Cardinals,Kansas City Royals,7,10,A
+04/06/2025 01:40,Seattle Mariners,Baltimore Orioles,1,5,A
+04/06/2025 01:45,San Francisco Giants,San Diego Padres,2,3,A
+04/06/2025 02:05,Athletics,Minnesota Twins,3,10,A
+04/06/2025 02:10,Los Angeles Dodgers,New York Mets,6,5,H
+04/06/2025 16:10,Miami Marlins,Colorado Rockies,2,3,A
+04/06/2025 16:40,Cincinnati Reds,Milwaukee Brewers,1,9,A
+04/06/2025 17:35,Boston Red Sox,Los Angeles Angels,11,9,H
+04/06/2025 22:40,Pittsburgh Pirates,Houston Astros,3,0,H
+04/06/2025 22:45,Washington Nationals,Chicago Cubs,2,0,H
+04/06/2025 23:05,New York Yankees,Cleveland Guardians,0,4,A
+04/06/2025 23:07,Toronto Blue Jays,Philadelphia Phillies,2,1,H
+04/06/2025 23:15,Atlanta Braves,Arizona Diamondbacks,1,2,A
+04/06/2025 23:35,Tampa Bay Rays,Texas Rangers,5,4,H
+04/06/2025 23:40,Chicago White Sox,Detroit Tigers,4,5,A
+05/06/2025 01:40,Seattle Mariners,Baltimore Orioles,2,3,A
+05/06/2025 01:45,San Francisco Giants,San Diego Padres,6,5,H
+05/06/2025 02:05,Athletics,Minnesota Twins,1,6,A
+05/06/2025 02:10,Los Angeles Dodgers,New York Mets,1,6,A
+05/06/2025 16:15,Atlanta Braves,Arizona Diamondbacks,10,11,A
+05/06/2025 17:45,St. Louis Cardinals,Kansas City Royals,6,5,H
+05/06/2025 18:10,Chicago White Sox,Detroit Tigers,3,2,H
+05/06/2025 19:07,Toronto Blue Jays,Philadelphia Phillies,9,1,H
+05/06/2025 19:35,Athletics,Minnesota Twins,14,3,H
+05/06/2025 19:40,Seattle Mariners,Baltimore Orioles,3,4,A
+05/06/2025 19:45,San Francisco Giants,San Diego Padres,3,2,H
+05/06/2025 20:10,Los Angeles Dodgers,New York Mets,6,5,H
+05/06/2025 22:40,Pittsburgh Pirates,Houston Astros,2,8,A
+05/06/2025 22:45,Washington Nationals,Chicago Cubs,1,7,A
+05/06/2025 23:05,New York Yankees,Cleveland Guardians,4,0,H
+05/06/2025 23:35,Tampa Bay Rays,Texas Rangers,4,3,H
+05/06/2025 23:45,St. Louis Cardinals,Kansas City Royals,5,7,A
+06/06/2025 17:10,Tampa Bay Rays,Miami Marlins,4,3,H
+06/06/2025 22:40,Pittsburgh Pirates,Philadelphia Phillies,5,4,H
+06/06/2025 22:45,Washington Nationals,Texas Rangers,2,0,H
+06/06/2025 23:05,New York Yankees,Boston Red Sox,9,6,H
+06/06/2025 23:10,Detroit Tigers,Chicago Cubs,3,1,H
+06/06/2025 23:10,Cleveland Guardians,Houston Astros,2,4,A
+06/06/2025 23:40,Chicago White Sox,Kansas City Royals,7,2,H
+07/06/2025 00:10,Minnesota Twins,Toronto Blue Jays,4,6,A
+07/06/2025 00:10,Milwaukee Brewers,San Diego Padres,0,2,A
+07/06/2025 00:15,St. Louis Cardinals,Los Angeles Dodgers,5,0,H
+07/06/2025 00:40,Colorado Rockies,New York Mets,2,4,A
+07/06/2025 01:38,Los Angeles Angels,Seattle Mariners,5,4,H
+07/06/2025 02:05,Athletics,Baltimore Orioles,5,4,H
+07/06/2025 02:15,San Francisco Giants,Atlanta Braves,5,4,H
+07/06/2025 17:10,Detroit Tigers,Chicago Cubs,1,6,A
+07/06/2025 18:10,Cincinnati Reds,Arizona Diamondbacks,4,3,H
+07/06/2025 18:10,Minnesota Twins,Toronto Blue Jays,4,5,A
+07/06/2025 18:15,St. Louis Cardinals,Los Angeles Dodgers,2,1,H
+07/06/2025 20:05,Washington Nationals,Texas Rangers,0,5,A
+07/06/2025 20:05,Pittsburgh Pirates,Philadelphia Phillies,2,1,H
+07/06/2025 20:05,San Francisco Giants,Atlanta Braves,3,2,H
+07/06/2025 20:10,Cincinnati Reds,Arizona Diamondbacks,13,1,H
+07/06/2025 20:10,Cleveland Guardians,Houston Astros,3,5,A
+07/06/2025 20:10,Chicago White Sox,Kansas City Royals,4,1,H
+07/06/2025 20:10,Tampa Bay Rays,Miami Marlins,10,11,A
+07/06/2025 23:35,New York Yankees,Boston Red Sox,7,10,A
+07/06/2025 23:35,Milwaukee Brewers,San Diego Padres,4,3,H
+08/06/2025 01:38,Los Angeles Angels,Seattle Mariners,8,6,H
+08/06/2025 01:40,Colorado Rockies,New York Mets,1,8,A
+08/06/2025 02:05,Athletics,Baltimore Orioles,4,7,A
+08/06/2025 16:10,Tampa Bay Rays,Miami Marlins,3,2,H
+08/06/2025 17:05,Milwaukee Brewers,San Diego Padres,0,1,A
+08/06/2025 17:35,Washington Nationals,Texas Rangers,2,4,A
+08/06/2025 17:35,Pittsburgh Pirates,Philadelphia Phillies,2,1,H
+08/06/2025 17:40,Cincinnati Reds,Arizona Diamondbacks,4,2,H
+08/06/2025 17:40,Detroit Tigers,Chicago Cubs,4,0,H
+08/06/2025 17:40,Cleveland Guardians,Houston Astros,4,2,H
+08/06/2025 18:10,Minnesota Twins,Toronto Blue Jays,6,3,H
+08/06/2025 18:10,Chicago White Sox,Kansas City Royals,5,7,A
+08/06/2025 18:15,St. Louis Cardinals,Los Angeles Dodgers,3,7,A
+08/06/2025 19:10,Colorado Rockies,New York Mets,5,13,A
+08/06/2025 20:05,Athletics,Baltimore Orioles,5,1,H
+08/06/2025 20:05,San Francisco Giants,Atlanta Braves,4,3,H
+08/06/2025 20:07,Los Angeles Angels,Seattle Mariners,2,3,A
+08/06/2025 23:10,New York Yankees,Boston Red Sox,7,11,A
+09/06/2025 22:40,Cleveland Guardians,Cincinnati Reds,4,7,A
+09/06/2025 22:40,Pittsburgh Pirates,Miami Marlins,10,3,H
+09/06/2025 22:45,Philadelphia Phillies,Chicago Cubs,4,3,H
+09/06/2025 23:10,Boston Red Sox,Tampa Bay Rays,8,10,A
+09/06/2025 23:40,Milwaukee Brewers,Atlanta Braves,1,7,A
+09/06/2025 23:45,St. Louis Cardinals,Toronto Blue Jays,4,5,A
+10/06/2025 01:38,Los Angeles Angels,Athletics,7,4,H
+10/06/2025 01:40,San Diego Padres,Los Angeles Dodgers,7,8,A
+10/06/2025 01:40,Arizona Diamondbacks,Seattle Mariners,8,4,H
+10/06/2025 22:35,Baltimore Orioles,Detroit Tigers,3,5,A
+10/06/2025 22:40,Cleveland Guardians,Cincinnati Reds,0,1,A
+10/06/2025 22:40,Pittsburgh Pirates,Miami Marlins,2,3,A
+10/06/2025 22:45,Philadelphia Phillies,Chicago Cubs,4,8,A
+10/06/2025 23:10,New York Mets,Washington Nationals,5,4,H
+10/06/2025 23:10,Boston Red Sox,Tampa Bay Rays,3,1,H
+10/06/2025 23:40,Minnesota Twins,Texas Rangers,4,16,A
+10/06/2025 23:40,Kansas City Royals,New York Yankees,2,10,A
+10/06/2025 23:40,Milwaukee Brewers,Atlanta Braves,4,1,H
+10/06/2025 23:45,St. Louis Cardinals,Toronto Blue Jays,9,10,A
+11/06/2025 00:10,Houston Astros,Chicago White Sox,2,4,A
+11/06/2025 00:40,Colorado Rockies,San Francisco Giants,5,6,A
+11/06/2025 01:38,Los Angeles Angels,Athletics,2,1,H
+11/06/2025 01:40,San Diego Padres,Los Angeles Dodgers,11,1,H
+11/06/2025 01:40,Arizona Diamondbacks,Seattle Mariners,10,3,H
+11/06/2025 16:35,Pittsburgh Pirates,Miami Marlins,5,2,H
+11/06/2025 17:05,Philadelphia Phillies,Chicago Cubs,7,2,H
+11/06/2025 17:10,Cleveland Guardians,Cincinnati Reds,11,2,H
+11/06/2025 18:10,Milwaukee Brewers,Atlanta Braves,2,6,A
+11/06/2025 18:15,St. Louis Cardinals,Toronto Blue Jays,2,5,A
+11/06/2025 19:40,Arizona Diamondbacks,Seattle Mariners,5,2,H
+11/06/2025 20:07,Los Angeles Angels,Athletics,6,5,H
+11/06/2025 20:10,San Diego Padres,Los Angeles Dodgers,2,5,A
+11/06/2025 22:35,Baltimore Orioles,Detroit Tigers,10,1,H
+11/06/2025 23:10,New York Mets,Washington Nationals,5,0,H
+11/06/2025 23:10,Boston Red Sox,Tampa Bay Rays,4,3,H
+11/06/2025 23:40,Minnesota Twins,Texas Rangers,6,2,H
+11/06/2025 23:40,Kansas City Royals,New York Yankees,3,6,A
+12/06/2025 00:10,Houston Astros,Chicago White Sox,10,2,H
+12/06/2025 00:40,Colorado Rockies,San Francisco Giants,7,10,A
+12/06/2025 17:10,New York Mets,Washington Nationals,4,3,H
+12/06/2025 17:10,Minnesota Twins,Texas Rangers,3,16,A
+12/06/2025 19:10,Colorado Rockies,San Francisco Giants,8,7,H
+12/06/2025 22:35,Baltimore Orioles,Detroit Tigers,1,4,A
+12/06/2025 23:40,Kansas City Royals,New York Yankees,0,1,A
+12/06/2025 23:40,Milwaukee Brewers,St. Louis Cardinals,6,0,H
+13/06/2025 00:05,Chicago Cubs,Pittsburgh Pirates,3,2,H
+13/06/2025 00:10,Houston Astros,Chicago White Sox,4,3,H
+13/06/2025 18:20,Chicago Cubs,Pittsburgh Pirates,1,2,A
+13/06/2025 22:45,Philadelphia Phillies,Toronto Blue Jays,8,0,H
+13/06/2025 22:45,Washington Nationals,Miami Marlins,9,11,A
+13/06/2025 23:08,Baltimore Orioles,Los Angeles Angels,2,0,H
+13/06/2025 23:10,Detroit Tigers,Cincinnati Reds,11,5,H
+13/06/2025 23:10,New York Mets,Tampa Bay Rays,5,7,A
+13/06/2025 23:10,Boston Red Sox,New York Yankees,2,1,H
+13/06/2025 23:15,Atlanta Braves,Colorado Rockies,12,4,H
+14/06/2025 00:05,Texas Rangers,Chicago White Sox,3,1,H
+14/06/2025 00:10,Kansas City Royals,Athletics,4,6,A
+14/06/2025 00:10,Houston Astros,Minnesota Twins,10,3,H
+14/06/2025 00:10,Milwaukee Brewers,St. Louis Cardinals,3,2,H
+14/06/2025 01:40,Arizona Diamondbacks,San Diego Padres,5,1,H
+14/06/2025 02:10,Seattle Mariners,Cleveland Guardians,7,2,H
+14/06/2025 02:10,Los Angeles Dodgers,San Francisco Giants,2,6,A
+14/06/2025 17:05,Washington Nationals,Miami Marlins,3,4,A
+14/06/2025 17:10,Detroit Tigers,Cincinnati Reds,1,11,A
+14/06/2025 18:20,Chicago Cubs,Pittsburgh Pirates,2,1,H
+14/06/2025 20:05,Baltimore Orioles,Los Angeles Angels,6,5,H
+14/06/2025 20:05,Philadelphia Phillies,Toronto Blue Jays,3,2,H
+14/06/2025 20:05,Texas Rangers,Chicago White Sox,5,4,H
+14/06/2025 20:10,Kansas City Royals,Athletics,0,4,A
+14/06/2025 20:10,New York Mets,Tampa Bay Rays,4,8,A
+14/06/2025 20:10,Houston Astros,Minnesota Twins,3,2,H
+14/06/2025 20:10,Atlanta Braves,Colorado Rockies,4,1,H
+14/06/2025 20:10,Milwaukee Brewers,St. Louis Cardinals,5,8,A
+14/06/2025 23:15,Arizona Diamondbacks,San Diego Padres,8,7,H
+14/06/2025 23:15,Boston Red Sox,New York Yankees,4,3,H
+15/06/2025 01:40,Seattle Mariners,Cleveland Guardians,4,3,H
+15/06/2025 02:10,Los Angeles Dodgers,San Francisco Giants,11,5,H
+15/06/2025 16:05,Detroit Tigers,Cincinnati Reds,4,8,A
+15/06/2025 17:35,Baltimore Orioles,Los Angeles Angels,11,2,H
+15/06/2025 17:35,Philadelphia Phillies,Toronto Blue Jays,11,4,H
+15/06/2025 17:35,Atlanta Braves,Colorado Rockies,1,10,A
+15/06/2025 17:35,Washington Nationals,Miami Marlins,1,3,A
+15/06/2025 17:35,Boston Red Sox,New York Yankees,2,0,H
+15/06/2025 17:40,New York Mets,Tampa Bay Rays,0,9,A
+15/06/2025 18:10,Kansas City Royals,Athletics,2,3,A
+15/06/2025 18:10,Houston Astros,Minnesota Twins,2,1,H
+15/06/2025 18:10,Milwaukee Brewers,St. Louis Cardinals,3,2,H
+15/06/2025 18:20,Chicago Cubs,Pittsburgh Pirates,3,2,H
+15/06/2025 18:35,Texas Rangers,Chicago White Sox,2,1,H
+15/06/2025 20:10,Arizona Diamondbacks,San Diego Padres,2,8,A
+15/06/2025 20:10,Seattle Mariners,Cleveland Guardians,6,0,H
+15/06/2025 23:10,Los Angeles Dodgers,San Francisco Giants,5,4,H
+16/06/2025 22:40,Miami Marlins,Philadelphia Phillies,2,5,A
+16/06/2025 22:45,Washington Nationals,Colorado Rockies,4,6,A
+16/06/2025 23:05,New York Yankees,Los Angeles Angels,0,1,A
+16/06/2025 23:35,Tampa Bay Rays,Baltimore Orioles,7,1,H
+17/06/2025 01:40,Seattle Mariners,Boston Red Sox,0,2,A
+17/06/2025 02:05,Athletics,Houston Astros,3,1,H
+17/06/2025 02:10,Los Angeles Dodgers,San Diego Padres,6,3,H
+17/06/2025 22:10,Miami Marlins,Philadelphia Phillies,8,3,H
+17/06/2025 22:40,Detroit Tigers,Pittsburgh Pirates,7,3,H
+17/06/2025 22:45,Washington Nationals,Colorado Rockies,6,10,A
+17/06/2025 23:05,New York Yankees,Los Angeles Angels,0,4,A
+17/06/2025 23:07,Toronto Blue Jays,Arizona Diamondbacks,5,4,H
+17/06/2025 23:10,Cincinnati Reds,Minnesota Twins,6,5,H
+17/06/2025 23:15,Atlanta Braves,New York Mets,5,4,H
+17/06/2025 23:35,Tampa Bay Rays,Baltimore Orioles,1,5,A
+17/06/2025 23:40,Chicago White Sox,St. Louis Cardinals,2,12,A
+18/06/2025 00:05,Texas Rangers,Kansas City Royals,1,6,A
+18/06/2025 00:05,Chicago Cubs,Milwaukee Brewers,5,3,H
+18/06/2025 01:40,Seattle Mariners,Boston Red Sox,8,0,H
+18/06/2025 01:45,San Francisco Giants,Cleveland Guardians,2,3,A
+18/06/2025 02:05,Athletics,Houston Astros,3,13,A
+18/06/2025 02:10,Los Angeles Dodgers,San Diego Padres,8,6,H
+18/06/2025 20:10,Seattle Mariners,Boston Red Sox,1,3,A
+18/06/2025 22:40,Miami Marlins,Philadelphia Phillies,2,4,A
+18/06/2025 22:45,Washington Nationals,Colorado Rockies,1,3,A
+18/06/2025 23:05,New York Yankees,Los Angeles Angels,2,3,A
+18/06/2025 23:07,Toronto Blue Jays,Arizona Diamondbacks,8,1,H
+18/06/2025 23:10,Cincinnati Reds,Minnesota Twins,4,2,H
+18/06/2025 23:15,Atlanta Braves,New York Mets,5,0,H
+18/06/2025 23:35,Tampa Bay Rays,Baltimore Orioles,12,8,H
+19/06/2025 00:05,Texas Rangers,Kansas City Royals,3,6,A
+19/06/2025 01:45,San Francisco Giants,Cleveland Guardians,2,4,A
+19/06/2025 02:05,Athletics,Houston Astros,4,11,A
+19/06/2025 02:10,Los Angeles Dodgers,San Diego Padres,4,3,H
+19/06/2025 16:40,Cincinnati Reds,Minnesota Twins,5,12,A
+19/06/2025 17:05,Washington Nationals,Colorado Rockies,4,3,H
+19/06/2025 17:05,New York Yankees,Los Angeles Angels,7,3,H
+19/06/2025 17:10,Detroit Tigers,Pittsburgh Pirates,9,2,H
+19/06/2025 18:10,Chicago White Sox,St. Louis Cardinals,4,5,A
+19/06/2025 18:15,Chicago White Sox,St. Louis Cardinals,6,8,A
+19/06/2025 18:20,Chicago Cubs,Milwaukee Brewers,7,8,A
+19/06/2025 18:35,Texas Rangers,Kansas City Royals,1,4,A
+19/06/2025 19:07,Toronto Blue Jays,Arizona Diamondbacks,5,9,A
+19/06/2025 20:05,San Francisco Giants,Cleveland Guardians,2,1,H
+19/06/2025 22:10,Detroit Tigers,Pittsburgh Pirates,4,8,A
+19/06/2025 22:40,Miami Marlins,Philadelphia Phillies,1,2,A
+19/06/2025 23:15,Atlanta Braves,New York Mets,7,1,H
+19/06/2025 23:35,Tampa Bay Rays,Baltimore Orioles,1,4,A
+20/06/2025 02:05,Athletics,Houston Astros,6,4,H
+20/06/2025 02:10,Los Angeles Dodgers,San Diego Padres,3,5,A
+20/06/2025 18:20,Chicago Cubs,Seattle Mariners,4,9,A
+20/06/2025 22:40,Pittsburgh Pirates,Texas Rangers,2,6,A
+20/06/2025 23:05,Tampa Bay Rays,Detroit Tigers,14,8,H
+20/06/2025 23:05,New York Yankees,Baltimore Orioles,3,5,A
+20/06/2025 23:07,Toronto Blue Jays,Chicago White Sox,1,7,A
+20/06/2025 23:10,Miami Marlins,Atlanta Braves,6,2,H
+20/06/2025 23:15,St. Louis Cardinals,Cincinnati Reds,6,1,H
+20/06/2025 23:15,Philadelphia Phillies,New York Mets,10,2,H
+21/06/2025 00:10,Minnesota Twins,Milwaukee Brewers,6,17,A
+21/06/2025 00:40,Colorado Rockies,Arizona Diamondbacks,8,14,A
+21/06/2025 01:38,Los Angeles Angels,Houston Astros,2,3,A
+21/06/2025 01:40,San Diego Padres,Kansas City Royals,5,6,A
+21/06/2025 02:05,Athletics,Cleveland Guardians,5,1,H
+21/06/2025 02:10,Los Angeles Dodgers,Washington Nationals,6,5,H
+21/06/2025 02:15,San Francisco Giants,Boston Red Sox,5,7,A
+21/06/2025 16:10,Tampa Bay Rays,Detroit Tigers,8,3,H
+21/06/2025 17:05,New York Yankees,Baltimore Orioles,9,0,H
+21/06/2025 18:10,Minnesota Twins,Milwaukee Brewers,0,9,A
+21/06/2025 18:15,St. Louis Cardinals,Cincinnati Reds,6,5,H
+21/06/2025 18:20,Chicago Cubs,Seattle Mariners,10,7,H
+21/06/2025 19:07,Toronto Blue Jays,Chicago White Sox,7,1,H
+21/06/2025 20:05,San Francisco Giants,Boston Red Sox,3,2,H
+21/06/2025 20:05,Pittsburgh Pirates,Texas Rangers,2,3,A
+21/06/2025 20:10,Miami Marlins,Atlanta Braves,0,7,A
+21/06/2025 23:15,San Diego Padres,Kansas City Royals,5,1,H
+21/06/2025 23:15,Philadelphia Phillies,New York Mets,4,11,A
+22/06/2025 01:10,Colorado Rockies,Arizona Diamondbacks,3,5,A
+22/06/2025 01:38,Los Angeles Angels,Houston Astros,9,1,H
+22/06/2025 02:05,Athletics,Cleveland Guardians,2,4,A
+22/06/2025 02:10,Los Angeles Dodgers,Washington Nationals,3,7,A
+22/06/2025 15:35,New York Yankees,Baltimore Orioles,4,2,H
+22/06/2025 16:10,Tampa Bay Rays,Detroit Tigers,3,9,A
+22/06/2025 17:35,Pittsburgh Pirates,Texas Rangers,8,3,H
+22/06/2025 17:37,Toronto Blue Jays,Chicago White Sox,2,4,A
+22/06/2025 17:40,Miami Marlins,Atlanta Braves,5,3,H
+22/06/2025 18:10,Minnesota Twins,Milwaukee Brewers,8,9,A
+22/06/2025 18:15,St. Louis Cardinals,Cincinnati Reds,1,4,A
+22/06/2025 18:20,Chicago Cubs,Seattle Mariners,6,14,A
+22/06/2025 19:10,Colorado Rockies,Arizona Diamondbacks,4,2,H
+22/06/2025 20:05,Athletics,Cleveland Guardians,0,3,A
+22/06/2025 20:05,San Francisco Giants,Boston Red Sox,9,5,H
+22/06/2025 20:07,Los Angeles Angels,Houston Astros,7,8,A
+22/06/2025 20:10,Los Angeles Dodgers,Washington Nationals,13,7,H
+22/06/2025 20:10,San Diego Padres,Kansas City Royals,3,2,H
+22/06/2025 23:10,Philadelphia Phillies,New York Mets,7,1,H
+23/06/2025 22:35,Baltimore Orioles,Texas Rangers,6,0,H
+23/06/2025 23:10,New York Mets,Atlanta Braves,2,3,A
+23/06/2025 23:10,Cincinnati Reds,New York Yankees,6,1,H
+23/06/2025 23:40,Minnesota Twins,Seattle Mariners,2,11,A
+23/06/2025 23:40,Chicago White Sox,Arizona Diamondbacks,0,10,A
+23/06/2025 23:40,Milwaukee Brewers,Pittsburgh Pirates,4,5,A
+23/06/2025 23:45,St. Louis Cardinals,Chicago Cubs,8,2,H
+24/06/2025 01:38,Los Angeles Angels,Boston Red Sox,9,5,H
+24/06/2025 01:40,San Diego Padres,Washington Nationals,6,10,A
+24/06/2025 22:35,Baltimore Orioles,Texas Rangers,5,6,A
+24/06/2025 22:40,Detroit Tigers,Athletics,11,4,H
+24/06/2025 22:40,Cleveland Guardians,Toronto Blue Jays,6,10,A
+24/06/2025 23:10,New York Mets,Atlanta Braves,4,7,A
+24/06/2025 23:10,Cincinnati Reds,New York Yankees,5,4,H
+24/06/2025 23:40,Kansas City Royals,Tampa Bay Rays,1,5,A
+24/06/2025 23:40,Minnesota Twins,Seattle Mariners,5,6,A
+24/06/2025 23:40,Chicago White Sox,Arizona Diamondbacks,1,4,A
+24/06/2025 23:40,Milwaukee Brewers,Pittsburgh Pirates,9,3,H
+24/06/2025 23:45,St. Louis Cardinals,Chicago Cubs,8,7,H
+25/06/2025 00:10,Houston Astros,Philadelphia Phillies,1,0,H
+25/06/2025 00:40,Colorado Rockies,Los Angeles Dodgers,7,9,A
+25/06/2025 01:38,Los Angeles Angels,Boston Red Sox,3,2,H
+25/06/2025 01:40,San Diego Padres,Washington Nationals,4,3,H
+25/06/2025 01:45,San Francisco Giants,Miami Marlins,2,4,A
+25/06/2025 18:10,Chicago White Sox,Arizona Diamondbacks,7,3,H
+25/06/2025 18:10,Milwaukee Brewers,Pittsburgh Pirates,4,2,H
+25/06/2025 20:07,Los Angeles Angels,Boston Red Sox,5,2,H
+25/06/2025 20:10,San Diego Padres,Washington Nationals,1,0,H
+25/06/2025 22:35,Baltimore Orioles,Texas Rangers,0,7,A
+25/06/2025 22:40,Detroit Tigers,Athletics,0,3,A
+25/06/2025 22:40,Cleveland Guardians,Toronto Blue Jays,5,4,H
+25/06/2025 23:10,New York Mets,Atlanta Braves,7,3,H
+25/06/2025 23:10,Cincinnati Reds,New York Yankees,1,7,A
+25/06/2025 23:40,Kansas City Royals,Tampa Bay Rays,0,3,A
+25/06/2025 23:40,Minnesota Twins,Seattle Mariners,2,0,H
+25/06/2025 23:45,St. Louis Cardinals,Chicago Cubs,0,8,A
+26/06/2025 00:10,Houston Astros,Philadelphia Phillies,2,0,H
+26/06/2025 00:40,Colorado Rockies,Los Angeles Dodgers,1,8,A
+26/06/2025 01:45,San Francisco Giants,Miami Marlins,5,8,A
+26/06/2025 17:10,Detroit Tigers,Athletics,8,0,H
+26/06/2025 17:10,Cleveland Guardians,Toronto Blue Jays,0,6,A
+26/06/2025 17:10,Minnesota Twins,Seattle Mariners,10,1,H
+26/06/2025 18:10,Kansas City Royals,Tampa Bay Rays,0,4,A
+26/06/2025 18:10,Houston Astros,Philadelphia Phillies,2,1,H
+26/06/2025 18:15,St. Louis Cardinals,Chicago Cubs,0,3,A
+26/06/2025 19:10,Colorado Rockies,Los Angeles Dodgers,1,3,A
+26/06/2025 19:45,San Francisco Giants,Miami Marlins,5,12,A
+26/06/2025 23:10,New York Mets,Atlanta Braves,4,0,H
+27/06/2025 22:40,Pittsburgh Pirates,New York Mets,9,1,H
+27/06/2025 23:05,Baltimore Orioles,Tampa Bay Rays,22,8,H
+27/06/2025 23:05,New York Yankees,Athletics,3,0,H
+27/06/2025 23:10,Cincinnati Reds,San Diego Padres,8,1,H
+27/06/2025 23:10,Cleveland Guardians,St. Louis Cardinals,0,5,A
+27/06/2025 23:10,Boston Red Sox,Toronto Blue Jays,0,9,A
+27/06/2025 23:10,Detroit Tigers,Minnesota Twins,1,4,A
+27/06/2025 23:15,Atlanta Braves,Philadelphia Phillies,0,13,A
+27/06/2025 23:40,Chicago White Sox,San Francisco Giants,1,3,A
+28/06/2025 00:05,Texas Rangers,Seattle Mariners,6,7,A
+28/06/2025 00:10,Houston Astros,Chicago Cubs,7,4,H
+28/06/2025 00:10,Kansas City Royals,Los Angeles Dodgers,4,5,A
+28/06/2025 00:10,Milwaukee Brewers,Colorado Rockies,10,6,H
+28/06/2025 01:38,Los Angeles Angels,Washington Nationals,9,15,A
+28/06/2025 01:40,Arizona Diamondbacks,Miami Marlins,8,9,A
+28/06/2025 17:05,New York Yankees,Athletics,0,7,A
+28/06/2025 17:10,Detroit Tigers,Minnesota Twins,10,5,H
+28/06/2025 20:05,Pittsburgh Pirates,New York Mets,9,2,H
+28/06/2025 20:05,Baltimore Orioles,Tampa Bay Rays,3,11,A
+28/06/2025 20:05,Texas Rangers,Seattle Mariners,3,2,H
+28/06/2025 20:10,Kansas City Royals,Los Angeles Dodgers,9,5,H
+28/06/2025 20:10,Cincinnati Reds,San Diego Padres,4,6,A
+28/06/2025 20:10,Cleveland Guardians,St. Louis Cardinals,6,9,A
+28/06/2025 20:10,Boston Red Sox,Toronto Blue Jays,15,1,H
+28/06/2025 20:10,Chicago White Sox,San Francisco Giants,1,0,H
+28/06/2025 20:10,Arizona Diamondbacks,Miami Marlins,7,8,A
+28/06/2025 20:10,Milwaukee Brewers,Colorado Rockies,5,0,H
+28/06/2025 23:15,Houston Astros,Chicago Cubs,3,12,A
+28/06/2025 23:15,Atlanta Braves,Philadelphia Phillies,6,1,H
+29/06/2025 01:38,Los Angeles Angels,Washington Nationals,8,2,H
+29/06/2025 16:05,Cleveland Guardians,St. Louis Cardinals,0,7,A
+29/06/2025 17:35,Pittsburgh Pirates,New York Mets,12,1,H
+29/06/2025 17:35,Baltimore Orioles,Tampa Bay Rays,5,1,H
+29/06/2025 17:35,Boston Red Sox,Toronto Blue Jays,3,5,A
+29/06/2025 17:35,Atlanta Braves,Philadelphia Phillies,1,2,A
+29/06/2025 17:35,New York Yankees,Athletics,12,5,H
+29/06/2025 17:40,Cincinnati Reds,San Diego Padres,3,2,H
+29/06/2025 18:10,Houston Astros,Chicago Cubs,2,0,H
+29/06/2025 18:10,Kansas City Royals,Los Angeles Dodgers,1,5,A
+29/06/2025 18:10,Chicago White Sox,San Francisco Giants,5,2,H
+29/06/2025 18:10,Milwaukee Brewers,Colorado Rockies,3,4,A
+29/06/2025 18:35,Texas Rangers,Seattle Mariners,4,6,A
+29/06/2025 20:07,Los Angeles Angels,Washington Nationals,4,7,A
+29/06/2025 20:10,Arizona Diamondbacks,Miami Marlins,4,6,A
+29/06/2025 23:10,Detroit Tigers,Minnesota Twins,3,0,H
+30/06/2025 22:35,Philadelphia Phillies,San Diego Padres,4,0,H
+30/06/2025 22:40,Pittsburgh Pirates,St. Louis Cardinals,7,0,H
+30/06/2025 23:07,Toronto Blue Jays,New York Yankees,5,4,H
+30/06/2025 23:10,Boston Red Sox,Cincinnati Reds,13,6,H
+30/06/2025 23:35,Tampa Bay Rays,Athletics,4,6,A
+01/07/2025 00:05,Texas Rangers,Baltimore Orioles,6,10,A
+01/07/2025 01:40,Seattle Mariners,Kansas City Royals,6,2,H
+01/07/2025 01:40,Arizona Diamondbacks,San Francisco Giants,4,2,H
+01/07/2025 19:07,Toronto Blue Jays,New York Yankees,12,5,H
+01/07/2025 22:40,Pittsburgh Pirates,St. Louis Cardinals,1,0,H
+01/07/2025 22:40,Miami Marlins,Minnesota Twins,2,0,H
+01/07/2025 23:05,Tampa Bay Rays,Athletics,3,4,A
+01/07/2025 23:15,Atlanta Braves,Los Angeles Angels,0,4,A
+02/07/2025 00:05,Chicago Cubs,Cleveland Guardians,5,2,H
+02/07/2025 00:05,Texas Rangers,Baltimore Orioles,10,2,H
+02/07/2025 00:40,Colorado Rockies,Houston Astros,5,6,A
+02/07/2025 01:40,Seattle Mariners,Kansas City Royals,3,6,A
+02/07/2025 01:40,Arizona Diamondbacks,San Francisco Giants,8,2,H
+02/07/2025 02:10,Los Angeles Dodgers,Chicago White Sox,6,1,H
+02/07/2025 16:10,Tampa Bay Rays,Athletics,6,5,H
+02/07/2025 16:35,Pittsburgh Pirates,St. Louis Cardinals,5,0,H
+02/07/2025 17:05,Washington Nationals,Detroit Tigers,2,11,A
+02/07/2025 17:05,Philadelphia Phillies,San Diego Padres,4,6,A
+02/07/2025 17:10,New York Mets,Milwaukee Brewers,2,7,A
+02/07/2025 18:30,Boston Red Sox,Cincinnati Reds,5,3,H
+02/07/2025 22:15,Philadelphia Phillies,San Diego Padres,5,1,H
+02/07/2025 22:40,Miami Marlins,Minnesota Twins,1,2,A
+02/07/2025 22:45,Washington Nationals,Detroit Tigers,9,4,H
+02/07/2025 23:07,Toronto Blue Jays,New York Yankees,11,9,H
+02/07/2025 23:10,Boston Red Sox,Cincinnati Reds,4,8,A
+02/07/2025 23:10,New York Mets,Milwaukee Brewers,7,3,H
+02/07/2025 23:15,Atlanta Braves,Los Angeles Angels,8,3,H
+03/07/2025 00:05,Chicago Cubs,Cleveland Guardians,5,4,H
+03/07/2025 00:05,Texas Rangers,Baltimore Orioles,6,0,H
+03/07/2025 00:40,Colorado Rockies,Houston Astros,3,5,A
+03/07/2025 01:40,Seattle Mariners,Kansas City Royals,3,2,H
+03/07/2025 01:40,Arizona Diamondbacks,San Francisco Giants,5,6,A
+03/07/2025 02:10,Los Angeles Dodgers,Chicago White Sox,5,4,H
+03/07/2025 16:10,Miami Marlins,Minnesota Twins,4,1,H
+03/07/2025 19:10,Colorado Rockies,Houston Astros,7,6,H
+03/07/2025 22:45,Washington Nationals,Detroit Tigers,11,7,H
+03/07/2025 23:07,Toronto Blue Jays,New York Yankees,8,5,H
+03/07/2025 23:10,New York Mets,Milwaukee Brewers,3,2,H
+03/07/2025 23:15,Atlanta Braves,Los Angeles Angels,1,5,A
+04/07/2025 00:05,Chicago Cubs,Cleveland Guardians,1,0,H
+04/07/2025 01:40,Arizona Diamondbacks,San Francisco Giants,2,7,A
+04/07/2025 02:10,Seattle Mariners,Kansas City Royals,2,3,A
+04/07/2025 02:10,Los Angeles Dodgers,Chicago White Sox,6,2,H
+04/07/2025 15:05,Washington Nationals,Boston Red Sox,2,11,A
+04/07/2025 17:05,Philadelphia Phillies,Cincinnati Reds,6,9,A
+04/07/2025 18:20,Chicago Cubs,St. Louis Cardinals,11,3,H
+04/07/2025 19:10,New York Mets,New York Yankees,6,5,H
+04/07/2025 20:10,Seattle Mariners,Pittsburgh Pirates,6,0,H
+04/07/2025 20:10,Minnesota Twins,Tampa Bay Rays,4,3,H
+04/07/2025 22:40,San Diego Padres,Texas Rangers,3,2,H
+04/07/2025 23:07,Toronto Blue Jays,Los Angeles Angels,4,3,H
+04/07/2025 23:10,Cleveland Guardians,Detroit Tigers,1,2,A
+04/07/2025 23:10,Miami Marlins,Milwaukee Brewers,5,6,A
+04/07/2025 23:15,Atlanta Braves,Baltimore Orioles,2,3,A
+05/07/2025 00:10,Colorado Rockies,Chicago White Sox,2,3,A
+05/07/2025 01:10,Los Angeles Dodgers,Houston Astros,1,18,A
+05/07/2025 01:40,Arizona Diamondbacks,Kansas City Royals,3,9,A
+05/07/2025 02:05,Athletics,San Francisco Giants,11,2,H
+05/07/2025 18:10,Minnesota Twins,Tampa Bay Rays,6,5,H
+05/07/2025 18:20,Chicago Cubs,St. Louis Cardinals,6,8,A
+05/07/2025 19:07,Toronto Blue Jays,Los Angeles Angels,4,3,H
+05/07/2025 20:05,Washington Nationals,Boston Red Sox,3,10,A
+05/07/2025 20:05,Philadelphia Phillies,Cincinnati Reds,5,1,H
+05/07/2025 20:10,Arizona Diamondbacks,Kansas City Royals,7,1,H
+05/07/2025 20:10,Atlanta Braves,Baltimore Orioles,6,9,A
+05/07/2025 20:10,New York Mets,New York Yankees,12,6,H
+05/07/2025 20:10,Miami Marlins,Milwaukee Brewers,4,2,H
+05/07/2025 23:15,Cleveland Guardians,Detroit Tigers,0,1,A
+05/07/2025 23:15,Los Angeles Dodgers,Houston Astros,4,6,A
+06/07/2025 01:10,Colorado Rockies,Chicago White Sox,3,10,A
+06/07/2025 01:40,San Diego Padres,Texas Rangers,4,7,A
+06/07/2025 02:05,Athletics,San Francisco Giants,2,7,A
+06/07/2025 02:10,Seattle Mariners,Pittsburgh Pirates,1,0,H
+06/07/2025 15:35,Atlanta Braves,Baltimore Orioles,1,2,A
+06/07/2025 17:35,Washington Nationals,Boston Red Sox,4,6,A
+06/07/2025 17:35,Philadelphia Phillies,Cincinnati Reds,3,1,H
+06/07/2025 17:37,Toronto Blue Jays,Los Angeles Angels,3,2,H
+06/07/2025 17:40,Cleveland Guardians,Detroit Tigers,2,7,A
+06/07/2025 17:40,New York Mets,New York Yankees,4,6,A
+06/07/2025 17:40,Miami Marlins,Milwaukee Brewers,1,3,A
+06/07/2025 18:10,Minnesota Twins,Tampa Bay Rays,5,7,A
+06/07/2025 19:10,Colorado Rockies,Chicago White Sox,6,4,H
+06/07/2025 20:10,Arizona Diamondbacks,Kansas City Royals,0,4,A
+06/07/2025 20:10,Los Angeles Dodgers,Houston Astros,1,5,A
+06/07/2025 20:10,Seattle Mariners,Pittsburgh Pirates,1,0,H
+06/07/2025 22:10,Chicago Cubs,St. Louis Cardinals,11,0,H
+07/07/2025 01:10,San Diego Padres,Texas Rangers,4,1,H
+07/07/2025 02:05,Athletics,San Francisco Giants,2,6,A
+07/07/2025 22:40,Detroit Tigers,Tampa Bay Rays,5,1,H
+07/07/2025 23:10,Boston Red Sox,Colorado Rockies,9,3,H
+07/07/2025 23:10,Cincinnati Reds,Miami Marlins,1,5,A
+07/07/2025 23:40,Kansas City Royals,Pittsburgh Pirates,9,3,H
+07/07/2025 23:40,Chicago White Sox,Toronto Blue Jays,4,8,A
+07/07/2025 23:40,Milwaukee Brewers,Los Angeles Dodgers,9,1,H
+08/07/2025 00:10,Houston Astros,Cleveland Guardians,5,7,A
+08/07/2025 01:38,Los Angeles Angels,Texas Rangers,6,5,H
+08/07/2025 01:40,San Diego Padres,Arizona Diamondbacks,3,6,A
+08/07/2025 01:45,San Francisco Giants,Philadelphia Phillies,3,1,H
+08/07/2025 22:35,Baltimore Orioles,New York Mets,6,7,A
+08/07/2025 22:40,Detroit Tigers,Tampa Bay Rays,4,2,H
+08/07/2025 23:05,New York Yankees,Seattle Mariners,10,3,H
+08/07/2025 23:10,Boston Red Sox,Colorado Rockies,10,2,H
+08/07/2025 23:10,Cincinnati Reds,Miami Marlins,2,12,A
+08/07/2025 23:40,Kansas City Royals,Pittsburgh Pirates,4,3,H
+08/07/2025 23:40,Minnesota Twins,Chicago Cubs,8,1,H
+08/07/2025 23:40,Chicago White Sox,Toronto Blue Jays,1,6,A
+08/07/2025 23:40,Milwaukee Brewers,Los Angeles Dodgers,3,1,H
+08/07/2025 23:45,St. Louis Cardinals,Washington Nationals,4,2,H
+09/07/2025 00:10,Houston Astros,Cleveland Guardians,6,10,A
+09/07/2025 01:38,Los Angeles Angels,Texas Rangers,1,13,A
+09/07/2025 01:40,San Diego Padres,Arizona Diamondbacks,1,0,H
+09/07/2025 01:45,San Francisco Giants,Philadelphia Phillies,4,3,H
+09/07/2025 02:05,Athletics,Atlanta Braves,10,1,H
+09/07/2025 18:10,Chicago White Sox,Toronto Blue Jays,2,1,H
+09/07/2025 18:10,Milwaukee Brewers,Los Angeles Dodgers,3,2,H
+09/07/2025 19:45,San Francisco Giants,Philadelphia Phillies,0,13,A
+09/07/2025 21:10,Detroit Tigers,Tampa Bay Rays,3,7,A
+09/07/2025 23:05,New York Yankees,Seattle Mariners,9,6,H
+09/07/2025 23:10,Boston Red Sox,Colorado Rockies,10,2,H
+09/07/2025 23:10,Cincinnati Reds,Miami Marlins,7,2,H
+09/07/2025 23:40,Kansas City Royals,Pittsburgh Pirates,4,3,H
+09/07/2025 23:40,Minnesota Twins,Chicago Cubs,4,2,H
+09/07/2025 23:45,St. Louis Cardinals,Washington Nationals,2,8,A
+10/07/2025 00:10,Houston Astros,Cleveland Guardians,2,4,A
+10/07/2025 01:38,Los Angeles Angels,Texas Rangers,11,8,H
+10/07/2025 01:40,San Diego Padres,Arizona Diamondbacks,2,8,A
+10/07/2025 02:05,Athletics,Atlanta Braves,2,9,A
+10/07/2025 16:05,Baltimore Orioles,New York Mets,3,1,H
+10/07/2025 17:10,Minnesota Twins,Chicago Cubs,1,8,A
+10/07/2025 21:05,Baltimore Orioles,New York Mets,7,3,H
+10/07/2025 21:10,Cincinnati Reds,Miami Marlins,6,0,H
+10/07/2025 23:05,New York Yankees,Seattle Mariners,6,5,H
+10/07/2025 23:10,Boston Red Sox,Tampa Bay Rays,4,3,H
+10/07/2025 23:45,St. Louis Cardinals,Washington Nationals,8,1,H
+11/07/2025 01:05,Athletics,Atlanta Braves,5,4,H
+11/07/2025 01:38,Los Angeles Angels,Texas Rangers,4,11,A
+11/07/2025 01:40,San Diego Padres,Arizona Diamondbacks,4,3,H
+11/07/2025 19:10,Chicago White Sox,Cleveland Guardians,2,4,A
+11/07/2025 23:05,Baltimore Orioles,Miami Marlins,5,2,H
+11/07/2025 23:05,New York Yankees,Chicago Cubs,11,0,H
+11/07/2025 23:10,Cincinnati Reds,Colorado Rockies,2,3,A
+11/07/2025 23:10,Detroit Tigers,Seattle Mariners,3,12,A
+11/07/2025 23:10,Boston Red Sox,Tampa Bay Rays,5,4,H
+12/07/2025 00:10,Kansas City Royals,New York Mets,3,8,A
+12/07/2025 00:10,Houston Astros,Texas Rangers,3,7,A
+12/07/2025 00:10,Minnesota Twins,Pittsburgh Pirates,2,1,H
+12/07/2025 00:10,Chicago White Sox,Cleveland Guardians,5,4,H
+12/07/2025 00:10,Milwaukee Brewers,Washington Nationals,8,3,H
+12/07/2025 00:15,St. Louis Cardinals,Atlanta Braves,5,6,A
+12/07/2025 01:38,Los Angeles Angels,Arizona Diamondbacks,6,5,H
+12/07/2025 01:40,San Diego Padres,Philadelphia Phillies,4,2,H
+12/07/2025 02:05,Athletics,Toronto Blue Jays,6,7,A
+12/07/2025 02:15,San Francisco Giants,Los Angeles Dodgers,8,7,H
+12/07/2025 17:05,New York Yankees,Chicago Cubs,2,5,A
+12/07/2025 17:10,Detroit Tigers,Seattle Mariners,7,15,A
+12/07/2025 18:10,Minnesota Twins,Pittsburgh Pirates,12,4,H
+12/07/2025 18:15,St. Louis Cardinals,Atlanta Braves,6,7,A
+12/07/2025 20:05,San Francisco Giants,Los Angeles Dodgers,1,2,A
+12/07/2025 20:05,Baltimore Orioles,Miami Marlins,0,6,A
+12/07/2025 20:10,Cincinnati Reds,Colorado Rockies,4,3,H
+12/07/2025 20:10,Kansas City Royals,New York Mets,1,3,A
+12/07/2025 20:10,Boston Red Sox,Tampa Bay Rays,1,0,H
+12/07/2025 20:10,Chicago White Sox,Cleveland Guardians,2,6,A
+12/07/2025 20:10,Milwaukee Brewers,Washington Nationals,6,5,H
+12/07/2025 23:35,Houston Astros,Texas Rangers,5,4,H
+12/07/2025 23:35,San Diego Padres,Philadelphia Phillies,5,4,H
+13/07/2025 01:38,Los Angeles Angels,Arizona Diamondbacks,10,5,H
+13/07/2025 02:05,Athletics,Toronto Blue Jays,4,3,H
+13/07/2025 17:35,Boston Red Sox,Tampa Bay Rays,4,1,H
+13/07/2025 17:35,Baltimore Orioles,Miami Marlins,1,11,A
+13/07/2025 17:35,New York Yankees,Chicago Cubs,1,4,A
+13/07/2025 17:40,Cincinnati Reds,Colorado Rockies,4,2,H
+13/07/2025 17:40,Detroit Tigers,Seattle Mariners,4,8,A
+13/07/2025 18:10,Kansas City Royals,New York Mets,3,2,H
+13/07/2025 18:10,Houston Astros,Texas Rangers,1,5,A
+13/07/2025 18:10,Minnesota Twins,Pittsburgh Pirates,1,2,A
+13/07/2025 18:10,Chicago White Sox,Cleveland Guardians,5,6,A
+13/07/2025 18:10,Milwaukee Brewers,Washington Nationals,8,1,H
+13/07/2025 18:15,St. Louis Cardinals,Atlanta Braves,5,4,H
+13/07/2025 20:05,San Francisco Giants,Los Angeles Dodgers,2,5,A
+13/07/2025 20:05,Athletics,Toronto Blue Jays,6,3,H
+13/07/2025 20:07,Los Angeles Angels,Arizona Diamondbacks,1,5,A
+13/07/2025 20:10,San Diego Padres,Philadelphia Phillies,1,2,A
+18/07/2025 18:20,Chicago Cubs,Boston Red Sox,4,1,H
+18/07/2025 22:40,Pittsburgh Pirates,Chicago White Sox,1,10,A
+18/07/2025 22:45,Washington Nationals,San Diego Padres,2,7,A
+18/07/2025 22:45,Philadelphia Phillies,Los Angeles Angels,5,6,A
+18/07/2025 23:07,Toronto Blue Jays,San Francisco Giants,4,0,H
+18/07/2025 23:10,New York Mets,Cincinnati Reds,4,8,A
+18/07/2025 23:10,Cleveland Guardians,Athletics,8,6,H
+18/07/2025 23:10,Miami Marlins,Kansas City Royals,8,7,H
+18/07/2025 23:15,Atlanta Braves,New York Yankees,7,3,H
+18/07/2025 23:35,Tampa Bay Rays,Baltimore Orioles,11,1,H
+19/07/2025 00:05,Texas Rangers,Detroit Tigers,2,0,H
+19/07/2025 00:40,Colorado Rockies,Minnesota Twins,6,4,H
+19/07/2025 01:40,Arizona Diamondbacks,St. Louis Cardinals,7,3,H
+19/07/2025 02:10,Seattle Mariners,Houston Astros,6,1,H
+19/07/2025 02:10,Los Angeles Dodgers,Milwaukee Brewers,0,2,A
+19/07/2025 19:07,Toronto Blue Jays,San Francisco Giants,6,3,H
+19/07/2025 20:10,New York Mets,Cincinnati Reds,2,5,A
+19/07/2025 20:10,Miami Marlins,Kansas City Royals,3,1,H
+19/07/2025 22:05,Philadelphia Phillies,Los Angeles Angels,9,5,H
+19/07/2025 22:40,Pittsburgh Pirates,Chicago White Sox,4,10,A
+19/07/2025 22:45,Washington Nationals,San Diego Padres,4,2,H
+19/07/2025 23:05,Tampa Bay Rays,Baltimore Orioles,4,3,H
+19/07/2025 23:05,Texas Rangers,Detroit Tigers,4,1,H
+19/07/2025 23:10,Cleveland Guardians,Athletics,2,8,A
+19/07/2025 23:15,Chicago Cubs,Boston Red Sox,6,0,H
+19/07/2025 23:15,Arizona Diamondbacks,St. Louis Cardinals,10,1,H
+19/07/2025 23:15,Atlanta Braves,New York Yankees,9,12,A
+20/07/2025 00:10,Colorado Rockies,Minnesota Twins,10,6,H
+20/07/2025 01:10,Los Angeles Dodgers,Milwaukee Brewers,7,8,A
+20/07/2025 01:40,Seattle Mariners,Houston Astros,7,6,H
+20/07/2025 16:05,Toronto Blue Jays,San Francisco Giants,8,6,H
+20/07/2025 16:10,Tampa Bay Rays,Baltimore Orioles,3,5,A
+20/07/2025 17:35,Washington Nationals,San Diego Padres,1,8,A
+20/07/2025 17:35,Philadelphia Phillies,Los Angeles Angels,2,8,A
+20/07/2025 17:35,Pittsburgh Pirates,Chicago White Sox,2,7,A
+20/07/2025 17:35,Atlanta Braves,New York Yankees,2,4,A
+20/07/2025 17:40,New York Mets,Cincinnati Reds,3,2,H
+20/07/2025 17:40,Cleveland Guardians,Athletics,8,2,H
+20/07/2025 17:40,Miami Marlins,Kansas City Royals,4,7,A
+20/07/2025 18:20,Chicago Cubs,Boston Red Sox,1,6,A
+20/07/2025 19:10,Colorado Rockies,Minnesota Twins,1,7,A
+20/07/2025 20:10,Seattle Mariners,Houston Astros,3,11,A
+20/07/2025 20:10,Arizona Diamondbacks,St. Louis Cardinals,5,3,H
+20/07/2025 20:10,Los Angeles Dodgers,Milwaukee Brewers,5,6,A
+20/07/2025 23:10,Texas Rangers,Detroit Tigers,1,2,A
+21/07/2025 22:40,Cleveland Guardians,Baltimore Orioles,10,5,H
+21/07/2025 22:40,Pittsburgh Pirates,Detroit Tigers,3,0,H
+21/07/2025 22:40,Miami Marlins,San Diego Padres,1,2,A
+21/07/2025 22:45,Washington Nationals,Cincinnati Reds,10,8,H
+21/07/2025 22:45,Philadelphia Phillies,Boston Red Sox,3,2,H
+21/07/2025 23:07,Toronto Blue Jays,New York Yankees,4,1,H
+21/07/2025 23:10,New York Mets,Los Angeles Angels,7,5,H
+21/07/2025 23:15,Atlanta Braves,San Francisco Giants,9,5,H
+21/07/2025 23:35,Tampa Bay Rays,Chicago White Sox,3,8,A
+22/07/2025 00:05,Chicago Cubs,Kansas City Royals,4,12,A
+22/07/2025 00:05,Texas Rangers,Athletics,7,2,H
+22/07/2025 00:40,Colorado Rockies,St. Louis Cardinals,2,6,A
+22/07/2025 01:40,Arizona Diamondbacks,Houston Astros,3,6,A
+22/07/2025 01:40,Seattle Mariners,Milwaukee Brewers,0,6,A
+22/07/2025 02:10,Los Angeles Dodgers,Minnesota Twins,5,2,H
+22/07/2025 22:40,Cleveland Guardians,Baltimore Orioles,6,3,H
+22/07/2025 22:40,Pittsburgh Pirates,Detroit Tigers,8,5,H
+22/07/2025 22:40,Miami Marlins,San Diego Padres,4,3,H
+22/07/2025 22:45,Washington Nationals,Cincinnati Reds,6,1,H
+22/07/2025 22:45,Philadelphia Phillies,Boston Red Sox,4,1,H
+22/07/2025 23:05,Tampa Bay Rays,Chicago White Sox,4,3,H
+22/07/2025 23:07,Toronto Blue Jays,New York Yankees,4,5,A
+22/07/2025 23:10,New York Mets,Los Angeles Angels,3,2,H
+22/07/2025 23:15,Atlanta Braves,San Francisco Giants,0,9,A
+23/07/2025 00:05,Chicago Cubs,Kansas City Royals,6,0,H
+23/07/2025 00:05,Texas Rangers,Athletics,6,2,H
+23/07/2025 00:40,Colorado Rockies,St. Louis Cardinals,8,4,H
+23/07/2025 01:40,Arizona Diamondbacks,Houston Astros,1,3,A
+23/07/2025 01:40,Seattle Mariners,Milwaukee Brewers,1,0,H
+23/07/2025 02:10,Los Angeles Dodgers,Minnesota Twins,7,10,A
+23/07/2025 16:05,Washington Nationals,Cincinnati Reds,0,5,A
+23/07/2025 16:10,Miami Marlins,San Diego Padres,3,2,H
+23/07/2025 16:15,Atlanta Braves,San Francisco Giants,3,9,A
+23/07/2025 16:35,Pittsburgh Pirates,Detroit Tigers,6,1,H
+23/07/2025 17:10,New York Mets,Los Angeles Angels,6,3,H
+23/07/2025 18:20,Chicago Cubs,Kansas City Royals,4,8,A
+23/07/2025 19:10,Colorado Rockies,St. Louis Cardinals,6,0,H
+23/07/2025 19:40,Arizona Diamondbacks,Houston Astros,3,4,A
+23/07/2025 19:40,Seattle Mariners,Milwaukee Brewers,2,10,A
+23/07/2025 20:10,Los Angeles Dodgers,Minnesota Twins,4,3,H
+23/07/2025 22:40,Cleveland Guardians,Baltimore Orioles,3,2,H
+23/07/2025 23:07,Toronto Blue Jays,New York Yankees,8,4,H
+23/07/2025 23:10,Philadelphia Phillies,Boston Red Sox,8,9,A
+23/07/2025 23:35,Tampa Bay Rays,Chicago White Sox,9,11,A
+24/07/2025 00:05,Texas Rangers,Athletics,2,1,H
+24/07/2025 17:10,Cleveland Guardians,Baltimore Orioles,3,4,A
+24/07/2025 22:40,Detroit Tigers,Toronto Blue Jays,4,11,A
+24/07/2025 23:45,St. Louis Cardinals,San Diego Padres,9,7,H
+25/07/2025 00:10,Houston Astros,Athletics,2,5,A
+25/07/2025 01:38,Los Angeles Angels,Seattle Mariners,2,4,A
+25/07/2025 20:10,Milwaukee Brewers,Miami Marlins,1,5,A
+25/07/2025 22:40,Pittsburgh Pirates,Arizona Diamondbacks,0,1,A
+25/07/2025 23:05,Baltimore Orioles,Colorado Rockies,5,6,A
+25/07/2025 23:05,New York Yankees,Philadelphia Phillies,5,12,A
+25/07/2025 23:10,Boston Red Sox,Los Angeles Dodgers,2,5,A
+25/07/2025 23:10,Cincinnati Reds,Tampa Bay Rays,7,2,H
+25/07/2025 23:10,Detroit Tigers,Toronto Blue Jays,2,6,A
+25/07/2025 23:15,St. Louis Cardinals,San Diego Padres,3,0,H
+25/07/2025 23:40,Chicago White Sox,Chicago Cubs,12,5,H
+26/07/2025 00:05,Texas Rangers,Atlanta Braves,8,3,H
+26/07/2025 00:10,Houston Astros,Athletics,3,15,A
+26/07/2025 00:10,Minnesota Twins,Washington Nationals,1,0,H
+26/07/2025 01:38,Los Angeles Angels,Seattle Mariners,3,2,H
+26/07/2025 02:15,San Francisco Giants,New York Mets,1,8,A
+26/07/2025 17:05,New York Yankees,Philadelphia Phillies,4,9,A
+26/07/2025 18:40,Kansas City Royals,Cleveland Guardians,5,3,H
+26/07/2025 22:10,Detroit Tigers,Toronto Blue Jays,1,6,A
+26/07/2025 22:40,Pittsburgh Pirates,Arizona Diamondbacks,2,0,H
+26/07/2025 22:40,Cincinnati Reds,Tampa Bay Rays,6,2,H
+26/07/2025 23:05,Baltimore Orioles,Colorado Rockies,18,0,H
+26/07/2025 23:05,Texas Rangers,Atlanta Braves,6,5,H
+26/07/2025 23:10,Houston Astros,Athletics,1,5,A
+26/07/2025 23:10,Minnesota Twins,Washington Nationals,3,9,A
+26/07/2025 23:10,Chicago White Sox,Chicago Cubs,1,6,A
+26/07/2025 23:10,Milwaukee Brewers,Miami Marlins,4,7,A
+26/07/2025 23:15,Kansas City Royals,Cleveland Guardians,4,6,A
+26/07/2025 23:15,Boston Red Sox,Los Angeles Dodgers,4,2,H
+26/07/2025 23:15,St. Louis Cardinals,San Diego Padres,1,3,A
+27/07/2025 01:05,San Francisco Giants,New York Mets,1,2,A
+27/07/2025 01:38,Los Angeles Angels,Seattle Mariners,2,7,A
+27/07/2025 17:35,Baltimore Orioles,Colorado Rockies,5,1,H
+27/07/2025 17:35,Boston Red Sox,Los Angeles Dodgers,4,3,H
+27/07/2025 17:35,Pittsburgh Pirates,Arizona Diamondbacks,6,0,H
+27/07/2025 17:35,New York Yankees,Philadelphia Phillies,4,3,H
+27/07/2025 17:40,Cincinnati Reds,Tampa Bay Rays,2,1,H
+27/07/2025 17:40,Detroit Tigers,Toronto Blue Jays,10,4,H
+27/07/2025 18:10,Kansas City Royals,Cleveland Guardians,4,1,H
+27/07/2025 18:10,Houston Astros,Athletics,1,7,A
+27/07/2025 18:10,Minnesota Twins,Washington Nationals,2,7,A
+27/07/2025 18:10,Chicago White Sox,Chicago Cubs,4,5,A
+27/07/2025 18:10,Milwaukee Brewers,Miami Marlins,3,2,H
+27/07/2025 18:15,St. Louis Cardinals,San Diego Padres,2,9,A
+27/07/2025 18:35,Texas Rangers,Atlanta Braves,8,1,H
+27/07/2025 20:07,Los Angeles Angels,Seattle Mariners,4,1,H
+27/07/2025 23:10,San Francisco Giants,New York Mets,3,5,A
+28/07/2025 22:35,Baltimore Orioles,Toronto Blue Jays,11,4,H
+28/07/2025 22:40,Cleveland Guardians,Colorado Rockies,6,8,A
+28/07/2025 22:40,Detroit Tigers,Arizona Diamondbacks,5,1,H
+28/07/2025 23:05,New York Yankees,Tampa Bay Rays,2,4,A
+28/07/2025 23:10,Cincinnati Reds,Los Angeles Dodgers,2,5,A
+28/07/2025 23:40,Minnesota Twins,Boston Red Sox,5,4,H
+28/07/2025 23:40,Kansas City Royals,Atlanta Braves,7,10,A
+28/07/2025 23:40,Chicago White Sox,Philadelphia Phillies,6,2,H
+28/07/2025 23:40,Milwaukee Brewers,Chicago Cubs,8,4,H
+28/07/2025 23:45,St. Louis Cardinals,Miami Marlins,7,1,H
+29/07/2025 00:10,Houston Astros,Washington Nationals,1,2,A
+29/07/2025 01:38,Los Angeles Angels,Texas Rangers,6,4,H
+29/07/2025 01:40,San Diego Padres,New York Mets,7,6,H
+29/07/2025 01:45,San Francisco Giants,Pittsburgh Pirates,5,6,A
+29/07/2025 02:05,Athletics,Seattle Mariners,1,3,A
+29/07/2025 16:35,Baltimore Orioles,Toronto Blue Jays,16,4,H
+29/07/2025 22:35,Baltimore Orioles,Toronto Blue Jays,3,2,H
+29/07/2025 22:40,Cleveland Guardians,Colorado Rockies,10,4,H
+29/07/2025 22:40,Detroit Tigers,Arizona Diamondbacks,12,2,H
+29/07/2025 23:05,New York Yankees,Tampa Bay Rays,7,5,H
+29/07/2025 23:10,Cincinnati Reds,Los Angeles Dodgers,4,5,A
+29/07/2025 23:40,Minnesota Twins,Boston Red Sox,5,8,A
+29/07/2025 23:40,Kansas City Royals,Atlanta Braves,9,6,H
+29/07/2025 23:40,Chicago White Sox,Philadelphia Phillies,3,6,A
+29/07/2025 23:40,Milwaukee Brewers,Chicago Cubs,9,3,H
+29/07/2025 23:45,St. Louis Cardinals,Miami Marlins,0,5,A
+30/07/2025 00:10,Houston Astros,Washington Nationals,7,4,H
+30/07/2025 01:38,Los Angeles Angels,Texas Rangers,8,5,H
+30/07/2025 01:40,San Diego Padres,New York Mets,7,1,H
+30/07/2025 01:45,San Francisco Giants,Pittsburgh Pirates,1,3,A
+30/07/2025 02:05,Athletics,Seattle Mariners,6,1,H
+30/07/2025 16:35,Baltimore Orioles,Toronto Blue Jays,5,9,A
+30/07/2025 17:10,Detroit Tigers,Arizona Diamondbacks,7,2,H
+30/07/2025 17:10,Minnesota Twins,Boston Red Sox,1,13,A
+30/07/2025 18:10,Houston Astros,Washington Nationals,9,1,H
+30/07/2025 18:10,Kansas City Royals,Atlanta Braves,1,0,H
+30/07/2025 18:10,Chicago White Sox,Philadelphia Phillies,9,3,H
+30/07/2025 18:10,Milwaukee Brewers,Chicago Cubs,3,10,A
+30/07/2025 19:45,San Francisco Giants,Pittsburgh Pirates,1,2,A
+30/07/2025 20:10,San Diego Padres,New York Mets,5,0,H
+30/07/2025 22:40,Cleveland Guardians,Colorado Rockies,5,0,H
+30/07/2025 23:05,New York Yankees,Tampa Bay Rays,5,4,H
+30/07/2025 23:10,Cincinnati Reds,Los Angeles Dodgers,5,2,H
+30/07/2025 23:45,St. Louis Cardinals,Miami Marlins,0,2,A
+31/07/2025 01:38,Los Angeles Angels,Texas Rangers,3,6,A
+31/07/2025 02:05,Athletics,Seattle Mariners,5,4,H
+31/07/2025 17:05,New York Yankees,Tampa Bay Rays,7,4,H
+31/07/2025 23:10,Cincinnati Reds,Atlanta Braves,11,12,A
+01/08/2025 01:40,Seattle Mariners,Texas Rangers,6,0,H
+01/08/2025 16:40,Cincinnati Reds,Atlanta Braves,3,2,H
+01/08/2025 18:20,Chicago Cubs,Baltimore Orioles,1,0,H
+01/08/2025 22:45,Philadelphia Phillies,Detroit Tigers,5,4,H
+01/08/2025 22:45,Washington Nationals,Milwaukee Brewers,9,16,A
+01/08/2025 23:07,Toronto Blue Jays,Kansas City Royals,3,9,A
+01/08/2025 23:10,Boston Red Sox,Houston Astros,2,1,H
+01/08/2025 23:10,New York Mets,San Francisco Giants,3,4,A
+01/08/2025 23:10,Cleveland Guardians,Minnesota Twins,3,2,H
+01/08/2025 23:10,Miami Marlins,New York Yankees,13,12,H
+01/08/2025 23:35,Tampa Bay Rays,Los Angeles Dodgers,0,5,A
+02/08/2025 00:10,Colorado Rockies,Pittsburgh Pirates,17,16,H
+02/08/2025 01:38,Los Angeles Angels,Chicago White Sox,3,6,A
+02/08/2025 01:40,San Diego Padres,St. Louis Cardinals,4,1,H
+02/08/2025 02:05,Athletics,Arizona Diamondbacks,5,1,H
+02/08/2025 02:10,Seattle Mariners,Texas Rangers,4,3,H
+02/08/2025 17:10,Tampa Bay Rays,Los Angeles Dodgers,4,0,H
+02/08/2025 18:20,Chicago Cubs,Baltimore Orioles,3,4,A
+02/08/2025 19:07,Toronto Blue Jays,Kansas City Royals,4,2,H
+02/08/2025 19:10,Colorado Rockies,Pittsburgh Pirates,8,5,H
+02/08/2025 20:05,Philadelphia Phillies,Detroit Tigers,5,7,A
+02/08/2025 20:05,Washington Nationals,Milwaukee Brewers,2,8,A
+02/08/2025 20:10,Boston Red Sox,Houston Astros,7,3,H
+02/08/2025 20:10,New York Mets,San Francisco Giants,12,6,H
+02/08/2025 20:10,Seattle Mariners,Texas Rangers,4,6,A
+02/08/2025 20:10,Cleveland Guardians,Minnesota Twins,5,4,H
+02/08/2025 20:10,Miami Marlins,New York Yankees,2,0,H
+03/08/2025 02:05,Athletics,Arizona Diamondbacks,2,7,A
+03/08/2025 02:07,Los Angeles Angels,Chicago White Sox,0,1,A
+03/08/2025 02:10,San Diego Padres,St. Louis Cardinals,5,8,A
+03/08/2025 15:35,Boston Red Sox,Houston Astros,6,1,H
+03/08/2025 16:10,Tampa Bay Rays,Los Angeles Dodgers,0,3,A
+03/08/2025 17:05,Cincinnati Reds,Atlanta Braves,2,4,A
+03/08/2025 17:35,Washington Nationals,Milwaukee Brewers,3,14,A
+03/08/2025 17:37,Toronto Blue Jays,Kansas City Royals,4,7,A
+03/08/2025 17:40,New York Mets,San Francisco Giants,4,12,A
+03/08/2025 17:40,Cleveland Guardians,Minnesota Twins,4,5,A
+03/08/2025 17:40,Miami Marlins,New York Yankees,7,3,H
+03/08/2025 18:20,Chicago Cubs,Baltimore Orioles,5,3,H
+03/08/2025 19:10,Colorado Rockies,Pittsburgh Pirates,5,9,A
+03/08/2025 20:05,Athletics,Arizona Diamondbacks,4,6,A
+03/08/2025 20:07,Los Angeles Angels,Chicago White Sox,8,5,H
+03/08/2025 20:10,San Diego Padres,St. Louis Cardinals,7,3,H
+03/08/2025 20:10,Seattle Mariners,Texas Rangers,5,4,H
+03/08/2025 23:10,Philadelphia Phillies,Detroit Tigers,2,0,H
+04/08/2025 22:40,Pittsburgh Pirates,San Francisco Giants,5,4,H
+04/08/2025 22:40,Detroit Tigers,Minnesota Twins,6,3,H
+04/08/2025 22:40,Miami Marlins,Houston Astros,2,8,A
+04/08/2025 22:45,Philadelphia Phillies,Baltimore Orioles,13,3,H
+04/08/2025 23:10,Boston Red Sox,Kansas City Royals,8,5,H
+04/08/2025 23:10,New York Mets,Cleveland Guardians,6,7,A
+04/08/2025 23:15,Atlanta Braves,Milwaukee Brewers,1,3,A
+05/08/2025 00:05,Chicago Cubs,Cincinnati Reds,2,3,A
+05/08/2025 00:05,Texas Rangers,New York Yankees,8,5,H
+05/08/2025 00:40,Colorado Rockies,Toronto Blue Jays,1,15,A
+05/08/2025 01:38,Los Angeles Angels,Tampa Bay Rays,5,1,H
+05/08/2025 01:40,Arizona Diamondbacks,San Diego Padres,6,2,H
+05/08/2025 02:10,Los Angeles Dodgers,St. Louis Cardinals,2,3,A
+05/08/2025 22:40,Pittsburgh Pirates,San Francisco Giants,1,8,A
+05/08/2025 22:40,Detroit Tigers,Minnesota Twins,3,6,A
+05/08/2025 22:40,Miami Marlins,Houston Astros,3,7,A
+05/08/2025 22:45,Washington Nationals,Athletics,7,16,A
+05/08/2025 22:45,Philadelphia Phillies,Baltimore Orioles,5,0,H
+05/08/2025 23:10,Boston Red Sox,Kansas City Royals,6,2,H
+05/08/2025 23:10,New York Mets,Cleveland Guardians,2,3,A
+05/08/2025 23:15,Atlanta Braves,Milwaukee Brewers,2,7,A
+06/08/2025 00:05,Chicago Cubs,Cincinnati Reds,1,5,A
+06/08/2025 00:05,Texas Rangers,New York Yankees,2,0,H
+06/08/2025 00:40,Colorado Rockies,Toronto Blue Jays,4,10,A
+06/08/2025 01:38,Los Angeles Angels,Tampa Bay Rays,3,7,A
+06/08/2025 01:40,Arizona Diamondbacks,San Diego Padres,5,10,A
+06/08/2025 01:40,Seattle Mariners,Chicago White Sox,8,3,H
+06/08/2025 02:10,Los Angeles Dodgers,St. Louis Cardinals,12,6,H
+06/08/2025 16:35,Pittsburgh Pirates,San Francisco Giants,2,4,A
+06/08/2025 16:35,Philadelphia Phillies,Baltimore Orioles,1,5,A
+06/08/2025 17:10,New York Mets,Cleveland Guardians,1,4,A
+06/08/2025 17:10,Detroit Tigers,Minnesota Twins,4,9,A
+06/08/2025 18:20,Chicago Cubs,Cincinnati Reds,6,1,H
+06/08/2025 18:35,Texas Rangers,New York Yankees,2,3,A
+06/08/2025 19:10,Colorado Rockies,Toronto Blue Jays,1,20,A
+06/08/2025 20:07,Los Angeles Angels,Tampa Bay Rays,4,5,A
+06/08/2025 20:10,Los Angeles Dodgers,St. Louis Cardinals,3,5,A
+06/08/2025 20:40,Miami Marlins,Houston Astros,6,4,H
+06/08/2025 22:45,Washington Nationals,Athletics,2,1,H
+06/08/2025 23:10,Boston Red Sox,Kansas City Royals,3,7,A
+06/08/2025 23:15,Atlanta Braves,Milwaukee Brewers,4,5,A
+07/08/2025 01:40,Arizona Diamondbacks,San Diego Padres,2,3,A
+07/08/2025 01:40,Seattle Mariners,Chicago White Sox,8,6,H
+07/08/2025 16:05,Washington Nationals,Athletics,0,6,A
+07/08/2025 20:10,Seattle Mariners,Chicago White Sox,4,3,H
+07/08/2025 22:40,Pittsburgh Pirates,Cincinnati Reds,7,0,H
+07/08/2025 23:15,Atlanta Braves,Miami Marlins,8,6,H
+08/08/2025 22:40,Pittsburgh Pirates,Cincinnati Reds,3,2,H
+08/08/2025 23:05,Baltimore Orioles,Athletics,3,2,H
+08/08/2025 23:05,New York Yankees,Houston Astros,3,5,A
+08/08/2025 23:10,Detroit Tigers,Los Angeles Angels,6,5,H
+08/08/2025 23:15,Atlanta Braves,Miami Marlins,1,5,A
+08/08/2025 23:40,Chicago White Sox,Cleveland Guardians,5,9,A
+09/08/2025 00:05,Texas Rangers,Philadelphia Phillies,1,9,A
+09/08/2025 00:10,Minnesota Twins,Kansas City Royals,9,4,H
+09/08/2025 00:10,Milwaukee Brewers,New York Mets,3,2,H
+09/08/2025 00:15,St. Louis Cardinals,Chicago Cubs,5,0,H
+09/08/2025 01:40,Arizona Diamondbacks,Colorado Rockies,6,1,H
+09/08/2025 01:40,San Diego Padres,Boston Red Sox,2,10,A
+09/08/2025 01:40,Seattle Mariners,Tampa Bay Rays,3,2,H
+09/08/2025 02:10,Los Angeles Dodgers,Toronto Blue Jays,5,1,H
+09/08/2025 02:15,San Francisco Giants,Washington Nationals,5,0,H
+09/08/2025 17:15,Atlanta Braves,Miami Marlins,7,1,H
+09/08/2025 18:05,New York Yankees,Houston Astros,5,4,H
+09/08/2025 20:05,San Francisco Giants,Washington Nationals,2,4,A
+09/08/2025 22:10,Detroit Tigers,Los Angeles Angels,4,7,A
+09/08/2025 22:40,Pittsburgh Pirates,Cincinnati Reds,1,2,A
+09/08/2025 23:05,Baltimore Orioles,Athletics,3,11,A
+09/08/2025 23:10,Minnesota Twins,Kansas City Royals,0,2,A
+09/08/2025 23:10,Chicago White Sox,Cleveland Guardians,1,3,A
+09/08/2025 23:10,Milwaukee Brewers,New York Mets,7,4,H
+09/08/2025 23:15,St. Louis Cardinals,Chicago Cubs,1,9,A
+09/08/2025 23:15,Texas Rangers,Philadelphia Phillies,2,3,A
+09/08/2025 23:15,Atlanta Braves,Miami Marlins,8,6,H
+10/08/2025 00:10,Arizona Diamondbacks,Colorado Rockies,6,5,H
+10/08/2025 00:40,San Diego Padres,Boston Red Sox,5,4,H
+10/08/2025 01:10,Los Angeles Dodgers,Toronto Blue Jays,9,1,H
+10/08/2025 01:40,Seattle Mariners,Tampa Bay Rays,7,4,H
+10/08/2025 17:05,Minnesota Twins,Kansas City Royals,5,3,H
+10/08/2025 17:35,Baltimore Orioles,Athletics,2,3,A
+10/08/2025 17:35,Pittsburgh Pirates,Cincinnati Reds,8,14,A
+10/08/2025 17:35,Atlanta Braves,Miami Marlins,7,1,H
+10/08/2025 17:35,New York Yankees,Houston Astros,1,7,A
+10/08/2025 17:40,Detroit Tigers,Los Angeles Angels,9,5,H
+10/08/2025 18:10,Chicago White Sox,Cleveland Guardians,6,4,H
+10/08/2025 18:10,Milwaukee Brewers,New York Mets,7,6,H
+10/08/2025 18:35,Texas Rangers,Philadelphia Phillies,2,4,A
+10/08/2025 20:05,San Francisco Giants,Washington Nationals,0,8,A
+10/08/2025 20:10,Arizona Diamondbacks,Colorado Rockies,13,6,H
+10/08/2025 20:10,San Diego Padres,Boston Red Sox,6,2,H
+10/08/2025 20:10,Seattle Mariners,Tampa Bay Rays,6,3,H
+10/08/2025 20:10,Los Angeles Dodgers,Toronto Blue Jays,4,5,A
+10/08/2025 23:10,St. Louis Cardinals,Chicago Cubs,3,2,H
+11/08/2025 22:10,Cincinnati Reds,Philadelphia Phillies,1,4,A
+11/08/2025 23:05,New York Yankees,Minnesota Twins,6,2,H
+11/08/2025 23:40,Kansas City Royals,Washington Nationals,7,4,H
+11/08/2025 23:40,Chicago White Sox,Detroit Tigers,1,2,A
+11/08/2025 23:40,Milwaukee Brewers,Pittsburgh Pirates,7,1,H
+11/08/2025 23:45,St. Louis Cardinals,Colorado Rockies,3,2,H
+12/08/2025 00:05,Texas Rangers,Arizona Diamondbacks,7,6,H
+12/08/2025 00:10,Houston Astros,Boston Red Sox,7,6,H
+12/08/2025 01:38,Los Angeles Angels,Los Angeles Dodgers,7,4,H
+12/08/2025 01:45,San Francisco Giants,San Diego Padres,1,4,A
+12/08/2025 02:05,Athletics,Tampa Bay Rays,4,7,A
+12/08/2025 22:35,Baltimore Orioles,Seattle Mariners,0,1,A
+12/08/2025 22:40,Cincinnati Reds,Philadelphia Phillies,6,1,H
+12/08/2025 22:40,Cleveland Guardians,Miami Marlins,4,3,H
+12/08/2025 23:05,New York Yankees,Minnesota Twins,9,1,H
+12/08/2025 23:07,Toronto Blue Jays,Chicago Cubs,5,1,H
+12/08/2025 23:10,New York Mets,Atlanta Braves,13,5,H
+12/08/2025 23:40,Kansas City Royals,Washington Nationals,8,5,H
+12/08/2025 23:40,Chicago White Sox,Detroit Tigers,9,6,H
+12/08/2025 23:40,Milwaukee Brewers,Pittsburgh Pirates,14,0,H
+12/08/2025 23:45,St. Louis Cardinals,Colorado Rockies,0,3,A
+13/08/2025 00:05,Texas Rangers,Arizona Diamondbacks,2,3,A
+13/08/2025 00:10,Houston Astros,Boston Red Sox,1,14,A
+13/08/2025 01:38,Los Angeles Angels,Los Angeles Dodgers,7,6,H
+13/08/2025 01:45,San Francisco Giants,San Diego Padres,1,5,A
+13/08/2025 02:05,Athletics,Tampa Bay Rays,6,0,H
+13/08/2025 18:10,Kansas City Royals,Washington Nationals,7,8,A
+13/08/2025 18:10,Chicago White Sox,Detroit Tigers,0,1,A
+13/08/2025 18:10,Milwaukee Brewers,Pittsburgh Pirates,12,5,H
+13/08/2025 18:15,St. Louis Cardinals,Colorado Rockies,5,6,A
+13/08/2025 18:35,Texas Rangers,Arizona Diamondbacks,4,6,A
+13/08/2025 19:45,San Francisco Giants,San Diego Padres,1,11,A
+13/08/2025 21:10,Cincinnati Reds,Philadelphia Phillies,8,0,H
+13/08/2025 22:35,Baltimore Orioles,Seattle Mariners,4,3,H
+13/08/2025 22:40,Cleveland Guardians,Miami Marlins,4,13,A
+13/08/2025 23:05,New York Yankees,Minnesota Twins,1,4,A
+13/08/2025 23:07,Toronto Blue Jays,Chicago Cubs,1,4,A
+13/08/2025 23:10,Houston Astros,Boston Red Sox,4,1,H
+13/08/2025 23:10,New York Mets,Atlanta Braves,6,11,A
+14/08/2025 01:38,Los Angeles Angels,Los Angeles Dodgers,6,5,H
+14/08/2025 02:05,Athletics,Tampa Bay Rays,2,8,A
+14/08/2025 17:05,Baltimore Orioles,Seattle Mariners,5,3,H
+14/08/2025 19:07,Toronto Blue Jays,Chicago Cubs,2,1,H
+14/08/2025 22:40,Cleveland Guardians,Miami Marlins,9,4,H
+14/08/2025 22:45,Washington Nationals,Philadelphia Phillies,3,2,H
+14/08/2025 23:10,New York Mets,Atlanta Braves,3,4,A
+14/08/2025 23:40,Minnesota Twins,Detroit Tigers,3,4,A
+15/08/2025 00:40,Colorado Rockies,Arizona Diamondbacks,2,8,A
+15/08/2025 18:20,Chicago Cubs,Pittsburgh Pirates,2,3,A
+15/08/2025 22:40,Cincinnati Reds,Milwaukee Brewers,8,10,A
+15/08/2025 22:45,Washington Nationals,Philadelphia Phillies,2,6,A
+15/08/2025 23:07,Toronto Blue Jays,Texas Rangers,6,5,H
+15/08/2025 23:10,New York Mets,Seattle Mariners,9,11,A
+15/08/2025 23:10,Cleveland Guardians,Atlanta Braves,0,2,A
+15/08/2025 23:10,Boston Red Sox,Miami Marlins,2,1,H
+16/08/2025 00:10,Houston Astros,Baltimore Orioles,0,7,A
+16/08/2025 00:10,Minnesota Twins,Detroit Tigers,0,7,A
+16/08/2025 00:10,Kansas City Royals,Chicago White Sox,3,1,H
+16/08/2025 00:15,St. Louis Cardinals,New York Yankees,3,4,A
+16/08/2025 00:40,Colorado Rockies,Arizona Diamondbacks,4,3,H
+16/08/2025 02:05,Athletics,Los Angeles Angels,10,3,H
+16/08/2025 02:10,Los Angeles Dodgers,San Diego Padres,3,2,H
+16/08/2025 02:15,San Francisco Giants,Tampa Bay Rays,6,7,A
+16/08/2025 18:20,Chicago Cubs,Pittsburgh Pirates,3,1,H
+16/08/2025 19:07,Toronto Blue Jays,Texas Rangers,14,2,H
+16/08/2025 20:05,Washington Nationals,Philadelphia Phillies,2,0,H
+16/08/2025 20:10,New York Mets,Seattle Mariners,3,1,H
+16/08/2025 20:10,Boston Red Sox,Miami Marlins,7,5,H
+16/08/2025 22:40,Cincinnati Reds,Milwaukee Brewers,5,6,A
+16/08/2025 23:10,Houston Astros,Baltimore Orioles,5,4,H
+16/08/2025 23:10,Cleveland Guardians,Atlanta Braves,1,10,A
+16/08/2025 23:10,Kansas City Royals,Chicago White Sox,6,2,H
+16/08/2025 23:15,Minnesota Twins,Detroit Tigers,5,8,A
+16/08/2025 23:15,St. Louis Cardinals,New York Yankees,8,12,A
+17/08/2025 00:10,Colorado Rockies,Arizona Diamondbacks,10,7,H
+17/08/2025 01:05,San Francisco Giants,Tampa Bay Rays,1,2,A
+17/08/2025 01:10,Los Angeles Dodgers,San Diego Padres,6,0,H
+17/08/2025 02:05,Athletics,Los Angeles Angels,7,2,H
+17/08/2025 15:35,Washington Nationals,Philadelphia Phillies,9,11,A
+17/08/2025 17:35,Boston Red Sox,Miami Marlins,3,5,A
+17/08/2025 17:37,Toronto Blue Jays,Texas Rangers,4,10,A
+17/08/2025 17:40,Cleveland Guardians,Atlanta Braves,4,5,A
+17/08/2025 17:40,Cincinnati Reds,Milwaukee Brewers,3,2,H
+17/08/2025 18:10,Houston Astros,Baltimore Orioles,0,12,A
+17/08/2025 18:10,Minnesota Twins,Detroit Tigers,8,1,H
+17/08/2025 18:10,Kansas City Royals,Chicago White Sox,6,2,H
+17/08/2025 18:15,St. Louis Cardinals,New York Yankees,4,8,A
+17/08/2025 18:20,Chicago Cubs,Pittsburgh Pirates,4,3,H
+17/08/2025 19:10,Colorado Rockies,Arizona Diamondbacks,6,5,H
+17/08/2025 20:05,Athletics,Los Angeles Angels,5,11,A
+17/08/2025 20:05,San Francisco Giants,Tampa Bay Rays,7,1,H
+17/08/2025 20:10,Los Angeles Dodgers,San Diego Padres,5,4,H
+17/08/2025 23:10,New York Mets,Seattle Mariners,7,3,H
+18/08/2025 18:20,Chicago Cubs,Milwaukee Brewers,0,7,A
+18/08/2025 22:40,Detroit Tigers,Houston Astros,10,0,H
+18/08/2025 22:40,Pittsburgh Pirates,Toronto Blue Jays,5,2,H
+18/08/2025 22:40,Miami Marlins,St. Louis Cardinals,3,8,A
+18/08/2025 22:45,Philadelphia Phillies,Seattle Mariners,12,7,H
+18/08/2025 23:10,Boston Red Sox,Baltimore Orioles,3,6,A
+18/08/2025 23:15,Atlanta Braves,Chicago White Sox,9,13,A
+18/08/2025 23:40,Kansas City Royals,Texas Rangers,4,3,H
+19/08/2025 00:40,Colorado Rockies,Los Angeles Dodgers,4,3,H
+19/08/2025 01:38,Los Angeles Angels,Cincinnati Reds,1,4,A
+19/08/2025 01:40,Arizona Diamondbacks,Cleveland Guardians,1,3,A
+19/08/2025 01:40,San Diego Padres,San Francisco Giants,3,4,A
+19/08/2025 18:20,Chicago Cubs,Milwaukee Brewers,6,4,H
+19/08/2025 22:40,Detroit Tigers,Houston Astros,1,0,H
+19/08/2025 22:40,Pittsburgh Pirates,Toronto Blue Jays,3,7,A
+19/08/2025 22:40,Miami Marlins,St. Louis Cardinals,4,7,A
+19/08/2025 22:45,Washington Nationals,New York Mets,1,8,A
+19/08/2025 22:45,Philadelphia Phillies,Seattle Mariners,6,4,H
+19/08/2025 23:10,Boston Red Sox,Baltimore Orioles,3,4,A
+19/08/2025 23:15,Atlanta Braves,Chicago White Sox,11,10,H
+19/08/2025 23:35,Tampa Bay Rays,New York Yankees,3,13,A
+19/08/2025 23:40,Kansas City Royals,Texas Rangers,5,2,H
+19/08/2025 23:40,Minnesota Twins,Athletics,3,6,A
+20/08/2025 00:05,Chicago Cubs,Milwaukee Brewers,4,1,H
+20/08/2025 00:40,Colorado Rockies,Los Angeles Dodgers,4,11,A
+20/08/2025 01:38,Los Angeles Angels,Cincinnati Reds,4,6,A
+20/08/2025 01:40,Arizona Diamondbacks,Cleveland Guardians,6,5,H
+20/08/2025 01:40,San Diego Padres,San Francisco Giants,5,1,H
+20/08/2025 16:35,Pittsburgh Pirates,Toronto Blue Jays,2,1,H
+20/08/2025 17:05,Philadelphia Phillies,Seattle Mariners,11,2,H
+20/08/2025 17:10,Detroit Tigers,Houston Astros,7,2,H
+20/08/2025 19:40,Arizona Diamondbacks,Cleveland Guardians,3,2,H
+20/08/2025 22:40,Miami Marlins,St. Louis Cardinals,6,2,H
+20/08/2025 22:45,Washington Nationals,New York Mets,5,4,H
+20/08/2025 23:15,Atlanta Braves,Chicago White Sox,1,0,H
+20/08/2025 23:35,Tampa Bay Rays,New York Yankees,4,6,A
+20/08/2025 23:40,Kansas City Royals,Texas Rangers,3,6,A
+20/08/2025 23:40,Minnesota Twins,Athletics,2,4,A
+21/08/2025 00:05,Chicago Cubs,Milwaukee Brewers,4,3,H
+21/08/2025 00:40,Colorado Rockies,Los Angeles Dodgers,8,3,H
+21/08/2025 01:38,Los Angeles Angels,Cincinnati Reds,2,1,H
+21/08/2025 01:40,San Diego Padres,San Francisco Giants,8,1,H
+21/08/2025 17:10,Minnesota Twins,Athletics,3,8,A
+21/08/2025 18:10,Kansas City Royals,Texas Rangers,6,4,H
+21/08/2025 18:20,Chicago Cubs,Milwaukee Brewers,1,4,A
+21/08/2025 19:10,Colorado Rockies,Los Angeles Dodgers,5,9,A
+21/08/2025 20:05,Washington Nationals,New York Mets,9,3,H
+21/08/2025 20:10,San Diego Padres,San Francisco Giants,8,4,H
+21/08/2025 23:15,Baltimore Orioles,Houston Astros,2,7,A
+21/08/2025 23:15,New York Yankees,Boston Red Sox,3,6,A
+21/08/2025 23:35,Tampa Bay Rays,St. Louis Cardinals,4,7,A
+22/08/2025 22:40,Pittsburgh Pirates,Colorado Rockies,9,0,H
+22/08/2025 22:45,Philadelphia Phillies,Washington Nationals,4,5,A
+22/08/2025 23:05,Baltimore Orioles,Houston Astros,7,10,A
+22/08/2025 23:05,New York Yankees,Boston Red Sox,0,1,A
+22/08/2025 23:10,Detroit Tigers,Kansas City Royals,7,5,H
+22/08/2025 23:10,Miami Marlins,Toronto Blue Jays,2,5,A
+22/08/2025 23:15,Atlanta Braves,New York Mets,7,12,A
+22/08/2025 23:35,Tampa Bay Rays,St. Louis Cardinals,10,6,H
+22/08/2025 23:40,Chicago White Sox,Minnesota Twins,7,9,A
+23/08/2025 00:05,Texas Rangers,Cleveland Guardians,4,3,H
+23/08/2025 00:10,Milwaukee Brewers,San Francisco Giants,5,4,H
+23/08/2025 01:38,Los Angeles Angels,Chicago Cubs,2,3,A
+23/08/2025 01:40,Arizona Diamondbacks,Cincinnati Reds,6,5,H
+23/08/2025 01:40,San Diego Padres,Los Angeles Dodgers,2,1,H
+23/08/2025 02:10,Seattle Mariners,Athletics,3,2,H
+23/08/2025 17:05,New York Yankees,Boston Red Sox,1,12,A
+23/08/2025 20:10,Miami Marlins,Toronto Blue Jays,6,7,A
+23/08/2025 22:05,Philadelphia Phillies,Washington Nationals,6,4,H
+23/08/2025 22:10,Detroit Tigers,Kansas City Royals,4,2,H
+23/08/2025 22:40,Pittsburgh Pirates,Colorado Rockies,5,1,H
+23/08/2025 23:05,Baltimore Orioles,Houston Astros,8,9,A
+23/08/2025 23:05,Texas Rangers,Cleveland Guardians,10,0,H
+23/08/2025 23:10,Chicago White Sox,Minnesota Twins,7,3,H
+23/08/2025 23:10,Milwaukee Brewers,San Francisco Giants,1,7,A
+23/08/2025 23:15,Atlanta Braves,New York Mets,2,9,A
+24/08/2025 00:10,Arizona Diamondbacks,Cincinnati Reds,10,1,H
+24/08/2025 00:40,San Diego Padres,Los Angeles Dodgers,5,1,H
+24/08/2025 01:38,Los Angeles Angels,Chicago Cubs,1,12,A
+24/08/2025 01:40,Seattle Mariners,Athletics,1,2,A
+24/08/2025 16:05,Pittsburgh Pirates,Colorado Rockies,4,0,H
+24/08/2025 16:10,Tampa Bay Rays,St. Louis Cardinals,7,2,H
+24/08/2025 17:35,Baltimore Orioles,Houston Astros,3,2,H
+24/08/2025 17:35,Philadelphia Phillies,Washington Nationals,3,2,H
+24/08/2025 17:35,Atlanta Braves,New York Mets,4,3,H
+24/08/2025 17:40,Detroit Tigers,Kansas City Royals,8,10,A
+24/08/2025 17:40,Miami Marlins,Toronto Blue Jays,5,3,H
+24/08/2025 18:10,Chicago White Sox,Minnesota Twins,8,0,H
+24/08/2025 18:10,Milwaukee Brewers,San Francisco Giants,3,4,A
+24/08/2025 18:35,Texas Rangers,Cleveland Guardians,5,0,H
+24/08/2025 20:07,Los Angeles Angels,Chicago Cubs,3,4,A
+24/08/2025 20:10,Arizona Diamondbacks,Cincinnati Reds,1,6,A
+24/08/2025 20:10,San Diego Padres,Los Angeles Dodgers,2,8,A
+24/08/2025 20:10,Seattle Mariners,Athletics,11,4,H
+24/08/2025 23:10,New York Yankees,Boston Red Sox,7,2,H
+25/08/2025 22:35,Baltimore Orioles,Boston Red Sox,3,4,A
+25/08/2025 22:40,Cleveland Guardians,Tampa Bay Rays,0,9,A
+25/08/2025 22:40,Miami Marlins,Atlanta Braves,2,1,H
+25/08/2025 23:05,New York Yankees,Washington Nationals,10,5,H
+25/08/2025 23:07,Toronto Blue Jays,Minnesota Twins,10,4,H
+25/08/2025 23:10,New York Mets,Philadelphia Phillies,13,3,H
+25/08/2025 23:40,Chicago White Sox,Kansas City Royals,7,0,H
+25/08/2025 23:40,Milwaukee Brewers,Arizona Diamondbacks,7,5,H
+25/08/2025 23:45,St. Louis Cardinals,Pittsburgh Pirates,7,6,H
+26/08/2025 00:05,Texas Rangers,Los Angeles Angels,0,4,A
+26/08/2025 01:40,Seattle Mariners,San Diego Padres,9,6,H
+26/08/2025 02:05,Athletics,Detroit Tigers,8,3,H
+26/08/2025 02:10,Los Angeles Dodgers,Cincinnati Reds,7,0,H
+26/08/2025 22:35,Baltimore Orioles,Boston Red Sox,0,5,A
+26/08/2025 22:40,Cleveland Guardians,Tampa Bay Rays,3,0,H
+26/08/2025 22:40,Miami Marlins,Atlanta Braves,2,11,A
+26/08/2025 23:05,New York Yankees,Washington Nationals,5,1,H
+26/08/2025 23:07,Toronto Blue Jays,Minnesota Twins,5,7,A
+26/08/2025 23:10,New York Mets,Philadelphia Phillies,6,5,H
+26/08/2025 23:40,Chicago White Sox,Kansas City Royals,4,5,A
+26/08/2025 23:40,Milwaukee Brewers,Arizona Diamondbacks,9,8,H
+26/08/2025 23:45,St. Louis Cardinals,Pittsburgh Pirates,3,8,A
+27/08/2025 00:05,Texas Rangers,Los Angeles Angels,7,3,H
+27/08/2025 00:10,Houston Astros,Colorado Rockies,1,6,A
+27/08/2025 01:40,Seattle Mariners,San Diego Padres,6,7,A
+27/08/2025 01:45,San Francisco Giants,Chicago Cubs,5,2,H
+27/08/2025 02:05,Athletics,Detroit Tigers,7,6,H
+27/08/2025 02:10,Los Angeles Dodgers,Cincinnati Reds,6,3,H
+27/08/2025 17:05,New York Yankees,Washington Nationals,11,2,H
+27/08/2025 17:10,Cleveland Guardians,Tampa Bay Rays,4,3,H
+27/08/2025 17:10,Miami Marlins,Atlanta Braves,1,12,A
+27/08/2025 20:10,Seattle Mariners,San Diego Padres,4,3,H
+27/08/2025 22:35,Baltimore Orioles,Boston Red Sox,2,3,A
+27/08/2025 23:07,Toronto Blue Jays,Minnesota Twins,9,8,H
+27/08/2025 23:10,New York Mets,Philadelphia Phillies,6,0,H
+27/08/2025 23:40,Chicago White Sox,Kansas City Royals,1,12,A
+27/08/2025 23:40,Milwaukee Brewers,Arizona Diamondbacks,2,3,A
+27/08/2025 23:45,St. Louis Cardinals,Pittsburgh Pirates,1,2,A
+28/08/2025 00:05,Texas Rangers,Los Angeles Angels,20,3,H
+28/08/2025 00:10,Houston Astros,Colorado Rockies,4,0,H
+28/08/2025 00:40,Los Angeles Dodgers,Cincinnati Reds,5,1,H
+28/08/2025 01:45,San Francisco Giants,Chicago Cubs,12,3,H
+28/08/2025 02:05,Athletics,Detroit Tigers,7,0,H
+28/08/2025 17:05,Baltimore Orioles,Boston Red Sox,2,3,A
+28/08/2025 18:10,Houston Astros,Colorado Rockies,4,3,H
+28/08/2025 18:10,Milwaukee Brewers,Arizona Diamondbacks,4,6,A
+28/08/2025 18:15,St. Louis Cardinals,Pittsburgh Pirates,4,1,H
+28/08/2025 19:45,San Francisco Giants,Chicago Cubs,4,3,H
+28/08/2025 22:45,Philadelphia Phillies,Atlanta Braves,19,4,H
+28/08/2025 23:10,New York Mets,Miami Marlins,4,7,A
+28/08/2025 23:40,Chicago White Sox,New York Yankees,4,10,A
+29/08/2025 22:40,Cincinnati Reds,St. Louis Cardinals,5,7,A
+29/08/2025 22:45,Washington Nationals,Tampa Bay Rays,1,4,A
+29/08/2025 22:45,Philadelphia Phillies,Atlanta Braves,2,1,H
+29/08/2025 23:07,Toronto Blue Jays,Milwaukee Brewers,2,7,A
+29/08/2025 23:10,Boston Red Sox,Pittsburgh Pirates,2,4,A
+29/08/2025 23:10,Cleveland Guardians,Seattle Mariners,5,4,H
+29/08/2025 23:10,New York Mets,Miami Marlins,19,9,H
+29/08/2025 23:40,Chicago White Sox,New York Yankees,2,10,A
+30/08/2025 00:10,Houston Astros,Los Angeles Angels,2,0,H
+30/08/2025 00:10,Kansas City Royals,Detroit Tigers,3,5,A
+30/08/2025 00:10,Minnesota Twins,San Diego Padres,7,4,H
+30/08/2025 00:40,Colorado Rockies,Chicago Cubs,7,11,A
+30/08/2025 02:05,Athletics,Texas Rangers,2,5,A
+30/08/2025 02:10,Los Angeles Dodgers,Arizona Diamondbacks,0,3,A
+30/08/2025 02:15,San Francisco Giants,Baltimore Orioles,15,8,H
+30/08/2025 19:07,Toronto Blue Jays,Milwaukee Brewers,1,4,A
+30/08/2025 20:05,Washington Nationals,Tampa Bay Rays,1,4,A
+30/08/2025 20:10,Boston Red Sox,Pittsburgh Pirates,3,10,A
+30/08/2025 20:10,New York Mets,Miami Marlins,8,11,A
+30/08/2025 22:05,Philadelphia Phillies,Atlanta Braves,3,2,H
+30/08/2025 22:40,Cincinnati Reds,St. Louis Cardinals,2,4,A
+30/08/2025 23:10,Houston Astros,Los Angeles Angels,1,4,A
+30/08/2025 23:10,Minnesota Twins,San Diego Padres,3,12,A
+30/08/2025 23:10,Chicago White Sox,New York Yankees,3,5,A
+30/08/2025 23:15,Kansas City Royals,Detroit Tigers,3,1,H
+30/08/2025 23:15,Cleveland Guardians,Seattle Mariners,4,3,H
+30/08/2025 23:15,San Francisco Giants,Baltimore Orioles,1,11,A
+31/08/2025 00:10,Colorado Rockies,Chicago Cubs,3,4,A
+31/08/2025 01:10,Los Angeles Dodgers,Arizona Diamondbacks,1,6,A
+31/08/2025 02:05,Athletics,Texas Rangers,3,9,A
+31/08/2025 16:10,Cincinnati Reds,St. Louis Cardinals,7,4,H
+31/08/2025 17:05,Minnesota Twins,San Diego Padres,7,2,H
+31/08/2025 17:35,Boston Red Sox,Pittsburgh Pirates,5,2,H
+31/08/2025 17:35,Washington Nationals,Tampa Bay Rays,4,7,A
+31/08/2025 17:37,Toronto Blue Jays,Milwaukee Brewers,8,4,H
+31/08/2025 17:40,Cleveland Guardians,Seattle Mariners,2,4,A
+31/08/2025 17:40,New York Mets,Miami Marlins,1,5,A
+31/08/2025 18:10,Houston Astros,Los Angeles Angels,0,3,A
+31/08/2025 18:10,Kansas City Royals,Detroit Tigers,0,5,A
+31/08/2025 18:10,Chicago White Sox,New York Yankees,3,2,H
+31/08/2025 19:10,Colorado Rockies,Chicago Cubs,6,5,H
+31/08/2025 20:05,San Francisco Giants,Baltimore Orioles,13,2,H
+31/08/2025 20:05,Athletics,Texas Rangers,6,9,A
+31/08/2025 20:10,Los Angeles Dodgers,Arizona Diamondbacks,5,4,H
+31/08/2025 23:10,Philadelphia Phillies,Atlanta Braves,1,3,A
+01/09/2025 17:05,Washington Nationals,Miami Marlins,2,0,H
+01/09/2025 17:10,Detroit Tigers,New York Mets,8,10,A
+01/09/2025 17:10,Cincinnati Reds,Toronto Blue Jays,5,4,H
+01/09/2025 17:35,Boston Red Sox,Cleveland Guardians,6,4,H
+01/09/2025 18:10,Houston Astros,Los Angeles Angels,8,3,H
+01/09/2025 18:10,Minnesota Twins,Chicago White Sox,5,6,A
+01/09/2025 18:15,St. Louis Cardinals,Athletics,3,11,A
+01/09/2025 20:05,Chicago Cubs,Atlanta Braves,7,6,H
+01/09/2025 20:10,Colorado Rockies,San Francisco Giants,2,8,A
+01/09/2025 20:10,Milwaukee Brewers,Philadelphia Phillies,8,10,A
+01/09/2025 22:40,San Diego Padres,Baltimore Orioles,3,4,A
+01/09/2025 23:35,Tampa Bay Rays,Seattle Mariners,10,2,H
+02/09/2025 00:10,Arizona Diamondbacks,Texas Rangers,5,7,A
+02/09/2025 22:40,Detroit Tigers,New York Mets,5,12,A
+02/09/2025 22:40,Pittsburgh Pirates,Los Angeles Dodgers,9,7,H
+02/09/2025 22:40,Cincinnati Reds,Toronto Blue Jays,9,12,A
+02/09/2025 22:45,Boston Red Sox,Cleveland Guardians,11,7,H
+02/09/2025 22:45,Washington Nationals,Miami Marlins,5,2,H
+02/09/2025 23:35,Tampa Bay Rays,Seattle Mariners,6,5,H
+02/09/2025 23:40,Kansas City Royals,Los Angeles Angels,1,5,A
+02/09/2025 23:40,Chicago Cubs,Atlanta Braves,4,3,H
+02/09/2025 23:40,Minnesota Twins,Chicago White Sox,3,12,A
+02/09/2025 23:45,St. Louis Cardinals,Athletics,2,1,H
+03/09/2025 00:10,Houston Astros,New York Yankees,1,7,A
+03/09/2025 00:40,Colorado Rockies,San Francisco Giants,4,7,A
+03/09/2025 01:40,San Diego Padres,Baltimore Orioles,2,6,A
+03/09/2025 01:40,Arizona Diamondbacks,Texas Rangers,5,3,H
+03/09/2025 17:05,Washington Nationals,Miami Marlins,10,5,H
+03/09/2025 17:10,Detroit Tigers,New York Mets,6,2,H
+03/09/2025 19:40,Arizona Diamondbacks,Texas Rangers,2,0,H
+03/09/2025 20:10,San Diego Padres,Baltimore Orioles,5,7,A
+03/09/2025 22:40,Pittsburgh Pirates,Los Angeles Dodgers,3,0,H
+03/09/2025 22:40,Cincinnati Reds,Toronto Blue Jays,9,13,A
+03/09/2025 22:45,Boston Red Sox,Cleveland Guardians,1,8,A
+03/09/2025 23:35,Tampa Bay Rays,Seattle Mariners,9,4,H
+03/09/2025 23:40,Kansas City Royals,Los Angeles Angels,3,4,A
+03/09/2025 23:40,Chicago Cubs,Atlanta Braves,1,5,A
+03/09/2025 23:40,Minnesota Twins,Chicago White Sox,3,4,A
+03/09/2025 23:40,Milwaukee Brewers,Philadelphia Phillies,6,3,H
+03/09/2025 23:45,St. Louis Cardinals,Athletics,5,1,H
+04/09/2025 00:10,Houston Astros,New York Yankees,8,7,H
+04/09/2025 00:40,Colorado Rockies,San Francisco Giants,8,10,A
+04/09/2025 20:10,Milwaukee Brewers,Philadelphia Phillies,0,2,A
+04/09/2025 22:40,Pittsburgh Pirates,Los Angeles Dodgers,5,3,H
+04/09/2025 23:35,Tampa Bay Rays,Cleveland Guardians,4,2,H
+04/09/2025 23:40,Kansas City Royals,Los Angeles Angels,4,3,H
+04/09/2025 23:40,Minnesota Twins,Chicago White Sox,8,11,A
+04/09/2025 23:40,Houston Astros,New York Yankees,4,8,A
+05/09/2025 18:20,Chicago Cubs,Washington Nationals,11,5,H
+05/09/2025 22:40,Cincinnati Reds,New York Mets,4,5,A
+05/09/2025 22:40,Detroit Tigers,Chicago White Sox,5,7,A
+05/09/2025 22:40,Pittsburgh Pirates,Milwaukee Brewers,2,5,A
+05/09/2025 23:05,Baltimore Orioles,Los Angeles Dodgers,2,1,H
+05/09/2025 23:05,New York Yankees,Toronto Blue Jays,1,7,A
+05/09/2025 23:10,Miami Marlins,Philadelphia Phillies,3,9,A
+05/09/2025 23:15,Atlanta Braves,Seattle Mariners,4,1,H
+05/09/2025 23:35,Tampa Bay Rays,Cleveland Guardians,1,7,A
+05/09/2025 23:40,Kansas City Royals,Minnesota Twins,2,1,H
+06/09/2025 00:05,Texas Rangers,Houston Astros,4,3,H
+06/09/2025 00:15,St. Louis Cardinals,San Francisco Giants,2,8,A
+06/09/2025 00:40,Colorado Rockies,San Diego Padres,3,0,H
+06/09/2025 01:38,Los Angeles Angels,Athletics,4,10,A
+06/09/2025 01:40,Arizona Diamondbacks,Boston Red Sox,10,5,H
+06/09/2025 17:05,New York Yankees,Toronto Blue Jays,3,1,H
+06/09/2025 18:20,Chicago Cubs,Washington Nationals,1,2,A
+06/09/2025 20:10,Miami Marlins,Philadelphia Phillies,2,4,A
+06/09/2025 22:10,Detroit Tigers,Chicago White Sox,6,0,H
+06/09/2025 22:40,Cincinnati Reds,New York Mets,6,3,H
+06/09/2025 22:40,Pittsburgh Pirates,Milwaukee Brewers,1,4,A
+06/09/2025 23:05,Baltimore Orioles,Los Angeles Dodgers,4,3,H
+06/09/2025 23:05,Tampa Bay Rays,Cleveland Guardians,2,3,A
+06/09/2025 23:15,St. Louis Cardinals,San Francisco Giants,3,2,H
+06/09/2025 23:15,Texas Rangers,Houston Astros,0,11,A
+06/09/2025 23:15,Kansas City Royals,Minnesota Twins,11,2,H
+06/09/2025 23:15,Atlanta Braves,Seattle Mariners,2,10,A
+07/09/2025 00:10,Arizona Diamondbacks,Boston Red Sox,5,1,H
+07/09/2025 00:10,Colorado Rockies,San Diego Padres,8,10,A
+07/09/2025 01:38,Los Angeles Angels,Athletics,4,17,A
+07/09/2025 16:05,Atlanta Braves,Seattle Mariners,2,18,A
+07/09/2025 16:10,Tampa Bay Rays,Cleveland Guardians,1,2,A
+07/09/2025 17:35,Baltimore Orioles,Los Angeles Dodgers,2,5,A
+07/09/2025 17:35,New York Yankees,Toronto Blue Jays,4,3,H
+07/09/2025 17:35,Pittsburgh Pirates,Milwaukee Brewers,2,10,A
+07/09/2025 17:40,Cincinnati Reds,New York Mets,3,2,H
+07/09/2025 17:40,Detroit Tigers,Chicago White Sox,4,6,A
+07/09/2025 17:40,Miami Marlins,Philadelphia Phillies,5,4,H
+07/09/2025 18:10,Kansas City Royals,Minnesota Twins,1,5,A
+07/09/2025 18:15,St. Louis Cardinals,San Francisco Giants,4,3,H
+07/09/2025 18:20,Chicago Cubs,Washington Nationals,3,6,A
+07/09/2025 18:35,Texas Rangers,Houston Astros,4,2,H
+07/09/2025 19:10,Colorado Rockies,San Diego Padres,1,8,A
+07/09/2025 20:07,Los Angeles Angels,Athletics,4,3,H
+07/09/2025 20:10,Arizona Diamondbacks,Boston Red Sox,4,7,A
+08/09/2025 22:40,Cleveland Guardians,Kansas City Royals,10,2,H
+08/09/2025 22:40,Miami Marlins,Washington Nationals,7,15,A
+08/09/2025 22:45,Philadelphia Phillies,New York Mets,1,0,H
+08/09/2025 23:15,Atlanta Braves,Chicago Cubs,4,1,H
+09/09/2025 00:05,Texas Rangers,Milwaukee Brewers,5,0,H
+09/09/2025 01:38,Los Angeles Angels,Minnesota Twins,3,12,A
+09/09/2025 01:40,San Diego Padres,Cincinnati Reds,4,3,H
+09/09/2025 01:40,Seattle Mariners,St. Louis Cardinals,4,2,H
+09/09/2025 01:45,San Francisco Giants,Arizona Diamondbacks,11,5,H
+09/09/2025 02:05,Athletics,Boston Red Sox,0,7,A
+09/09/2025 02:10,Los Angeles Dodgers,Colorado Rockies,3,1,H
+09/09/2025 22:35,Baltimore Orioles,Pittsburgh Pirates,3,2,H
+09/09/2025 22:40,Cleveland Guardians,Kansas City Royals,2,0,H
+09/09/2025 22:40,Miami Marlins,Washington Nationals,5,7,A
+09/09/2025 22:45,Philadelphia Phillies,New York Mets,9,3,H
+09/09/2025 23:05,New York Yankees,Detroit Tigers,2,12,A
+09/09/2025 23:07,Toronto Blue Jays,Houston Astros,4,3,H
+09/09/2025 23:15,Atlanta Braves,Chicago Cubs,1,6,A
+09/09/2025 23:40,Chicago White Sox,Tampa Bay Rays,4,5,A
+10/09/2025 00:05,Texas Rangers,Milwaukee Brewers,5,4,H
+10/09/2025 01:38,Los Angeles Angels,Minnesota Twins,12,2,H
+10/09/2025 01:40,San Diego Padres,Cincinnati Reds,2,4,A
+10/09/2025 01:40,Seattle Mariners,St. Louis Cardinals,5,3,H
+10/09/2025 01:45,San Francisco Giants,Arizona Diamondbacks,5,3,H
+10/09/2025 02:05,Athletics,Boston Red Sox,0,6,A
+10/09/2025 02:10,Los Angeles Dodgers,Colorado Rockies,7,2,H
+10/09/2025 18:35,Texas Rangers,Milwaukee Brewers,6,3,H
+10/09/2025 19:35,Athletics,Boston Red Sox,5,4,H
+10/09/2025 19:45,San Francisco Giants,Arizona Diamondbacks,3,5,A
+10/09/2025 20:07,Los Angeles Angels,Minnesota Twins,4,3,H
+10/09/2025 22:35,Baltimore Orioles,Pittsburgh Pirates,2,1,H
+10/09/2025 22:40,Cleveland Guardians,Kansas City Royals,3,4,A
+10/09/2025 22:40,Miami Marlins,Washington Nationals,8,3,H
+10/09/2025 22:45,Philadelphia Phillies,New York Mets,11,3,H
+10/09/2025 23:05,New York Yankees,Detroit Tigers,1,11,A
+10/09/2025 23:07,Toronto Blue Jays,Houston Astros,2,3,A
+10/09/2025 23:15,Atlanta Braves,Chicago Cubs,2,3,A
+10/09/2025 23:40,Chicago White Sox,Tampa Bay Rays,6,5,H
+11/09/2025 00:40,San Diego Padres,Cincinnati Reds,1,2,A
+11/09/2025 01:40,Seattle Mariners,St. Louis Cardinals,4,2,H
+11/09/2025 02:10,Los Angeles Dodgers,Colorado Rockies,9,0,H
+11/09/2025 17:05,Baltimore Orioles,Pittsburgh Pirates,3,2,H
+11/09/2025 18:10,Chicago White Sox,Tampa Bay Rays,5,1,H
+11/09/2025 19:07,Toronto Blue Jays,Houston Astros,6,0,H
+11/09/2025 22:40,Miami Marlins,Washington Nationals,5,0,H
+11/09/2025 23:05,New York Yankees,Detroit Tigers,9,3,H
+11/09/2025 23:15,Cleveland Guardians,Kansas City Royals,3,2,H
+11/09/2025 23:15,Philadelphia Phillies,New York Mets,6,4,H
+12/09/2025 01:40,San Diego Padres,Colorado Rockies,2,0,H
+12/09/2025 01:40,Seattle Mariners,Los Angeles Angels,7,6,H
+12/09/2025 18:20,Chicago Cubs,Tampa Bay Rays,6,4,H
+12/09/2025 22:45,Washington Nationals,Pittsburgh Pirates,6,5,H
+12/09/2025 22:45,Philadelphia Phillies,Kansas City Royals,8,2,H
+12/09/2025 23:07,Toronto Blue Jays,Baltimore Orioles,6,1,H
+12/09/2025 23:10,New York Mets,Texas Rangers,3,8,A
+12/09/2025 23:10,Cleveland Guardians,Chicago White Sox,4,0,H
+12/09/2025 23:10,Miami Marlins,Detroit Tigers,8,2,H
+12/09/2025 23:10,Boston Red Sox,New York Yankees,1,4,A
+12/09/2025 23:15,Atlanta Braves,Houston Astros,3,11,A
+13/09/2025 00:10,Minnesota Twins,Arizona Diamondbacks,9,8,H
+13/09/2025 00:10,Milwaukee Brewers,St. Louis Cardinals,8,2,H
+13/09/2025 01:40,San Diego Padres,Colorado Rockies,2,4,A
+13/09/2025 02:05,Athletics,Cincinnati Reds,3,0,H
+13/09/2025 02:10,Seattle Mariners,Los Angeles Angels,2,1,H
+13/09/2025 02:15,San Francisco Giants,Los Angeles Dodgers,5,1,H
+13/09/2025 18:20,Chicago Cubs,Tampa Bay Rays,4,5,A
+13/09/2025 19:07,Toronto Blue Jays,Baltimore Orioles,5,4,H
+13/09/2025 20:05,Washington Nationals,Pittsburgh Pirates,1,5,A
+13/09/2025 20:10,New York Mets,Texas Rangers,2,3,A
+13/09/2025 20:10,Miami Marlins,Detroit Tigers,6,4,H
+13/09/2025 20:10,Boston Red Sox,New York Yankees,3,5,A
+13/09/2025 22:05,Philadelphia Phillies,Kansas City Royals,8,6,H
+13/09/2025 22:10,Cleveland Guardians,Chicago White Sox,3,1,H
+13/09/2025 23:10,Minnesota Twins,Arizona Diamondbacks,2,5,A
+13/09/2025 23:15,Atlanta Braves,Houston Astros,2,6,A
+14/09/2025 00:15,Milwaukee Brewers,St. Louis Cardinals,9,8,H
+14/09/2025 00:40,San Diego Padres,Colorado Rockies,11,3,H
+14/09/2025 01:05,San Francisco Giants,Los Angeles Dodgers,7,13,A
+14/09/2025 01:40,Seattle Mariners,Los Angeles Angels,5,3,H
+14/09/2025 02:05,Athletics,Cincinnati Reds,11,5,H
+14/09/2025 15:35,Washington Nationals,Pittsburgh Pirates,4,3,H
+14/09/2025 17:35,Philadelphia Phillies,Kansas City Royals,3,10,A
+14/09/2025 17:35,Atlanta Braves,Houston Astros,8,3,H
+14/09/2025 17:37,Toronto Blue Jays,Baltimore Orioles,11,2,H
+14/09/2025 17:40,New York Mets,Texas Rangers,5,2,H
+14/09/2025 17:40,Cleveland Guardians,Chicago White Sox,3,2,H
+14/09/2025 17:40,Miami Marlins,Detroit Tigers,0,2,A
+14/09/2025 18:10,Minnesota Twins,Arizona Diamondbacks,4,6,A
+14/09/2025 18:10,Milwaukee Brewers,St. Louis Cardinals,2,3,A
+14/09/2025 18:20,Chicago Cubs,Tampa Bay Rays,4,3,H
+14/09/2025 20:05,Athletics,Cincinnati Reds,7,4,H
+14/09/2025 20:05,San Francisco Giants,Los Angeles Dodgers,2,10,A
+14/09/2025 20:10,San Diego Padres,Colorado Rockies,9,6,H
+14/09/2025 20:10,Seattle Mariners,Los Angeles Angels,11,2,H
+14/09/2025 23:10,Boston Red Sox,New York Yankees,6,4,H
+15/09/2025 22:40,Pittsburgh Pirates,Chicago Cubs,0,4,A
+15/09/2025 22:45,Washington Nationals,Atlanta Braves,3,11,A
+15/09/2025 23:35,Tampa Bay Rays,Toronto Blue Jays,1,2,A
+15/09/2025 23:40,Chicago White Sox,Baltimore Orioles,1,4,A
+15/09/2025 23:40,Minnesota Twins,New York Yankees,7,0,H
+15/09/2025 23:45,St. Louis Cardinals,Cincinnati Reds,6,11,A
+16/09/2025 00:10,Houston Astros,Texas Rangers,6,3,H
+16/09/2025 01:40,Arizona Diamondbacks,San Francisco Giants,8,1,H
+16/09/2025 02:10,Los Angeles Dodgers,Philadelphia Phillies,5,6,A
+16/09/2025 17:05,Washington Nationals,Atlanta Braves,3,6,A
+16/09/2025 22:40,Detroit Tigers,Cleveland Guardians,5,7,A
+16/09/2025 22:40,Pittsburgh Pirates,Chicago Cubs,1,4,A
+16/09/2025 22:45,Boston Red Sox,Athletics,1,2,A
+16/09/2025 22:45,Washington Nationals,Atlanta Braves,0,5,A
+16/09/2025 23:10,New York Mets,San Diego Padres,8,3,H
+16/09/2025 23:35,Tampa Bay Rays,Toronto Blue Jays,5,6,A
+16/09/2025 23:40,Kansas City Royals,Seattle Mariners,5,12,A
+16/09/2025 23:40,Chicago White Sox,Baltimore Orioles,7,8,A
+16/09/2025 23:40,Minnesota Twins,New York Yankees,9,10,A
+16/09/2025 23:40,Milwaukee Brewers,Los Angeles Angels,9,2,H
+16/09/2025 23:45,St. Louis Cardinals,Cincinnati Reds,3,0,H
+17/09/2025 00:10,Houston Astros,Texas Rangers,6,5,H
+17/09/2025 00:40,Colorado Rockies,Miami Marlins,5,6,A
+17/09/2025 01:40,Arizona Diamondbacks,San Francisco Giants,6,5,H
+17/09/2025 02:10,Los Angeles Dodgers,Philadelphia Phillies,6,9,A
+17/09/2025 16:35,Pittsburgh Pirates,Chicago Cubs,4,8,A
+17/09/2025 17:15,St. Louis Cardinals,Cincinnati Reds,2,6,A
+17/09/2025 18:10,Chicago White Sox,Baltimore Orioles,1,3,A
+17/09/2025 19:40,Arizona Diamondbacks,San Francisco Giants,1,5,A
+17/09/2025 20:05,Washington Nationals,Atlanta Braves,4,9,A
+17/09/2025 22:40,Detroit Tigers,Cleveland Guardians,0,4,A
+17/09/2025 22:45,Boston Red Sox,Athletics,5,4,H
+17/09/2025 23:05,Tampa Bay Rays,Toronto Blue Jays,2,1,H
+17/09/2025 23:10,New York Mets,San Diego Padres,4,7,A
+17/09/2025 23:40,Kansas City Royals,Seattle Mariners,7,5,H
+17/09/2025 23:40,Minnesota Twins,New York Yankees,5,10,A
+17/09/2025 23:40,Milwaukee Brewers,Los Angeles Angels,9,2,H
+18/09/2025 00:10,Houston Astros,Texas Rangers,5,2,H
+18/09/2025 00:40,Colorado Rockies,Miami Marlins,4,8,A
+18/09/2025 02:10,Los Angeles Dodgers,Philadelphia Phillies,5,0,H
+18/09/2025 17:10,Detroit Tigers,Cleveland Guardians,1,3,A
+18/09/2025 17:10,New York Mets,San Diego Padres,6,1,H
+18/09/2025 17:10,Tampa Bay Rays,Toronto Blue Jays,4,0,H
+18/09/2025 17:35,Boston Red Sox,Athletics,3,5,A
+18/09/2025 18:10,Kansas City Royals,Seattle Mariners,0,2,A
+18/09/2025 19:10,Colorado Rockies,Miami Marlins,7,9,A
+18/09/2025 23:15,Cincinnati Reds,Chicago Cubs,1,0,H
+18/09/2025 23:15,Baltimore Orioles,New York Yankees,0,7,A
+18/09/2025 23:40,Milwaukee Brewers,Los Angeles Angels,5,2,H
+19/09/2025 02:10,Los Angeles Dodgers,San Francisco Giants,2,1,H
+19/09/2025 22:40,Cincinnati Reds,Chicago Cubs,7,4,H
+19/09/2025 22:40,Pittsburgh Pirates,Athletics,3,4,A
+19/09/2025 22:40,Detroit Tigers,Atlanta Braves,1,10,A
+19/09/2025 23:05,Baltimore Orioles,New York Yankees,4,2,H
+19/09/2025 23:10,New York Mets,Washington Nationals,12,6,H
+19/09/2025 23:35,Tampa Bay Rays,Boston Red Sox,7,11,A
+19/09/2025 23:40,Kansas City Royals,Toronto Blue Jays,20,1,H
+19/09/2025 23:40,Chicago White Sox,San Diego Padres,4,3,H
+20/09/2025 00:05,Texas Rangers,Miami Marlins,4,6,A
+20/09/2025 00:10,Colorado Rockies,Los Angeles Angels,7,6,H
+20/09/2025 00:10,Houston Astros,Seattle Mariners,0,4,A
+20/09/2025 00:10,Minnesota Twins,Cleveland Guardians,2,6,A
+20/09/2025 00:15,St. Louis Cardinals,Milwaukee Brewers,7,1,H
+20/09/2025 01:40,Arizona Diamondbacks,Philadelphia Phillies,2,8,A
+20/09/2025 02:10,Los Angeles Dodgers,San Francisco Giants,6,3,H
+20/09/2025 17:10,Detroit Tigers,Atlanta Braves,5,6,A
+20/09/2025 18:10,Minnesota Twins,Cleveland Guardians,0,6,A
+20/09/2025 20:10,New York Mets,Washington Nationals,3,5,A
+20/09/2025 22:40,Cincinnati Reds,Chicago Cubs,6,3,H
+20/09/2025 22:40,Pittsburgh Pirates,Athletics,2,0,H
+20/09/2025 23:05,Tampa Bay Rays,Boston Red Sox,3,6,A
+20/09/2025 23:05,Texas Rangers,Miami Marlins,3,4,A
+20/09/2025 23:05,Baltimore Orioles,New York Yankees,1,6,A
+20/09/2025 23:10,Houston Astros,Seattle Mariners,4,6,A
+20/09/2025 23:10,Kansas City Royals,Toronto Blue Jays,2,1,H
+20/09/2025 23:10,Minnesota Twins,Cleveland Guardians,0,8,A
+20/09/2025 23:10,Chicago White Sox,San Diego Padres,3,7,A
+20/09/2025 23:15,St. Louis Cardinals,Milwaukee Brewers,2,3,A
+21/09/2025 00:10,Colorado Rockies,Los Angeles Angels,0,3,A
+21/09/2025 00:10,Arizona Diamondbacks,Philadelphia Phillies,4,3,H
+21/09/2025 01:10,Los Angeles Dodgers,San Francisco Giants,7,5,H
+21/09/2025 17:10,Detroit Tigers,Atlanta Braves,2,6,A
+21/09/2025 17:35,Pittsburgh Pirates,Athletics,11,0,H
+21/09/2025 17:35,Baltimore Orioles,New York Yankees,1,7,A
+21/09/2025 17:40,Cincinnati Reds,Chicago Cubs,1,0,H
+21/09/2025 17:40,New York Mets,Washington Nationals,2,3,A
+21/09/2025 18:10,Kansas City Royals,Toronto Blue Jays,5,8,A
+21/09/2025 18:10,Minnesota Twins,Cleveland Guardians,6,2,H
+21/09/2025 18:10,Chicago White Sox,San Diego Padres,2,3,A
+21/09/2025 18:15,St. Louis Cardinals,Milwaukee Brewers,5,1,H
+21/09/2025 18:35,Texas Rangers,Miami Marlins,2,4,A
+21/09/2025 19:10,Colorado Rockies,Los Angeles Angels,3,1,H
+21/09/2025 20:10,Los Angeles Dodgers,San Francisco Giants,1,3,A
+21/09/2025 20:10,Arizona Diamondbacks,Philadelphia Phillies,9,2,H
+21/09/2025 23:10,Houston Astros,Seattle Mariners,3,7,A
+21/09/2025 23:35,Tampa Bay Rays,Boston Red Sox,7,3,H
+22/09/2025 23:15,Atlanta Braves,Washington Nationals,11,5,H
+23/09/2025 01:40,San Diego Padres,Milwaukee Brewers,5,4,H
+23/09/2025 01:45,San Francisco Giants,St. Louis Cardinals,5,6,A
+23/09/2025 22:35,Baltimore Orioles,Tampa Bay Rays,6,0,H
+23/09/2025 22:40,Cleveland Guardians,Detroit Tigers,5,2,H
+23/09/2025 22:40,Cincinnati Reds,Pittsburgh Pirates,2,4,A
+23/09/2025 22:45,Philadelphia Phillies,Miami Marlins,5,6,A
+23/09/2025 23:05,New York Yankees,Chicago White Sox,3,2,H
+23/09/2025 23:07,Toronto Blue Jays,Boston Red Sox,1,4,A
+23/09/2025 23:15,Atlanta Braves,Washington Nationals,3,2,H
+23/09/2025 23:40,Chicago Cubs,New York Mets,7,9,A
+24/09/2025 00:05,Texas Rangers,Minnesota Twins,1,4,A
+24/09/2025 01:38,Los Angeles Angels,Kansas City Royals,4,8,A
+24/09/2025 01:40,Arizona Diamondbacks,Los Angeles Dodgers,5,4,H
+24/09/2025 01:40,Seattle Mariners,Colorado Rockies,4,3,H
+24/09/2025 01:40,San Diego Padres,Milwaukee Brewers,7,0,H
+24/09/2025 01:45,San Francisco Giants,St. Louis Cardinals,8,9,A
+24/09/2025 02:05,Athletics,Houston Astros,5,1,H
+24/09/2025 16:15,Atlanta Braves,Washington Nationals,3,4,A
+24/09/2025 20:10,San Diego Padres,Milwaukee Brewers,1,3,A
+24/09/2025 22:35,Baltimore Orioles,Tampa Bay Rays,2,6,A
+24/09/2025 22:40,Cleveland Guardians,Detroit Tigers,5,1,H
+24/09/2025 22:40,Cincinnati Reds,Pittsburgh Pirates,3,4,A
+24/09/2025 22:45,Philadelphia Phillies,Miami Marlins,11,1,H
+24/09/2025 23:05,New York Yankees,Chicago White Sox,8,1,H
+24/09/2025 23:07,Toronto Blue Jays,Boston Red Sox,1,7,A
+25/09/2025 00:05,Chicago Cubs,New York Mets,10,3,H
+25/09/2025 00:05,Texas Rangers,Minnesota Twins,4,2,H
+25/09/2025 01:38,Los Angeles Angels,Kansas City Royals,3,2,H
+25/09/2025 01:40,Arizona Diamondbacks,Los Angeles Dodgers,4,5,A
+25/09/2025 01:40,Seattle Mariners,Colorado Rockies,9,2,H
+25/09/2025 01:45,San Francisco Giants,St. Louis Cardinals,4,3,H
+25/09/2025 02:05,Athletics,Houston Astros,6,0,H
+25/09/2025 16:40,Cincinnati Reds,Pittsburgh Pirates,2,1,H
+25/09/2025 17:05,Baltimore Orioles,Tampa Bay Rays,6,5,H
+25/09/2025 18:35,Texas Rangers,Minnesota Twins,0,4,A
+25/09/2025 19:35,Athletics,Houston Astros,5,11,A
+25/09/2025 19:40,Arizona Diamondbacks,Los Angeles Dodgers,0,8,A
+25/09/2025 22:05,Philadelphia Phillies,Miami Marlins,1,0,H
+25/09/2025 22:40,Cleveland Guardians,Detroit Tigers,2,4,A
+25/09/2025 23:05,New York Yankees,Chicago White Sox,5,3,H
+25/09/2025 23:07,Toronto Blue Jays,Boston Red Sox,6,1,H
+25/09/2025 23:40,Chicago Cubs,New York Mets,5,8,A
+26/09/2025 01:38,Los Angeles Angels,Kansas City Royals,4,9,A
+26/09/2025 01:40,Seattle Mariners,Colorado Rockies,6,2,H
+26/09/2025 18:20,Chicago Cubs,St. Louis Cardinals,12,1,H
+26/09/2025 22:45,Philadelphia Phillies,Minnesota Twins,3,1,H
+26/09/2025 22:45,Washington Nationals,Chicago White Sox,9,10,A
+26/09/2025 23:05,New York Yankees,Baltimore Orioles,8,4,H
+26/09/2025 23:07,Toronto Blue Jays,Tampa Bay Rays,4,2,H
+26/09/2025 23:10,Boston Red Sox,Detroit Tigers,4,3,H
+26/09/2025 23:10,Cleveland Guardians,Texas Rangers,3,7,A
+26/09/2025 23:10,Miami Marlins,New York Mets,6,2,H
+26/09/2025 23:15,Atlanta Braves,Pittsburgh Pirates,3,9,A
+27/09/2025 00:10,Milwaukee Brewers,Cincinnati Reds,1,3,A
+27/09/2025 01:38,Los Angeles Angels,Houston Astros,4,3,H
+27/09/2025 01:40,San Diego Padres,Arizona Diamondbacks,7,4,H
+27/09/2025 01:40,Seattle Mariners,Los Angeles Dodgers,2,3,A
+27/09/2025 02:05,Athletics,Kansas City Royals,4,3,H
+27/09/2025 02:15,San Francisco Giants,Colorado Rockies,6,3,H
+27/09/2025 17:05,New York Yankees,Baltimore Orioles,6,1,H
+27/09/2025 18:20,Chicago Cubs,St. Louis Cardinals,7,3,H
+27/09/2025 19:07,Toronto Blue Jays,Tampa Bay Rays,5,1,H
+27/09/2025 20:05,San Francisco Giants,Colorado Rockies,4,3,H
+27/09/2025 20:05,Washington Nationals,Chicago White Sox,6,5,H
+27/09/2025 20:10,Boston Red Sox,Detroit Tigers,1,2,A
+27/09/2025 20:10,Miami Marlins,New York Mets,0,5,A
+27/09/2025 22:05,Philadelphia Phillies,Minnesota Twins,0,5,A
+27/09/2025 23:15,Cleveland Guardians,Texas Rangers,3,2,H
+27/09/2025 23:15,Milwaukee Brewers,Cincinnati Reds,4,7,A
+27/09/2025 23:15,Atlanta Braves,Pittsburgh Pirates,1,3,A
+28/09/2025 00:40,San Diego Padres,Arizona Diamondbacks,5,1,H
+28/09/2025 01:38,Los Angeles Angels,Houston Astros,1,6,A
+28/09/2025 01:40,Seattle Mariners,Los Angeles Dodgers,3,5,A
+28/09/2025 02:05,Athletics,Kansas City Royals,2,4,A
+28/09/2025 19:05,Boston Red Sox,Detroit Tigers,4,3,H
+28/09/2025 19:05,Athletics,Kansas City Royals,2,9,A
+28/09/2025 19:05,San Francisco Giants,Colorado Rockies,4,0,H
+28/09/2025 19:05,Philadelphia Phillies,Minnesota Twins,2,1,H
+28/09/2025 19:05,Washington Nationals,Chicago White Sox,0,8,A
+28/09/2025 19:05,New York Yankees,Baltimore Orioles,3,2,H
+28/09/2025 19:07,Los Angeles Angels,Houston Astros,2,6,A
+28/09/2025 19:07,Toronto Blue Jays,Tampa Bay Rays,13,4,H
+28/09/2025 19:10,San Diego Padres,Arizona Diamondbacks,12,4,H
+28/09/2025 19:10,Seattle Mariners,Los Angeles Dodgers,1,6,A
+28/09/2025 19:10,Cleveland Guardians,Texas Rangers,9,8,H
+28/09/2025 19:10,Miami Marlins,New York Mets,4,0,H
+28/09/2025 19:10,Milwaukee Brewers,Cincinnati Reds,4,2,H
+28/09/2025 19:15,Atlanta Braves,Pittsburgh Pirates,4,1,H
+28/09/2025 19:20,Chicago Cubs,St. Louis Cardinals,2,0,H
