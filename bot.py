@@ -139,8 +139,14 @@ def send_to_telegram(message: str):
         logging.error("⚠️ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID mancanti.")
         return
     try:
+        # Usa MarkdownV2 e sostituisci i caratteri speciali
+        safe_msg = message.replace("_", "\\_").replace("*", "\\*").replace("[", "\\[").replace("]", "\\]")
         url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-        r = requests.post(url, json={"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "Markdown"}, timeout=12)
+        r = requests.post(url, json={
+            "chat_id": TELEGRAM_CHAT_ID,
+            "text": safe_msg,
+            "parse_mode": "MarkdownV2"
+        }, timeout=12)
         if r.status_code != 200:
             logging.error(f"Errore Telegram: {r.text}")
     except Exception as e:
