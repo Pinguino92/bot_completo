@@ -1240,6 +1240,65 @@ def weekly_report():
         f"🏆 *Top sport:*\n{top_lines}"
     )
     send_to_telegram(msg)
+    # ──────────────────────────────────────────────────────────────
+# 📊 REPORT GIORNALIERO AUTOMATICO (22:00 IT)
+# ──────────────────────────────────────────────────────────────
+def daily_report():
+    try:
+        if not os.path.exists(RESULTS_LOG_PATH):
+            send_to_telegram("📊 Nessun dato disponibile per il report giornaliero.")
+            return
+
+        df = pd.read_csv(RESULTS_LOG_PATH)
+        if df.empty or "outcome_result" not in df.columns:
+            send_to_telegram("📊 Nessun pronostico registrato oggi.")
+            return
+
+        today = datetime.date.today().isoformat()
+        df_today = df[df["date"] == today]
+        if df_today.empty:
+            send_to_telegram(f"📊 Nessun pronostico per oggi ({today}).")
+            return
+
+        total = len(df_today)
+        won = (df_today["outcome_result"] == "W").sum()
+        lost = (df_today["outcome_result"] == "L").sum()
+        acc = (won / total * 100) if total else 0.0
+        avg_odds = round(df_today["price"].mean(), 2) if "price" in df_today.columns else 0
+
+        # Profitto stimato flat stake 1
+        profit = 0.0
+        for _, row in df_today.iterrows():
+            if row.get("outcome_result") == "W":
+                profit += (row.get("price", 1.0) - 1.0)
+            elif row.get("outcome_result") == "L":
+                profit -= 1.0
+
+        # Miglior/Peggior sport
+        perf_by_sport = (
+            df_today.groupby("sport")["outcome_result"]
+            .apply(lambda x: (x == "W").mean() * 100)
+            .sort_values(ascending=False)
+        )
+        best_sport = perf_by_sport.index[0] if not perf_by_sport.empty else "-"
+        worst_sport = perf_by_sport.index[-1] if len(perf_by_sport) > 1 else "-"
+
+        msg = (
+            f"📊 *Report giornaliero* ({today})\n\n"
+            f"Totale pronostici: *{total}*\n"
+            f"✅ Vinti: *{won}* | ❌ Persi: *{lost}*\n"
+            f"🎯 Accuracy: *{acc:.1f}%*\n"
+            f"💰 Quota media: *{avg_odds}*\n"
+            f"📈 Profitto stimato: *{profit:+.2f} unità*\n\n"
+            f"🏆 Miglior sport: *{best_sport}*\n"
+            f"⚠️ Peggiore: *{worst_sport}*"
+        )
+
+        send_to_telegram(msg)
+        logging.info("✅ Report giornaliero inviato.")
+    except Exception as e:
+        logging.warning(f"⚠️ Errore report giornaliero: {e}")
+        send_to_telegram(f"⚠️ Errore generazione report giornaliero: {e}")
 
 # ──────────────────────────────────────────────────────────────
 # 🕒 SCHEDULER Europe/Rome
@@ -1260,6 +1319,8 @@ def start_scheduler():
     sched.add_job(update_weather, "cron", hour=8, minute=40)
     # report domenica 21:00
     sched.add_job(weekly_report, "cron", **WEEKLY_REPORT_TIME)
+    # report giornaliero 22:00
+    sched.add_job(daily_report, "cron", hour=22, minute=0)
     # backup giornaliero
     sched.add_job(backup_results_log, "cron", **DAILY_BACKUP_TIME)
     sched.add_job(update_results_with_scores, "cron", **DAILY_BACKUP_TIME)
