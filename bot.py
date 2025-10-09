@@ -77,7 +77,7 @@ DAILY_BACKUP_TIME  = {"hour": 3, "minute": 30}  # tutti i giorni 03:30
 
 # 💰 Stake management (punto 7)
 BANKROLL = float(os.getenv("BANKROLL", "1000.0"))  # capitale per calcolo stake
-KELLY_CAP = float(os.getenv("KELLY_CAP", "0.05"))  # cap frazione Kelly (5% default)
+KELLY_CAP = float(os.getenv("KELLY_CAP", "0.10"))  # cap frazione Kelly (5% default)
 
 # log
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
@@ -134,10 +134,10 @@ SPORT_RELIABILITY = {
 # Soglie per sport
 SPORT_THRESHOLDS = {
     "soccer_": {"prob": 65.0, "quota": 1.35},              # calcio
-    "basketball_": {"prob": 60.0, "quota": 1.50},           # NBA
+    "basketball_": {"prob": 70.0, "quota": 1.40},           # NBA
     "americanfootball_nfl": {"prob": 62.0, "quota": 1.52},  # NFL
     "americanfootball_ncaaf": {"prob": 64.0, "quota": 1.52},# NCAAF
-    "baseball_mlb": {"prob": 60.0, "quota": 1.58},          # MLB
+    "baseball_mlb": {"prob": 70.0, "quota": 1.50},          # MLB
     "icehockey_nhl": {"prob": 65.0, "quota": 1.48},         # NHL
     "tennis_atp_shanghai_masters": {"prob": 65.0, "quota": 1.32},
 }
