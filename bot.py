@@ -947,56 +947,60 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         prob_final = max(0, min(100, prob_final + context_bonus))
                         prob_final = ai_correction(prob_final, price)
                        # ⚽ Bonus/Malus standings + forma recente (solo per calcio)
-try:
-    if sport.startswith("soccer_"):
-        standings_path = "/data/injuries_cache/football_standings.json"
-        form_path = "/data/injuries_cache/football_recent_form.json"
+                        prob_final = ai_correction(prob_final, price)
 
-        bonus_malus = 0.0
+                        # ⚽ Bonus/Malus standings + forma recente (solo per calcio)
+                        try:
+                            if sport.startswith("soccer_"):
+                                standings_path = "/data/injuries_cache/football_standings.json"
+                                form_path = "/data/injuries_cache/football_recent_form.json"
 
-        # --- CLASSIFICA (motivazione)
-        if os.path.exists(standings_path):
-            with open(standings_path, "r", encoding="utf-8") as f:
-                standings_data = json.load(f)
-            for dataset in standings_data:
-                for league in dataset.get("response", []):
-                    for table in league.get("league", {}).get("standings", [[]])[0]:
-                        team_name = table.get("team", {}).get("name", "")
-                        rank = table.get("rank", 10)
-                        if team_name.lower() == home.lower():
-                            if rank <= 3:       # top 3
-                                bonus_malus += 2.0
-                            elif rank >= 18:    # zona retrocessione
-                                bonus_malus -= 2.0
-                        elif team_name.lower() == away.lower():
-                            if rank <= 3:
-                                bonus_malus -= 2.0
-                            elif rank >= 18:
-                                bonus_malus += 2.0
+                                bonus_malus = 0.0
 
-        # --- FORMA RECENTE (ultime 5 partite)
-        if os.path.exists(form_path):
-            with open(form_path, "r", encoding="utf-8") as f:
-                form_data = json.load(f)
-            for dataset in form_data:
-                for matchset in dataset.get("response", []):
-                    team_home = matchset.get("teams", {}).get("home", {}).get("name", "")
-                    team_away = matchset.get("teams", {}).get("away", {}).get("name", "")
-                    winner = matchset.get("teams", {}).get("winner", None)
+                                # --- CLASSIFICA (motivazione)
+                                if os.path.exists(standings_path):
+                                    with open(standings_path, "r", encoding="utf-8") as f:
+                                        standings_data = json.load(f)
+                                    for dataset in standings_data:
+                                        for league in dataset.get("response", []):
+                                            for table in league.get("league", {}).get("standings", [[]])[0]:
+                                                team_name = table.get("team", {}).get("name", "")
+                                                rank = table.get("rank", 10)
+                                                if team_name.lower() == home.lower():
+                                                    if rank <= 3:       # top 3
+                                                        bonus_malus += 2.0
+                                                    elif rank >= 18:    # zona retrocessione
+                                                        bonus_malus -= 2.0
+                                                elif team_name.lower() == away.lower():
+                                                    if rank <= 3:
+                                                        bonus_malus -= 2.0
+                                                    elif rank >= 18:
+                                                        bonus_malus += 2.0
 
-                    if winner and team_home.lower() == home.lower():
-                        bonus_malus += 0.3
-                    elif winner and team_away.lower() == home.lower():
-                        bonus_malus -= 0.3
-                    if winner and team_home.lower() == away.lower():
-                        bonus_malus -= 0.3
-                    elif winner and team_away.lower() == away.lower():
-                        bonus_malus += 0.3
+                                # --- FORMA RECENTE (ultime 5 partite)
+                                if os.path.exists(form_path):
+                                    with open(form_path, "r", encoding="utf-8") as f:
+                                        form_data = json.load(f)
+                                    for dataset in form_data:
+                                        for matchset in dataset.get("response", []):
+                                            team_home = matchset.get("teams", {}).get("home", {}).get("name", "")
+                                            team_away = matchset.get("teams", {}).get("away", {}).get("name", "")
+                                            winner = matchset.get("teams", {}).get("winner", None)
 
-        # Applica bonus/malus cumulativo limitato a ±5%
-        prob_final = max(0, min(100, prob_final + max(-5, min(5, bonus_malus))))
-except Exception as e:
-    logging.debug(f"[DEBUG] bonus/malus standings-form skipped {sport}: {e}")
+                                            if winner and team_home.lower() == home.lower():
+                                                bonus_malus += 0.3
+                                            elif winner and team_away.lower() == home.lower():
+                                                bonus_malus -= 0.3
+                                            if winner and team_home.lower() == away.lower():
+                                                bonus_malus -= 0.3
+                                            elif winner and team_away.lower() == away.lower():
+                                                bonus_malus += 0.3
+
+                                # Applica bonus/malus cumulativo limitato a ±5%
+                                prob_final = max(0, min(100, prob_final + max(-5, min(5, bonus_malus))))
+                        except Exception as e:
+                            logging.debug(f"[DEBUG] bonus/malus standings-form skipped {sport}: {e}")
+
 
                         min_prob, min_quota = get_thresholds(sport)
                         ev = expected_value(prob_final, price)
