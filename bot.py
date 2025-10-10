@@ -51,7 +51,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "10"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.18"))  # 18%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.22"))  # 22%
 
 # blending e divergenze (legacy tuoi)
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
@@ -1243,6 +1243,9 @@ def weekly_report():
     # ──────────────────────────────────────────────────────────────
 # 📊 REPORT GIORNALIERO AUTOMATICO (22:00 IT)
 # ──────────────────────────────────────────────────────────────
+# ──────────────────────────────────────────────────────────────
+# 📊 REPORT GIORNALIERO AUTOMATICO (22:00 IT)
+# ──────────────────────────────────────────────────────────────
 def daily_report():
     try:
         if not os.path.exists(RESULTS_LOG_PATH):
@@ -1255,16 +1258,23 @@ def daily_report():
             return
 
         today = datetime.date.today().isoformat()
-        df_today = df[df["date"] == today]
+        # ✅ Filtra solo i pronostici effettivamente inviati nel giorno corrente
+        df_today = df[
+            (df["date"] == today)
+            & df["prob_final"].notna()
+            & df["price"].notna()
+            & df["outcome"].notna()
+        ]
+
         if df_today.empty:
-            send_to_telegram(f"📊 Nessun pronostico per oggi ({today}).")
+            send_to_telegram(f"📊 Nessun pronostico effettivo per oggi ({today}).")
             return
 
         total = len(df_today)
         won = (df_today["outcome_result"] == "W").sum()
         lost = (df_today["outcome_result"] == "L").sum()
         acc = (won / total * 100) if total else 0.0
-        avg_odds = round(df_today["price"].mean(), 2) if "price" in df_today.columns else 0
+        avg_odds = round(df_today["price"].mean(), 2) if "price" in df_today.columns else 0.0
 
         # Profitto stimato flat stake 1
         profit = 0.0
@@ -1299,6 +1309,7 @@ def daily_report():
     except Exception as e:
         logging.warning(f"⚠️ Errore report giornaliero: {e}")
         send_to_telegram(f"⚠️ Errore generazione report giornaliero: {e}")
+
 
 # ──────────────────────────────────────────────────────────────
 # 🕒 SCHEDULER Europe/Rome
