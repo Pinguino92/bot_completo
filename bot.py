@@ -135,11 +135,11 @@ SPORT_RELIABILITY = {
 SPORT_THRESHOLDS = {
     "soccer_": {"prob": 65.0, "quota": 1.35},              # calcio
     "basketball_": {"prob": 70.0, "quota": 1.40},           # NBA
-    "americanfootball_nfl": {"prob": 62.0, "quota": 1.52},  # NFL
-    "americanfootball_ncaaf": {"prob": 64.0, "quota": 1.52},# NCAAF
+    "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},  # NFL
+    "americanfootball_ncaaf": {"prob": 62.0, "quota": 1.50},# NCAAF
     "baseball_mlb": {"prob": 70.0, "quota": 1.50},          # MLB
-    "icehockey_nhl": {"prob": 65.0, "quota": 1.48},         # NHL
-    "tennis_atp_shanghai_masters": {"prob": 65.0, "quota": 1.32},
+    "icehockey_nhl": {"prob": 62.0, "quota": 1.48},         # NHL
+    "tennis_atp_shanghai_masters": {"prob": 62.0, "quota": 1.32},
 }
 
 # ──────────────────────────────────────────────────────────────
@@ -1011,8 +1011,8 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
                         if not (price >= min_quota):
                             logging.debug(f"[DEBUG] {sport} | {home} vs {away} | quota {price:.2f} < soglia {min_quota}")
                             continue
-                        if ev > 0.6:
-                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | EV {ev:.2f} > 0.6 (anomalo)")
+                        if ev > 0.75:
+                            logging.debug(f"[DEBUG] {sport} | {home} vs {away} | EV {ev:.2f} > 0.75 (anomalo)")
                             continue
 
                         # (7) Stake consigliato (Kelly cappato)
@@ -1258,17 +1258,24 @@ def daily_report():
             return
 
         today = datetime.date.today().isoformat()
-        # ✅ Filtra solo i pronostici effettivamente inviati nel giorno corrente
-        df_today = df[
-            (df["date"] == today)
-            & df["prob_final"].notna()
-            & df["price"].notna()
-            & df["outcome"].notna()
-        ]
 
-        if df_today.empty:
-            send_to_telegram(f"📊 Nessun pronostico effettivo per oggi ({today}).")
-            return
+# ✅ Considera SOLO i pronostici effettivamente INVIATI (incrocio con sent_predictions.json)
+sent_path = f"{DATA_DIR}/sent_predictions.json"
+sent_ids = set()
+if os.path.exists(sent_path):
+    try:
+        sent_ids = set(json.load(open(sent_path, "r", encoding="utf-8")))
+    except Exception:
+        pass
+
+df_today = df[
+    (df["date"] == today)
+    & df["match_id"].astype(str).isin(sent_ids)
+]
+
+if df_today.empty:
+    send_to_telegram(f"📊 Nessun pronostico inviato oggi ({today}).")
+    return
 
         total = len(df_today)
         won = (df_today["outcome_result"] == "W").sum()
