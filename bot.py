@@ -1257,25 +1257,26 @@ def daily_report():
             send_to_telegram("📊 Nessun pronostico registrato oggi.")
             return
 
-        today = datetime.date.today().isoformat()
+                today = datetime.date.today().isoformat()
 
-# ✅ Considera SOLO i pronostici effettivamente INVIATI (incrocio con sent_predictions.json)
-sent_path = f"{DATA_DIR}/sent_predictions.json"
-sent_ids = set()
-if os.path.exists(sent_path):
-    try:
-        sent_ids = set(json.load(open(sent_path, "r", encoding="utf-8")))
-    except Exception:
-        pass
+        # ✅ Considera SOLO i pronostici effettivamente INVIATI (incrocio con sent_predictions.json)
+        sent_path = f"{DATA_DIR}/sent_predictions.json"
+        sent_ids = set()
+        if os.path.exists(sent_path):
+            try:
+                with open(sent_path, "r", encoding="utf-8") as f:
+                    sent_ids = set(json.load(f))
+            except Exception:
+                pass
 
-df_today = df[
-    (df["date"] == today)
-    & df["match_id"].astype(str).isin(sent_ids)
-]
+        df_today = df[
+            (df["date"] == today)
+            & df["match_id"].astype(str).isin(sent_ids)
+        ]
 
-if df_today.empty:
-    send_to_telegram(f"📊 Nessun pronostico inviato oggi ({today}).")
-    return
+        if df_today.empty:
+            send_to_telegram(f"📊 Nessun pronostico inviato oggi ({today}).")
+            return
 
         total = len(df_today)
         won = (df_today["outcome_result"] == "W").sum()
