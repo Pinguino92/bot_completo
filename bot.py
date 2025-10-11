@@ -1257,7 +1257,7 @@ def daily_report():
             send_to_telegram("📊 Nessun pronostico registrato oggi.")
             return
 
-                today = datetime.date.today().isoformat()
+        today = datetime.date.today().isoformat()
 
         # ✅ Considera SOLO i pronostici effettivamente INVIATI (incrocio con sent_predictions.json)
         sent_path = f"{DATA_DIR}/sent_predictions.json"
@@ -1314,10 +1314,10 @@ def daily_report():
 
         send_to_telegram(msg)
         logging.info("✅ Report giornaliero inviato.")
+
     except Exception as e:
         logging.warning(f"⚠️ Errore report giornaliero: {e}")
         send_to_telegram(f"⚠️ Errore generazione report giornaliero: {e}")
-
 
 # ──────────────────────────────────────────────────────────────
 # 🕒 SCHEDULER Europe/Rome
