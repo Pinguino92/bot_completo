@@ -1252,7 +1252,7 @@ def daily_report():
             send_to_telegram("📊 Nessun dato disponibile per il report giornaliero.")
             return
 
-        df = pd.read_csv(RESULTS_LOG_PATH)
+        df = pd.read_csv(RESULTS_LOG_PATH, on_bad_lines="skip", engine="python")
         if df.empty or "outcome_result" not in df.columns:
             send_to_telegram("📊 Nessun pronostico registrato oggi.")
             return
