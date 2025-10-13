@@ -306,6 +306,7 @@ def _http_get(url, params, max_attempts=3, timeout=20):
     # ────────────────────────────────────────────────
     # 📈 MERCATI PERSONALIZZATI PER SPORT
     # ────────────────────────────────────────────────
+def fetch_odds(sport: str): 
     if sport.startswith("soccer_"):
         markets = "h2h,btts,totals,spreads,1st_half_result"
     elif sport.startswith("basketball_"):
