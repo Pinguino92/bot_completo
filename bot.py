@@ -142,6 +142,17 @@ SPORT_THRESHOLDS = {
     "tennis_atp_shanghai_masters": {"prob": 62.0, "quota": 1.32},
 }
 
+# ────────────────────────────────────────────────
+# ⚙️ MINIMO BOOKMAKER PER SPORT (filtri dinamici)
+# ────────────────────────────────────────────────
+MIN_BOOKMAKERS_BY_SPORT = {
+    "soccer_": 2,        # calcio: 2 bookmaker bastano
+    "basketball_": 2,    # NBA, Eurolega ecc.
+    "icehockey_": 2,     # NHL: 2 bookmaker bastano
+    "tennis_": 1,        # tennis: 1 solo
+}
+DEFAULT_MIN_BOOKMAKERS = 3
+
 # ──────────────────────────────────────────────────────────────
 # 📬 TELEGRAM
 # ──────────────────────────────────────────────────────────────
@@ -292,11 +303,18 @@ def _http_get(url, params, max_attempts=3, timeout=20):
             time.sleep(2 ** attempt)
     return None
 
-def get_odds(sport: str):
-    if not ODDS_API_KEY:
-        logging.error("⚠️ ODDS_API_KEY mancante.")
-        return []
-    markets = "h2h,btts,totals,spreads" if sport.startswith("soccer_") else "h2h,totals"
+    # ────────────────────────────────────────────────
+    # 📈 MERCATI PERSONALIZZATI PER SPORT
+    # ────────────────────────────────────────────────
+    if sport.startswith("soccer_"):
+        markets = "h2h,btts,totals,spreads,1st_half_result"
+    elif sport.startswith("basketball_"):
+        markets = "h2h,totals,player_points,player_rebounds"
+    elif sport.startswith("icehockey_"):
+        markets = "h2h,totals,1st_period_result"
+    else:
+        markets = "h2h,totals"
+
     url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
     params = {
         "apiKey": ODDS_API_KEY,
@@ -837,7 +855,12 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             # (3) FILTRO: numero minimo bookmaker aggregati
             bookmakers = match.get("bookmakers", []) or []
             bk_count = len(bookmakers)
-            min_bk = 2 if sport.startswith("tennis_") else 3
+            min_bk = DEFAULT_MIN_BOOKMAKERS
+            for prefix, req in MIN_BOOKMAKERS_BY_SPORT.items():
+                if sport.startswith(prefix):
+                   min_bk = req
+                   break
+                  
             if bk_count < min_bk:
                 logging.debug(f"[DEBUG] {sport} | {home} vs {away} | insufficient bookmakers: {bk_count} < {min_bk}")
                 scartati.append("insufficient_bookmakers")
