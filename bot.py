@@ -647,7 +647,7 @@ def update_results_with_scores():
     if not (FEEDBACK_ENABLED and os.path.exists(RESULTS_LOG_PATH)):
         return
     try:
-        df = pd.read_csv(RESULTS_LOG_PATH)
+        df = pd.read_csv(RESULTS_LOG_PATH, on_bad_lines="skip")
     except Exception as e:
         logging.warning(f"⚠️ Impossibile leggere {RESULTS_LOG_PATH}: {e}")
         return
@@ -1202,7 +1202,7 @@ def job():
     tot_ok, tot_ko = 0, 0
     for sport in SPORTS.keys():
         hist_df = get_hist(sport)
-        matches = get_odds(sport)
+        matches = fetch_odds(sport)
         accettati, rifiutati = analyze_matches(sport, matches, hist_df)
         # i messaggi vengono inviati direttamente in analyze_matches
         tot_ok += len(accettati)
