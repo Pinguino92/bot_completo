@@ -25,6 +25,7 @@ import requests
 import datetime
 import pandas as pd
 from typing import Optional, List, Dict
+from statistical_predictions import run_statistical_batch
 
 # ── i tuoi import invariati ───────────────────────────────────
 from context_engine.context_manager import context_adjustment, update_context_data
@@ -1367,6 +1368,10 @@ def start_scheduler():
     # backup giornaliero
     sched.add_job(backup_results_log, "cron", **DAILY_BACKUP_TIME)
     sched.add_job(update_results_with_scores, "cron", **DAILY_BACKUP_TIME)
+       # pronostici statistici senza quota (CSV + API stats)
+    sched.add_job(run_statistical_batch, "cron", hour=9,  minute=10)   # 09:10
+    sched.add_job(run_statistical_batch, "cron", hour=19, minute=10)    # 19:10
+
     sched.start()
     return sched
 
