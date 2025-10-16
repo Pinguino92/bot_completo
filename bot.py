@@ -120,7 +120,7 @@ SPORTS = {
     "baseball_mlb": "⚾ MLB",
     "icehockey_nhl": "🏒 NHL",
     "tennis_atp_shanghai_masters": "🎾 ATP Shanghai Masters",
-    "basketball_nba_preseaseon": "NBA"
+    "basketball_nba_preseason": "🏀 NBA Preseason"
 }
 
 # Affidabilità relativa per sport (moltiplicatore)
