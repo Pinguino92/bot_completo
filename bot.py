@@ -120,6 +120,7 @@ SPORTS = {
     "baseball_mlb": "⚾ MLB",
     "icehockey_nhl": "🏒 NHL",
     "tennis_atp_shanghai_masters": "🎾 ATP Shanghai Masters",
+    "basketball_nba_preseaseon": "NBA"
 }
 
 # Affidabilità relativa per sport (moltiplicatore)
@@ -532,13 +533,13 @@ def save_feedback_state(state: Dict[str, float]):
 def _get_blend_weights_for_sport(sport: str):
     """
     Restituisce (w_api, w_csv, w_model) in [0..1] che sommano ~1.
-    Se assenti, default conservativo: API 0.6, CSV 0.3, MODEL 0.1
+    Se assenti, default conservativo: API 0.5, CSV 0.4, MODEL 0.1
     """
     state = load_feedback_state()
     wk = state.get(f"blend_weights__{sport}")
     if isinstance(wk, list) and len(wk) == 3:
         return tuple(wk)
-    return (0.6, 0.3, 0.1)
+    return (0.5, 0.4, 0.1)
 
 def _save_blend_weights_for_sport(sport: str, w_api: float, w_csv: float, w_model: float):
     state = load_feedback_state()
@@ -828,7 +829,7 @@ def confidence_bucket(prob, vol, ev):
     # score 0..1
     score = (prob/100.0)*0.6 + (1.0 - min(1.0, vol))*0.25 + min(0.5, max(0.0, ev))/0.5*0.15
     if score >= 0.75: return "🟢 Alta"
-    if score >= 0.55: return "🔵 Media"
+    if score >= 0.60: return "🔵 Media"
     return "🟠 Bassa"
 
 def analyze_matches(sport: str, matches: list, hist_df=None):
@@ -1265,9 +1266,6 @@ def weekly_report():
         f"🏆 *Top sport:*\n{top_lines}"
     )
     send_to_telegram(msg)
-    # ──────────────────────────────────────────────────────────────
-# 📊 REPORT GIORNALIERO AUTOMATICO (22:00 IT)
-# ──────────────────────────────────────────────────────────────
 # ──────────────────────────────────────────────────────────────
 # 📊 REPORT GIORNALIERO AUTOMATICO (22:00 IT)
 # ──────────────────────────────────────────────────────────────
