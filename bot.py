@@ -52,7 +52,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.50"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "5"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.40"))  # 40%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.30"))  # 30%
 
 # blending e divergenze (legacy tuoi)
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
@@ -135,9 +135,9 @@ SPORT_RELIABILITY = {
 
 # Soglie per sport
 SPORT_THRESHOLDS = {
-    "soccer_": {"prob": 60.0, "quota": 1.30},              # calcio
+    "soccer_": {"prob": 65.0, "quota": 1.30},              # calcio
     "basketball_": {"prob": 65.0, "quota": 1.40},           # NBA
-    "americanfootball_nfl": {"prob": 60.0, "quota": 1.50},  # NFL
+    "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},  # NFL
     "americanfootball_ncaaf": {"prob": 62.0, "quota": 1.50},# NCAAF
     "baseball_mlb": {"prob": 65.0, "quota": 1.50},          # MLB
     "icehockey_nhl": {"prob": 60.0, "quota": 1.40},         # NHL
@@ -310,11 +310,11 @@ def _http_get(url, params, max_attempts=3, timeout=20):
     # ────────────────────────────────────────────────
 def fetch_odds(sport: str): 
     if sport.startswith("soccer_"):
-        markets = "h2h,btts,totals,spreads,1st_half_result"
+        markets = "h2h,totals,spreads"
     elif sport.startswith("basketball_"):
-        markets = "h2h,totals,player_points,player_rebounds"
+        markets = "h2h,totals,spreads"
     elif sport.startswith("icehockey_"):
-        markets = "h2h,totals,1st_period_result"
+        markets = "h2h,totals,spreads"
     else:
         markets = "h2h,totals"
 
