@@ -52,7 +52,7 @@ TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 MIN_PROB_BASE = float(os.getenv("MIN_PROB_BASE", "60"))       # %
 MIN_QUOTA     = float(os.getenv("MIN_QUOTA", "1.40"))         # decimale
 FORM_WINDOW   = int(os.getenv("FORM_WINDOW", "5"))           # ultime N partite
-VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.60"))  # 50%
+VOLATILITY_LIMIT = float(os.getenv("VOLATILITY_LIMIT", "0.50"))  # 50%
 
 # blending e divergenze (legacy tuoi)
 DIVERGENZA_SOGLIA = float(os.getenv("DIVERGENZA_SOGLIA", "15.0"))  # punti %
@@ -136,7 +136,7 @@ SPORT_RELIABILITY = {
 # Soglie per sport
 SPORT_THRESHOLDS = {
     "soccer_": {"prob": 60.0, "quota": 1.30},              # calcio
-    "basketball_": {"prob": 60.0, "quota": 1.40},           # NBA
+    "basketball_": {"prob": 66.0, "quota": 1.40},           # NBA
     "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},  # NFL
     "americanfootball_ncaaf": {"prob": 62.0, "quota": 1.50},# NCAAF
     "baseball_mlb": {"prob": 65.0, "quota": 1.50},          # MLB
