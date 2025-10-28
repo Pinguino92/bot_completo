@@ -119,7 +119,7 @@ SPORTS = {
     "americanfootball_ncaaf": "🏈 NCAAF",
     "baseball_mlb": "⚾ MLB",
     "icehockey_nhl": "🏒 NHL",
-    "tennis_atp_shanghai_masters": "🎾 ATP Shanghai Masters",
+    "tennis_atp_paris_masters": "🎾 ATP Paris Masters",
     "basketball_nba_preseason": "🏀 NBA Preseason"
 }
 
@@ -141,7 +141,7 @@ SPORT_THRESHOLDS = {
     "americanfootball_ncaaf": {"prob": 62.0, "quota": 1.50},# NCAAF
     "baseball_mlb": {"prob": 65.0, "quota": 1.50},          # MLB
     "icehockey_nhl": {"prob": 60.0, "quota": 1.40},         # NHL
-    "tennis_atp_shanghai_masters": {"prob": 62.0, "quota": 1.32},
+    "tennis_atp_paris_masters": {"prob": 65.0, "quota": 1.32},
 }
 
 # ────────────────────────────────────────────────
