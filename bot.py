@@ -1104,7 +1104,7 @@ def analyze_matches(sport: str, matches: list, hist_df=None):
             pronostici.append(best_pick)
 
             try:
-                match_id = match.get("id", prediction_id)
+                match_id = prediction_id
                 date_str = start_time.strftime("%Y-%m-%d")
                 # 🧾 LOG ESTESO con prob_api/csv/model/final + ev
                 log_prediction(
@@ -1292,10 +1292,21 @@ def daily_report():
             except Exception:
                 pass
 
-        df_today = df[
-            (df["date"] == today)
-            & df["match_id"].astype(str).isin(sent_ids)
-        ]
+        # assicuriamoci che 'timestamp' esista e lo convertiamo in data (YYYY-MM-DD)
+        if "timestamp" in df.columns:
+            try:
+                df["sent_date"] = pd.to_datetime(df["timestamp"], errors="coerce").dt.date.astype(str)
+            except Exception:
+                df["sent_date"] = ""
+        else:
+             # fallback: se non c'è timestamp, prova con la colonna 'date' (meno precisa)
+             df["sent_date"] = df.get("date", "")
+
+       # seleziona righe inviate oggi E i cui match_id (che ora sono prediction_id) sono fra i sent_ids
+       df_today = df[
+           (df["sent_date"] == today) &
+           (df["match_id"].astype(str).isin(sent_ids))
+       ]
 
         if df_today.empty:
             send_to_telegram(f"📊 Nessun pronostico inviato oggi ({today}).")
