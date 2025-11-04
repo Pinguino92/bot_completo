@@ -1299,14 +1299,14 @@ def daily_report():
             except Exception:
                 df["sent_date"] = ""
         else:
-             # fallback: se non c'è timestamp, prova con la colonna 'date' (meno precisa)
-             df["sent_date"] = df.get("date", "")
+            # fallback: se non c'è timestamp, prova con la colonna 'date' (meno precisa)
+            df["sent_date"] = df.get("date", "")
 
-       # seleziona righe inviate oggi E i cui match_id (che ora sono prediction_id) sono fra i sent_ids
-       df_today = df[
-           (df["sent_date"] == today) &
-           (df["match_id"].astype(str).isin(sent_ids))
-       ]
+        # seleziona righe inviate oggi E i cui match_id (che ora sono prediction_id) sono fra i sent_ids
+        df_today = df[
+            (df["sent_date"] == today) &
+            (df["match_id"].astype(str).isin(sent_ids))
+        ]
 
         if df_today.empty:
             send_to_telegram(f"📊 Nessun pronostico inviato oggi ({today}).")
@@ -1352,6 +1352,7 @@ def daily_report():
     except Exception as e:
         logging.warning(f"⚠️ Errore report giornaliero: {e}")
         send_to_telegram(f"⚠️ Errore generazione report giornaliero: {e}")
+
 
 # ──────────────────────────────────────────────────────────────
 # 🕒 SCHEDULER Europe/Rome
