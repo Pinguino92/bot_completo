@@ -72,7 +72,7 @@ PRED_SENT_PATH = f"{DATA_DIR}/sent_predictions.json"
 
 # timezone & orari
 TZ = pytz.timezone("Europe/Rome")
-SCHEDULE_TIMES = ["09:00", "12:00", "16:00", "19:00"]  # invio pronostici
+SCHEDULE_TIMES = ["09:00", "11:00", "13:00", "15:00", "17:00", "19:00", "21:00", "22:00"]  # invio pronostici
 WEEKLY_REPORT_TIME = {"day_of_week": "sun", "hour": 22, "minute": 5}  # domenica 22:05
 DAILY_BACKUP_TIME  = {"hour": 3, "minute": 30}  # tutti i giorni 03:30
 
