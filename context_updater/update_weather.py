@@ -64,7 +64,7 @@ def get_weather(lat, lon):
         return {}
 
 def update_weather():
-        logging.info("🌦️ Aggiornamento meteo per nazioni in corso...")
+    logging.info("🌦️ Aggiornamento meteo per nazioni in corso...")
     total_entries = 0
     updated_sports = 0
 
@@ -86,5 +86,7 @@ def update_weather():
 
     logging.info(f"🏁 Meteo aggiornato per {updated_sports} sport, {total_entries} località totali.")
 
+
 if __name__ == "__main__":
     update_weather()
+
