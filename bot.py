@@ -1196,6 +1196,14 @@ def get_hist(sport):
 
 def job():
     logging.info("🔍 Controllo nuove partite...")
+       # 🔁 Ricarica dinamica del contesto (meteo / infortuni)
+    try:
+        global CONTEXT_DATA
+        CONTEXT_DATA = load_context_data()
+        logging.debug(f"[DEBUG] CONTEXT_DATA ricaricato: {len(CONTEXT_DATA.get('weather',{}))} sport meteo, {len(CONTEXT_DATA.get('injuries',{}))} infortuni")
+    except Exception as e:
+        logging.warning(f"⚠️ Impossibile ricaricare CONTEXT_DATA all'avvio del job: {e}")
+
     try:
         update_results_with_scores()
         adapt_blend_weights()
