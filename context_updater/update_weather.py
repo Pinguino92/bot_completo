@@ -64,7 +64,10 @@ def get_weather(lat, lon):
         return {}
 
 def update_weather():
-    logging.info("🌦️ Aggiornamento meteo per nazioni in corso...")
+        logging.info("🌦️ Aggiornamento meteo per nazioni in corso...")
+    total_entries = 0
+    updated_sports = 0
+
     for sport, countries in SPORT_COUNTRIES.items():
         results = []
         for country, lat, lon in countries:
@@ -73,10 +76,15 @@ def update_weather():
                 w["country"] = country
                 results.append(w)
             time.sleep(1)
+
         out_path = os.path.join(DATA_DIR, f"{sport}_weather.json")
         json.dump(results, open(out_path, "w", encoding="utf-8"))
+
+        updated_sports += 1
+        total_entries += len(results)
         logging.info(f"✅ Salvato meteo per {sport}: {len(results)} nazioni")
-    logging.info("🏁 Meteo aggiornato.")
+
+    logging.info(f"🏁 Meteo aggiornato per {updated_sports} sport, {total_entries} località totali.")
 
 if __name__ == "__main__":
     update_weather()
