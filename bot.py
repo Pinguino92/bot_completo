@@ -801,7 +801,9 @@ def load_context_data():
             sport = os.path.basename(f).replace("_injuries.json", "")
             with open(f, "r", encoding="utf-8") as fp:
                 ctx["injuries"][sport] = json.load(fp)
-        logging.info(f"📊 Contesto caricato: {len(ctx['weather'])} sport meteo, {len(ctx['injuries'])} infortuni")
+        total_weather_entries = sum(len(json.load(open(f"/data/weather_cache/{f}", encoding="utf-8"))) for f in os.listdir("/data/weather_cache") if f.endswith(".json"))
+        logging.info(f"📊 Contesto aggiornato: {len(os.listdir('/data/weather_cache'))} sport meteo, {total_weather_entries} località totali, {len(injury_data)} infortuni")
+
     except Exception as e:
         logging.warning(f"⚠️ Context load fallito: {e}")
     return ctx
