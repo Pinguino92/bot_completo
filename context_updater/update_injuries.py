@@ -214,6 +214,9 @@ def update_all():
 
     logging.info(f"✅ Update completato con {api_call_count} chiamate totali.")
 
+    return injuries_data
+
+
 
 # ──────────────────────────────────────────────────────────────
 # ESECUZIONE
