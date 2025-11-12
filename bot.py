@@ -136,7 +136,7 @@ SPORT_RELIABILITY = {
 # Soglie per sport
 SPORT_THRESHOLDS = {
     "soccer_": {"prob": 60.0, "quota": 1.30},              # calcio
-    "basketball_": {"prob": 69.0, "quota": 1.40},           # NBA
+    "basketball_": {"prob": 67.0, "quota": 1.40},           # NBA
     "americanfootball_nfl": {"prob": 65.0, "quota": 1.50},  # NFL
     "americanfootball_ncaaf": {"prob": 62.0, "quota": 1.50},# NCAAF
     "baseball_mlb": {"prob": 65.0, "quota": 1.50},          # MLB
